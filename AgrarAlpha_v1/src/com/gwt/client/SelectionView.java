@@ -26,6 +26,8 @@ import com.google.gwt.visualization.client.visualizations.Table;
 
 import java.io.Serializable;
 
+import org.moxieapps.gwt.highcharts.client.Chart;
+
 public class SelectionView extends Composite implements Serializable{
 
 	private Label yearLabel;
@@ -214,14 +216,14 @@ public class SelectionView extends Composite implements Serializable{
 			
 			
 			
-			highchartSvc.getCharts("null", "Tea", "Import Quantity" , false,
-					new AsyncCallback<ArrayList<String[]>>() {
+			highchartSvc.getCharts("null", "Tea", "Import Quantity" , false, false,
+					new AsyncCallback<ArrayList<Chart[]>>() {
 						public void onFailure(Throwable caught) {
 							// Show the RPC error message to the user
 							System.out.println("Error!");
 						}
 
-						public void onSuccess(ArrayList<String[]> resultTemp) {
+						public void onSuccess(ArrayList<Chart[]> resultTemp) {
 							
 						}
 					});

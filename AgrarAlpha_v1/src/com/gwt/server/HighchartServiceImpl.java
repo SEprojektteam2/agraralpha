@@ -1,14 +1,12 @@
 package com.gwt.server;
 
-import java.sql.*;
+
+
 import java.util.ArrayList;
 
-import com.gwt.server.MySQLConnection;
-//import com.google.appengine.api.utils.SystemProperty;
-import com.google.gwt.visualization.client.*;
-import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
+import org.moxieapps.gwt.highcharts.client.Chart;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import com.gwt.client.DataManager2;
 import com.gwt.client.HighchartService;
 
 @SuppressWarnings("serial")
@@ -16,12 +14,12 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		HighchartService {
 		
 		
-	public ArrayList<String[]> getCharts(String country, String product, String type, Boolean perCapita){
+	public ArrayList<Chart[]> getCharts(String country, String product, String type, Boolean perCapita, Boolean interpolation){
 			
-		ArrayList<String[]> result = new ArrayList<String[]>();
-		
+		ArrayList<Chart[]> result = new ArrayList<Chart[]>();
 		DataManager data = new DataManager();
-		result=data.getData(country, product, type);
+		ArrayList<String[]> resultData = new ArrayList<String[]>();
+		resultData=data.getData(country, product, type);
 		
 		return result;
 	}
