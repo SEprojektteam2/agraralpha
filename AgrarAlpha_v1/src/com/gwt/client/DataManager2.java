@@ -10,7 +10,7 @@ import com.google.gwt.visualization.client.*;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
 
 @SuppressWarnings("serial")
-public class DataManager implements Serializable{
+public class DataManager2 implements Serializable{
 	private DataTable DATA;
 	private ArrayList<String[]> DataArray;
 	private DataManagerServiceAsync dataManagerSvc = GWT.create(DataManagerService.class);

@@ -215,7 +215,7 @@ public class SelectionView extends Composite implements Serializable{
 			//De visualizatonManager muen da erstellt werde und Ã¼bergeh werde!!
 			Runnable onLoadCallback = new Runnable(){	
 				public void run(){
-					DataManager data = new DataManager();
+					DataManager2 data = new DataManager2();
 					VisualizationManager vis= new VisualizationManager(data.createDataTable("India", "Tea", "null"), "World", "Tea", "consumption", "2010");
 					main.openCreateView(vis);
 				}

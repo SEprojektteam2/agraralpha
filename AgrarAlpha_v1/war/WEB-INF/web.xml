@@ -34,8 +34,19 @@
 
   <servlet-mapping>
     <servlet-name>DataManagerServiceImpl</servlet-name>
-    <url-pattern>/agraralpha_v1/try</url-pattern>
+    <url-pattern>/agraralpha_v1/DataManager</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>HighchartServiceImpl</servlet-name>
+    <servlet-class>com.gwt.server.HighchartServiceImpl</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>HighchartServiceImpl</servlet-name>
+    <url-pattern>/agraralpha_v1/Highchart</url-pattern>
+  </servlet-mapping>
+  
 
   
   
