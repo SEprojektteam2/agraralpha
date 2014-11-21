@@ -1,0 +1,2 @@
+serviceClass: com.gwt.client.DataManagerService
+path: 4A4FB1589A54752D35AE032BD16906A7.gwt.rpc
