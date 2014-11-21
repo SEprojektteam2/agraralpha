@@ -56,6 +56,7 @@ public class SelectionView extends Composite implements Serializable{
 	//private DataManager data;
 	
 	private DataManagerServiceAsync dataManagerSvc = GWT.create(DataManagerService.class);
+	private HighchartServiceAsync highchartSvc = GWT.create(HighchartService.class);
 	/*
 	 * This class is drawing the options, the user can choose from. The
 	 * RootPanel is a FlexTable (Table with flexible size)
@@ -104,12 +105,6 @@ public class SelectionView extends Composite implements Serializable{
 					}
 				});
 		
-		//countryLB = new ListBox();
-		//countryLB.addChangeHandler(new countryLBChangeHandler());
-		//countryLB.addItem("World");
-		//countryLB.addItem("Switzerland");
-		//countryLB.addItem("Germany");*/
-
 		productLB = new ListBox();
 		dataManagerSvc.getProducts(
 				new AsyncCallback<ArrayList<String>>() {
@@ -127,12 +122,6 @@ public class SelectionView extends Composite implements Serializable{
 		productLB.addChangeHandler(new listBoxChangeHandler(productLB,
 				productCB));
 		
-		/*productLB = new ListBox();
-		productLB.addItem(" ");
-		productLB.addItem("Apple");
-		productLB.addItem("Pie");
-		productLB.addChangeHandler(new listBoxChangeHandler(productLB,
-				productCB));*/
 
 		typeLB = new ListBox();
 		typeLB.addItem(" ");
@@ -222,7 +211,20 @@ public class SelectionView extends Composite implements Serializable{
 			};
 			
 			VisualizationUtils.loadVisualizationApi(onLoadCallback, Table.PACKAGE);
+			
+			
+			
+			highchartSvc.getCharts("null", "Tea", "Import Quantity" , false,
+					new AsyncCallback<ArrayList<String[]>>() {
+						public void onFailure(Throwable caught) {
+							// Show the RPC error message to the user
+							System.out.println("Error!");
+						}
 
+						public void onSuccess(ArrayList<String[]> resultTemp) {
+							
+						}
+					});
 				
 			//DataManager data = new DataManager();
 			//data.createDataTable("India", "Tea", "null");

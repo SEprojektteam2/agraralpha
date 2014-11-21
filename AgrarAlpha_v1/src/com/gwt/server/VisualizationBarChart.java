@@ -1,5 +1,5 @@
 package com.gwt.server;
 
-public class VisualizationBarChart implements Visualization {
-
-}
+/*public class VisualizationBarChart implements Visualization {
+	
+}*/
