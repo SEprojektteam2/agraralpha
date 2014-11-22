@@ -1,10 +1,10 @@
 package com.gwt.client;
 import java.util.ArrayList;
 
+import org.moxieapps.gwt.highcharts.client.Chart;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface HighchartServiceAsync {
-	void getCountries(AsyncCallback<ArrayList<String>> callback) throws IllegalArgumentException;
-	void getProducts(AsyncCallback<ArrayList<String>> callback) throws IllegalArgumentException;
-	void getData(String country, String product, String type, AsyncCallback<ArrayList<String[]>> callback) throws IllegalArgumentException;
+	void getCharts(String country, String product, String type, Boolean perCapita, Boolean interpolation, AsyncCallback<ArrayList<Chart[]>> callback) throws IllegalArgumentException;
 }

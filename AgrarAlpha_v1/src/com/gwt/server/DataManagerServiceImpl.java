@@ -33,7 +33,8 @@ public class DataManagerServiceImpl extends RemoteServiceServlet implements
 		connectToDatabase();
 		//limit 1 bei der Abfrage (entfernt die Dupletten)
 		// if you only need a few columns, specify them by name instead of using "*"
-		String query = "SELECT distinct AreaName FROM records WHERE ElementName='Export Quantity'";
+		//String query = "SELECT distinct AreaName FROM records WHERE ElementName='Export Quantity'";
+		String query = "SELECT distinct AreaName FROM records";
 		
 		// create the java statement
 		Statement st = null;
@@ -70,7 +71,8 @@ public class DataManagerServiceImpl extends RemoteServiceServlet implements
 		connectToDatabase();
 		//limit 1 bei der Abfrage (entfernt die Dupletten)
 		// if you only need a few columns, specify them by name instead of using "*"
-		String query = "SELECT distinct ItemName FROM records WHERE ElementName='Export Quantity'";
+		//String query = "SELECT distinct ItemName FROM records WHERE ElementName='Export Quantity'";
+		String query = "SELECT distinct ItemName FROM records ORDER BY ItemName ASC";
 		
 		// create the java statement
 		Statement st = null;
