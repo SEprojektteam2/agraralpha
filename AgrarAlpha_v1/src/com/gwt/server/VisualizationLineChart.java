@@ -1,26 +1,32 @@
 package com.gwt.server;
+import java.util.ArrayList;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.i18n.client.*;  
 import com.google.gwt.user.client.ui.RootPanel;  
+
 import org.moxieapps.gwt.highcharts.client.*;  
 import org.moxieapps.gwt.highcharts.client.labels.*;  
 import org.moxieapps.gwt.highcharts.client.plotOptions.*; 
 
-public class VisualizationLineChart implements EntryPoint{
+//public class VisualizationLineChart implements EntryPoint{
+public class VisualizationLineChart{
 	
-	public void getInterpolation(){
+	/*public void getInterpolation(){
 		
+	}*/
+	
+	private ArrayList<String[]> getExtrapolation(ArrayList<String[]> resultData){
+		ArrayList<String[]> resultExtra = new ArrayList<String[]>();
+		return resultData;
 	}
 	
-	public void getExtrapolation(){
-		
-	}
-	
-	public void onModuleLoad() {  
-        RootPanel.get().add(createChart());  
-    }  
+	/*public void onModuleLoad(ArrayList<String[]> temp) {  
+        RootPanel.get().add(createChart(temp));  
+    } */
   
-    public Chart createChart() {  
+    public Chart createChart(ArrayList<String[]> resultData) {  
+    	resultData=getExtrapolation(resultData);
     	final Chart chart = new Chart()  
         .setType(Series.Type.SPLINE)  
         .setChartTitleText("Interpolation and Extrapolation")  
@@ -62,8 +68,31 @@ public class VisualizationLineChart implements EntryPoint{
         .setMinorGridLineWidth(0)  
         .setGridLineWidth(0)  
         .setAlternateGridColor(null);  
-
-    chart.addSeries(chart.createSeries()  
+    
+    
+    String[] temp = resultData.get(resultData.size());
+	int counterMax = Integer.parseInt(temp[0]);
+	String searchingVar = temp[1];
+	
+	for(int i=0; i<counterMax; i++){
+		double[] points = new double[2016-1990+1];
+		for(int j=0;j<=2016-1990;j++){
+			String[] tempNumber= resultData.get(i*27+j);
+			points[j]=Double.parseDouble(tempNumber[2]);
+		}
+		temp = resultData.get(i*27);
+		chart.addSeries(chart.createSeries()  
+			.setName(temp[1])  
+			.setPoints(new Number[]{  
+				points[0], points[1], points[2], points[3], points[4], points[5],  
+				points[6], points[7], points[8], points[9], points[10], points[11], 
+				points[12], points[13], points[14], points[15], points[16], points[17], 
+				points[18], points[19], points[20], points[21], points[22], points[23],
+				points[24], points[25], points[26] 
+			})  
+		);
+	}
+    /*chart.addSeries(chart.createSeries()  
         .setName("Export")  
         .setPoints(new Number[]{  
             4.3, 5.1, 4.3, 5.2, 5.4, 4.7,  
@@ -92,7 +121,7 @@ public class VisualizationLineChart implements EntryPoint{
                 3.2, 2.0, 0.9, 0.4, 0.3, 0.5,  
                 5.0, 4.8, 5.0 
             })  
-        ); 
+        ); */
         
     	/*final Chart chart = new Chart()  
             .setType(Series.Type.LINE)  

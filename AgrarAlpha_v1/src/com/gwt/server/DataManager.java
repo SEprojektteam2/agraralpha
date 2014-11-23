@@ -129,27 +129,6 @@ public class DataManager {
 		resultTemp[2] = "null";
 		result.add(result.size(),resultTemp);
 		
-		/*DataTable DATA = DataTable.create();
-
-		DATA.addColumn(ColumnType.STRING, searchingVar);
-		for(int j=2011; j>=1990;j--){      //TODO Achtung Funktion zum auffuellen
-			DATA.addColumn(ColumnType.NUMBER, Integer.toString(j));
-		}
-				
-		DATA.addRows(counter);
-
-		for(int c = 0; c < DATA.getNumberOfRows(); c++ )
-		{
-			int k;
-			String[] temp=null;
-			for(k = 1; k <= DATA.getNumberOfColumns(); k++ )
-			{
-				temp=result.get(k-1);
-				DATA.setCell(c, k, Double.parseDouble(temp[2]), temp[2], null);
-			}
-			DATA.setCell(c, 0, temp[1],temp[1] , null);
-		}*/
-		
 		return result;
 	}
 		
