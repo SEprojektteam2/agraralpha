@@ -7,18 +7,26 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 import org.moxieapps.gwt.highcharts.client.*;  
 import org.moxieapps.gwt.highcharts.client.labels.*;  
-import org.moxieapps.gwt.highcharts.client.plotOptions.*; 
+import org.moxieapps.gwt.highcharts.client.plotOptions.*;
+
+import org.apache.commons.math3.stat.regression.SimpleRegression;
 
 //public class VisualizationLineChart implements EntryPoint{
 public class VisualizationLineChart{
-	
-	/*public void getInterpolation(){
-		
-	}*/
-	
-	private ArrayList<String[]> getExtrapolation(ArrayList<String[]> resultData){
-		ArrayList<String[]> resultExtra = new ArrayList<String[]>();
-		return resultData;
+
+	private double[] getSimpleRegression(double[] points){
+		double[] resultReg = new double[2];
+		//double[][] data = { { 0, 1 }, {1, 1.5 }, {2, 2.8 }, {3, 3.5 }, {4, 3.9 }, {5, 4.2 }};
+		double[][] data = new double[points.length][2];
+		for(int k=0;k<=2011-1990;k++){
+			data[k][0]=k;
+			data[k][1]=points[k];
+		}
+		SimpleRegression regression = new SimpleRegression();
+		regression.addData(data);
+		resultReg[0]=regression.predict(0);
+		resultReg[1]=regression.predict(27);
+		return resultReg;
 	}
 	
 	/*public void onModuleLoad(ArrayList<String[]> temp) {  
@@ -26,7 +34,6 @@ public class VisualizationLineChart{
     } */
   
     public Chart createChart(ArrayList<String[]> resultData) {  
-    	resultData=getExtrapolation(resultData);
     	final Chart chart = new Chart()  
         .setType(Series.Type.SPLINE)  
         .setChartTitleText("Interpolation and Extrapolation")  
@@ -75,22 +82,36 @@ public class VisualizationLineChart{
 	String searchingVar = temp[1];
 	
 	for(int i=0; i<counterMax; i++){
-		double[] points = new double[2016-1990+1];
-		for(int j=0;j<=2016-1990;j++){
-			String[] tempNumber= resultData.get(i*27+j);
+		double[] points = new double[2011-1990+1];
+		for(int j=0;j<=2011-1990;j++){
+			String[] tempNumber= resultData.get(i*22+j);
 			points[j]=Double.parseDouble(tempNumber[2]);
 		}
-		temp = resultData.get(i*27);
+		temp = resultData.get(i*22);
 		chart.addSeries(chart.createSeries()  
 			.setName(temp[1])  
 			.setPoints(new Number[]{  
 				points[0], points[1], points[2], points[3], points[4], points[5],  
 				points[6], points[7], points[8], points[9], points[10], points[11], 
 				points[12], points[13], points[14], points[15], points[16], points[17], 
-				points[18], points[19], points[20], points[21], points[22], points[23],
-				points[24], points[25], points[26] 
+				points[18], points[19], points[20], points[21] 
 			})  
 		);
+		double[] resultReg = getSimpleRegression(points);
+		chart.addSeries(chart.createSeries()  
+		            .setName("Regression Line "+temp[1])  
+		            .setType(Series.Type.LINE)  
+		            .setPlotOptions(new LinePlotOptions()  
+		                .setMarker(new Marker()  
+		                    .setEnabled(false)  
+		                )  
+		                .setHoverStateLineWidth(0)  
+		                .setEnableMouseTracking(false)  
+		            )  
+		            .setPoints(new Number[][]{  
+		                {1990, resultReg[0]}, {2016, resultReg[1]}  
+		            })  
+				);
 	}
     /*chart.addSeries(chart.createSeries()  
         .setName("Export")  
