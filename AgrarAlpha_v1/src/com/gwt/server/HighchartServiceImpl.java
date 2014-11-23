@@ -14,7 +14,7 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		HighchartService {
 		
 		
-	public ArrayList<Chart[]> getCharts(String country, String product, String type, Boolean perCapita, Boolean interpolation){
+	public ArrayList<Chart[]> getCharts(String country, String product, String type, String year, Boolean perCapita, Boolean interpolation){
 			
 		ArrayList<Chart[]> result = new ArrayList<Chart[]>();
 		DataManager data = new DataManager();
