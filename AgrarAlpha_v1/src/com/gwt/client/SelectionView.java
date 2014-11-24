@@ -229,8 +229,6 @@ public class SelectionView extends Composite implements Serializable {
 			VisualizationUtils.loadVisualizationApi(onLoadCallback,
 					Table.PACKAGE);*/
 
-		    VisualizationMap map =new VisualizationMap();
-		    RootPanel.get().add(map.createChart());
 			
 		    highchartSvc.getData("India", "Tea", "Import Quantity",
 					false, new AsyncCallback<ArrayList<String[]>>() {
@@ -240,7 +238,7 @@ public class SelectionView extends Composite implements Serializable {
 						}
 
 						public void onSuccess(ArrayList<String[]> resultTemp) {
-							
+							main.openCreateView(true,resultTemp);
 						}
 		    });
 		    

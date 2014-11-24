@@ -2,6 +2,8 @@ package com.gwt.client;
 
 //package guiA.client;
 
+import java.util.ArrayList;
+
 import com.google.gwt.dev.asm.Label;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ButtonBase;
@@ -21,14 +23,16 @@ public class CreateView extends Composite{
 	private VerticalPanel graphPanel = new VerticalPanel();
 	private VerticalPanel mapPanel = new VerticalPanel();
 	private SourceView source;
-	
-	private VisualizationManager VisMan;
+	private ArrayList <String[]>dataArray;
+private VisualizationMap vMap;
+//private VisualizationLineChart vLineChart;
 
 	/* This class present the view the user has after he clicked the create button on mainView. it contains the graphics the user wants to see
 	 */
-	public CreateView(final VisualizationManager visMan){
+	public CreateView(boolean b, ArrayList<String[]>a){
 		initWidget(this.basePanel);
-		
+	vMap=new VisualizationMap();
+	//vLineChart=new VisualizationLineChart();
 		
 		
 		source= new SourceView();
@@ -41,7 +45,7 @@ public class CreateView extends Composite{
 		/*only placeholer until we can fill with the acutal graphics from visalisationmanager.  will be removed later*/
 		Button message = new Button("To be implemented in a future sprint.");
 		message.setStyleName("message");
-		
+		/*
 		Runnable onLoadCallbackTable = new Runnable(){
 			public void run(){
 				VisMan = visMan;
@@ -52,7 +56,7 @@ public class CreateView extends Composite{
 		VisualizationUtils.loadVisualizationApi(onLoadCallbackTable, Table.PACKAGE);
 		  
 		
-		
+		*/
 		tablePanel.add(source);
 		
 		//adding table
@@ -61,8 +65,9 @@ public class CreateView extends Composite{
 		
 	
 		graphPanel.add(message);
+		graphPanel.add(vMap.createChart());
 		//graphPanel.add(source); // adding a verticalPanel with all source to the mapPanel
-		
+		/*
 		Runnable onLoadCallbackMap = new Runnable(){
 			public void run(){
 				mapPanel.add(VisMan.graphs.get(1));
@@ -70,7 +75,7 @@ public class CreateView extends Composite{
 		};
 
 		VisualizationUtils.loadVisualizationApi(onLoadCallbackMap, GeoMap.PACKAGE);
-		  
+		  */
 		//mapPanel.add(message.asWidget());
 		mapPanel.add(source); // adding a verticalPanel with all source to the mapPanel
 		

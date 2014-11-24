@@ -3,6 +3,7 @@ package com.gwt.client;
 //package guiA.client;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -68,13 +69,13 @@ public class MainView extends Composite {
 		rootPanel.add(contentPanel);
 	}
 
-	public void openCreateView(VisualizationManager visMan) {
+	public void openCreateView(boolean b, ArrayList<String[]>a) {
 		rootPanel.clear();
 		contentPanel.clear();
 		ExtendedMenuView menu = new ExtendedMenuView(this);
 		rootPanel.add(menu);
 		
-		CreateView cView = new CreateView(visMan);
+		CreateView cView = new CreateView(b,a);
 		contentPanel.add(cView);
 		rootPanel.add(contentPanel);
 	}
