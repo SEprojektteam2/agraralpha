@@ -216,7 +216,7 @@ public class SelectionView extends Composite implements Serializable {
 			// bi "aplle" s produkt und bi "pie" de Produkttyp, und no sjahr
 			// De visualizatonManager muen da erstellt werde und Ã¼bergeh
 			// werde!!
-			Runnable onLoadCallback = new Runnable() {
+			/*Runnable onLoadCallback = new Runnable() {
 				public void run() {
 					DataManager2 data = new DataManager2();
 					VisualizationManager vis = new VisualizationManager(
@@ -227,11 +227,23 @@ public class SelectionView extends Composite implements Serializable {
 			};
 
 			VisualizationUtils.loadVisualizationApi(onLoadCallback,
-					Table.PACKAGE);
+					Table.PACKAGE);*/
 
 		    VisualizationMap map =new VisualizationMap();
 		    RootPanel.get().add(map.createChart());
 			
+		    highchartSvc.getData("India", "Tea", "Import Quantity",
+					false, new AsyncCallback<ArrayList<String[]>>() {
+						public void onFailure(Throwable caught) {
+							// Show the RPC error message to the user
+							System.out.println("Error Arraylist!");
+						}
+
+						public void onSuccess(ArrayList<String[]> resultTemp) {
+							
+						}
+		    });
+		    
 			/*highchartSvc.getCharts("India", "Tea", "Import Quantity", "1990", false,
 					false, new AsyncCallback<ArrayList<Chart>>() {
 						public void onFailure(Throwable caught) {
