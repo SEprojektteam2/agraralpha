@@ -5,8 +5,6 @@ import java.util.ArrayList;
 
 import com.gwt.server.MySQLConnection;
 //import com.google.appengine.api.utils.SystemProperty;
-import com.google.gwt.visualization.client.*;
-import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.gwt.client.DataManagerService;
 
@@ -34,7 +32,7 @@ public class DataManagerServiceImpl extends RemoteServiceServlet implements
 		//limit 1 bei der Abfrage (entfernt die Dupletten)
 		// if you only need a few columns, specify them by name instead of using "*"
 		//String query = "SELECT distinct AreaName FROM records WHERE ElementName='Export Quantity'";
-		String query = "SELECT distinct AreaName FROM records";
+		String query = "SELECT distinct AreaName FROM records ORDER BY AreaName ASC";
 		
 		// create the java statement
 		Statement st = null;
