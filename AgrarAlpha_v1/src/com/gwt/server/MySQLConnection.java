@@ -12,12 +12,12 @@ public class MySQLConnection {
 	private String host, user, password, db, appengineSource;
 	Connection conn;
 	public static final Logger log = Logger.getLogger(MySQLConnection.class.getName());
-	public MySQLConnection(String host, String user, String password, String db, String appengineSource){
-		this.host = host;
-		this.user = user;
-		this.password = password;
-		this.db = db;
-		this.appengineSource = appengineSource;
+	public MySQLConnection(){
+		this.host = "173.194.240.221";
+		this.user = "root";
+		this.password = "";
+		this.db = "agrar";
+		this.appengineSource = "agraralphav2:agrar";
 	}
 	
 	public boolean connect(){
