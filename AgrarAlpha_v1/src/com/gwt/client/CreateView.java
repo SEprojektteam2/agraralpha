@@ -24,15 +24,16 @@ public class CreateView extends Composite{
 	private VerticalPanel mapPanel = new VerticalPanel();
 	private SourceView source;
 	private ArrayList <String[]>dataArray;
-private VisualizationMap vMap;
+
 //private VisualizationLineChart vLineChart;
 
 	/* This class present the view the user has after he clicked the create button on mainView. it contains the graphics the user wants to see
 	 */
-	public CreateView(boolean b, ArrayList<String[]>a){
+	public CreateView(boolean interpolation, ArrayList<String[]> Data){
 		initWidget(this.basePanel);
-	vMap=new VisualizationMap();
-	//vLineChart=new VisualizationLineChart();
+		VisualizationMap vMap=new VisualizationMap();
+		VisualizationLineChart vLineChart = new VisualizationLineChart();
+		VisualizationTable vTable = new VisualizationTable(Data);
 		
 		
 		source= new SourceView();
@@ -65,7 +66,13 @@ private VisualizationMap vMap;
 		
 	
 		graphPanel.add(message);
-		graphPanel.add(vMap.createChart());
+		
+		if(interpolation==true){
+			graphPanel.add(vLineChart.createChart(Data));
+		}
+		else{
+			graphPanel.add(vMap.createChart());
+		}
 		//graphPanel.add(source); // adding a verticalPanel with all source to the mapPanel
 		/*
 		Runnable onLoadCallbackMap = new Runnable(){
