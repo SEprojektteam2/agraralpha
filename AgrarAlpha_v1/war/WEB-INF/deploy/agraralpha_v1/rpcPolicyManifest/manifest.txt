@@ -1,3 +1,4 @@
 # Module agraralpha_v1
 # RPC service class, partial path of RPC policy file
-com.gwt.client.DataManagerService, 4A4FB1589A54752D35AE032BD16906A7.gwt.rpc
+com.gwt.client.HighchartService, 76F9F11E1ADEA2EC9B63361BBF7C63EA.gwt.rpc
+com.gwt.client.DataManagerService, 8EE168B71768640297BEDB5740DC2324.gwt.rpc
