@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.moxieapps.gwt.highcharts.client.Chart;
 
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.gwt.client.HighchartService;
 
@@ -20,15 +21,19 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		DataManager data = new DataManager();
 		ArrayList<String[]> resultData = new ArrayList<String[]>();
 		resultData=data.getData(country, product, type);
-		if(interpolation==true){
+		/*if(interpolation==true){
 			VisualizationLineChart LineChart = new VisualizationLineChart();
 			result.add(0,LineChart.createChart(resultData));
-			//vielleicht noch Tabelle und Histogramm einfügen
-		}
+			//vielleicht noch Tabelle und Histogramm einfÃ¼gen
+		}*/
+		VisualizationMap map = new VisualizationMap();
+		RootPanel.get().add(map.createChart());
 		return result;
 	}
 		
 
 }	
+	
+	
 	
 
