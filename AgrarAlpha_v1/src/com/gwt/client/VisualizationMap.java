@@ -1,4 +1,4 @@
-package com.gwt.server;
+package com.gwt.client;
 
 import com.google.gwt.i18n.client.*;  
 import com.google.gwt.core.client.EntryPoint;  

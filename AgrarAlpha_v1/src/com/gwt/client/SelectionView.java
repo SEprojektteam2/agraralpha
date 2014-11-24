@@ -16,6 +16,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -215,7 +216,7 @@ public class SelectionView extends Composite implements Serializable {
 			// bi "aplle" s produkt und bi "pie" de Produkttyp, und no sjahr
 			// De visualizatonManager muen da erstellt werde und Ã¼bergeh
 			// werde!!
-			/*Runnable onLoadCallback = new Runnable() {
+			Runnable onLoadCallback = new Runnable() {
 				public void run() {
 					DataManager2 data = new DataManager2();
 					VisualizationManager vis = new VisualizationManager(
@@ -226,10 +227,12 @@ public class SelectionView extends Composite implements Serializable {
 			};
 
 			VisualizationUtils.loadVisualizationApi(onLoadCallback,
-					Table.PACKAGE);*/
+					Table.PACKAGE);
+
+		    VisualizationMap map =new VisualizationMap();
+		    RootPanel.get().add(map.createChart());
 			
-			
-			highchartSvc.getCharts("India", "Tea", "Import Quantity", "1990", false,
+			/*highchartSvc.getCharts("India", "Tea", "Import Quantity", "1990", false,
 					false, new AsyncCallback<ArrayList<Chart>>() {
 						public void onFailure(Throwable caught) {
 							// Show the RPC error message to the user
@@ -237,9 +240,10 @@ public class SelectionView extends Composite implements Serializable {
 						}
 
 						public void onSuccess(ArrayList<Chart> resultTemp) {
-
+								RootPanel.get().add(resultTemp.get(0));
+							
 						}
-					});
+					});*/
 
 			// DataManager data = new DataManager();
 			// data.createDataTable("India", "Tea", "null");

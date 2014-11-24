@@ -1,4 +1,4 @@
-package com.gwt.server;
+package com.gwt.client;
 import java.util.ArrayList;
 
 import com.google.gwt.core.client.EntryPoint;

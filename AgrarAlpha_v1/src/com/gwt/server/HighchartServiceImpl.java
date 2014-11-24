@@ -9,6 +9,7 @@ import org.moxieapps.gwt.highcharts.client.Chart;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.gwt.client.HighchartService;
+import com.gwt.client.VisualizationMap;
 
 @SuppressWarnings("serial")
 public class HighchartServiceImpl extends RemoteServiceServlet implements
@@ -27,7 +28,7 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 			//vielleicht noch Tabelle und Histogramm einfügen
 		}*/
 		VisualizationMap map = new VisualizationMap();
-		RootPanel.get().add(map.createChart());
+		result.add(0,map.createChart());
 		return result;
 	}
 		

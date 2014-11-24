@@ -1,7 +1,10 @@
 package com.gwt.client;
 
-import com.gwt.shared.FieldVerifier;
+import java.util.ArrayList;
 
+import org.moxieapps.gwt.highcharts.client.Chart;
+
+import com.gwt.shared.FieldVerifier;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -34,7 +37,6 @@ public class AgrarAlpha_v1 implements EntryPoint {
 	 */
 	
 	
-	
 	/**
 	 * This is the entry point method.
 	 */
@@ -59,4 +61,7 @@ public class AgrarAlpha_v1 implements EntryPoint {
 	    gui.onModuleLoad();
 
 	    RootPanel.get().add(form);
+						
+
+
 }}

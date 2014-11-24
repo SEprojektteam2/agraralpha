@@ -8,6 +8,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 @RemoteServiceRelativePath("Highchart")
 public interface HighchartService extends RemoteService {
-	//Arralist miz Charts
+	//Arralist mit Charts
 	ArrayList<Chart> getCharts(String country, String product, String type, String year, Boolean perCapita, Boolean interpolation) throws IllegalArgumentException;
 }
