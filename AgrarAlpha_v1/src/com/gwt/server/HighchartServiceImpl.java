@@ -98,12 +98,12 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		ArrayList<String[]> result = new ArrayList<String[]>();
 			
 			
-		connectToDatabase();
+		/*connectToDatabase();
 			
 		String query="null";
 		String query2="null";
 		String searchingVar="null";
-		String outputVar="null";
+		String outputVar="Value";
 			
 		int counter=0;
 		// country=null when world is selected and product is given and type is given => Output: Country + Year + Value
@@ -140,7 +140,54 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		resultTemp[0] = Integer.toString(counter);
 		resultTemp[1] = searchingVar;
 		resultTemp[2] = "null";
-		result.add(result.size(),resultTemp);
+		result.add(result.size(),resultTemp);*/
+		
+		String[] sArray= {"1990","Schweiz","3"};
+		String[] sArray1= {"1991","Schweiz","10"};
+		String[] sArray2= {"1992","Schweiz","9"};
+		String[] sArray3= {"1993","Schweiz","11"};
+		String[] sArray4= {"1994","Schweiz","15"};
+		String[] sArray5= {"1995","Schweiz","12"};
+		String[] sArray6= {"1996","Schweiz","14"};
+		String[] sArray7= {"1997","Schweiz","16"};
+		String[] sArray8= {"1998","Schweiz","10"};
+		String[] sArray9= {"1999","Schweiz","14"};
+		String[] sArray10= {"2000","Schweiz","19"};
+		String[] sArray11= {"2001","Schweiz","20"};
+		String[] sArray12= {"2002","Schweiz","21"};
+		String[] sArray13= {"2003","Schweiz","25"};
+		String[] sArray14= {"2004","Schweiz","14"};
+		String[] sArray15= {"2005","Schweiz","16"};
+		String[] sArray16= {"2006","Schweiz","19"};
+		String[] sArray17= {"2007","Schweiz","18"};
+		String[] sArray18= {"2008","Schweiz","20"};
+		String[] sArray19= {"2009","Schweiz","21"};
+		String[] sArray20= {"2010","Schweiz","22"};
+		String[] sArray21= {"2011","Schweiz","20"};
+		String[] sArray22= {"1","AreaName","null"};
+		result.add(sArray);
+		result.add(sArray1);
+		result.add(sArray2);
+		result.add(sArray3);
+		result.add(sArray4);
+		result.add(sArray5);
+		result.add(sArray6);
+		result.add(sArray7);
+		result.add(sArray8);
+		result.add(sArray9);
+		result.add(sArray10);
+		result.add(sArray11);
+		result.add(sArray12);
+		result.add(sArray13);
+		result.add(sArray14);
+		result.add(sArray15);
+		result.add(sArray16);
+		result.add(sArray17);
+		result.add(sArray18);
+		result.add(sArray19);
+		result.add(sArray20);
+		result.add(sArray21);
+		result.add(sArray22);
 		
 		return result;
 	}

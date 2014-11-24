@@ -67,10 +67,12 @@ public class CreateView extends Composite{
 	
 		graphPanel.add(message);
 		
+		
 		if(interpolation==true){
 			graphPanel.add(vLineChart.createChart(Data));
 		}
-		else{
+		if(interpolation==false){
+			tablePanel.add(vTable.create());
 			graphPanel.add(vMap.createChart());
 		}
 		//graphPanel.add(source); // adding a verticalPanel with all source to the mapPanel

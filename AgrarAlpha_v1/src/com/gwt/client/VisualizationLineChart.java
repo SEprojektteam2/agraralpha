@@ -2,30 +2,39 @@ package com.gwt.client;
 import java.util.ArrayList;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.*;  
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;  
 
 import org.moxieapps.gwt.highcharts.client.*;  
 import org.moxieapps.gwt.highcharts.client.labels.*;  
 import org.moxieapps.gwt.highcharts.client.plotOptions.*;
-
 import org.apache.commons.math3.stat.regression.SimpleRegression;
 
 //public class VisualizationLineChart implements EntryPoint{
 public class VisualizationLineChart{
-
+	
+	private SimpleRegressionServiceAsync simpleRegSvc = GWT.create(SimpleRegressionService.class);
+	private double[] resultReg = new double[2];
+	
 	private double[] getSimpleRegression(double[] points){
-		double[] resultReg = new double[2];
-		//double[][] data = { { 0, 1 }, {1, 1.5 }, {2, 2.8 }, {3, 3.5 }, {4, 3.9 }, {5, 4.2 }};
-		double[][] data = new double[points.length][2];
+		double[][] data = new double[points.length+1][2];
 		for(int k=0;k<=2011-1990;k++){
 			data[k][0]=k;
 			data[k][1]=points[k];
 		}
-		SimpleRegression regression = new SimpleRegression();
-		regression.addData(data);
-		resultReg[0]=regression.predict(0);
-		resultReg[1]=regression.predict(27);
+		
+		simpleRegSvc.getSimpleReg(data, new AsyncCallback<double[]>() {
+					public void onFailure(Throwable caught) {
+						// Show the RPC error message to the user
+						System.out.println("Error Arraylist!");
+					}
+
+					public void onSuccess(double[] resultTemp) {
+						resultReg=resultTemp;
+					}
+	    });
 		return resultReg;
 	}
 	
