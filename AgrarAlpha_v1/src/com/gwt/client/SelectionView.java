@@ -312,7 +312,7 @@ public class SelectionView extends Composite implements Serializable {
 		 * user select an option in a listbox the checkbox will adapt
 		 */
 		public void onChange(ChangeEvent event) {
-			if (!countryLB.isItemSelected(0)) { // checks if world is chosen
+			if (countryLB.isItemSelected(0)) { // checks if world is chosen
 
 				if (list.isItemSelected(0)) {// checks if the user has picked an
 												// option
@@ -323,7 +323,7 @@ public class SelectionView extends Composite implements Serializable {
 					box.setValue(false);
 
 				} else {
-					if (!box.getValue() && CBcounter < 1) { // checks if there
+					if (!box.getValue() && CBcounter < 3) { // checks if there
 															// already a
 															// checkbox checked
 															// and if the
