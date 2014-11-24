@@ -127,6 +127,12 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 			counter=getCounter(query2);
 			searchingVar="ElementName";
 		}
+		else{
+			query = "SELECT AreaName, Year, Value FROM records WHERE ItemName = '"+product+"' AND AreaName = '"+country+"' AND ElementName = '"+type+"' ORDER BY Year ASC";
+			query2 = "SELECT distinct AreaName FROM records WHERE ItemName = '"+product+"' AND AreaName = '"+country+"' AND ElementName = '"+type+"'";
+			counter=getCounter(query2);
+			searchingVar="AreaName";
+		}
 			
 		result = readDatabase(query,searchingVar,outputVar);
 		
@@ -139,7 +145,7 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		return result;
 	}
 	
-	private ArrayList<String[]> calcPerCaptia(ArrayList<String[]> resultData){
+	private ArrayList<String[]> calcPerCapita(ArrayList<String[]> resultData){
 		return resultData;
 	}
 		
