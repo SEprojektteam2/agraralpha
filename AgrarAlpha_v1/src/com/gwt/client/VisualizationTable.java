@@ -71,22 +71,22 @@ public VisualizationTable(ArrayList<String[]>a){
 		htmlString+="</tr>";
 		htmlString+="</thead>";
 		htmlString+="<tbody>";
-        String checkCountry=arraylist.get(0)[0];
+        String checkCountry=arraylist.get(0)[1];
 		int i=0;
 		int k=0;
 		
 		while(i<arraylist.size()-1){
 			htmlString+=tr;
-			htmlString+=td+arraylist.get(i)[0]+td2;
-			while(i<arraylist.size()-1 && checkCountry.equals(arraylist.get(k)[0])){
-				htmlString+=td+arraylist.get(i)[1]+td2;
+			htmlString+=td+arraylist.get(i)[1]+td2;
+			while(i<arraylist.size()-1 && checkCountry.equals(arraylist.get(k)[1])){
+				htmlString+=td+arraylist.get(i)[2]+td2;
 		      i++;
 		      if(i<arraylist.size()-2)
 		    	  k=i;
 		      
 			}
 			if(i<arraylist.size())
-			checkCountry=arraylist.get(i)[0];
+			checkCountry=arraylist.get(i)[1];
 			
 			
 			htmlString+=tr2;

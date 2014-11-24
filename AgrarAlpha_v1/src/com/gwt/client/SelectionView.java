@@ -230,7 +230,7 @@ public class SelectionView extends Composite implements Serializable {
 					Table.PACKAGE);*/
 
 			
-		    highchartSvc.getData("Namibia", "Tea", "Export Quantity",
+		    /*highchartSvc.getData("Namibia", "Tea", "Export Quantity",
 					false, new AsyncCallback<ArrayList<String[]>>() {
 						public void onFailure(Throwable caught) {
 							// Show the RPC error message to the user
@@ -240,20 +240,19 @@ public class SelectionView extends Composite implements Serializable {
 						public void onSuccess(ArrayList<String[]> resultTemp) {
 							main.openCreateView(true,resultTemp);
 						}
-		    });
-		    
-			/*highchartSvc.getCharts("India", "Tea", "Import Quantity", "1990", false,
-					false, new AsyncCallback<ArrayList<Chart>>() {
+		    });*/
+		    highchartSvc.getData("null", "Tea", "Export Quantity",
+					false, new AsyncCallback<ArrayList<String[]>>() {
 						public void onFailure(Throwable caught) {
 							// Show the RPC error message to the user
-							System.out.println("Error Highchart!");
+							System.out.println("Error Arraylist!");
 						}
 
-						public void onSuccess(ArrayList<Chart> resultTemp) {
-								RootPanel.get().add(resultTemp.get(0));
-							
+						public void onSuccess(ArrayList<String[]> resultTemp) {
+							main.openCreateView(false,resultTemp);
 						}
-					});*/
+		    });
+		    
 
 			// DataManager data = new DataManager();
 			// data.createDataTable("India", "Tea", "null");
