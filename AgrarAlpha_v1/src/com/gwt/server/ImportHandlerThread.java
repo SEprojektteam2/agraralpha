@@ -20,7 +20,7 @@ public class ImportHandlerThread implements Runnable {
 				
 				//Initialization of MySQL Connection
 				String statement = "INSERT INTO records (domainCode, domain, areaCode, areaName, elementCode, elementName, itemCode, itemName, year, unit, value, flag, flagD) VALUES( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? )";
-				MySQLConnection database = new MySQLConnection("173.194.253.240:3306","root","","agrar","agraralphav1:agrar");
+				MySQLConnection database = new MySQLConnection();
 			    database.connect();
 				
 				Connection conn = database.returnConnection();
