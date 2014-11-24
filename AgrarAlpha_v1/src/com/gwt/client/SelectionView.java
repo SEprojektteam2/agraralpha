@@ -380,7 +380,7 @@ public class SelectionView extends Composite implements Serializable {
 											// checkbox counter with 1
 					CBcounter--;
 				} else {
-					if (CBcounter < 2) { // not needed now,because there are
+					if (CBcounter < 3) { // not needed now,because there are
 											// only two boxes, but when extended
 											// with another box will be needed
 						box.setValue(true); // mark the box and add 1 to
@@ -398,7 +398,7 @@ public class SelectionView extends Composite implements Serializable {
 											// checkbox counter with 1
 					CBcounter--;
 				} else {
-					if (CBcounter < 1) {    //user is only allowed to have one CB selected
+					if (CBcounter < 2) {    //user is only allowed to have one CB selected
 						box.setValue(true); // mark the box and add 1 to
 											// checkbox counter
 						CBcounter++;
