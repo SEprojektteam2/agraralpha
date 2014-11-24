@@ -130,8 +130,8 @@ public class SelectionView extends Composite implements Serializable {
 
 		typeLB = new ListBox();
 		typeLB.addItem(" ");
-		typeLB.addItem("Import Qantity");
-		typeLB.addItem("Export Qantity");
+		typeLB.addItem("Import Quantity");
+		typeLB.addItem("Export Quantity");
 		typeLB.addItem("Production");
 		typeLB.addChangeHandler(new listBoxChangeHandler(typeLB, typeCB));
 
