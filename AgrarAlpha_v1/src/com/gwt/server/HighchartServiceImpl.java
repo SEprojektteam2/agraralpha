@@ -145,7 +145,7 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		return result;
 	}
 	
-	private ArrayList<String[]> calcPerCaptia(ArrayList<String[]> resultData){
+	private ArrayList<String[]> calcPerCapita(ArrayList<String[]> resultData){
 		return resultData;
 	}
 		
