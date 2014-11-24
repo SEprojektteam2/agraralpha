@@ -60,7 +60,7 @@ public VisualizationTable(ArrayList<String[]>a){
 	htmlString+="<table border=\"1\" style=\"width:100%\">";
 
 
-	
+	//hjmkl
 		HTML html=new HTML();
 		htmlString+="<thead>";
 		htmlString+=tr;
