@@ -140,18 +140,14 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 			
 		result = readDatabase(query,searchingVar,outputVar);
 		
-		String[] sArray22= {"1","AreaName","null"};
-		result.add(sArray22);
-		for(int i=0; i<result.size(); i++){
-			log.warning("Line x: ["+ result.get(i)[0] + "," + result.get(i)[1] + "," + result.get(i)[2] + "]");
-		}
+		
 		/*String[] resultTemp = new String[3];
 		resultTemp[0] = Integer.toString(counter);
 		resultTemp[1] = searchingVar;
 		resultTemp[2] = "null";
 		result.add(result.size(),resultTemp);
 		
-	/*	String[] sArray= {"1990","Schweiz","3.0"};
+		String[] sArray= {"1990","Schweiz","3.0"};
 		String[] sArray1= {"1991","Schweiz","10.0"};
 		String[] sArray2= {"1992","Schweiz","9.0"};
 		String[] sArray3= {"1993","Schweiz","11.0"};
@@ -173,8 +169,8 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		String[] sArray19= {"2009","Schweiz","21.0"};
 		String[] sArray20= {"2010","Schweiz","22.0"};
 		String[] sArray21= {"2011","Schweiz","20.0"};
-		String[] sArray22= {"1","AreaName","null"};
-		/*result.add(sArray);
+		
+		result.add(sArray);
 		result.add(sArray1);
 		result.add(sArray2);
 		result.add(sArray3);
@@ -195,9 +191,18 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		result.add(sArray18);
 		result.add(sArray19);
 		result.add(sArray20);
-		result.add(sArray21);
-		result.add(sArray22);*/
+		result.add(sArray21);*/
 	
+		
+		//adding informations
+
+		String[] informationRow= {"1","AreaName","null"};
+		result.add(informationRow);
+		
+		for(int i=0; i<result.size(); i++){
+			log.warning("Line x: ["+ result.get(i)[0] + "," + result.get(i)[1] + "," + result.get(i)[2] + "]");
+		}
+		
 		return result;
 	}
 	
