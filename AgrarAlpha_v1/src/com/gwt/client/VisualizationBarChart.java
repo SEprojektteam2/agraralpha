@@ -14,12 +14,14 @@ public class VisualizationBarChart{
 	private Chart chart;
 	private Number[][] data;
 	private int numColumns;
+	private int yearIndex;
 	
-	public VisualizationBarChart(ArrayList<String[]> resultData)
+	public VisualizationBarChart(ArrayList<String[]> resultData, String year)
 	{
 		chart = new Chart();
 		chart.setType(Series.Type.COLUMN);
 		
+		yearIndex = calculateYearIndex(year);
 		prepareData(resultData);
 		
 		numColumns = 10;
