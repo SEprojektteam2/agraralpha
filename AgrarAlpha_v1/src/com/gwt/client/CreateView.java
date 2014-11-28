@@ -69,6 +69,7 @@ public class CreateView extends Composite{
 		
 		
 		if(interpolation==true){
+			tablePanel.add(vTable.create());
 			graphPanel.add(vLineChart.createChart(Data));
 		}
 		if(interpolation==false){

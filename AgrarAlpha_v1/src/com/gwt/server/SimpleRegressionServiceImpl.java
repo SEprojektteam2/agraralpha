@@ -15,7 +15,8 @@ public class SimpleRegressionServiceImpl extends RemoteServiceServlet implements
 		SimpleRegression regression = new SimpleRegression();
 		regression.addData(data);
 		resultReg[0]=regression.predict(0);
-		resultReg[1]=regression.predict(27);
+		resultReg[1]=regression.predict(26);
+		
 		return resultReg;
 	}
 		
