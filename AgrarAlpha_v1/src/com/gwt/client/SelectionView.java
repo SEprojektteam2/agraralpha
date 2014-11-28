@@ -3,6 +3,7 @@ package com.gwt.client;
 //package guiA.client;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -30,7 +31,7 @@ import java.io.Serializable;
 import org.moxieapps.gwt.highcharts.client.Chart;
 
 public class SelectionView extends Composite implements Serializable {
-
+	public static Logger log = Logger.getLogger(SelectionView.class.getName());
 	private Label yearLabel;
 	private Label countryLabel;
 	private Label test1; // only to test if the getter functions works
@@ -229,8 +230,8 @@ public class SelectionView extends Composite implements Serializable {
 			VisualizationUtils.loadVisualizationApi(onLoadCallback,
 					Table.PACKAGE);*/
 
-			
-		    highchartSvc.getData("Namibia", "Tea", "Export Quantity",
+			log.warning("hallo");
+		  /*  highchartSvc.getData("Namibia", "Tea", "Export Quantity",
 					false, new AsyncCallback<ArrayList<String[]>>() {
 						public void onFailure(Throwable caught) {
 							// Show the RPC error message to the user
@@ -240,8 +241,8 @@ public class SelectionView extends Composite implements Serializable {
 						public void onSuccess(ArrayList<String[]> resultTemp) {
 							main.openCreateView(true,resultTemp);
 						}
-		    });
-		    /*highchartSvc.getData("null", "Tea", "Export Quantity",
+		    });*/
+		    highchartSvc.getData("null", "Tea", "Export Quantity",
 					false, new AsyncCallback<ArrayList<String[]>>() {
 						public void onFailure(Throwable caught) {
 							// Show the RPC error message to the user
@@ -251,7 +252,7 @@ public class SelectionView extends Composite implements Serializable {
 						public void onSuccess(ArrayList<String[]> resultTemp) {
 							main.openCreateView(false,resultTemp);
 						}
-		    });*/
+		    });
 		    
 
 			// DataManager data = new DataManager();

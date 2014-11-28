@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
-@RemoteServiceRelativePath("DataManager")
+@RemoteServiceRelativePath("SimpleRegression")
 public interface SimpleRegressionService extends RemoteService {
 	double[] getSimpleReg(double[][] data) throws IllegalArgumentException;
 }

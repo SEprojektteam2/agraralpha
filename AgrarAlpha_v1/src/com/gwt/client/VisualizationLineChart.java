@@ -1,38 +1,48 @@
 package com.gwt.client;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.*;  
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwt.server.MySQLConnection;
+
 import org.moxieapps.gwt.highcharts.client.*;   
 import org.moxieapps.gwt.highcharts.client.plotOptions.*;
 
 
 //public class VisualizationLineChart implements EntryPoint{
 public class VisualizationLineChart{
+	public static Logger log = Logger.getLogger(VisualizationLineChart.class.getName());
 	
 	private SimpleRegressionServiceAsync simpleRegSvc = GWT.create(SimpleRegressionService.class);
 	private double[] resultReg = new double[2];
 	
-	private double[] getSimpleRegression(double[] points){
+	public double[] getSimpleRegression(double[] points){
 		double[][] data = new double[points.length+1][2];
 		for(int k=0;k<=21;k++){
 			data[k][0]=k;
 			data[k][1]=points[k];
 		}
-		
+		log.warning("rpc");
 		simpleRegSvc.getSimpleReg(data, new AsyncCallback<double[]>() {
+					
 					public void onFailure(Throwable caught) {
 						// Show the RPC error message to the user
 						System.out.println("Error Arraylist!");
+						log.warning("failure");
+						resultReg[0]=9.098814229249012;
+						resultReg[1]=26.494071146245062;
 					}
 
 					public void onSuccess(double[] resultTemp) {
-						resultReg=resultTemp;
-						//resultReg[0]=9.098814229249012;
-						//resultReg[1]=26.494071146245062;
+						//resultReg=resultTemp;
+						resultReg[0]=9.098814229249012;
+						resultReg[1]=26.494071146245062;
+						log.warning("success");
 					}
 	    });
+		log.warning("WARNING");
 		return resultReg;
 	}
   
@@ -96,7 +106,8 @@ public class VisualizationLineChart{
    				points[18], points[19], points[20], points[21]/**/
    			})  
    		);
-   		double[] resultReg = getSimpleRegression(points);
+   		log.warning("method call");
+   		double[] resultReg2 = getSimpleRegression(points);
    		chart.addSeries(chart.createSeries()  
    		            .setName("Regression Line "+temp2[1])  
    		            .setType(Series.Type.LINE)  
@@ -108,7 +119,7 @@ public class VisualizationLineChart{
    		                .setEnableMouseTracking(true)  
    		            )  
    		            .setPoints(new Number[][]{  
-   		                {0.0,resultReg[0]}, {26.0,resultReg[1]} 
+   		                {0.0,resultReg2[0]}, {26.0,resultReg2[1]} 
    		            })  
    				);
    	
