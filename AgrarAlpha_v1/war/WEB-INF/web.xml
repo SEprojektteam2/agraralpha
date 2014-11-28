@@ -48,7 +48,15 @@
   </servlet-mapping>
   
 
-  
+    <servlet>
+    <servlet-name>SimpleRegressionServiceImpl</servlet-name>
+    <servlet-class>com.gwt.server.SimpleRegressionServiceImpl</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>SimpleRegressionServiceImpl</servlet-name>
+    <url-pattern>/agraralpha_v1/SimpleRegression</url-pattern>
+  </servlet-mapping>
   
   
   <!-- Default page to serve -->
