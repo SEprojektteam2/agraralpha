@@ -4,12 +4,13 @@ package com.gwt.client;
 
 import java.util.ArrayList;
 
-import com.google.gwt.dev.asm.Label;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ButtonBase;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TabPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.visualization.client.VisualizationUtils;
@@ -22,7 +23,9 @@ public class CreateView extends Composite{
 	private VerticalPanel tablePanel = new VerticalPanel();
 	private VerticalPanel interpolationPanel = new VerticalPanel();
 	private VerticalPanel stockChartPanel = new VerticalPanel();
-
+    
+	private Label label;
+	private ListBox list;
 	private VerticalPanel mapPanel = new VerticalPanel();
 	private SourceView source;
 	private ArrayList <String[]>dataArray;
@@ -36,8 +39,13 @@ public class CreateView extends Composite{
 		VisualizationMap vMap=new VisualizationMap();
 		VisualizationLineChart vLineChart = new VisualizationLineChart();
 		VisualizationTable vTable = new VisualizationTable(Data);
-		
-		
+		list=new ListBox();
+		label= new Label("Placeholder");
+		/*
+		 for(int i=min; i<=max; i++){
+		 list.addItem(String.valueOf(i));
+		 }
+		 */
 		source= new SourceView();
 		source.addSource("Source:© FAO. 2014. FAOSTAT. data.fao.org. (Accessed 1.9.2014)"); //add a source
 		
