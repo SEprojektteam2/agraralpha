@@ -36,10 +36,5 @@ public class VisualizationTableTest extends TestCase {
 		assertEquals(a, vTable.arraylist);
 
 	}
-    /*
-	public void testCreate() {
-		FlowPanel panel = new FlowPanel();
-		panel.add(vTable.create());
-
-	}*/
+   
 }
