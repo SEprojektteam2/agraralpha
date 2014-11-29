@@ -24,13 +24,15 @@ public class MainView extends Composite {
 	 */
 	public MainView(){
 		initWidget(this.rootPanel);
-
+        rootPanel.setWidth("100%");
 		MenuView menu = new MenuView(this);
+		menu.setWidth("40%");
 		rootPanel.add(menu);
 
 		selView = new SelectionView(this);
 
 		contentPanel = new VerticalPanel();
+		contentPanel.setWidth("60%");
 		contentPanel.add(selView);
 		rootPanel.add(contentPanel);
 	}
@@ -89,15 +91,7 @@ public class MainView extends Composite {
 		contentPanel.add(changeView);
 		rootPanel.add(contentPanel);
 	}
-	public void openExportView() {
-		rootPanel.clear();
-		contentPanel.clear();
-		ExtendedMenuView menu = new ExtendedMenuView(this);
-		rootPanel.add(menu);
-		ExportView exportView = new ExportView();
-		contentPanel.add(exportView);
-		rootPanel.add(contentPanel);
-	}
+	
 	public void openSaveView() {
 		rootPanel.clear();
 		contentPanel.clear();
