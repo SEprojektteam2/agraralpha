@@ -83,14 +83,6 @@ public class ExtendedMenuView extends Composite {
 			}
 	}
 	
-		private class exportClickHandler implements ClickHandler{
-
-			@Override
-			public void onClick(ClickEvent event) {
-				main.openExportView();
-				}
-			
-		}
 		private class changeClickHandler implements ClickHandler{
 
 			@Override
