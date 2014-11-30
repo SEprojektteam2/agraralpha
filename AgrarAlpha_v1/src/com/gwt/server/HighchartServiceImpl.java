@@ -7,19 +7,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import org.moxieapps.gwt.highcharts.client.Chart;
 
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.gwt.client.HighchartService;
+import com.gwt.client.VisualizationLineChart;
 import com.gwt.client.VisualizationMap;
 
 @SuppressWarnings("serial")
 public class HighchartServiceImpl extends RemoteServiceServlet implements
 		HighchartService {
 		
-		
+	public static final Logger log = Logger.getLogger(HighchartServiceImpl.class.getName());	
 	Connection conn;
 	
 	//Create connection to mysqldatabase
@@ -27,6 +29,7 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		MySQLConnection database = new MySQLConnection();
 		if(database.connect()){
 			System.out.println("<html><head></head><body>Connection Started</body></html>");
+			log.warning("MySQL Connection Started!");
 		}
 	    conn = database.returnConnection();
 	}
@@ -60,6 +63,7 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		ArrayList<String[]> result = new ArrayList<String[]>();
 		// create the java statement
 		Statement st = null;
+		log.warning("now reading database!");
 		try {
 			st = conn.createStatement();
 			
@@ -68,16 +72,16 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 			rs = st.executeQuery(query);
 			
 			// iterate through the java resultset
-			int i=0;
+			//int i=0;
 			
 			while (rs.next())
-			{
-					String[] resultTemp = new String[3];
+			{		String[] resultTemp = new String[3];
 					resultTemp[0] = rs.getString("Year");
 					resultTemp[1] = rs.getString(searchingVar);
 					resultTemp[2] = rs.getString(outputVar);
-					result.add(i, resultTemp);
-					i++;
+					result.add(resultTemp);
+					//i++;
+					log.warning("added[" + resultTemp[0] + "," + resultTemp[1] + "," + resultTemp[2] + "]" );
 			}
 			
 		} 
@@ -87,7 +91,7 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		}
 		return result;
 	}
-		
+	//									Namibia			Tea			Export Quantity			false	
 	public ArrayList<String[]> getData(String country, String product, String type, Boolean perCapita){
 		// "null" nicht angegeben => nicht Beachtung der varaible 
 		//private DataTable TableDATA;
@@ -97,8 +101,8 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 			
 		ArrayList<String[]> result = new ArrayList<String[]>();
 			
-			
-		/*connectToDatabase();
+		log.warning("start");
+		connectToDatabase();
 			
 		String query="null";
 		String query2="null";
@@ -136,11 +140,12 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 			
 		result = readDatabase(query,searchingVar,outputVar);
 		
-		String[] resultTemp = new String[3];
+		
+		/*String[] resultTemp = new String[3];
 		resultTemp[0] = Integer.toString(counter);
 		resultTemp[1] = searchingVar;
 		resultTemp[2] = "null";
-		result.add(result.size(),resultTemp);*/
+		result.add(result.size(),resultTemp);
 		
 		String[] sArray= {"1990","Schweiz","3.0"};
 		String[] sArray1= {"1991","Schweiz","10.0"};
@@ -164,7 +169,7 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		String[] sArray19= {"2009","Schweiz","21.0"};
 		String[] sArray20= {"2010","Schweiz","22.0"};
 		String[] sArray21= {"2011","Schweiz","20.0"};
-		String[] sArray22= {"1","AreaName","null"};
+		
 		result.add(sArray);
 		result.add(sArray1);
 		result.add(sArray2);
@@ -186,8 +191,17 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		result.add(sArray18);
 		result.add(sArray19);
 		result.add(sArray20);
-		result.add(sArray21);
-		result.add(sArray22);
+		result.add(sArray21);*/
+	
+		
+		//adding informations
+
+		String[] informationRow= {"1","AreaName","null"};
+		result.add(informationRow);
+		
+		for(int i=0; i<result.size(); i++){
+			log.warning("Line x: ["+ result.get(i)[0] + "," + result.get(i)[1] + "," + result.get(i)[2] + "]");
+		}
 		
 		return result;
 	}
@@ -198,7 +212,3 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		
 
 }	
-	
-	
-	
-
