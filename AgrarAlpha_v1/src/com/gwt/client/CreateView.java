@@ -20,9 +20,9 @@ import com.google.gwt.visualization.client.visualizations.Table;
 public class CreateView extends Composite{
 	
 	private TabPanel basePanel = new TabPanel();
-	private VerticalPanel tablePanel = new VerticalPanel();
-	private VerticalPanel interpolationPanel = new VerticalPanel();
-	private VerticalPanel stockChartPanel = new VerticalPanel();
+	private VerticalPanel tablePanel;
+	private VerticalPanel interpolationPanel;
+	private VerticalPanel stockChartPanel;
     
 	private Label label;
 	private ListBox list;
@@ -47,7 +47,7 @@ public class CreateView extends Composite{
 		 }
 		 */
 		source= new SourceView();
-		source.addSource("Source:© FAO. 2014. FAOSTAT. data.fao.org. (Accessed 1.9.2014)"); //add a source
+		source.addSource("Source: FAO. 2014. FAOSTAT. data.fao.org. (Accessed 1.9.2014)"); //add a source
 		
 		tablePanel = new VerticalPanel();
 		interpolationPanel = new VerticalPanel();
