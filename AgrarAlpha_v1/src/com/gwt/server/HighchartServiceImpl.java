@@ -196,12 +196,8 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		
 		//adding informations
 
-		String[] informationRow= {"1","AreaName","null"};
+		String[] informationRow= {Integer.toString(counter),searchingVar,"null"};
 		result.add(informationRow);
-		
-		for(int i=0; i<result.size(); i++){
-			log.warning("Line x: ["+ result.get(i)[0] + "," + result.get(i)[1] + "," + result.get(i)[2] + "]");
-		}
 		
 		return result;
 	}
