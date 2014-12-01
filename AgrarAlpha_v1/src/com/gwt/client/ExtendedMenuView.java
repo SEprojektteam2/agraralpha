@@ -34,9 +34,9 @@ public class ExtendedMenuView extends Composite {
 
 	
 		
-		homeBtn = new Button("AgrarAlpha");
+		homeBtn = new Button("Home");
 		homeBtn.addClickHandler(new homeClickHandler());
-		homeBtn.addStyleName("homeBtn");
+		homeBtn.addStyleName("otherBtn");
 		
 		this.vPanel.add(homeBtn);
 		this.vPanel.add(openBtn);
