@@ -250,7 +250,7 @@ public class SelectionView extends Composite implements Serializable {
 							main.openCreateView(true,resultTemp);
 						}
 		    });*/
-		    highchartSvc.getData("null", "Tea", "Export Quantity",
+		    highchartSvc.getData("Namibia", "Tea", "Export Quantity",
 					false, new AsyncCallback<ArrayList<String[]>>() {
 						public void onFailure(Throwable caught) {
 							// Show the RPC error message to the user
@@ -258,7 +258,12 @@ public class SelectionView extends Composite implements Serializable {
 						}
 
 						public void onSuccess(ArrayList<String[]> resultTemp) {
-							main.openCreateView(false,resultTemp);
+							main.openCreateView(true,resultTemp);
+							ArrayList<String[]> neu = resultTemp;
+							log.warning("SENT:" + neu.get(0)[0]);
+							log.warning("SENT:" + neu.get(0)[1]);
+							log.warning("SENT:" + neu.get(0)[2]);
+							
 						}
 		    });
 		    
