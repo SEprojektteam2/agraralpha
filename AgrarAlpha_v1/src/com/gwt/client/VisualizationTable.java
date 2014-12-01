@@ -58,7 +58,7 @@ public VisualizationTable(ArrayList<String[]>a){
   arraylist.add(sArray7);
 */
    String isCountry="AreName";		
-	htmlString+="<table>";
+	htmlString+="<table border\"1\">";
 
 
 	
