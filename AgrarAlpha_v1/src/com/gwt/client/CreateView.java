@@ -56,7 +56,7 @@ public class CreateView extends Composite{
 		mapPanel = new VerticalPanel();
         
 	
-		Runnable onLoadCallbackTable = new Runnable(){
+		/*Runnable onLoadCallbackTable = new Runnable(){
 			public void run(){
 				VisMan = visMan;
 				tablePanel.add(VisMan.graphs.get(0));
