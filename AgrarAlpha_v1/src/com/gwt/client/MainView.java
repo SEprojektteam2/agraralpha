@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -26,15 +27,18 @@ public class MainView extends Composite {
 		initWidget(this.rootPanel);
         rootPanel.setWidth("100%");
 		MenuView menu = new MenuView(this);
-		menu.setWidth("40%");
 		rootPanel.add(menu);
+		menu.setWidth("40%");
+
 
 		selView = new SelectionView(this);
 
 		contentPanel = new VerticalPanel();
-		contentPanel.setWidth("60%");
 		contentPanel.add(selView);
+		contentPanel.setWidth("60%");
 		rootPanel.add(contentPanel);
+		RootPanel.get().getElement().getStyle().setProperty("backgroundColor", "#252530");
+
 	}
 
 	/* clears the panel and draw the open view */
