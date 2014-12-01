@@ -258,12 +258,7 @@ public class SelectionView extends Composite implements Serializable {
 						}
 
 						public void onSuccess(ArrayList<String[]> resultTemp) {
-							main.openCreateView(true,resultTemp);
-							ArrayList<String[]> neu = resultTemp;
-							log.warning("SENT:" + neu.get(0)[0]);
-							log.warning("SENT:" + neu.get(0)[1]);
-							log.warning("SENT:" + neu.get(0)[2]);
-							
+							main.openCreateView(true,resultTemp);		
 						}
 		    });
 		    
