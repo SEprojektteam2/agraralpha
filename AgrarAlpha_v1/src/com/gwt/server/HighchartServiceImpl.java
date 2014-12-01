@@ -212,7 +212,3 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		
 
 }	
-	
-	
-	
-

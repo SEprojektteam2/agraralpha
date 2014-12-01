@@ -41,6 +41,8 @@ public class SelectionView extends Composite implements Serializable {
 
 	private CheckBox productCB;
 	private CheckBox typeCB;
+	private CheckBox perCapitaCB;
+	private CheckBox interpolationCB;
 
 	private ListBox yearLB;
 	private FlexTable fTable = new FlexTable(); // size is flexible
@@ -81,13 +83,15 @@ public class SelectionView extends Composite implements Serializable {
 		countryLabel = new Label("Country");
 
 		productCB = new CheckBox("Product");
-		productCB.addClickHandler(new checkBoxClickHandler(productCB));
 		typeCB = new CheckBox("Product Type");
-		typeCB.addClickHandler(new checkBoxClickHandler(typeCB));
 
 		yearLB = new ListBox();
 		yearLB.addItem(" "); // Adding blank option
 
+		
+		perCapitaCB=new CheckBox("Per capita");
+		interpolationCB=new CheckBox("Interpolation");
+		
 		/* fills listbox with years */
 		String year = null;
 		for (int i = 1990; i <= lastyear; i++) // i is the first year user can
@@ -139,6 +143,7 @@ public class SelectionView extends Composite implements Serializable {
 
 		createBtn = new Button("Create");
 		createBtn.addClickHandler(new createClickHandler());
+	
 
 		/* Adding every component to the FlexTable */
 		fTable.setWidget(0, 0, yearLabel);
@@ -154,7 +159,10 @@ public class SelectionView extends Composite implements Serializable {
 		fTable.setWidget(3, 0, typeCB);
 		fTable.setWidget(3, 1, typeLB);
 
-		fTable.setWidget(4, 0, createBtn);
+		fTable.setWidget(4, 0, perCapitaCB);
+		fTable.setWidget(5, 0, interpolationCB);
+
+		fTable.setWidget(6, 0, createBtn);
 
 	}
 
@@ -303,8 +311,15 @@ public class SelectionView extends Composite implements Serializable {
 		public void onChange(ChangeEvent event) {
 			if (!countryLB.isItemSelected(0)) { // checks if world is selected
 				fTable.setWidget(1, 2, informationL); // add a lable
+				if(productCB.getValue()&&typeCB.getValue()){
+				   fTable.getRowFormatter().setVisible(3, false);
+
+			    }
+				
 			} else {
 				fTable.remove(informationL); // remove the lable
+			    
+			
 			}
 		}
 
@@ -312,116 +327,52 @@ public class SelectionView extends Composite implements Serializable {
 
 	private class listBoxChangeHandler implements ChangeHandler {
 
-		private CheckBox box;
-		private ListBox list;
-
-		public listBoxChangeHandler(ListBox list, CheckBox box) {
-			this.list = list;
-			this.box = box;
-
+	private CheckBox box;
+	private ListBox list;
+    private int row;
+	private listBoxChangeHandler(ListBox list, CheckBox box) {
+		this.list = list;
+		this.box = box;
+		
+        
+		if(list.equals(productLB)){
+			row=3;
 		}
-
-		/*
-		 * this method handles the change of the selection in a listbox if the
-		 * user select an option in a listbox the checkbox will adapt
-		 */
-		public void onChange(ChangeEvent event) {
-			if (countryLB.isItemSelected(0)) { // checks if world is chosen
-
-				if (list.isItemSelected(0)) {// checks if the user has picked an
-												// option
-					if (box.getValue()) { // look if the checkbox is checked
-						CBcounter--;
-					}
-
-					box.setValue(false);
-
-				} else {
-					if (!box.getValue() && CBcounter < 3) { // checks if there
-															// already a
-															// checkbox checked
-															// and if the
-															// current checkbox
-															// is checked
-						CBcounter++;
-						box.setValue(true);
-					}
-
-				}
-
-			} else {
-				if (list.isItemSelected(0)) {
-					if (box.getValue()) {
-						CBcounter--;
-					}
-
-					box.setValue(false);
-
-				} else {
-					if (!box.getValue() && CBcounter < 2) {
-						CBcounter++;
-						box.setValue(true);
-					}
-
-				}
-
-			}
+		else{
+			row=2;
 		}
-
 	}
 
 	/*
-	 * This class handles the checkbox event. The user is allowed to mark one
-	 * checkbox if world is selected. If world isn't selected the user is
-	 * allowed to mark two boxes
+	 * this method handles the change of the selection in a listbox if the
+	 * user select an option in a listbox the checkbox will adapt
 	 */
-	private class checkBoxClickHandler implements ClickHandler {
+	public void onChange(ChangeEvent event) {
+		if (!countryLB.isItemSelected(0)) {
+			if (!list.isItemSelected(0)) {
+				fTable.getRowFormatter().setVisible(row, false);
+				box.setValue(true);
+			} else {
+				fTable.getRowFormatter().setVisible(row, true);
+                box.setValue(false);
 
-		private CheckBox box;
-
-		public checkBoxClickHandler(CheckBox box) {
-
-			this.box = box;
-
-		}
-
-		@Override
-		public void onClick(ClickEvent event) {
-			if (countryLB.isItemSelected(0)) { // if world is selected the user
-				if (box.getValue()) { // if the box is marked user is always
-										// allowed to unmark the box
-					box.setValue(false); // unmark the box and subtract the
-											// checkbox counter with 1
-					CBcounter--;
-				} else {
-					if (CBcounter < 3) { // not needed now,because there are
-											// only two boxes, but when extended
-											// with another box will be needed
-						box.setValue(true); // mark the box and add 1 to
-											// checkbox counter
-						CBcounter++;
-					}
-
-				}
-			} else { // for the case world is not selected the user can only
-						// select
-
-				if (box.getValue()) { // if the box is marked user is always
-										// allowed to unmark the box
-					box.setValue(false); // unmark the box and subtract the
-											// checkbox counter with 1
-					CBcounter--;
-				} else {
-					if (CBcounter < 2) {    //user is only allowed to have one CB selected
-						box.setValue(true); // mark the box and add 1 to
-											// checkbox counter
-						CBcounter++;
-					}
-
-				}
 			}
-
+			
 		}
+		else{
+			if (!list.isItemSelected(0)) {
+				box.setValue(true);
+			} else {
+                box.setValue(false);
+
+			}
+		}
+	
+		}
+
 	}
+
+	
+	
 
 }

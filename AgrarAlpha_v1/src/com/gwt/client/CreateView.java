@@ -4,12 +4,13 @@ package com.gwt.client;
 
 import java.util.ArrayList;
 
-import com.google.gwt.dev.asm.Label;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ButtonBase;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TabPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.visualization.client.VisualizationUtils;
@@ -20,7 +21,11 @@ public class CreateView extends Composite{
 	
 	private TabPanel basePanel = new TabPanel();
 	private VerticalPanel tablePanel = new VerticalPanel();
-	private VerticalPanel graphPanel = new VerticalPanel();
+	private VerticalPanel interpolationPanel = new VerticalPanel();
+	private VerticalPanel stockChartPanel = new VerticalPanel();
+    
+	private Label label;
+	private ListBox list;
 	private VerticalPanel mapPanel = new VerticalPanel();
 	private SourceView source;
 	private ArrayList <String[]>dataArray;
@@ -34,13 +39,20 @@ public class CreateView extends Composite{
 		VisualizationMap vMap=new VisualizationMap();
 		VisualizationLineChart vLineChart = new VisualizationLineChart();
 		VisualizationTable vTable = new VisualizationTable(Data);
-		
-		
+		list=new ListBox();
+		label= new Label("Placeholder");
+		/*
+		 for(int i=min; i<=max; i++){
+		 list.addItem(String.valueOf(i));
+		 }
+		 */
 		source= new SourceView();
-		source.addSource("Source:...."); //add a source
+		source.addSource("Source:© FAO. 2014. FAOSTAT. data.fao.org. (Accessed 1.9.2014)"); //add a source
 		
 		tablePanel = new VerticalPanel();
-		graphPanel = new VerticalPanel();
+		interpolationPanel = new VerticalPanel();
+		stockChartPanel = new VerticalPanel();
+
 		mapPanel = new VerticalPanel();
         
 		/*only placeholer until we can fill with the acutal graphics from visalisationmanager.  will be removed later*/
@@ -60,21 +72,19 @@ public class CreateView extends Composite{
 		*/
 		tablePanel.add(source);
 		
-		//adding table
-		//tablePanel.add(child);
 		
 		
 	
-		graphPanel.add(message);
+		interpolationPanel.add(message);
 		
 		
 		if(interpolation==true){
 			tablePanel.add(vTable.create());
-			graphPanel.add(vLineChart.createChart(Data));
+			interpolationPanel.add(vLineChart.createChart(Data));
 		}
 		if(interpolation==false){
 			tablePanel.add(vTable.create());
-			graphPanel.add(vMap.createChart());
+			interpolationPanel.add(vMap.createChart());
 		}
 		//graphPanel.add(source); // adding a verticalPanel with all source to the mapPanel
 		/*
@@ -91,8 +101,9 @@ public class CreateView extends Composite{
 		
 		
 		basePanel.add(tablePanel,"Table");
+		basePanel.add(interpolationPanel,"Interpolation");
+		basePanel.add(stockChartPanel,"Stock Chart");
 		basePanel.add(mapPanel,"Map");
-		basePanel.add(graphPanel,"Graph");
 
 		basePanel.selectTab(0); // first tab of the tabPanel will be open
 		
