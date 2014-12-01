@@ -28,7 +28,7 @@ public class DataManagerServiceImpl extends RemoteServiceServlet implements
 		ArrayList<String> countries = new ArrayList<String>();
 		countries.add(0, "World");
 		
-		/***connectToDatabase();
+		connectToDatabase();
 		//limit 1 bei der Abfrage (entfernt die Dupletten)
 		// if you only need a few columns, specify them by name instead of using "*"
 		//String query = "SELECT distinct AreaName FROM records WHERE ElementName='Export Quantity'";
@@ -56,7 +56,7 @@ public class DataManagerServiceImpl extends RemoteServiceServlet implements
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}***/
+		}/******/
 				
 		return (countries);
 	}
@@ -66,7 +66,7 @@ public class DataManagerServiceImpl extends RemoteServiceServlet implements
 		ArrayList<String> products = new ArrayList<String>();
 		products.add(0, " ");
 		
-		/***connectToDatabase();
+		connectToDatabase();
 		//limit 1 bei der Abfrage (entfernt die Dupletten)
 		// if you only need a few columns, specify them by name instead of using "*"
 		//String query = "SELECT distinct ItemName FROM records WHERE ElementName='Export Quantity'";
@@ -94,7 +94,7 @@ public class DataManagerServiceImpl extends RemoteServiceServlet implements
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}***/
+		}/******/
 				
 		return (products);
 	}

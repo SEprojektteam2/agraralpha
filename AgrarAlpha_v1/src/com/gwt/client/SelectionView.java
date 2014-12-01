@@ -251,7 +251,7 @@ public class SelectionView extends Composite implements Serializable {
 						}
 		    });*/
 		    highchartSvc.getData("Namibia", "Tea", "Export Quantity",
-					false, new AsyncCallback<ArrayList<String[]>>() {
+					true, new AsyncCallback<ArrayList<String[]>>() {
 						public void onFailure(Throwable caught) {
 							// Show the RPC error message to the user
 							System.out.println("Error Arraylist!");
