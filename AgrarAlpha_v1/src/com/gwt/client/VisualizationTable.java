@@ -61,7 +61,7 @@ public VisualizationTable(ArrayList<String[]>a){
 	htmlString+="<table>";
 
 
-	//hjmkl
+	
 		HTML html=new HTML();
 		htmlString+="<thead>";
 		htmlString+=tr;
