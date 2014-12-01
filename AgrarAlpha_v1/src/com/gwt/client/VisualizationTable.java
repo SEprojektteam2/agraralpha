@@ -97,7 +97,7 @@ public VisualizationTable(ArrayList<String[]>a){
 			
 			htmlString+=tr2;
 		}
-		htmlString+="<tbody>";
+		htmlString+="</tbody>";
 
 		htmlString+="</table>";
 
