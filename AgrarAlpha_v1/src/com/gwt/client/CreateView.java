@@ -55,10 +55,7 @@ public class CreateView extends Composite{
 
 		mapPanel = new VerticalPanel();
         
-		/*only placeholer until we can fill with the acutal graphics from visalisationmanager.  will be removed later*/
-		Button message = new Button("To be implemented in a future sprint.");
-		message.setStyleName("message");
-		/*
+	
 		Runnable onLoadCallbackTable = new Runnable(){
 			public void run(){
 				VisMan = visMan;
@@ -75,8 +72,7 @@ public class CreateView extends Composite{
 		
 		
 	
-		interpolationPanel.add(message);
-		
+
 		
 		if(interpolation==true){
 			tablePanel.add(vTable.create());
