@@ -59,7 +59,7 @@ public class VisualizationMap{
 		DataTable dataWorldChart = DataTable.create();
 
 		dataWorldChart.addColumn(ColumnType.STRING, "Country");
-		dataWorldChart.addColumn(ColumnType.NUMBER, "Population");
+		dataWorldChart.addColumn(ColumnType.NUMBER, data.get(data.size()-1)[2]);
 	
 		
 		/*dataWorldChart.addRows(5);

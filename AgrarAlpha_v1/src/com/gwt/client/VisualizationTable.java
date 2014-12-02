@@ -71,7 +71,7 @@ public VisualizationTable(ArrayList<String[]>a){
 		htmlString+=th+"Country"+th2;
 		}
 		else{
-			htmlString+=th+"Product Type"+th2;
+			htmlString+=th+arraylist.get(arraylist.size()-1)[2]+th2;
 		}
 		for(int a=start;a<=end;a++){
 	    
