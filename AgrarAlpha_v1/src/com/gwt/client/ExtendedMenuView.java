@@ -25,18 +25,18 @@ public class ExtendedMenuView extends Composite {
 		
 		openBtn = new Button("Open");
 		openBtn.addClickHandler(new openClickHandler());
-		openBtn.addStyleName("otherBtn");
+		openBtn.addStyleName("beautifulbutton open");
 
 
 		saveBtn = new Button("Save");
 		saveBtn.addClickHandler(new saveClickHandler());
-		saveBtn.addStyleName("otherBtn");
+		saveBtn.addStyleName("beautifulbutton save");
 
 	
 		
 		homeBtn = new Button("Home");
 		homeBtn.addClickHandler(new homeClickHandler());
-		homeBtn.addStyleName("otherBtn");
+		homeBtn.addStyleName("beautifulbutton spark");
 		
 		this.vPanel.add(homeBtn);
 		this.vPanel.add(openBtn);

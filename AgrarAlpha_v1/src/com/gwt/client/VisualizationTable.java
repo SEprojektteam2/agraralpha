@@ -85,7 +85,7 @@ public VisualizationTable(ArrayList<String[]>a){
 		
 		while(i<arraylist.size()-1){
 			htmlString+=tr;
-			htmlString+=td+arraylist.get(i)[1]+td2;
+			htmlString+=th+arraylist.get(i)[1]+th2;
 			while(i<arraylist.size()-1 && checkCountry.equals(arraylist.get(k)[1])){
 				htmlString+=td+arraylist.get(i)[2]+td2;
 		      i++;

@@ -1,32 +1,97 @@
-/* 
-
-	TableCloth	
-	by Alen Grakalic, brought to you by cssglobe.com
-	
-*/
-
-/* general styles */
-
-table#tdisplay, td#tdisplay{
-	font:100% Arial, Helvetica, sans-serif; 
+table#tdisplay a:link {
+	color: #666;
+	font-weight: bold;
+	text-decoration:none;
 }
-table#tdisplay table{width:100%;border-collapse:collapse;margin:1em 0;}
-table#tdisplay th, table#tdisplay  td{text-align:left;padding:.5em;border:1px solid #fff;}
-table#tdisplay th{background:#328aa4 url(tr_back.gif) repeat-x;color:#fff;}
-table#tdisplay td{background:#e5f1f4;}
+table#tdisplay a:visited {
+	color: #999999;
+	font-weight:bold;
+	text-decoration:none;
+}
+table#tdisplay a:active,
+table#tdisplay a:hover {
+	color: #bd5a35;
+	text-decoration:underline;
+}
+table#tdisplay {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#666;
+	font-size:12px;
+	text-shadow: 1px 1px 0px #fff;
+	background:#eaebec;
+	margin:0px;
+	border:#ccc 1px solid;
 
-/* tablecloth styles */
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
 
-table#tdisplay tr.even td{background:#e5f1f4;}
-table#tdisplay tr.odd td{background:#f8fbfc;}
+	-moz-box-shadow: 0 1px 2px #d1d1d1;
+	-webkit-box-shadow: 0 1px 2px #d1d1d1;
+	box-shadow: 0 1px 2px #d1d1d1;
+}
+table#tdisplay th {
+	padding:21px 25px 22px 25px;
+	border-top:1px solid #fafafa;
+	border-bottom:1px solid #e0e0e0;
 
-table#tdisplay th.over,table#tdisplay tr.even table#tdisplay th.over,table#tdisplay tr.oddtable #tdisplay th.over{background:#4a98af;}
-table#tdisplay th.down,table#tdisplay tr.even table#tdisplay table#tdisplay table#tdisplay th.down,table#tdisplay tr.odd table#tdisplay th.down{background:#bce774;}
-table#tdisplay th.selected, table#tdisplay tr.even table#tdisplay th.selected, table#tdisplay tr.odd table#tdisplay th.selected{}
-
-table#tdisplay td.over, table#tdisplay tr.even table#tdisplay td.over, table#tdisplay tr.odd table#tdisplay td.over{background:#ecfbd4;}
-table#tdisplay td.down, table#tdisplay tr.even table#tdisplay td.down, table#tdisplay tr.odd table#tdisplay td.down{background:#bce774;color:#fff;}
-table#tdisplay td.selected, table#tdisplay tr.even table#tdisplay td.selected, table#tdisplay tr.odd table#tdisplay td.selected{background:#bce774;color:#555;}
-
-/* use this if you want to apply different styleing to empty table cells*/
-table#tdisplay td.empty, table#tdisplay tr.odd table#tdisplay td.empty, table#tdisplay tr.even table#tdisplay td.empty{background:#fff;}
+	background: #ededed;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#ebebeb));
+	background: -moz-linear-gradient(top,  #ededed,  #ebebeb);
+}
+table#tdisplay th:first-child{
+	text-align: left;
+	padding-left:20px;
+}
+table#tdisplay tr:first-child th:first-child{
+	-moz-border-radius-topleft:3px;
+	-webkit-border-top-left-radius:3px;
+	border-top-left-radius:3px;
+}
+table#tdisplay tr:first-child th:last-child{
+	-moz-border-radius-topright:3px;
+	-webkit-border-top-right-radius:3px;
+	border-top-right-radius:3px;
+}
+table#tdisplay tr{
+	text-align: center;
+	padding-left:20px;
+}
+table#tdisplay tr td:first-child{
+	text-align: left;
+	padding-left:20px;
+	border-left: 0;
+}
+table#tdisplay tr td {
+	padding:18px;
+	border-top: 1px solid #ffffff;
+	border-bottom:1px solid #e0e0e0;
+	border-left: 1px solid #e0e0e0;
+	
+	background: #fafafa;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
+	background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);
+}
+table#tdisplay tr.even td{
+	background: #f6f6f6;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f6f6f6));
+	background: -moz-linear-gradient(top,  #f8f8f8,  #f6f6f6);
+}
+table#tdisplay tr:last-child td{
+	border-bottom:0;
+}
+table#tdisplay tr:last-child td:first-child{
+	-moz-border-radius-bottomleft:3px;
+	-webkit-border-bottom-left-radius:3px;
+	border-bottom-left-radius:3px;
+}
+table#tdisplay tr:last-child td:last-child{
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-bottom-right-radius:3px;
+	border-bottom-right-radius:3px;
+}
+table#tdisplay tr:hover td{
+	background: #f2f2f2;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
+	background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);	
+}

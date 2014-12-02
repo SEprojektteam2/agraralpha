@@ -21,11 +21,11 @@ private VerticalPanel vPanel = new VerticalPanel();
 		this.main=main;
 		openBtn = new Button("Open");
 		openBtn.addClickHandler(new openClickHandler());
-		openBtn.addStyleName("otherBtn");
+		openBtn.addStyleName("beautifulbutton open");
 		
 		homeBtn = new Button("AgrarAlpha");
 	    homeBtn.addClickHandler(new homeClickHandler());
-	    homeBtn.addStyleName("otherBtn");
+	    homeBtn.addStyleName("beautifulbutton spark");
 		
 		this.vPanel.add(homeBtn);
 		this.vPanel.add(openBtn);
