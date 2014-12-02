@@ -310,15 +310,15 @@ public class SelectionView extends Composite implements Serializable {
 		@Override
 		public void onChange(ChangeEvent event) {
 			if (!countryLB.isItemSelected(0)) { // checks if world is selected
-				fTable.setWidget(1, 2, informationL); // add a lable
 				if(productCB.getValue()&&typeCB.getValue()){
 				   fTable.getRowFormatter().setVisible(3, false);
 
 			    }
 				
 			} else {
-				fTable.remove(informationL); // remove the lable
-			    
+				   fTable.getRowFormatter().setVisible(3, true);
+				   fTable.getRowFormatter().setVisible(4, true);
+    
 			
 			}
 		}
