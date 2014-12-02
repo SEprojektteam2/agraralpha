@@ -1,148 +1,89 @@
 package com.gwt.client;
 
+import java.util.ArrayList;
+
 import com.google.gwt.i18n.client.*;  
 import com.google.gwt.core.client.EntryPoint;  
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Random;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;  
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
+import com.google.gwt.visualization.client.DataTable;
+import com.google.gwt.visualization.client.VisualizationUtils;
+import com.google.gwt.visualization.client.visualizations.GeoMap;
+
 import org.moxieapps.gwt.highcharts.client.*;  
 import org.moxieapps.gwt.highcharts.client.labels.*;  
 import org.moxieapps.gwt.highcharts.client.plotOptions.*;
 
 public class VisualizationMap{
+	ArrayList<String[]> data = null;
+	private int year = 0;
+	private GeoMap.Options world_chart_options=GeoMap.Options.create();
+
+	
+	public VisualizationMap(int year){
+		this.year = year;
+		setOptions();
+	}
+	
+	public void setOptions(){
+		world_chart_options.setDataMode(GeoMap.DataMode.REGIONS);
+		world_chart_options.setHeight(600);
+		world_chart_options.setWidth(1050);
+		world_chart_options.setShowLegend(true);
+		world_chart_options.setColors(0xDEEBF7, 0x3182BD);
+		//world_chart_options.setRegion("155");
+	}
+	
+	public GeoMap createMap(ArrayList<String[]> data){
+		this.data = data;
+		//getData();
+		DataTable datatable = createDataTable(year);
+		GeoMap grafico_mundo = new GeoMap();
+		grafico_mundo.draw(datatable, world_chart_options);
 		
-	public Chart createChart() {  
-		  
-        final Chart chart = new Chart()  
-            .setChartTitleText("Average Monthly Weather Data for Tokyo")  
-            .setChartSubtitleText("Source: WorldClimate.com")  
-            .setZoomType(Chart.ZoomType.X_AND_Y)  
-            .setToolTip(new ToolTip()  
-                .setFormatter(new ToolTipFormatter() {  
-                    public String format(ToolTipData toolTipData) {  
-                        String unit = "mm";  
-                        if ("Temperature".equals(toolTipData.getSeriesName())) {  
-                            unit = "Â°C";  
-                        } else if ("Sea-Level Pressure".equals(toolTipData.getSeriesName())) {  
-                            unit = "mb";  
-                        }  
-                        return toolTipData.getXAsString() + ": " + toolTipData.getYAsDouble() + " " + unit;  
-                    }  
-                })  
-            )  
-            .setLegend(new Legend()  
-                .setLayout(Legend.Layout.VERTICAL)  
-                .setAlign(Legend.Align.LEFT)  
-                .setVerticalAlign(Legend.VerticalAlign.TOP)  
-                .setX(120)  
-                .setY(80)  
-                .setFloating(true)  
-                .setBackgroundColor("#FFFFFF")  
-            );  
+		return grafico_mundo;
+	}
   
-        chart.getXAxis()  
-            .setCategories(  
-                "Jan", "Feb", "Mar", "Apr", "May", "Jun",  
-                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"  
-            );  
-  
-        // Primary yAxis  
-        chart.getYAxis(0)  
-            .setLabels(new YAxisLabels()  
-                .setStyle(new Style()  
-                    .setColor("#89A54E")  
-                )  
-                .setFormatter(new AxisLabelsFormatter() {  
-                    public String format(AxisLabelsData axisLabelsData) {  
-                        return axisLabelsData.getValueAsLong() + "Â°C";  
-                    }  
-                })  
-            )  
-            .setAxisTitle(new AxisTitle()  
-                .setText("Temperature")  
-                .setStyle(new Style()  
-                    .setColor("#89A54E")  
-                )  
-            )  
-            .setOpposite(true);  
-  
-        // Secondary yAxis  
-        chart.getYAxis(1)  
-            .setLabels(new YAxisLabels()  
-                .setStyle(new Style()  
-                    .setColor("#4572A7")  
-                )  
-                .setFormatter(new AxisLabelsFormatter() {  
-                    public String format(AxisLabelsData axisLabelsData) {  
-                        return axisLabelsData.getValueAsLong() + " mm";  
-                    }  
-                })  
-            )  
-            .setAxisTitle(new AxisTitle()  
-                .setText("Rainfall")  
-                .setStyle(new Style()  
-                    .setColor("#4572A7")  
-                )  
-            )  
-            .setGridLineWidth(1);  
-  
-        // Tertiary yAxis  
-        chart.getYAxis(2)  
-            .setLabels(new YAxisLabels()  
-                .setStyle(new Style()  
-                    .setColor("#AA4643")  
-                )  
-                .setFormatter(new AxisLabelsFormatter() {  
-                    public String format(AxisLabelsData axisLabelsData) {  
-                        return axisLabelsData.getValueAsLong() + " mb";  
-                    }  
-                })  
-            )  
-            .setAxisTitle(new AxisTitle()  
-                .setText("Sea-Level Pressure")  
-                .setStyle(new Style()  
-                    .setColor("#AA4643")  
-                )  
-            )  
-            .setGridLineWidth(0)  
-            .setOpposite(true);  
-  
-        chart.addSeries(chart.createSeries()  
-            .setName("Rainfall")  
-            .setType(Series.Type.COLUMN)  
-            .setPlotOptions(new ColumnPlotOptions()  
-                .setColor("#4572A7")  
-            )  
-            .setYAxis(1)  
-            .setPoints(new Number[]{  
-                49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4  
-            })  
-        );  
-        chart.addSeries(chart.createSeries()  
-            .setName("Sea-Level Pressure")  
-            .setType(Series.Type.SPLINE)  
-            .setPlotOptions(new SplinePlotOptions()  
-                .setColor("#AA4643")  
-                .setMarker(new Marker()  
-                    .setEnabled(false)  
-                )  
-                .setDashStyle(PlotLine.DashStyle.SHORT_DOT)  
-            )  
-            .setYAxis(2)  
-            .setPoints(new Number[]{  
-                1016, 1016, 1015.9, 1015.5, 1012.3, 1009.5, 1009.6, 1010.2, 1013.1, 1016.9, 1018.2, 1016.7  
-            })  
-        );  
-        chart.addSeries(chart.createSeries()  
-            .setName("Temperature")  
-            .setType(Series.Type.SPLINE)  
-            .setPlotOptions(new SplinePlotOptions()  
-                .setColor("#89A54E")  
-            )  
-            .setPoints(new Number[]{  
-                7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6  
-            })  
-        );  
-  
-        return chart;  
-    }  
-  
+	public DataTable createDataTable(int year) {
+		DataTable dataWorldChart = DataTable.create();
+
+		dataWorldChart.addColumn(ColumnType.STRING, "Country");
+		dataWorldChart.addColumn(ColumnType.NUMBER, "Population");
+	
+		
+		/*dataWorldChart.addRows(5);
+		dataWorldChart.setValue(0, 0, "Germany");
+		dataWorldChart.setValue(0, 1, 1000);
+	
+		dataWorldChart.setValue(1, 0, "Spain");
+		dataWorldChart.setValue(1, 1, 1500);
+		
+		dataWorldChart.setValue(2, 0, "Italy");
+		dataWorldChart.setValue(2, 1, 1000);
+	
+		dataWorldChart.setValue(3, 0, "France");
+		dataWorldChart.setValue(3, 1, 600);
+	
+		dataWorldChart.setValue(4, 0, "Portugal");
+		dataWorldChart.setValue(4, 1, 200);
+		*/
+		for(int i=0; i<data.size()-1; i++){
+			dataWorldChart.addRows(1);
+			String[] row = data.get(i);
+			int dataYear = Integer.parseInt(row[0]);
+			if(dataYear == year)
+			{
+				dataWorldChart.setValue(i, 0, row[1]);
+				dataWorldChart.setValue(i, 1, Double.parseDouble(row[2]));
+			}
+		}
+		
+		return dataWorldChart;
+	}
+	
 }

@@ -13,6 +13,8 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TabPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
+import com.google.gwt.visualization.client.DataTable;
 import com.google.gwt.visualization.client.VisualizationUtils;
 import com.google.gwt.visualization.client.visualizations.GeoMap;
 import com.google.gwt.visualization.client.visualizations.Table;
@@ -36,7 +38,9 @@ public class CreateView extends Composite{
 	 */
 	public CreateView(boolean interpolation, ArrayList<String[]> Data){
 		initWidget(this.basePanel);
-		VisualizationMap vMap=new VisualizationMap();
+
+		
+
 		VisualizationLineChart vLineChart = new VisualizationLineChart();
 		VisualizationTable vTable = new VisualizationTable(Data);
 		list=new ListBox();
@@ -80,7 +84,7 @@ public class CreateView extends Composite{
 		}
 		if(interpolation==false){
 			tablePanel.add(vTable.create());
-			interpolationPanel.add(vMap.createChart());
+			//interpolationPanel.add(vMap.createChart());
 		}
 		//graphPanel.add(source); // adding a verticalPanel with all source to the mapPanel
 		/*
@@ -93,8 +97,33 @@ public class CreateView extends Composite{
 		VisualizationUtils.loadVisualizationApi(onLoadCallbackMap, GeoMap.PACKAGE);
 		  */
 		//mapPanel.add(message.asWidget());
-		mapPanel.add(source); // adding a verticalPanel with all source to the mapPanel
 		
+		//mapPanel.add(vMap.createChart());
+		//vMap.createChart(mapPanel);
+		
+		ArrayList<String[]> arrayformap;
+		arrayformap = Data;
+		for(int i=0; i<arrayformap.size()-1; i++)
+		{
+			if(arrayformap.get(i)[0] != "2010")
+			{
+				arrayformap.remove(i);
+			}
+		}
+		
+		final ArrayList<String[]> newArray = arrayformap;
+		
+		Runnable onLoadCallbackMap = new Runnable(){
+			public void run(){
+				VisualizationMap map = new VisualizationMap(2010);
+				GeoMap newMap = map.createMap(newArray);
+				
+				mapPanel.add(newMap);
+			}
+		};
+
+		VisualizationUtils.loadVisualizationApi(onLoadCallbackMap, GeoMap.PACKAGE); 
+		mapPanel.add(source); // adding a verticalPanel with all source to the mapPanel
 		
 		basePanel.add(tablePanel,"Table");
 		basePanel.add(interpolationPanel,"Interpolation");
@@ -105,5 +134,5 @@ public class CreateView extends Composite{
 		
 	
 	}
-
+	
 }
