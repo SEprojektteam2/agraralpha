@@ -127,8 +127,8 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 			searchingVar="ItemName";
 		}
 		//
-		else if(type=="null"){
-			query = "SELECT ElementName, Year, Value FROM records WHERE ItemName = '"+product+"' AND AreaName = '"+country+"' ORDER BY Year ASC";
+		else if(type.equals("null")){
+			query = "SELECT ElementName, Year, Value FROM records WHERE ItemName = '"+product+"' AND AreaName = '"+country+"' ORDER BY ElementName ASC, Year ASC";
 			query2 = "SELECT distinct ElementName FROM records WHERE ItemName = '"+product+"' AND AreaName = '"+country+"'";
 			counter=getCounter(query2);
 			searchingVar="ElementName";
