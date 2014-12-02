@@ -35,7 +35,7 @@ private	String td2="</td>";
 private HTML table;
 private String htmlString;
 ArrayList<String[]> arraylist;
-
+private String leer;
 public VisualizationTable(ArrayList<String[]>a){
 	this.arraylist=a;
 }
