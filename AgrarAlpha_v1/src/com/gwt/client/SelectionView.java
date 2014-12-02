@@ -258,7 +258,10 @@ public class SelectionView extends Composite implements Serializable {
 						}
 
 						public void onSuccess(ArrayList<String[]> resultTemp) {
-							main.openCreateView(true,resultTemp, getYear());
+							if(getCountry().equals("Global"))
+								main.openCreateView(true,resultTemp, getYear());
+							else
+								main.openCreateView(false,resultTemp, getYear());
 						}
 		    });
 		    
@@ -312,13 +315,13 @@ public class SelectionView extends Composite implements Serializable {
 			if (!countryLB.isItemSelected(0)) { // checks if world is selected
 				if(productCB.getValue()&&typeCB.getValue()){
 				   fTable.getRowFormatter().setVisible(3, false);
-
+				   
 			    }
 				
 			} else {
-				   fTable.getRowFormatter().setVisible(3, true);
-				   fTable.getRowFormatter().setVisible(4, true);
-    
+				fTable.getRowFormatter().setVisible(3, true);
+				fTable.getRowFormatter().setVisible(4, true);
+			    
 			
 			}
 		}
