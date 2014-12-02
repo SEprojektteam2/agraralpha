@@ -55,7 +55,7 @@ public class VisualizationManager {
 		
 		if (country.contentEquals("world"))
 		{
-			firstParameter = "Coutry";
+			firstParameter = "Country";
 			secondParameter = product + " " + type;
 		}
 		else if(product.contentEquals("null"))

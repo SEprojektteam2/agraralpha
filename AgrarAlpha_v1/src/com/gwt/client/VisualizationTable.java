@@ -57,14 +57,20 @@ public VisualizationTable(ArrayList<String[]>a){
   arraylist.add(sArray6);
   arraylist.add(sArray7);
 */
-	htmlString+="<table border=\"1\" style=\"width:100%\">";
+   String isCountry="AreName";		
+	htmlString+="<table border\"1\">";
 
 
-	//hjmkl
+	
 		HTML html=new HTML();
 		htmlString+="<thead>";
 		htmlString+=tr;
+		if(arraylist.get(arraylist.size()-1)[1].equals(isCountry)){
 		htmlString+=th+"Country"+th2;
+		}
+		else{
+			htmlString+=th+"Product Type"+th2;
+		}
 		for(int a=1990;a<2012;a++){
 	    
 		htmlString+=th+String.valueOf(a)+th2;}
@@ -91,7 +97,7 @@ public VisualizationTable(ArrayList<String[]>a){
 			
 			htmlString+=tr2;
 		}
-		htmlString+="<tbody>";
+		htmlString+="</tbody>";
 
 		htmlString+="</table>";
 

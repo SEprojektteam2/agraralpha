@@ -67,6 +67,7 @@ public class MainView extends Composite {
 		contentPanel.clear();
 		MenuView menu = new MenuView(this);
 		rootPanel.add(menu);
+		menu.setWidth("40%");
 
 		selView = new SelectionView(this);
 
@@ -75,13 +76,14 @@ public class MainView extends Composite {
 		rootPanel.add(contentPanel);
 	}
 
-	public void openCreateView(boolean b, ArrayList<String[]>a) {
+	public void openCreateView(boolean b, ArrayList<String[]>a, String year) {
 		rootPanel.clear();
 		contentPanel.clear();
 		ExtendedMenuView menu = new ExtendedMenuView(this);
 		rootPanel.add(menu);
-		
-		CreateView cView = new CreateView(b,a);
+		menu.setWidth("40%");
+
+		CreateView cView = new CreateView(b,a,year);
 		contentPanel.add(cView);
 		rootPanel.add(contentPanel);
 	}
@@ -91,6 +93,8 @@ public class MainView extends Composite {
 		contentPanel.clear();
 		ExtendedMenuView menu = new ExtendedMenuView(this);
 		rootPanel.add(menu);
+		menu.setWidth("40%");
+
 		ChangeView changeView = new ChangeView();
 		contentPanel.add(changeView);
 		rootPanel.add(contentPanel);
@@ -101,6 +105,8 @@ public class MainView extends Composite {
 		contentPanel.clear();
 		ExtendedMenuView menu = new ExtendedMenuView(this);
 		rootPanel.add(menu);
+		menu.setWidth("40%");
+
 		SaveView saveView = new SaveView();
 		contentPanel.add(saveView);
 		rootPanel.add(contentPanel);

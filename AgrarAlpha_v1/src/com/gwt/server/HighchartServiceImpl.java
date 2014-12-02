@@ -70,7 +70,9 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 			// execute the query, and get a java resultset
 			ResultSet rs = null;
 			rs = st.executeQuery(query);
-			
+			int noOfEntries = rs.getRow();
+			rs.beforeFirst();
+			log.warning("Entries: "+String.valueOf(noOfEntries) +" Query: "+ query);
 			// iterate through the java resultset
 			//int i=0;
 			
@@ -112,20 +114,20 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		int counter=0;
 		// country=null when world is selected and product is given and type is given => Output: Country + Year + Value
 		if(country=="null"){ 
-			query = "SELECT AreaName, Year, Value FROM records WHERE ElementName = '"+type+"' AND ItemName = '"+product+"' ORDER BY Year ASC";
+			query = "SELECT AreaName, Year, Value FROM records WHERE ElementName = '"+type+"' AND ItemName = '"+product+"' ORDER BY AreaName ASC, Year ASC";
 			query2 = "SELECT distinct AreaName FROM records WHERE ElementName = '"+type+"' AND ItemName = '"+product+"'";
 			counter=getCounter(query2);
 			searchingVar="AreaName";
 		}
 		//
-		if(product=="null"){
+		else if(product=="null"){
 			query = "SELECT ItemName, Year, Value FROM records WHERE ElementName = '"+type+"' AND AreaName = '"+country+"' ORDER BY Year ASC";
 			query2 = "SELECT distinct ItemName FROM records WHERE ElementName = '"+type+"' AND AreaName = '"+country+"'";
 			counter=getCounter(query2);
 			searchingVar="ItemName";
 		}
 		//
-		if(type=="null"){
+		else if(type=="null"){
 			query = "SELECT ElementName, Year, Value FROM records WHERE ItemName = '"+product+"' AND AreaName = '"+country+"' ORDER BY Year ASC";
 			query2 = "SELECT distinct ElementName FROM records WHERE ItemName = '"+product+"' AND AreaName = '"+country+"'";
 			counter=getCounter(query2);
@@ -196,12 +198,8 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		
 		//adding informations
 
-		String[] informationRow= {"1","AreaName","null"};
+		String[] informationRow= {Integer.toString(counter),searchingVar,"null"};
 		result.add(informationRow);
-		
-		for(int i=0; i<result.size(); i++){
-			log.warning("Line x: ["+ result.get(i)[0] + "," + result.get(i)[1] + "," + result.get(i)[2] + "]");
-		}
 		
 		return result;
 	}

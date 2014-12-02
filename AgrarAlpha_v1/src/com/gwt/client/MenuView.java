@@ -25,7 +25,7 @@ private VerticalPanel vPanel = new VerticalPanel();
 		
 		homeBtn = new Button("AgrarAlpha");
 	    homeBtn.addClickHandler(new homeClickHandler());
-	    homeBtn.addStyleName("homeBtn");
+	    homeBtn.addStyleName("otherBtn");
 		
 		this.vPanel.add(homeBtn);
 		this.vPanel.add(openBtn);
