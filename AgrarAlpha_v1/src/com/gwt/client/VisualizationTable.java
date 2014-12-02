@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -58,8 +59,9 @@ public VisualizationTable(ArrayList<String[]>a){
   arraylist.add(sArray7);
 */
    String isCountry="AreName";		
-	htmlString+="<table border\"1\">";
-
+	htmlString+="<table border=\"1\" style=\"width:100%\">";;
+	int start = Integer.parseInt(arraylist.get(0)[0]);
+	int end = Integer.parseInt(arraylist.get(arraylist.size() - 2)[0]);
 
 	
 		HTML html=new HTML();
@@ -71,7 +73,7 @@ public VisualizationTable(ArrayList<String[]>a){
 		else{
 			htmlString+=th+"Product Type"+th2;
 		}
-		for(int a=1990;a<2012;a++){
+		for(int a=start;a<=end;a++){
 	    
 		htmlString+=th+String.valueOf(a)+th2;}
 		htmlString+="</tr>";
