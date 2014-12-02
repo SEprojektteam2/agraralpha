@@ -76,14 +76,14 @@ public class MainView extends Composite {
 		rootPanel.add(contentPanel);
 	}
 
-	public void openCreateView(boolean b, ArrayList<String[]>a) {
+	public void openCreateView(boolean b, ArrayList<String[]>a, String year) {
 		rootPanel.clear();
 		contentPanel.clear();
 		ExtendedMenuView menu = new ExtendedMenuView(this);
 		rootPanel.add(menu);
 		menu.setWidth("40%");
 
-		CreateView cView = new CreateView(b,a);
+		CreateView cView = new CreateView(b,a,year);
 		contentPanel.add(cView);
 		rootPanel.add(contentPanel);
 	}

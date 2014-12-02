@@ -31,15 +31,17 @@ public class CreateView extends Composite{
 	private VerticalPanel mapPanel = new VerticalPanel();
 	private SourceView source;
 	private ArrayList <String[]>dataArray;
+	
+	private String year;
 
 //private VisualizationLineChart vLineChart;
 
 	/* This class present the view the user has after he clicked the create button on mainView. it contains the graphics the user wants to see
 	 */
-	public CreateView(boolean interpolation, ArrayList<String[]> Data){
+	public CreateView(boolean interpolation, ArrayList<String[]> Data, final String year){
 		initWidget(this.basePanel);
 
-		
+		this.year = year;
 
 		VisualizationLineChart vLineChart = new VisualizationLineChart();
 		VisualizationTable vTable = new VisualizationTable(Data);
@@ -78,10 +80,10 @@ public class CreateView extends Composite{
 	
 
 		
-		if(interpolation==true){
+		/*if(interpolation==true){*/
 			tablePanel.add(vTable.create());
 			interpolationPanel.add(vLineChart.createChart(Data));
-		}
+		/*}
 		if(interpolation==false){
 			tablePanel.add(vTable.create());
 			//interpolationPanel.add(vMap.createChart());
@@ -105,7 +107,7 @@ public class CreateView extends Composite{
 		arrayformap = Data;
 		for(int i=0; i<arrayformap.size()-1; i++)
 		{
-			if(arrayformap.get(i)[0] != "2010")
+			if(arrayformap.get(i)[0] != year)
 			{
 				arrayformap.remove(i);
 			}
@@ -115,7 +117,7 @@ public class CreateView extends Composite{
 		
 		Runnable onLoadCallbackMap = new Runnable(){
 			public void run(){
-				VisualizationMap map = new VisualizationMap(2010);
+				VisualizationMap map = new VisualizationMap(Integer.parseInt(year));
 				GeoMap newMap = map.createMap(newArray);
 				
 				mapPanel.add(newMap);

@@ -6,6 +6,7 @@ import com.google.gwt.i18n.client.*;
 import com.google.gwt.core.client.EntryPoint;  
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Random;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;  
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -42,10 +43,15 @@ public class VisualizationMap{
 	public GeoMap createMap(ArrayList<String[]> data){
 		this.data = data;
 		//getData();
-		DataTable datatable = createDataTable(year);
-		GeoMap grafico_mundo = new GeoMap();
-		grafico_mundo.draw(datatable, world_chart_options);
+		final DataTable datatable = createDataTable(year);
+		final GeoMap grafico_mundo = new GeoMap();
 		
+		Timer timer = new Timer() {
+		      public void run() {
+		    	  grafico_mundo.draw(datatable, world_chart_options);
+		      }
+		    };
+		timer.schedule(5000);
 		return grafico_mundo;
 	}
   
