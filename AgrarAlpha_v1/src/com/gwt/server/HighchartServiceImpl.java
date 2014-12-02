@@ -113,14 +113,14 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 			
 		int counter=0;
 		// country=null when world is selected and product is given and type is given => Output: Country + Year + Value
-		if(country=="null"){ 
+		if(country.equals("Global")){ 
 			query = "SELECT AreaName, Year, Value FROM records WHERE ElementName = '"+type+"' AND ItemName = '"+product+"' ORDER BY AreaName ASC, Year ASC";
 			query2 = "SELECT distinct AreaName FROM records WHERE ElementName = '"+type+"' AND ItemName = '"+product+"'";
 			counter=getCounter(query2);
 			searchingVar="AreaName";
 		}
 		//
-		else if(product=="null"){
+		else if(product.equals("null")){
 			query = "SELECT ItemName, Year, Value FROM records WHERE ElementName = '"+type+"' AND AreaName = '"+country+"' ORDER BY Year ASC";
 			query2 = "SELECT distinct ItemName FROM records WHERE ElementName = '"+type+"' AND AreaName = '"+country+"'";
 			counter=getCounter(query2);
