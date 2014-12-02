@@ -47,8 +47,9 @@ public class VisualizationLineChart{
 	}
   
     public Chart createChart(ArrayList<String[]> resultData) {  
+    	String info[]=resultData.get(resultData.size()-1);
     	final Chart chart = new Chart()  
-        .setChartTitleText("Interpolation and Extrapolation")
+        .setChartTitleText("Interpolation and Extrapolation "+info[2])
         .setChartSubtitleText("Source: FAO. 2014. FAOSTAT. data.fao.org. (Accessed 1.9.2014)")
         .setToolTip(new ToolTip()  
                 .setFormatter(  

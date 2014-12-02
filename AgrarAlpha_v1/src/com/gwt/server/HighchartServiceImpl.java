@@ -110,6 +110,7 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		String query2="null";
 		String searchingVar="null";
 		String outputVar="Value";
+		String mapInfo="null";
 			
 		int counter=0;
 		// country=null when world is selected and product is given and type is given => Output: Country + Year + Value
@@ -118,6 +119,7 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 			query2 = "SELECT distinct AreaName FROM records WHERE ElementName = '"+type+"' AND ItemName = '"+product+"'";
 			counter=getCounter(query2);
 			searchingVar="AreaName";
+			mapInfo=type+" of "+product;
 		}
 		//
 		else if(product.equals("null")){
@@ -125,6 +127,7 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 			query2 = "SELECT distinct ItemName FROM records WHERE ElementName = '"+type+"' AND AreaName = '"+country+"'";
 			counter=getCounter(query2);
 			searchingVar="ItemName";
+			mapInfo=type+" in "+country;
 		}
 		//
 		else if(type.equals("null")){
@@ -132,6 +135,7 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 			query2 = "SELECT distinct ElementName FROM records WHERE ItemName = '"+product+"' AND AreaName = '"+country+"'";
 			counter=getCounter(query2);
 			searchingVar="ElementName";
+			mapInfo=product+" in "+country;
 		}
 		else{
 			query = "SELECT AreaName, Year, Value FROM records WHERE ItemName = '"+product+"' AND AreaName = '"+country+"' AND ElementName = '"+type+"' ORDER BY Year ASC";
@@ -198,7 +202,7 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		
 		//adding informations
 
-		String[] informationRow= {Integer.toString(counter),searchingVar,"null"};
+		String[] informationRow= {Integer.toString(counter),searchingVar,mapInfo};
 		result.add(informationRow);
 		
 		return result;
