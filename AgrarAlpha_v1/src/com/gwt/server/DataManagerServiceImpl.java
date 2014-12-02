@@ -64,7 +64,7 @@ public class DataManagerServiceImpl extends RemoteServiceServlet implements
 	public ArrayList<String> getProducts(){
 		//Array mit Strings als Rueckgabe
 		ArrayList<String> products = new ArrayList<String>();
-		//products.add(0, " ");
+		products.add(0, " ");
 		
 		connectToDatabase();
 		//limit 1 bei der Abfrage (entfernt die Dupletten)
@@ -82,7 +82,7 @@ public class DataManagerServiceImpl extends RemoteServiceServlet implements
 			rs = st.executeQuery(query);
 							
 			// iterate through the java resultset
-			int i=0;
+			int i=1;
 						
 			while (rs.next())
 			{
