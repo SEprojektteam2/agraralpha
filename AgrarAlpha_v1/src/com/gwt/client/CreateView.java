@@ -4,20 +4,31 @@ package com.gwt.client;
 
 import java.util.ArrayList;
 
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ButtonBase;
+import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TabPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
 import com.google.gwt.visualization.client.DataTable;
 import com.google.gwt.visualization.client.VisualizationUtils;
 import com.google.gwt.visualization.client.visualizations.GeoMap;
 import com.google.gwt.visualization.client.visualizations.Table;
+import com.google.gwt.widgetideas.client.SliderBar;
+import com.google.gwt.event.dom.client.MouseUpEvent;
+import com.google.gwt.event.dom.client.MouseUpHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 
 public class CreateView extends Composite{
 	
@@ -31,16 +42,16 @@ public class CreateView extends Composite{
 	private VerticalPanel mapPanel = new VerticalPanel();
 	private SourceView source;
 	private ArrayList <String[]>dataArray;
-	
+	public GeoMap map;
 	private String year;
-
+	private SliderBar slider = new SliderBar(1990, 2011);
 //private VisualizationLineChart vLineChart;
 
 	/* This class present the view the user has after he clicked the create button on mainView. it contains the graphics the user wants to see
 	 */
 	public CreateView(boolean interpolation, ArrayList<String[]> Data, final String year){
 		initWidget(this.basePanel);
-
+		this.dataArray = Data;
 		this.year = year;
 
 		VisualizationLineChart vLineChart = new VisualizationLineChart();
@@ -60,7 +71,8 @@ public class CreateView extends Composite{
 		stockChartPanel = new VerticalPanel();
 
 		mapPanel = new VerticalPanel();
-        
+
+
 	
 		/*Runnable onLoadCallbackTable = new Runnable(){
 			public void run(){
@@ -75,10 +87,38 @@ public class CreateView extends Composite{
 		*/
 		//tablePanel.add(source);
 		
-		
-		
-	
-
+		  slider.setStepSize(1);
+		  slider.setCurrentValue(Integer.parseInt(year));
+		  slider.setNumTicks(21);
+		  slider.setNumLabels(21);
+		  slider.setWidth("100%");
+		  
+		 /* slider.sinkEvents( Event.MOUSEEVENTS ); 
+		  slider.sinkEvents( Event.KEYEVENTS ); 
+		  slider.sinkEvents( Event.ONMOUSEWHEEL ); 
+		  slider.sinkEvents( Event.FOCUSEVENTS );
+		  */
+		  slider.addMouseUpHandler(new MouseUpHandler(){
+				@Override
+				public void onMouseUp(MouseUpEvent event) {
+					// TODO Auto-generated method stub
+					createMapFromSlider();
+					slider.redraw();
+				}
+	          });
+//		  slider.addChangeListener(new ChangeListener() {
+//				@Override
+//				public void onChange(Widget sender) {
+//					// TODO Auto-generated method stub
+//					createMapFromSlider();
+//					slider.redraw();
+//				}
+//	          });
+		 
+		  
+		  
+		  //slider.addValueChangeHandler();
+		  
 		
 		/*if(interpolation==true){*/
 			tablePanel.add(vTable.create());
@@ -103,30 +143,11 @@ public class CreateView extends Composite{
 		//mapPanel.add(vMap.createChart());
 		//vMap.createChart(mapPanel);
 		
-		ArrayList<String[]> arrayformap;
-		arrayformap = Data;
-		for(int i=0; i<arrayformap.size()-1; i++)
-		{
-			if(arrayformap.get(i)[0] != year)
-			{
-				arrayformap.remove(i);
-			}
-		}
 		
-		final ArrayList<String[]> newArray = arrayformap;
-		
-		Runnable onLoadCallbackMap = new Runnable(){
-			public void run(){
-				VisualizationMap map = new VisualizationMap(Integer.parseInt(year));
-				GeoMap newMap = map.createMap(newArray);
-				
-				mapPanel.add(newMap);
-			}
-		};
-
-		VisualizationUtils.loadVisualizationApi(onLoadCallbackMap, GeoMap.PACKAGE); 
-		mapPanel.add(source); // adding a verticalPanel with all source to the mapPanel
-		
+		mapPanel.add(source.asWidget()); // adding a verticalPanel with all source to the mapPanel
+		mapPanel.add(slider.asWidget());
+		createMap(Integer.parseInt(year));		
+		//mapPanel.add(getMap());
 		basePanel.add(tablePanel,"Table");
 		basePanel.add(interpolationPanel,"Interpolation");
 		basePanel.add(stockChartPanel,"Stock Chart");
@@ -136,5 +157,58 @@ public class CreateView extends Composite{
 		
 	
 	}
+	public void setMap(GeoMap map){
+		this.map = map;
+	}
+	public GeoMap getMap(){
+		return this.map;
+	}
 	
+/*	 public void onBrowserEvent(Event event) {
+	     switch (DOM.eventGetType(event)) {
+	         case Event.ONMOUSEDOWN: {
+	                 // do something
+	                 break;
+	         }
+	         case Event.ONMOUSEUP: {
+	                 // do something
+	                 break;
+	         }
+	         case Event.ONMOUSEOVER: {
+	                 // do something
+	                 break;
+	         }
+	         case Event.ONMOUSEOUT: {
+	                 // do something
+	                 break;
+	         }
+	     }
+	 }*/
+	public void createMapFromSlider(){
+		mapPanel.remove(2);
+		createMap((int)slider.getCurrentValue());
+	}
+	public void createMap(final int year){
+		ArrayList<String[]> arrayformap = new ArrayList<String[]>(dataArray);
+	
+		for(int i=0; i<arrayformap.size()-1; i++)
+		{
+			if(arrayformap.get(i)[0] != String.valueOf(year))
+			{
+				arrayformap.remove(i);
+			}
+		}
+		
+		final ArrayList<String[]> newArray = arrayformap;
+		
+		Runnable onLoadCallbackMap = new Runnable(){
+			public void run(){
+				VisualizationMap map = new VisualizationMap(year);
+				GeoMap newMap = map.createMap(newArray);
+				mapPanel.add(newMap.asWidget());
+			}
+		};
+
+		VisualizationUtils.loadVisualizationApi(onLoadCallbackMap, GeoMap.PACKAGE); 
+	}
 }

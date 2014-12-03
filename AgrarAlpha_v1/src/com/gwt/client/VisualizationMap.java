@@ -1,7 +1,9 @@
 package com.gwt.client;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
+import com.google.appengine.tools.util.Logging;
 import com.google.gwt.i18n.client.*;  
 import com.google.gwt.core.client.EntryPoint;  
 import com.google.gwt.core.client.GWT;
@@ -15,6 +17,8 @@ import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
 import com.google.gwt.visualization.client.DataTable;
 import com.google.gwt.visualization.client.VisualizationUtils;
 import com.google.gwt.visualization.client.visualizations.GeoMap;
+import com.google.gwt.logging.client.*;
+import com.gwt.server.MySQLConnection;
 
 import org.moxieapps.gwt.highcharts.client.*;  
 import org.moxieapps.gwt.highcharts.client.labels.*;  
@@ -24,11 +28,15 @@ public class VisualizationMap{
 	ArrayList<String[]> data = null;
 	private int year = 0;
 	private GeoMap.Options world_chart_options=GeoMap.Options.create();
+	public static final Logger log = Logger.getLogger(VisualizationMap.class.getName());
+	Logger logger = Logger.getLogger("NameOfYourLogger");
 
 	
 	public VisualizationMap(int year){
 		this.year = year;
 		setOptions();
+		log.warning("map created!");
+		logger.warning("map created!");
 	}
 	
 	public void setOptions(){
@@ -59,7 +67,7 @@ public class VisualizationMap{
 		DataTable dataWorldChart = DataTable.create();
 
 		dataWorldChart.addColumn(ColumnType.STRING, "Country");
-		dataWorldChart.addColumn(ColumnType.NUMBER, data.get(data.size()-1)[2]);
+		dataWorldChart.addColumn(ColumnType.NUMBER, data.get(data.size()-1)[2] + " in " + year);
 	
 		
 		/*dataWorldChart.addRows(5);

@@ -12,7 +12,8 @@
   <!-- Inherit the visualization that provides the charts -->
   <inherits name="org.moxieapps.gwt.highcharts.Highcharts"/>
     <inherits name='com.google.gwt.visualization.Visualization'/>
-  
+  <inherits name='com.google.gwt.widgetideas.WidgetIdeas'/>
+  <inherits name="com.google.gwt.logging.Logging"/>
   <!-- Inherit the default GWT style sheet.  You can change       -->
   <!-- the theme of your GWT application by uncommenting          -->
   <!-- any one of the following lines.                            -->

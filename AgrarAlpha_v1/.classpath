@@ -16,5 +16,7 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/opencsv-3.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-math3-3.3.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-slider-bar-1.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-incubator-20101117-r1766.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
