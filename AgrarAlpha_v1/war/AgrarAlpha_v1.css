@@ -21,6 +21,16 @@
 	font-family: serif;
 }
 
+.gwt-CheckBox{ 
+   color:#CCCCCA;   
+}
+.gwt-Label{ 
+   font-size: 150%; 
+   font-weight: bold;
+   color:#CCCCCA;
+   padding:5px;
+   margin:5px;
+}
 
 
 .message{
