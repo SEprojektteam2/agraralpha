@@ -66,7 +66,6 @@ public class SelectionView extends Composite implements Serializable {
 			.create(DataManagerService.class);
 	private HighchartServiceAsync highchartSvc = GWT
 			.create(HighchartService.class);
-
 	/*
 	 * This class is drawing the options, the user can choose from. The
 	 * RootPanel is a FlexTable (Table with flexible size)
@@ -135,10 +134,22 @@ public class SelectionView extends Composite implements Serializable {
 				productCB));
 
 		typeLB = new ListBox();
-		typeLB.addItem(" ");
-		typeLB.addItem("Import Quantity");
-		typeLB.addItem("Export Quantity");
-		typeLB.addItem("Production");
+		
+		dataManagerSvc.getElementNames(new AsyncCallback<ArrayList<String>>() {
+			public void onFailure(Throwable caught) {
+				// Show the RPC error message to the user
+				log.warning("Error get ElementNames!");
+			}
+
+			public void onSuccess(ArrayList<String> resultTemp) {
+				for (int j = 0; j < resultTemp.size(); j++) {
+					String element = (String) resultTemp.get(j);
+					typeLB.addItem(element);
+				}
+			}
+		});
+		
+		
 		typeLB.addChangeHandler(new listBoxChangeHandler(typeLB, typeCB));
 
 		createBtn = new Button("Create");

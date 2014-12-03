@@ -8,4 +8,5 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 public interface DataManagerService extends RemoteService {
 	ArrayList<String> getCountries() throws IllegalArgumentException;
 	ArrayList<String> getProducts() throws IllegalArgumentException;
+	ArrayList<String> getElementNames() throws IllegalArgumentException;
 }
