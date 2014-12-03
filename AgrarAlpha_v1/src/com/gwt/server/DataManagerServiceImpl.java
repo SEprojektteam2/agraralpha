@@ -108,7 +108,7 @@ public class DataManagerServiceImpl extends RemoteServiceServlet implements
 		//limit 1 bei der Abfrage (entfernt die Dupletten)
 		// if you only need a few columns, specify them by name instead of using "*"
 		//String query = "SELECT distinct ItemName FROM records WHERE ElementName='Export Quantity'";
-		String query = "SELECT distinct ElementType FROM records ORDER BY ElementType ASC";
+		String query = "SELECT distinct ElementName FROM records ORDER BY ElementName ASC";
 		
 		// create the java statement
 		Statement st = null;
