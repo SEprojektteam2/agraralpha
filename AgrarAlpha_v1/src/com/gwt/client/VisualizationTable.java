@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 
 
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -60,6 +61,7 @@ public VisualizationTable(ArrayList<String[]>a){
 */
    String isCountry="AreName";		
 	htmlString+="<table id=\"tdisplay\" cellspacing=\"0\" cellpadding=\"0\"";
+	
 	int start = Integer.parseInt(arraylist.get(0)[0]);
 	int end = Integer.parseInt(arraylist.get(arraylist.size() - 2)[0]);
 
@@ -82,10 +84,17 @@ public VisualizationTable(ArrayList<String[]>a){
         String checkCountry=arraylist.get(0)[1];
 		int i=0;
 		int k=0;
-		
+		int z=1990;
 		while(i<arraylist.size()-1){
 			htmlString+=tr;
 			htmlString+=th+arraylist.get(i)[1]+th2;
+			
+			while(z<Integer.parseInt(arraylist.get(i)[0])){
+				htmlString += td + " " + td2;
+                z++;
+			}
+			z=1990;
+			
 			while(i<arraylist.size()-1 && checkCountry.equals(arraylist.get(k)[1])){
 				htmlString+=td+arraylist.get(i)[2]+td2;
 		      i++;
