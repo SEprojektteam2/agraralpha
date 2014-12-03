@@ -28,25 +28,29 @@ public class ImportHandlerThread implements Runnable {
 				
 				//Add each array-row to mysql batch
 			    for(int y = 0; y<output.length; y++){
+			    	if(!output[y][2].equals("AreaCode")){
 			    	try {
+			    		
+			    		
 			    		stmt.setString(1,output[y][0]);
 						stmt.setString(2,output[y][1]);
-						stmt.setString(3,output[y][2]);
+						stmt.setInt(3,Integer.parseInt(output[y][2]));
 						stmt.setString(4,output[y][3]);
-						stmt.setString(5,output[y][4]);
+						stmt.setInt(5,Integer.parseInt(output[y][4]));
 						stmt.setString(6,output[y][5]);
-						stmt.setString(7,output[y][6]);
+						stmt.setInt(7,Integer.parseInt(output[y][6]));
 						stmt.setString(8,output[y][7]);
-						stmt.setString(9,output[y][8]);
+						stmt.setInt(9,Integer.parseInt(output[y][8]));
 						stmt.setString(10,output[y][9]);
-						stmt.setString(11,output[y][10]);
+						stmt.setFloat(11,Float.parseFloat(output[y][10]));
 						stmt.setString(12,output[y][11]);
 						stmt.setString(13,output[y][12]);
 						stmt.addBatch();
+			    		
 					 } catch (SQLException e) {
 						log.warning(e.toString());
 					}
-			         
+			    	} 
 				}
 			    try {
 			    	//execute mysql insertion

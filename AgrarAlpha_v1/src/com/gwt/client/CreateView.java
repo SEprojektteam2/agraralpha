@@ -3,10 +3,12 @@ package com.gwt.client;
 //package guiA.client;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ButtonBase;
 import com.google.gwt.user.client.ui.ChangeListener;
@@ -44,6 +46,7 @@ public class CreateView extends Composite{
 	public GeoMap map;
 	private String year;
 	private SliderBar slider = new SliderBar(1990, 2011);
+	public static final Logger log = Logger.getLogger(CreateView.class.getName());
 //private VisualizationLineChart vLineChart;
 
 	/* This class present the view the user has after he clicked the create button on mainView. it contains the graphics the user wants to see
@@ -162,48 +165,30 @@ public class CreateView extends Composite{
 		return this.map;
 	}
 	
-/*	 public void onBrowserEvent(Event event) {
-	     switch (DOM.eventGetType(event)) {
-	         case Event.ONMOUSEDOWN: {
-	                 // do something
-	                 break;
-	         }
-	         case Event.ONMOUSEUP: {
-	                 // do something
-	                 break;
-	         }
-	         case Event.ONMOUSEOVER: {
-	                 // do something
-	                 break;
-	         }
-	         case Event.ONMOUSEOUT: {
-	                 // do something
-	                 break;
-	         }
-	     }
-	 }*/
 	public void createMapFromSlider(){
 		mapPanel.remove(2);
 		createMap((int)slider.getCurrentValue());
 	}
 	public void createMap(final int year){
-		ArrayList<String[]> arrayformap = new ArrayList<String[]>(dataArray);
-	
-		for(int i=0; i<arrayformap.size()-1; i++)
+		final DataTable table = DataTable.create();
+		table.addColumn(ColumnType.STRING, "Country");
+		table.addColumn(ColumnType.NUMBER, dataArray.get(dataArray.size()-1)[2] + " in " + year);
+		int y = 0;
+		for(int i=0; i<dataArray.size()-1; i++)
 		{
-			if(arrayformap.get(i)[0] != String.valueOf(year))
+			if(dataArray.get(i)[0].equals(String.valueOf(year)))
 			{
-				arrayformap.remove(i);
+					table.addRows(1);
+					table.setValue(y, 0,dataArray.get(i)[1]);
+					table.setValue(y, 1, dataArray.get(i)[2]);
+					y++;
 			}
 		}
-		
-		final ArrayList<String[]> newArray = arrayformap;
-		
 		Runnable onLoadCallbackMap = new Runnable(){
 			public void run(){
 				VisualizationMap map = new VisualizationMap(year);
-				GeoMap newMap = map.createMap(newArray);
-				mapPanel.add(newMap.asWidget());
+				GeoMap newMap = map.createMap(table);
+				    	  mapPanel.add(newMap.asWidget());
 			}
 		};
 
