@@ -35,12 +35,11 @@ public class CreateView extends Composite{
 	private TabPanel basePanel = new TabPanel();
 	private VerticalPanel tablePanel;
 	private VerticalPanel interpolationPanel;
-	private VerticalPanel stockChartPanel;
+	private VerticalPanel histogramPanel;
     
 	private Label label;
 	private ListBox list;
 	private VerticalPanel mapPanel = new VerticalPanel();
-	private SourceView source;
 	private ArrayList <String[]>dataArray;
 	public GeoMap map;
 	private String year;
@@ -63,12 +62,11 @@ public class CreateView extends Composite{
 		 list.addItem(String.valueOf(i));
 		 }
 		 */
-		source= new SourceView();
-		source.addSource("Source: FAO. 2014. FAOSTAT. data.fao.org. (Accessed 1.9.2014)"); //add a source
 		
 		tablePanel = new VerticalPanel();
 		interpolationPanel = new VerticalPanel();
-		stockChartPanel = new VerticalPanel();
+		histogramPanel = new VerticalPanel();
+		histogramPanel.add(new SourceView());
 
 		mapPanel = new VerticalPanel();
 
@@ -85,7 +83,6 @@ public class CreateView extends Composite{
 		  
 		
 		*/
-		//tablePanel.add(source);
 		
 		  slider.setStepSize(1);
 		  slider.setCurrentValue(Integer.parseInt(year));
@@ -121,6 +118,7 @@ public class CreateView extends Composite{
 		  
 		
 		/*if(interpolation==true){*/
+		    tablePanel.add(new SourceView());
 			tablePanel.add(vTable.create());
 			interpolationPanel.add(vLineChart.createChart(Data));
 		/*}
@@ -144,13 +142,13 @@ public class CreateView extends Composite{
 		//vMap.createChart(mapPanel);
 		
 		
-		mapPanel.add(source.asWidget()); // adding a verticalPanel with all source to the mapPanel
+		mapPanel.add(new SourceView()); // adding a verticalPanel with all source to the mapPanel
 		mapPanel.add(slider.asWidget());
 		createMap(Integer.parseInt(year));		
 		//mapPanel.add(getMap());
 		basePanel.add(tablePanel,"Table");
 		basePanel.add(interpolationPanel,"Interpolation");
-		basePanel.add(stockChartPanel,"Stock Chart");
+		basePanel.add(histogramPanel,"Histogram");
 		basePanel.add(mapPanel,"Map");
 
 		basePanel.selectTab(0); // first tab of the tabPanel will be open

@@ -12,6 +12,7 @@ public class SourceView extends Composite {
 	private Label label;
 	public SourceView(){
 		initWidget(this.vPanel);
+		addSource("Source: FAO. 2014. FAOSTAT. data.fao.org. (Accessed 1.9.2014)");
 
 	}
 	
