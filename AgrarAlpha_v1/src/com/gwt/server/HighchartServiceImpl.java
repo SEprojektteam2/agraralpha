@@ -116,7 +116,7 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		// country=null when world is selected and product is given and type is given => Output: Country + Year + Value
 		if(country.equals("Global")){ 
 			query = "SELECT AreaName, Year, Value FROM records WHERE ElementName = '"+type+"' AND ItemName = '"+product+"' ORDER BY AreaName ASC, Year ASC";
-			query2 = "SELECT distinct AreaName FROM records WHERE ElementName = '"+type+"' AND ItemName = '"+product+"'";
+			query2 = "SELECT distinct AreaCode, AreaName FROM records WHERE ElementName = '"+type+"' AND ItemName = '"+product+"'";
 			counter=getCounter(query2);
 			searchingVar="AreaName";
 			mapInfo=type+" of "+product;
@@ -124,7 +124,7 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		//
 		else if(product.equals("null")){
 			query = "SELECT ItemName, Year, Value FROM records WHERE ElementName = '"+type+"' AND AreaName = '"+country+"' ORDER BY ItemName ASC, Year ASC";
-			query2 = "SELECT distinct ItemName FROM records WHERE ElementName = '"+type+"' AND AreaName = '"+country+"'";
+			query2 = "SELECT distinct ItemCode, ItemName FROM records WHERE ElementName = '"+type+"' AND AreaName = '"+country+"'";
 			counter=getCounter(query2);
 			searchingVar="ItemName";
 			mapInfo=type+" in "+country;
@@ -132,14 +132,14 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		//
 		else if(type.equals("null")){
 			query = "SELECT ElementName, Year, Value FROM records WHERE ItemName = '"+product+"' AND AreaName = '"+country+"' ORDER BY ElementName ASC, Year ASC";
-			query2 = "SELECT distinct ElementName FROM records WHERE ItemName = '"+product+"' AND AreaName = '"+country+"'";
+			query2 = "SELECT distinct ElementCode, ElementName FROM records WHERE ItemName = '"+product+"' AND AreaName = '"+country+"'";
 			counter=getCounter(query2);
 			searchingVar="ElementName";
 			mapInfo=product+" in "+country;
 		}
 		else{
 			query = "SELECT AreaName, Year, Value FROM records WHERE ItemName = '"+product+"' AND AreaName = '"+country+"' AND ElementName = '"+type+"' ORDER BY Year ASC";
-			query2 = "SELECT distinct AreaName FROM records WHERE ItemName = '"+product+"' AND AreaName = '"+country+"' AND ElementName = '"+type+"'";
+			query2 = "SELECT distinct AreaCode, AreaName FROM records WHERE ItemName = '"+product+"' AND AreaName = '"+country+"' AND ElementName = '"+type+"'";
 			counter=getCounter(query2);
 			searchingVar="AreaName";
 		}

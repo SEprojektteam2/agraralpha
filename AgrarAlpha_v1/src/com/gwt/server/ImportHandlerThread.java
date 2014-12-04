@@ -31,7 +31,10 @@ public class ImportHandlerThread implements Runnable {
 			    	if(!output[y][2].equals("AreaCode")){
 			    	try {
 			    		
-			    		
+			    		Float value = new Float(0);
+			    		if(!output[y][10].equals(""))
+			    			value = Float.parseFloat(output[y][10]);
+			    			
 			    		stmt.setString(1,output[y][0]);
 						stmt.setString(2,output[y][1]);
 						stmt.setInt(3,Integer.parseInt(output[y][2]));
@@ -42,7 +45,7 @@ public class ImportHandlerThread implements Runnable {
 						stmt.setString(8,output[y][7]);
 						stmt.setInt(9,Integer.parseInt(output[y][8]));
 						stmt.setString(10,output[y][9]);
-						stmt.setFloat(11,Float.parseFloat(output[y][10]));
+						stmt.setFloat(11,value);
 						stmt.setString(12,output[y][11]);
 						stmt.setString(13,output[y][12]);
 						stmt.addBatch();
