@@ -45,7 +45,7 @@ public class AgrarAlpha_v1 implements EntryPoint {
 		// Create a FormPanel and point it at a service.
 		  
 	
-	    final FormPanel form = new FormPanel();
+	    /**final FormPanel form = new FormPanel();
 	    form.setAction("/GuiAgrarV");
 
 	    // Because we're going to add a FileUpload widget, we'll need to set the
@@ -55,13 +55,9 @@ public class AgrarAlpha_v1 implements EntryPoint {
 
 	    // Create a panel to hold all of the form widgets.
 	    VerticalPanel panel = new VerticalPanel();
-	    form.setWidget(panel);
+	    form.setWidget(panel);**/
 
-	    GuiAgrarV gui = new GuiAgrarV();
-	    gui.onModuleLoad();
-
-	    RootPanel.get().add(form);
-						
-
+	    MainView gui = new MainView();
+	    RootPanel.get().add(gui);;
 
 }}

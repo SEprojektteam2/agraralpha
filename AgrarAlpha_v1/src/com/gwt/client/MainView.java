@@ -85,16 +85,6 @@ public class MainView extends Composite {
 		rootPanel.add(contentPanel);
 	}
 
-	public void openChangeView() {
-		rootPanel.clear();
-		contentPanel.clear();
-		rootPanel.add(emenu);
-
-		ChangeView changeView = new ChangeView();
-		contentPanel.add(changeView);
-		rootPanel.add(contentPanel);
-	}
-
 	public void openSaveView() {
 		rootPanel.clear();
 		contentPanel.clear();

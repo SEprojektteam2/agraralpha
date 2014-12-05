@@ -153,7 +153,7 @@ public class SelectionView extends Composite implements Serializable {
 
 		createBtn = new Button("Create");
 		createBtn.addClickHandler(new createClickHandler());
-		createBtn.addStyleName("beautifulbutton");
+		createBtn.addStyleName("beautifulbutton2");
 	
 
 		/* Adding every component to the FlexTable */

@@ -85,6 +85,12 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 					//i++;
 					if(resultTemp[0].equals(String.valueOf(i))){
 						result.add(resultTemp);
+						if(i==2011){
+							i=1990;
+						}
+						else{
+							i++;
+						}
 					}
 					else{
 						for(int j=i;j<Integer.parseInt(resultTemp[0]);j++){
@@ -93,16 +99,18 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 							resultCorrect[1]=resultTemp[1];
 							resultCorrect[2]="-";
 							result.add(resultCorrect);
+							i++;
 						}
 						result.add(resultTemp);
+						if(i==2011){
+							i=1990;
+						}
+						else{
+							i++;
+						}
 					}
 					
-					if(i==2011){
-						i=1990;
-					}
-					else{
-						i++;
-					}
+					
 					log.warning("added[" + resultTemp[0] + "," + resultTemp[1] + "," + resultTemp[2] + "]" );
 			}
 			
