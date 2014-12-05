@@ -148,11 +148,11 @@ public class SelectionView extends Composite implements Serializable {
 		});
 		
 		
-		typeLB.addChangeHandler(new listBoxChangeHandler(typeLB));
+		/*typeLB.addChangeHandler(new listBoxChangeHandler(typeLB, typeCB));*/
 
 		createBtn = new Button("Create");
 		createBtn.addClickHandler(new createClickHandler());
-		createBtn.addStyleName("beautifulbutton2");
+		createBtn.addStyleName("beautifulbutton");
 	
 
 		/* Adding every component to the FlexTable */
@@ -173,6 +173,22 @@ public class SelectionView extends Composite implements Serializable {
 
 		fTable.setWidget(5, 0, createBtn);
 
+	}
+	
+	public boolean isValid(){
+		boolean b=true;
+		if(countryLB.isItemSelected(0)){
+			if(productLB.isItemSelected(0)||typeLB.isItemSelected(0) ){
+				b=false;
+			}
+			
+		}
+		else{
+			if(productLB.isItemSelected(0) && typeLB.isItemSelected(0)){
+				b=false;
+			}
+		}
+		return b;
 	}
 
 	public String getYear() {
@@ -214,51 +230,19 @@ public class SelectionView extends Composite implements Serializable {
 		@Override
 		public void onClick(ClickEvent event) {
 			// dialog appears when user wants to create an invalid selection
-			/*
-			 * if(yearLB.isItemSelected(0) || CBcounter==0){ new
-			 * DialogBoxCreate().show(); }
-			 * 
-			 * else{
-			 */
-			// DataManager_test manager = new DataManager_test();
-			// VisualizationManager vis= new
-			// VisualizationManager(manager.setUpStaticData(), "world", "apple",
-			// "consumption", "2010");
-			// main.openCreateView(vis);
-			// }
+			
+			  if(yearLB.isItemSelected(0) || isValid()==false){ new
+			  DialogBoxCreate().show(); }
+			  
+			  else{
+			
+				
+			
 
-			// an william: muesch no apasse mit dene ufruef wo du bruchsch!
-			// inklusive datamanager erstelle und datelle mache!!
-			// bi "world" muen country Ã¼bergeh werde, wo vo de uswahl gno
-			// worde isch
-			// bi "aplle" s produkt und bi "pie" de Produkttyp, und no sjahr
-			// De visualizatonManager muen da erstellt werde und Ã¼bergeh
-			// werde!!
-			/*Runnable onLoadCallback = new Runnable() {
-				public void run() {
-					DataManager2 data = new DataManager2();
-					VisualizationManager vis = new VisualizationManager(
-							data.createDataTable("India", "Tea", "null"),
-							"World", "Tea", "consumption", "2010");
-					main.openCreateView(vis);
-				}
-			};
-
-			VisualizationUtils.loadVisualizationApi(onLoadCallback,
-					Table.PACKAGE);*/
+			
 
 			log.warning("hallo");
-		  /*  highchartSvc.getData("Namibia", "Tea", "Export Quantity",
-					false, new AsyncCallback<ArrayList<String[]>>() {
-						public void onFailure(Throwable caught) {
-							// Show the RPC error message to the user
-							System.out.println("Error Arraylist!");
-						}
-
-						public void onSuccess(ArrayList<String[]> resultTemp) {
-							main.openCreateView(true,resultTemp);
-						}
-		    });*/
+		 
 		    highchartSvc.getData(getCountry(), getProduct(), getType(),
 					true, new AsyncCallback<ArrayList<String[]>>() {
 						public void onFailure(Throwable caught) {
@@ -275,42 +259,8 @@ public class SelectionView extends Composite implements Serializable {
 		    });
 		    
 
-			// DataManager data = new DataManager();
-			// data.createDataTable("India", "Tea", "null");
-			// VisualizationManager visMan= new
-			// VisualizationManager(getCountry(),getProduct(),
-			// getType(),getYear());
-			// main.openCreateView(visMan);
-
-			/*
-			 * //DataManager data = new DataManager();
-			 * //data.createDataTable(getCountry(), getProduct(), getType());
-			 * //VisualizationManager visMan= new
-			 * VisualizationManager(data,getCountry(),getProduct(),
-			 * getType(),getYear()); //main.openCreateView(visMan);
-			 * 
-			 * 
-			 * 
-			 * dataManagerSvc.getDataTable(getCountry(), getProduct(),
-			 * getType(), new AsyncCallback<DataTable>() { public void
-			 * onFailure(Throwable caught) { // Show the RPC error message to
-			 * the user System.out.println("Error!"); }
-			 * 
-			 * public void onSuccess(DataTable resultTemp) {
-			 * VisualizationManager visMan= new
-			 * VisualizationManager(resultTemp,getCountry(),getProduct(),
-			 * getType(),getYear()); main.openCreateView(visMan); } });
-			 */
-			// for testing checkbox behavior its in a comment
-
-			/*
-			 * only for testing get methodes test1=new Label(getYear());
-			 * test2=new Label(getCountry()); test3=new Label(getProduct());
-			 * test4=new Label(getType());
-			 * 
-			 * fTable.setWidget(5, 0, test1); fTable.setWidget(5, 1, test2);
-			 * fTable.setWidget(6, 0, test3); fTable.setWidget(6, 1, test4);
-			 */
+			  }
+			 
 		}
 
 	}
@@ -322,8 +272,9 @@ public class SelectionView extends Composite implements Serializable {
 		@Override
 		public void onChange(ChangeEvent event) {
 			if (!countryLB.isItemSelected(0)) { // checks if world is selected
-				if(!productLB.isItemSelected(0)&&!typeLB.isItemSelected(0)){
+				if(!productLB.isItemSelected(0) && !typeLB.isItemSelected(0)){
 				   fTable.getRowFormatter().setVisible(3, false);
+				   productLB.setItemSelected(0, true);
 				   
 			    }
 				
@@ -339,7 +290,6 @@ public class SelectionView extends Composite implements Serializable {
 
 	private class listBoxChangeHandler implements ChangeHandler {
 
-	private CheckBox box;
 	private ListBox list;
     private int row;
 	private listBoxChangeHandler(ListBox list) {
@@ -362,14 +312,15 @@ public class SelectionView extends Composite implements Serializable {
 		if (!countryLB.isItemSelected(0)) {
 			if (!list.isItemSelected(0)) {
 				fTable.getRowFormatter().setVisible(row, false);
+				((ListBox) fTable.getWidget(row, 1)).setItemSelected(0,true);
 			} else {
 				fTable.getRowFormatter().setVisible(row, true);
 
 			}
 			
-		
-		
 		}
+		
+		
 	
 		}
 

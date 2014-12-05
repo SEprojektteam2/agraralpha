@@ -17,6 +17,10 @@ public class ExtendedMenuView extends Composite {
 	private Button saveBtn;
 	private Button homeBtn;
 	private MainView main;
+	private DialogBoxOpen openDB;
+	private DialogBoxSave saveDB;
+
+	
 
 	public ExtendedMenuView(MainView main) {
 		initWidget(this.vPanel);
@@ -38,6 +42,10 @@ public class ExtendedMenuView extends Composite {
 		homeBtn.addClickHandler(new homeClickHandler());
 		homeBtn.addStyleName("beautifulbutton spark");
 		
+		openDB=new DialogBoxOpen();
+		saveDB=new DialogBoxSave();
+
+		
 		this.vPanel.add(homeBtn);
 		this.vPanel.add(openBtn);
 		this.vPanel.add(saveBtn);
@@ -50,7 +58,7 @@ public class ExtendedMenuView extends Composite {
 		@Override
 		public void onClick(ClickEvent event) {
 			
-			//main.openOpenView();
+			openDB.show();
 			}
 		
 	}
@@ -68,7 +76,7 @@ public class ExtendedMenuView extends Composite {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			//main.openSaveView();
+			saveDB.show();
 			}
 	}
 	
