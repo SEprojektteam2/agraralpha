@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 
 
+import java.util.logging.Logger;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -27,6 +29,8 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  */
 public class VisualizationTable  {
 
+	public static Logger log = Logger.getLogger(VisualizationTable.class.getName());
+	
 private	String tr="<tr>";
 private	String tr2="</tr>";
 private	String th="<th>";
@@ -34,7 +38,7 @@ private	String th2="</th>";
 private	String td="<td>";
 private	String td2="</td>";
 private HTML table;
-private String htmlString;
+private String htmlString = new String();
 ArrayList<String[]> arraylist;
 private String leer;
 public VisualizationTable(ArrayList<String[]>a){
@@ -111,7 +115,8 @@ public VisualizationTable(ArrayList<String[]>a){
 		htmlString+="</tbody>";
 
 		htmlString+="</table>";
-
+		
+		log.warning(htmlString);
 		html.setHTML(htmlString);
         return html;		
 		}
