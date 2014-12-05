@@ -49,7 +49,7 @@ public class DialogBoxSave extends DialogBox {
            }
          });
          
-         Button cancel = new Button("cancel");
+         Button close = new Button("close");
          open.addClickHandler(new ClickHandler() {
            public void onClick(ClickEvent event) {
              DialogBoxSave.this.hide();
@@ -58,7 +58,7 @@ public class DialogBoxSave extends DialogBox {
         
      	fTable.setWidget(0, 0, tb);
         fTable.setWidget(1, 0, open);
-        fTable.setWidget(1, 0, cancel);
+        fTable.setWidget(1, 1, close);
 
          setWidget(fTable);
        }
