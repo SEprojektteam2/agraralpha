@@ -14,7 +14,7 @@ private VerticalPanel vPanel = new VerticalPanel();
 	private Button openBtn;
     private MainView main;
 	private Button homeBtn;
-
+    private DialogBoxOpen openDB;
 	/*the menu on the main page to navigate through application*/
 	public MenuView(MainView main) {
 		initWidget(this.vPanel);
@@ -26,6 +26,8 @@ private VerticalPanel vPanel = new VerticalPanel();
 		homeBtn = new Button("AgrarAlpha");
 	    homeBtn.addClickHandler(new homeClickHandler());
 	    homeBtn.addStyleName("beautifulbutton");
+	    
+	    openDB=new DialogBoxOpen();
 		
 		this.vPanel.add(homeBtn);
 		this.vPanel.add(openBtn);
@@ -43,7 +45,7 @@ private VerticalPanel vPanel = new VerticalPanel();
 
 		@Override
 		public void onClick(ClickEvent event) {
-			//main.openOpenView();
+			openDB.show();
 			}
 		
 	}
