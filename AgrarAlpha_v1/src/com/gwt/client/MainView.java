@@ -27,15 +27,14 @@ public class MainView extends Composite {
 		initWidget(this.rootPanel);
         rootPanel.setWidth("100%");
 		MenuView menu = new MenuView(this);
+		menu.addStyleName("menu");
 		rootPanel.add(menu);
-		//menu.setWidth("40%");
 
 
 		selView = new SelectionView(this);
 
 		contentPanel = new VerticalPanel();
 		contentPanel.add(selView);
-		contentPanel.setWidth("60%");
 		rootPanel.add(contentPanel);
 		RootPanel.get().getElement().getStyle().setProperty("backgroundColor", "#252530");
 
@@ -67,7 +66,6 @@ public class MainView extends Composite {
 		contentPanel.clear();
 		MenuView menu = new MenuView(this);
 		rootPanel.add(menu);
-		//menu.setWidth("40%");
 
 		selView = new SelectionView(this);
 
@@ -81,7 +79,6 @@ public class MainView extends Composite {
 		contentPanel.clear();
 		ExtendedMenuView menu = new ExtendedMenuView(this);
 		rootPanel.add(menu);
-		//menu.setWidth("40%");
 
 		CreateView cView = new CreateView(b,a,year);
 		contentPanel.add(cView);
@@ -93,7 +90,6 @@ public class MainView extends Composite {
 		contentPanel.clear();
 		ExtendedMenuView menu = new ExtendedMenuView(this);
 		rootPanel.add(menu);
-		//menu.setWidth("40%");
 
 		ChangeView changeView = new ChangeView();
 		contentPanel.add(changeView);
@@ -105,7 +101,6 @@ public class MainView extends Composite {
 		contentPanel.clear();
 		ExtendedMenuView menu = new ExtendedMenuView(this);
 		rootPanel.add(menu);
-		//menu.setWidth("40%");
 
 		SaveView saveView = new SaveView();
 		contentPanel.add(saveView);

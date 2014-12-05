@@ -34,15 +34,15 @@ public class SelectionView extends Composite implements Serializable {
 	public static Logger log = Logger.getLogger(SelectionView.class.getName());
 	private Label yearLabel;
 	private Label countryLabel;
+	private Label productLabel;
+	private Label typeLabel;
 	private Label test1; // only to test if the getter functions works
 	private Label test2;
 	private Label test3;
 	private Label test4;
 
-	private CheckBox productCB;
-	private CheckBox typeCB;
+
 	private CheckBox perCapitaCB;
-	private CheckBox interpolationCB;
 
 	private ListBox yearLB;
 	private FlexTable fTable = new FlexTable(); // size is flexible
@@ -81,15 +81,14 @@ public class SelectionView extends Composite implements Serializable {
 		yearLabel = new Label("Year");
 		countryLabel = new Label("Country");
 
-		productCB = new CheckBox("Product");
-		typeCB = new CheckBox("Product Type");
+		productLabel = new Label("Product");
+		typeLabel = new Label("Product Type");
 
 		yearLB = new ListBox();
 		yearLB.addItem(" "); // Adding blank option
 
 		
 		perCapitaCB=new CheckBox("Per capita");
-		interpolationCB=new CheckBox("Interpolation");
 		
 		/* fills listbox with years */
 		String year = null;
@@ -101,7 +100,7 @@ public class SelectionView extends Composite implements Serializable {
 		}
 
 		countryLB = new ListBox();
-		countryLB.addChangeHandler(new countryLBChangeHandler());
+	//	countryLB.addChangeHandler(new countryLBChangeHandler());
 		dataManagerSvc.getCountries(new AsyncCallback<ArrayList<String>>() {
 			public void onFailure(Throwable caught) {
 				// Show the RPC error message to the user
@@ -130,8 +129,8 @@ public class SelectionView extends Composite implements Serializable {
 				}
 			}
 		});
-		productLB.addChangeHandler(new listBoxChangeHandler(productLB,
-				productCB));
+		/*productLB.addChangeHandler(new listBoxChangeHandler(productLB,
+				productCB));*/
 
 		typeLB = new ListBox();
 		
@@ -150,7 +149,7 @@ public class SelectionView extends Composite implements Serializable {
 		});
 		
 		
-		typeLB.addChangeHandler(new listBoxChangeHandler(typeLB, typeCB));
+		/*typeLB.addChangeHandler(new listBoxChangeHandler(typeLB, typeCB));*/
 
 		createBtn = new Button("Create");
 		createBtn.addClickHandler(new createClickHandler());
@@ -164,16 +163,15 @@ public class SelectionView extends Composite implements Serializable {
 		fTable.setWidget(1, 1, countryLB);
 		// fTable.setWidget(1,2,informationL);
 
-		fTable.setWidget(2, 0, productCB);
+		fTable.setWidget(2, 0, productLabel);
 		fTable.setWidget(2, 1, productLB);
 
-		fTable.setWidget(3, 0, typeCB);
+		fTable.setWidget(3, 0, typeLabel);
 		fTable.setWidget(3, 1, typeLB);
 
 		fTable.setWidget(4, 0, perCapitaCB);
-		fTable.setWidget(5, 0, interpolationCB);
 
-		fTable.setWidget(6, 0, createBtn);
+		fTable.setWidget(5, 0, createBtn);
 
 	}
 
@@ -190,7 +188,7 @@ public class SelectionView extends Composite implements Serializable {
 
 	public String getProduct() {
 		String s;
-		if (productCB.getValue()) // checks if checkbox is selected
+		if (!productLB.isItemSelected(0)) // checks if checkbox is selected
 			s = productLB.getValue(productLB.getSelectedIndex());
 		else
 			s = "null";
@@ -199,7 +197,7 @@ public class SelectionView extends Composite implements Serializable {
 
 	public String getType() {
 		String s;
-		if (typeCB.getValue()) // checks if checkbox is selected
+		if (!typeLB.isItemSelected(0)) // checks if checkbox is selected
 			s = typeLB.getValue(typeLB.getSelectedIndex());
 		else
 			s = "null";
@@ -319,12 +317,12 @@ public class SelectionView extends Composite implements Serializable {
 
 	// this changehandler will let a label appear when world is not selected and
 	// dissapear when a country is selected
-	private class countryLBChangeHandler implements ChangeHandler {
-
+//	private class countryLBChangeHandler implements ChangeHandler {
+/*
 		@Override
 		public void onChange(ChangeEvent event) {
 			if (!countryLB.isItemSelected(0)) { // checks if world is selected
-				if(productCB.getValue()&&typeCB.getValue()){
+				//if(productCB.getValue()&&typeCB.getValue()){
 				   fTable.getRowFormatter().setVisible(3, false);
 				   
 			    }
@@ -337,7 +335,7 @@ public class SelectionView extends Composite implements Serializable {
 			}
 		}
 
-	}
+	}*/
 
 	private class listBoxChangeHandler implements ChangeHandler {
 

@@ -29,7 +29,6 @@ private VerticalPanel vPanel = new VerticalPanel();
 		
 		this.vPanel.add(homeBtn);
 		this.vPanel.add(openBtn);
-		vPanel.addStyleName("verticalPanel");
 		}
 	
 	private class homeClickHandler implements ClickHandler{
