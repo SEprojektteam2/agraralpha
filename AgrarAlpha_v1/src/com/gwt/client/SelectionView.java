@@ -100,7 +100,7 @@ public class SelectionView extends Composite implements Serializable {
 		}
 
 		countryLB = new ListBox();
-	//	countryLB.addChangeHandler(new countryLBChangeHandler());
+		countryLB.addChangeHandler(new countryLBChangeHandler());
 		dataManagerSvc.getCountries(new AsyncCallback<ArrayList<String>>() {
 			public void onFailure(Throwable caught) {
 				// Show the RPC error message to the user
@@ -129,8 +129,7 @@ public class SelectionView extends Composite implements Serializable {
 				}
 			}
 		});
-		/*productLB.addChangeHandler(new listBoxChangeHandler(productLB,
-				productCB));*/
+		productLB.addChangeHandler(new listBoxChangeHandler(productLB));
 
 		typeLB = new ListBox();
 		
@@ -149,7 +148,7 @@ public class SelectionView extends Composite implements Serializable {
 		});
 		
 		
-		/*typeLB.addChangeHandler(new listBoxChangeHandler(typeLB, typeCB));*/
+		typeLB.addChangeHandler(new listBoxChangeHandler(typeLB));
 
 		createBtn = new Button("Create");
 		createBtn.addClickHandler(new createClickHandler());
@@ -318,12 +317,12 @@ public class SelectionView extends Composite implements Serializable {
 
 	// this changehandler will let a label appear when world is not selected and
 	// dissapear when a country is selected
-//	private class countryLBChangeHandler implements ChangeHandler {
-/*
+	private class countryLBChangeHandler implements ChangeHandler {
+
 		@Override
 		public void onChange(ChangeEvent event) {
 			if (!countryLB.isItemSelected(0)) { // checks if world is selected
-				//if(productCB.getValue()&&typeCB.getValue()){
+				if(!productLB.isItemSelected(0)&&!typeLB.isItemSelected(0)){
 				   fTable.getRowFormatter().setVisible(3, false);
 				   
 			    }
@@ -336,16 +335,15 @@ public class SelectionView extends Composite implements Serializable {
 			}
 		}
 
-	}*/
+	}
 
 	private class listBoxChangeHandler implements ChangeHandler {
 
 	private CheckBox box;
 	private ListBox list;
     private int row;
-	private listBoxChangeHandler(ListBox list, CheckBox box) {
+	private listBoxChangeHandler(ListBox list) {
 		this.list = list;
-		this.box = box;
 		
         
 		if(list.equals(productLB)){
@@ -364,21 +362,13 @@ public class SelectionView extends Composite implements Serializable {
 		if (!countryLB.isItemSelected(0)) {
 			if (!list.isItemSelected(0)) {
 				fTable.getRowFormatter().setVisible(row, false);
-				box.setValue(true);
 			} else {
 				fTable.getRowFormatter().setVisible(row, true);
-                box.setValue(false);
 
 			}
 			
-		}
-		else{
-			if (!list.isItemSelected(0)) {
-				box.setValue(true);
-			} else {
-                box.setValue(false);
-
-			}
+		
+		
 		}
 	
 		}
