@@ -5,10 +5,13 @@ package com.gwt.client;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import org.moxieapps.gwt.highcharts.client.Chart;
+
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ButtonBase;
 import com.google.gwt.user.client.ui.ChangeListener;
@@ -27,6 +30,7 @@ import com.google.gwt.visualization.client.VisualizationUtils;
 import com.google.gwt.visualization.client.visualizations.GeoMap;
 import com.google.gwt.visualization.client.visualizations.Table;
 import com.google.gwt.widgetideas.client.SliderBar;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.MouseUpEvent;
 import com.google.gwt.event.dom.client.MouseUpHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -51,12 +55,12 @@ public class CreateView extends Composite{
 
 	/* This class present the view the user has after he clicked the create button on mainView. it contains the graphics the user wants to see
 	 */
-	public CreateView(boolean interpolation, ArrayList<String[]> Data, final String year){
+	public CreateView(boolean interpolation, final ArrayList<String[]> Data, final String year){
 		initWidget(this.basePanel);
 		this.dataArray = Data;
 		this.year = year;
 
-		VisualizationLineChart vLineChart = new VisualizationLineChart();
+		final VisualizationLineChart vLineChart = new VisualizationLineChart();
 		VisualizationTable vTable = new VisualizationTable(Data);
 		list=new ListBox();
 		label= new Label("Placeholder");
@@ -123,7 +127,70 @@ public class CreateView extends Composite{
 		/*if(interpolation==true){*/
 		    tablePanel.add(new SourceView());
 			tablePanel.add(vTable.create());
-			interpolationPanel.add(vLineChart.createChart(Data));
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			SimpleRegressionServiceAsync simpleRegSvc = GWT.create(SimpleRegressionService.class);
+			double[] points = new double[22];
+	   		for(int j=0;j<=21;j++){
+	   			String[] tempNumber= Data.get(j);
+	   			if(tempNumber[2].equals("-")){
+	   				points[j]=0;
+	   			}
+	   			else{
+	   				points[j]=Double.parseDouble(tempNumber[2]);
+	   			}
+	   		}
+				
+				double[][] data = new double[points.length+1][2];
+				for(int k=0;k<=21;k++){
+					data[k][0]=k;
+					data[k][1]=points[k];
+				}
+			final double rpcPoints[] = points;	
+			simpleRegSvc.getSimpleReg(data, new AsyncCallback<double[]>() {
+				
+
+					
+					public void onFailure(Throwable caught) {
+						// Show the RPC error message to the user
+						//System.out.println("Error Arraylist!");
+						log.warning("failure creating async callback");
+						
+					}
+
+					public void onSuccess(double[] resultTemp) {
+						double[] resultReg = new double[2];
+						resultReg=resultTemp;
+						log.warning("success creating async callback" + resultReg[0]);
+						Chart chart = vLineChart.getLineChart(Data, rpcPoints, resultReg);
+						interpolationPanel.add(chart.asWidget());
+						
+						
+					}
+		});
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			;
 		/*}
 		if(interpolation==false){
 			tablePanel.add(vTable.create());

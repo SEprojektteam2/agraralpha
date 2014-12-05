@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.*;  
 import com.google.gwt.user.client.rpc.AsyncCallback;
+
 import org.moxieapps.gwt.highcharts.client.*;   
 import org.moxieapps.gwt.highcharts.client.plotOptions.*;
 
@@ -13,41 +14,34 @@ import org.moxieapps.gwt.highcharts.client.plotOptions.*;
 public class VisualizationLineChart{
 	public static Logger log = Logger.getLogger(VisualizationLineChart.class.getName());
 	
-	private SimpleRegressionServiceAsync simpleRegSvc = GWT.create(SimpleRegressionService.class);
-	private double[] resultReg = new double[2];
 	
-	public double[] getSimpleRegression(double[] points){
-		double[][] data = new double[points.length+1][2];
-		for(int k=0;k<=21;k++){
-			data[k][0]=k;
-			data[k][1]=points[k];
-		}
+	private double[] resultReg;
+	private double[] points;
+	
+	final Chart chart = new Chart();
+	ArrayList<String[]> resultData;
+	
+	
+	public Chart getLineChart(ArrayList<String[]> resultData, double[] points, double[] regressionPoints){
+		this.resultReg = regressionPoints;
+		this.resultData = resultData;
+		this.points = points;
+		initializeChart();
+		generatePoints();
+		
+		
+		//String[] dbl = new String;
 		log.warning("rpc");
-		simpleRegSvc.getSimpleReg(data, new AsyncCallback<double[]>() {
-					
-					public void onFailure(Throwable caught) {
-						// Show the RPC error message to the user
-						System.out.println("Error Arraylist!");
-						log.warning("failure");
-						resultReg[0]=9.098814229249012;
-						resultReg[1]=26.494071146245062;
-					}
-
-					public void onSuccess(double[] resultTemp) {
-						//resultReg=resultTemp;
-						resultReg[0]=9.098814229249012;
-						resultReg[1]=26.494071146245062;
-						log.warning("success");
-					}
-	    });
+		addRegression();
+		
 		log.warning("WARNING");
-		return resultReg;
+		//if(callback.hasFinished())
+			return chart;
 	}
   
-    public Chart createChart(ArrayList<String[]> resultData) {  
-    	String info[]=resultData.get(resultData.size()-1);
-    	final Chart chart = new Chart()  
-        .setSize( 1050,600)
+    public void initializeChart() {
+    	String info[]=resultData.get(resultData.size()-1); 
+        chart.setSize( 1050,600)
     	.setChartTitleText("Interpolation and Extrapolation "+info[2])
         .setChartSubtitleText("Source: FAO. 2014. FAOSTAT. data.fao.org. (Accessed 1.9.2014)")
         .setToolTip(new ToolTip()  
@@ -90,17 +84,9 @@ public class VisualizationLineChart{
         .setGridLineWidth(0)  
         .setAlternateGridColor(null);  
    	
-   	
-   		double[] points = new double[22];
-   		for(int j=0;j<=21;j++){
-   			String[] tempNumber= resultData.get(j);
-   			if(tempNumber[2].equals("-")){
-   				points[j]=0;
-   			}
-   			else{
-   				points[j]=Double.parseDouble(tempNumber[2]);
-   			}
-   		}
+    }
+    
+    private void generatePoints(){
    		String [] temp2 = resultData.get(0);
    		chart.addSeries(chart.createSeries()  
    			.setName(temp2[1])
@@ -110,26 +96,31 @@ public class VisualizationLineChart{
    				points[6], points[7], points[8], points[9], points[10], points[11], 
    				points[12], points[13], points[14], points[15], points[16], points[17], 
    				points[18], points[19], points[20], points[21]/**/
-   			})  
+   			})
    		);
-   		log.warning("method call");
-   		double[] resultReg2 = getSimpleRegression(points);
-   		chart.addSeries(chart.createSeries()  
+   		
+    }
+   		
+   		private void addRegression(){
+   			String [] temp2 = resultData.get(0);
+   			chart.addSeries(chart.createSeries()  
    		            .setName("Regression Line "+temp2[1])  
-   		            .setType(Series.Type.LINE)  
+   		            .setType(Series.Type.SPLINE)  
    		            .setPlotOptions(new LinePlotOptions()  
    		                .setMarker(new Marker()  
    		                    .setEnabled(true)  
    		                )  
    		                .setHoverStateLineWidth(0)  
    		                .setEnableMouseTracking(true)  
-   		            )  
-   		            .setPoints(new Number[][]{  
-   		                {0.0,resultReg2[0]}, {26.0,resultReg2[1]} 
+   		            ) 
+   		
+   			
+   		            .setPoints(new Number[][]{
+   		            		{0.0, resultReg[0]}, {26.0, resultReg[26]}
+   		                
    		            })  
-   				);
-   	
-  
-        return chart;  
-    }  
+   		         
+   		);
+   		log.warning("Regression Line Created");
+   		}
 }
