@@ -74,15 +74,35 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 			rs.beforeFirst();
 			log.warning("Entries: "+String.valueOf(noOfEntries) +" Query: "+ query);
 			// iterate through the java resultset
-			//int i=0;
+			int i=1990;
 			
 			while (rs.next())
 			{		String[] resultTemp = new String[3];
 					resultTemp[0] = rs.getString("Year");
 					resultTemp[1] = rs.getString(searchingVar);
 					resultTemp[2] = rs.getString(outputVar);
-					result.add(resultTemp);
+					
 					//i++;
+					if(resultTemp[0].equals(String.valueOf(i))){
+						result.add(resultTemp);
+					}
+					else{
+						for(int j=i;j<Integer.parseInt(resultTemp[0]);j++){
+							String[] resultCorrect = new String[3];
+							resultCorrect[0]=String.valueOf(j);
+							resultCorrect[1]=resultTemp[1];
+							resultCorrect[2]="-";
+							result.add(resultCorrect);
+						}
+						result.add(resultTemp);
+					}
+					
+					if(i==2011){
+						i=1990;
+					}
+					else{
+						i++;
+					}
 					log.warning("added[" + resultTemp[0] + "," + resultTemp[1] + "," + resultTemp[2] + "]" );
 			}
 			
