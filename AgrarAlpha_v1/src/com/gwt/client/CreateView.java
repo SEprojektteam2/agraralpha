@@ -185,6 +185,30 @@ public class CreateView extends Composite{
 					table.addRows(1);
 					table.setValue(y, 0,dataArray.get(i)[1]);
 					table.setValue(y, 1, value);
+					
+					if(dataArray.get(i)[1].equals("United States of America")){
+						table.setValue(y, 0, "United States");
+						table.setValue(y, 1, value);
+						log.warning("US");
+					}
+					else if(dataArray.get(i)[1].equals("Russian Federation")){
+						table.setValue(y, 0, "Russia");
+						table.setValue(y, 1, value);
+					}
+					else if(dataArray.get(i)[1].equals("Iran (Islamic Republic of)")){
+						table.setValue(y, 0, "Russia");
+						table.setValue(y, 1, value);
+					}
+					
+					else if(dataArray.get(i)[1].equals("Venezuela (Bolivarian Republic of)")){
+						table.setValue(y, 0, "Venezuela");
+						table.setValue(y, 1, value);
+					}
+					else if(dataArray.get(i)[1].equalsIgnoreCase("Bolivia (Plurinational State of)")){
+						table.setValue(y, 0, "Bolivia");
+						table.setValue(y, 1, value);
+					}
+					
 					y++;
 			}
 		}
