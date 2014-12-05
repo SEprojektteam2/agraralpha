@@ -28,8 +28,6 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 /**
  */
 public class VisualizationTable  {
-
-	public static Logger log = Logger.getLogger(VisualizationTable.class.getName());
 	
 private	String tr="<tr>";
 private	String tr2="</tr>";
@@ -115,8 +113,6 @@ public VisualizationTable(ArrayList<String[]>a){
 		htmlString+="</tbody>";
 
 		htmlString+="</table>";
-		
-		log.warning(htmlString);
 		html.setHTML(htmlString);
         return html;		
 		}
