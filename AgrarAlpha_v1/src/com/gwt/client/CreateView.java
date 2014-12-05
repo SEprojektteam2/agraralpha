@@ -174,13 +174,17 @@ public class CreateView extends Composite{
 		table.addColumn(ColumnType.STRING, "Country");
 		table.addColumn(ColumnType.NUMBER, dataArray.get(dataArray.size()-1)[2] + " in " + year);
 		int y = 0;
+		Double value = 0.0;
 		for(int i=0; i<dataArray.size()-1; i++)
 		{
 			if(dataArray.get(i)[0].equals(String.valueOf(year)))
-			{
+			{		if(dataArray.get(i)[2].equals("-"))
+						value = 0.0;
+					else
+						value= Double.parseDouble(dataArray.get(i)[2]);
 					table.addRows(1);
 					table.setValue(y, 0,dataArray.get(i)[1]);
-					table.setValue(y, 1, dataArray.get(i)[2]);
+					table.setValue(y, 1, value);
 					y++;
 			}
 		}
