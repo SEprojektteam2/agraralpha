@@ -17,7 +17,6 @@ public class MainView extends Composite {
 	private HorizontalPanel rootPanel = new HorizontalPanel();
 	private VerticalPanel contentPanel;
 	private SelectionView selView;
-	private OpenView openView;
 	private MenuView menu;
 	private ExtendedMenuView emenu;
 
@@ -84,7 +83,7 @@ public class MainView extends Composite {
 		contentPanel.add(cView);
 		rootPanel.add(contentPanel);
 	}
-
+	/*
 	public void openSaveView() {
 		rootPanel.clear();
 		contentPanel.clear();
@@ -94,5 +93,5 @@ public class MainView extends Composite {
 		contentPanel.add(saveView);
 		rootPanel.add(contentPanel);
 	}
-
+*/
 }
