@@ -63,7 +63,9 @@ public class DialogBoxSave extends DialogBox {
              DialogBoxSave.this.hide();
            }
          });
-        
+        btnPanel.add(save);
+        btnPanel.add(close);
+
    base.add(tb);
    base.add(btnPanel);
 

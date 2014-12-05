@@ -64,7 +64,8 @@ public class DialogBoxOpen extends DialogBox {
              DialogBoxOpen.this.hide();
            }
          });
-        
+         btnPanel.add(open);
+         btnPanel.add(close);
    base.add(tb);
    base.add(btnPanel);
 
