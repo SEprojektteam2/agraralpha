@@ -145,9 +145,9 @@ public class CreateView extends Composite{
 		//vMap.createChart(mapPanel);
 		
 		
-		/**mapPanel.add(new SourceView()); // adding a verticalPanel with all source to the mapPanel
+		mapPanel.add(new SourceView()); // adding a verticalPanel with all source to the mapPanel
 		mapPanel.add(slider.asWidget());
-		createMap(Integer.parseInt(year));	**/	
+		createMap(Integer.parseInt(year));	
 		//mapPanel.add(getMap());
 		basePanel.add(tablePanel,"Table");
 		basePanel.add(interpolationPanel,"Interpolation");
