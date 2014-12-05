@@ -196,7 +196,7 @@ public class CreateView extends Composite{
 						table.setValue(y, 1, value);
 					}
 					else if(dataArray.get(i)[1].equals("Iran (Islamic Republic of)")){
-						table.setValue(y, 0, "Russia");
+						table.setValue(y, 0, "Iran");
 						table.setValue(y, 1, value);
 					}
 					
@@ -208,6 +208,62 @@ public class CreateView extends Composite{
 						table.setValue(y, 0, "Bolivia");
 						table.setValue(y, 1, value);
 					}
+					
+					else if(dataArray.get(i)[1].equalsIgnoreCase("United Republic of Tanzania")){
+						table.setValue(y, 0, "Tanzania");
+						table.setValue(y, 1, value);
+					}
+					else if(dataArray.get(i)[1].equalsIgnoreCase("Congo")){
+						table.setValue(y, 0, "CG");
+						table.setValue(y, 1, value);
+					}
+					else if(dataArray.get(i)[1].equalsIgnoreCase("Syrian Arab Republic")){
+						table.setValue(y, 0, "Syria");
+						table.setValue(y, 1, value);
+					}
+					else if(dataArray.get(i)[1].equalsIgnoreCase("Democratic People's Republic of Korea")){
+						table.setValue(y, 0, "North Korea");
+						table.setValue(y, 1, value);
+					}
+					else if(dataArray.get(i)[1].equalsIgnoreCase("Republic of Korea")){
+						table.setValue(y, 0, "South Korea");
+						table.setValue(y, 1, value);
+					}
+					else if(dataArray.get(i)[1].equalsIgnoreCase("Viet Nam")){
+						table.setValue(y, 0, "Vietnam");
+						table.setValue(y, 1, value);
+					}
+					else if(dataArray.get(i)[1].equalsIgnoreCase("Lao People's Democratic Republic")){
+						table.setValue(y, 0, "Laos");
+						table.setValue(y, 1, value);
+					}
+					
+					else if(dataArray.get(i)[1].equalsIgnoreCase("Democratic Republic of the Congo")){
+						table.setValue(y, 0, "CD");
+						table.setValue(y, 1, value);
+					}
+					else if(dataArray.get(i)[1].equalsIgnoreCase("South Sudan")){
+						table.setValue(y, 0, "SS");
+						table.setValue(y, 1, value);
+					}
+					else if(dataArray.get(i)[1].equalsIgnoreCase("Côte d'Ivoire")){
+						table.setValue(y, 0, "CIV");
+						table.setValue(y, 1, value);
+					}
+					else if(dataArray.get(i)[1].equalsIgnoreCase("Republic of Moldova")){
+						table.setValue(y, 0, "Moldova");
+						table.setValue(y, 1, value);
+					}
+					else if(dataArray.get(i)[1].equalsIgnoreCase("The former Yugoslav Republic of Macedonia")){
+						table.setValue(y, 0, "Macedonia");
+						table.setValue(y, 1, value);
+					}
+					else if(dataArray.get(i)[1].equalsIgnoreCase("Falkland")){
+						table.setValue(y, 0, "Falkland Islands (Malvinas)");
+						table.setValue(y, 1, value);
+					}
+					
+					
 					
 					y++;
 			}
