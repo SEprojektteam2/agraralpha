@@ -123,7 +123,7 @@ public class CreateView extends Composite{
 		/*if(interpolation==true){*/
 		    tablePanel.add(new SourceView());
 			tablePanel.add(vTable.create());
-			/**interpolationPanel.add(vLineChart.createChart(Data));**/
+			interpolationPanel.add(vLineChart.createChart(Data));
 		/*}
 		if(interpolation==false){
 			tablePanel.add(vTable.create());

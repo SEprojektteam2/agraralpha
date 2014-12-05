@@ -5,8 +5,6 @@ import java.util.logging.Logger;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.*;  
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwt.server.MySQLConnection;
-
 import org.moxieapps.gwt.highcharts.client.*;   
 import org.moxieapps.gwt.highcharts.client.plotOptions.*;
 
@@ -95,7 +93,12 @@ public class VisualizationLineChart{
    		double[] points = new double[22];
    		for(int j=0;j<=21;j++){
    			String[] tempNumber= resultData.get(j);
-   			points[j]=Double.parseDouble(tempNumber[2]);
+   			if(tempNumber[2].equals("-")){
+   				points[j]=0;
+   			}
+   			else{
+   				points[j]=Double.parseDouble(tempNumber[2]);
+   			}
    		}
    		String [] temp2 = resultData.get(0);
    		chart.addSeries(chart.createSeries()  

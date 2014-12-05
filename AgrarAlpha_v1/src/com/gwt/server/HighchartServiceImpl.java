@@ -8,14 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Logger;
-
-import org.moxieapps.gwt.highcharts.client.Chart;
-
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.gwt.client.HighchartService;
-import com.gwt.client.VisualizationLineChart;
-import com.gwt.client.VisualizationMap;
 
 @SuppressWarnings("serial")
 public class HighchartServiceImpl extends RemoteServiceServlet implements
@@ -106,17 +100,14 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 								resultCorrect[0]=String.valueOf(j);
 								resultCorrect[1]=controll;
 								resultCorrect[2]="-";
-								result.add(resultCorrect);
-								i=1990;
+								result.add(resultCorrect);	
 							}
+							i=1990;
 							if(resultTemp[0].equals("1990")){
 								String[] resultCorrect = new String[3];
 								resultCorrect[0]=String.valueOf(i);
 								resultCorrect[1]=resultTemp[1];
-								resultCorrect[2]="-";
-								result.add(resultTemp);
-								controll=resultTemp[1];
-								i++;
+								resultCorrect[2]="-";	
 							}
 							else{
 								for(int j=i;j<Integer.parseInt(resultTemp[0]);j++){
@@ -127,9 +118,10 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 									result.add(resultCorrect);
 									i++;
 								}
-								result.add(resultTemp);
-								i++;
 							}
+							result.add(resultTemp);
+							controll=resultTemp[1];
+							i++;
 								
 						}
 						else{
