@@ -59,7 +59,7 @@ public VisualizationTable(ArrayList<String[]>a){
   arraylist.add(sArray6);
   arraylist.add(sArray7);
 */
-   String isCountry="AreName";		
+   String isCountry="AreaName";		
 	htmlString+="<table id=\"tdisplay\" cellspacing=\"0\" cellpadding=\"0\"";
 	
 	int start = Integer.parseInt(arraylist.get(0)[0]);
