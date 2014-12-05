@@ -9,17 +9,29 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 // only placeholder at the moment
 public class DialogBoxOpen extends DialogBox {
 
      private TextBox tb;
-     private FlexTable fTable;
-     
-     public DialogBoxOpen(){
+     private VerticalPanel base;
+     private HorizontalPanel btnPanel;
 
-    	 fTable=new FlexTable();
+     public DialogBoxOpen(){
+    	 
+    	 setText("Open");
+    	 // Enable animation.
+         setAnimationEnabled(true);
+
+         // Enable glass background.
+         setGlassEnabled(true);
+    	
+         base=new VerticalPanel();
+    	 btnPanel=new HorizontalPanel();
+
+    	 
     	 tb=new TextBox();
     	 tb.addKeyPressHandler(new KeyPressHandler() {
     		  @Override
@@ -35,11 +47,7 @@ public class DialogBoxOpen extends DialogBox {
     		});
     	 // Set the dialog box's caption.
 
-         // Enable animation.
-         setAnimationEnabled(true);
-
-         // Enable glass background.
-         setGlassEnabled(true);
+      
 
          // DialogBox is a SimplePanel, so you have to set its widget property to
          // whatever you want its contents to be.
@@ -51,17 +59,16 @@ public class DialogBoxOpen extends DialogBox {
          });
          
          Button close = new Button("close");
-         open.addClickHandler(new ClickHandler() {
+         close.addClickHandler(new ClickHandler() {
            public void onClick(ClickEvent event) {
              DialogBoxOpen.this.hide();
            }
          });
         
-     	fTable.setWidget(0, 0, tb);
-        fTable.setWidget(1, 0, open);
-        fTable.setWidget(1, 1, close);
+   base.add(tb);
+   base.add(btnPanel);
 
-         setWidget(fTable);
+         setWidget(base);
        }
     	 
      
