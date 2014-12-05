@@ -71,7 +71,6 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 			int i=1990;
 			//String controll = rs.getString(searchingVar);
 			String controll = "null";
-			controll="Afghanistan";
 			while (rs.next())
 			{		
 					if(controll.equals("null")){
