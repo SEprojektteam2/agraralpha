@@ -18,56 +18,54 @@ public class MainView extends Composite {
 	private VerticalPanel contentPanel;
 	private SelectionView selView;
 	private OpenView openView;
+	private MenuView menu;
+	private ExtendedMenuView emenu;
 
 	/*
-	 * main view is the homepage where the user can choose the options to create
+	 * main view is the home page where the user can choose the options to create
 	 * the graph. Or can open saved options
 	 */
-	public MainView(){
+	public MainView() {
 		initWidget(this.rootPanel);
-        rootPanel.setWidth("100%");
 		MenuView menu = new MenuView(this);
-		menu.setWidth("20%");
 		menu.addStyleName("menu");
 		rootPanel.add(menu);
-
+		emenu = new ExtendedMenuView(this);
+		emenu.addStyleName("menu");
 
 		selView = new SelectionView(this);
 		selView.addStyleName("selView");
 
-
 		contentPanel = new VerticalPanel();
 		contentPanel.add(selView);
 		rootPanel.add(contentPanel);
-		RootPanel.get().getElement().getStyle().setProperty("backgroundColor", "#252530");
+		RootPanel.get().getElement().getStyle()
+				.setProperty("backgroundColor", "#252530");
 
 	}
 
 	/* clears the panel and draw the open view */
-	/*public void openOpenView() {
-		rootPanel.clear();
-		contentPanel.clear();
-		ExtendedMenuView menu = new ExtendedMenuView(this);
-		rootPanel.add(menu);
-
-		//to be created appropriatly from database
-		VisualizationManager VisMan = null;
-		
-		CreateView cView= new CreateView(visMan);
-
-		OpenView oView = new OpenView();
-		contentPanel.add(oView);
-		rootPanel.add(contentPanel);
-
-		//create openView 
-
-	}*/
+	/*
+	 * public void openOpenView() { rootPanel.clear(); contentPanel.clear();
+	 * ExtendedMenuView menu = new ExtendedMenuView(this); rootPanel.add(menu);
+	 * 
+	 * //to be created appropriatly from database VisualizationManager VisMan =
+	 * null;
+	 * 
+	 * CreateView cView= new CreateView(visMan);
+	 * 
+	 * OpenView oView = new OpenView(); contentPanel.add(oView);
+	 * rootPanel.add(contentPanel);
+	 * 
+	 * //create openView
+	 * 
+	 * }
+	 */
 
 	/* clears the panel and draw the home view */
-	public void openHomeView(){
+	public void openHomeView() {
 		rootPanel.clear();
 		contentPanel.clear();
-		MenuView menu = new MenuView(this);
 		rootPanel.add(menu);
 
 		selView = new SelectionView(this);
@@ -77,13 +75,12 @@ public class MainView extends Composite {
 		rootPanel.add(contentPanel);
 	}
 
-	public void openCreateView(boolean b, ArrayList<String[]>a, String year) {
+	public void openCreateView(boolean b, ArrayList<String[]> a, String year) {
 		rootPanel.clear();
 		contentPanel.clear();
-		ExtendedMenuView menu = new ExtendedMenuView(this);
-		rootPanel.add(menu);
+		rootPanel.add(emenu);
 
-		CreateView cView = new CreateView(b,a,year);
+		CreateView cView = new CreateView(b, a, year);
 		contentPanel.add(cView);
 		rootPanel.add(contentPanel);
 	}
@@ -91,19 +88,17 @@ public class MainView extends Composite {
 	public void openChangeView() {
 		rootPanel.clear();
 		contentPanel.clear();
-		ExtendedMenuView menu = new ExtendedMenuView(this);
-		rootPanel.add(menu);
+		rootPanel.add(emenu);
 
 		ChangeView changeView = new ChangeView();
 		contentPanel.add(changeView);
 		rootPanel.add(contentPanel);
 	}
-	
+
 	public void openSaveView() {
 		rootPanel.clear();
 		contentPanel.clear();
-		ExtendedMenuView menu = new ExtendedMenuView(this);
-		rootPanel.add(menu);
+		rootPanel.add(emenu);
 
 		SaveView saveView = new SaveView();
 		contentPanel.add(saveView);
