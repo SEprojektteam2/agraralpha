@@ -41,22 +41,6 @@ public class AgrarAlpha_v1 implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		
-		// Create a FormPanel and point it at a service.
-		  
-	
-	    /**final FormPanel form = new FormPanel();
-	    form.setAction("/GuiAgrarV");
-
-	    // Because we're going to add a FileUpload widget, we'll need to set the
-	    // form to use the POST method, and multipart MIME encoding.
-	    form.setEncoding(FormPanel.ENCODING_MULTIPART);
-	    form.setMethod(FormPanel.METHOD_POST);
-
-	    // Create a panel to hold all of the form widgets.
-	    VerticalPanel panel = new VerticalPanel();
-	    form.setWidget(panel);**/
-
 	    MainView gui = new MainView();
 	    RootPanel.get().add(gui);;
 

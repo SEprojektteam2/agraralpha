@@ -29,18 +29,18 @@ public class ExtendedMenuView extends Composite {
 		
 		openBtn = new Button("Open");
 		openBtn.addClickHandler(new openClickHandler());
-		openBtn.addStyleName("beautifulbutton open");
+		openBtn.addStyleName("beautifulbutton");
 
 
 		saveBtn = new Button("Save");
 		saveBtn.addClickHandler(new saveClickHandler());
-		saveBtn.addStyleName("beautifulbutton save");
+		saveBtn.addStyleName("beautifulbutton");
 
 	
 		
 		homeBtn = new Button("Home");
 		homeBtn.addClickHandler(new homeClickHandler());
-		homeBtn.addStyleName("beautifulbutton spark");
+		homeBtn.addStyleName("beautifulbutton");
 		
 		openDB=new DialogBoxOpen();
 		saveDB=new DialogBoxSave();

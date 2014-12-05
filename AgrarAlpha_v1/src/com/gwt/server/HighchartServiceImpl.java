@@ -8,14 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Logger;
-
-import org.moxieapps.gwt.highcharts.client.Chart;
-
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.gwt.client.HighchartService;
-import com.gwt.client.VisualizationLineChart;
-import com.gwt.client.VisualizationMap;
 
 @SuppressWarnings("serial")
 public class HighchartServiceImpl extends RemoteServiceServlet implements
@@ -75,38 +69,78 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 			log.warning("Entries: "+String.valueOf(noOfEntries) +" Query: "+ query);
 			// iterate through the java resultset
 			int i=1990;
-			
+			//String controll = rs.getString(searchingVar);
+			String controll = "null";
+			controll="Afghanistan";
 			while (rs.next())
-			{		String[] resultTemp = new String[3];
+			{		
+					if(controll.equals("null")){
+						controll = rs.getString(searchingVar);
+					}
+					String[] resultTemp = new String[3];
 					resultTemp[0] = rs.getString("Year");
 					resultTemp[1] = rs.getString(searchingVar);
 					resultTemp[2] = rs.getString(outputVar);
-					
+					/**result.add(resultTemp);**/
 					//i++;
 					if(resultTemp[0].equals(String.valueOf(i))){
 						result.add(resultTemp);
 						if(i==2011){
 							i=1990;
+							controll = "null";
 						}
 						else{
 							i++;
 						}
 					}
 					else{
-						for(int j=i;j<Integer.parseInt(resultTemp[0]);j++){
-							String[] resultCorrect = new String[3];
-							resultCorrect[0]=String.valueOf(j);
-							resultCorrect[1]=resultTemp[1];
-							resultCorrect[2]="-";
-							result.add(resultCorrect);
-							i++;
-						}
-						result.add(resultTemp);
-						if(i==2011){
+						if(!resultTemp[1].equals(controll)){
+							for(int j=i;j<=2011;j++){
+								String[] resultCorrect = new String[3];
+								resultCorrect[0]=String.valueOf(j);
+								resultCorrect[1]=controll;
+								resultCorrect[2]="-";
+								result.add(resultCorrect);	
+							}
 							i=1990;
+							if(resultTemp[0].equals("1990")){
+								String[] resultCorrect = new String[3];
+								resultCorrect[0]=String.valueOf(i);
+								resultCorrect[1]=resultTemp[1];
+								resultCorrect[2]="-";	
+							}
+							else{
+								for(int j=i;j<Integer.parseInt(resultTemp[0]);j++){
+									String[] resultCorrect = new String[3];
+									resultCorrect[0]=String.valueOf(j);
+									resultCorrect[1]=resultTemp[1];
+									resultCorrect[2]="-";
+									result.add(resultCorrect);
+									i++;
+								}
+							}
+							result.add(resultTemp);
+							controll=resultTemp[1];
+							i++;
+								
 						}
 						else{
-							i++;
+							for(int j=i;j<Integer.parseInt(resultTemp[0]);j++){
+								String[] resultCorrect = new String[3];
+								resultCorrect[0]=String.valueOf(j);
+								resultCorrect[1]=resultTemp[1];
+								resultCorrect[2]="-";
+								result.add(resultCorrect);
+								i++;
+							}
+							result.add(resultTemp);
+							if(i==2011){
+								i=1990;
+								controll = "null";
+							}
+							else{
+								i++;
+							}
 						}
 					}
 					

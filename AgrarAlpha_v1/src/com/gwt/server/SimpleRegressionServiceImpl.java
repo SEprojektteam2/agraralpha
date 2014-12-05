@@ -1,13 +1,10 @@
 package com.gwt.server;
 
 
-import java.util.logging.Logger;
-
 import org.apache.commons.math3.stat.regression.SimpleRegression;
-
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.gwt.client.SimpleRegressionService;
-import com.gwt.client.VisualizationLineChart;
+
 
 @SuppressWarnings("serial")
 public class SimpleRegressionServiceImpl extends RemoteServiceServlet implements 
