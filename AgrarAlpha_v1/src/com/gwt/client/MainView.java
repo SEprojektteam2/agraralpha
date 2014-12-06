@@ -26,14 +26,17 @@ public class MainView extends Composite {
 	 */
 	public MainView() {
 		initWidget(this.rootPanel);
-		MenuView menu = new MenuView(this);
-		menu.addStyleName("menu");
-		rootPanel.add(menu);
-		emenu = new ExtendedMenuView(this);
-		emenu.addStyleName("menu");
+		
 
 		selView = new SelectionView(this);
 		selView.addStyleName("selView");
+		
+		
+		MenuView menu = new MenuView(this);
+		menu.addStyleName("menu");
+		rootPanel.add(menu);
+		emenu = new ExtendedMenuView(this, selView);
+		emenu.addStyleName("menu");
 
 		contentPanel = new VerticalPanel();
 		contentPanel.add(selView);

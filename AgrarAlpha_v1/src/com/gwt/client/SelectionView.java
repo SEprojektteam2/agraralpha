@@ -66,8 +66,7 @@ public class SelectionView extends Composite implements Serializable {
 			.create(DataManagerService.class);
 	private HighchartServiceAsync highchartSvc = GWT
 			.create(HighchartService.class);
-	private SaveServiceAsync saveSvc = GWT
-			.create(SaveService.class);
+
 	/*
 	 * This class is drawing the options, the user can choose from. The
 	 * RootPanel is a FlexTable (Table with flexible size)
@@ -221,6 +220,10 @@ public class SelectionView extends Composite implements Serializable {
 			s = "null";
 		return s;
 	}
+	
+	public boolean getPerCapita() {
+		return perCapitaCB.getValue();
+	}
 
 	/*
 	 * handels the event when createBtn will get clicked checks if requirements
@@ -238,22 +241,7 @@ public class SelectionView extends Composite implements Serializable {
 			  
 			  else{
 			
-				  
-				saveSvc.save(Integer.parseInt(getYear()), getCountry(), getProduct(), getType(),
-							perCapitaCB.getValue(), "Mein erster Speicherversuch",  new AsyncCallback<Void>() {
-								public void onFailure(Throwable caught) {
-									// Show the RPC error message to the user
-									log.info("Error Saving!");
-								}
-
-
-								@Override
-								public void onSuccess(Void result) {
-									// TODO Auto-generated method stub
-									log.info("Save succeeded!");
-								}
-				    });
-			
+				
 
 			
 

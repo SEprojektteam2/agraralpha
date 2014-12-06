@@ -22,7 +22,7 @@ public class ExtendedMenuView extends Composite {
 
 	
 
-	public ExtendedMenuView(MainView main) {
+	public ExtendedMenuView(MainView main, SelectionView selectionView) {
 		initWidget(this.vPanel);
 		
 		this.main=main;
@@ -43,7 +43,7 @@ public class ExtendedMenuView extends Composite {
 		homeBtn.addStyleName("beautifulbutton");
 		
 		openDB=new DialogBoxOpen();
-		saveDB=new DialogBoxSave();
+		saveDB=new DialogBoxSave(selectionView);
 
 		
 		this.vPanel.add(homeBtn);

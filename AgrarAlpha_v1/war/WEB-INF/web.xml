@@ -58,6 +58,16 @@
     <url-pattern>/agraralpha_v1/SimpleRegression</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>SaveServiceImpl</servlet-name>
+    <servlet-class>com.gwt.server.SaveServiceImpl</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>SaveServiceImpl</servlet-name>
+    <url-pattern>/agraralpha_v1/SaveService</url-pattern>
+  </servlet-mapping>
+  
   
   <!-- Default page to serve -->
   <welcome-file-list>
