@@ -51,6 +51,7 @@ public class CreateView extends Composite{
 	private String year;
 	private SliderBar slider = new SliderBar(1990, 2011);
 	public static final Logger log = Logger.getLogger(CreateView.class.getName());
+	final VisualizationLineChart vLineChart = new VisualizationLineChart();
 //private VisualizationLineChart vLineChart;
 
 	/* This class present the view the user has after he clicked the create button on mainView. it contains the graphics the user wants to see
@@ -60,7 +61,7 @@ public class CreateView extends Composite{
 		this.dataArray = Data;
 		this.year = year;
 
-		final VisualizationLineChart vLineChart = new VisualizationLineChart();
+		
 		VisualizationTable vTable = new VisualizationTable(Data);
 		list=new ListBox();
 		label= new Label("Placeholder");
@@ -131,54 +132,13 @@ public class CreateView extends Composite{
 			
 			
 			
+			addLineChart();
 			
 			
 			
 			
 			
-			
-			
-			
-			SimpleRegressionServiceAsync simpleRegSvc = GWT.create(SimpleRegressionService.class);
-			double[] points = new double[22];
-	   		for(int j=0;j<=21;j++){
-	   			String[] tempNumber= Data.get(j);
-	   			if(tempNumber[2].equals("-")){
-	   				points[j]=0;
-	   			}
-	   			else{
-	   				points[j]=Double.parseDouble(tempNumber[2]);
-	   			}
-	   		}
-				
-				double[][] data = new double[points.length+1][2];
-				for(int k=0;k<=21;k++){
-					data[k][0]=k;
-					data[k][1]=points[k];
-				}
-			final double rpcPoints[] = points;	
-			simpleRegSvc.getSimpleReg(data, new AsyncCallback<double[]>() {
-				
-
-					
-					public void onFailure(Throwable caught) {
-						// Show the RPC error message to the user
-						//System.out.println("Error Arraylist!");
-						log.warning("failure creating async callback");
-						
-					}
-
-					public void onSuccess(double[] resultTemp) {
-						double[] resultReg = new double[2];
-						resultReg=resultTemp;
-						log.warning("success creating async callback" + resultReg[0]);
-						Chart chart = vLineChart.getLineChart(Data, rpcPoints, resultReg);
-						interpolationPanel.add(chart.asWidget());
-						
-						
-					}
-		});
-			
+	
 			
 			
 			
@@ -344,5 +304,42 @@ public class CreateView extends Composite{
 		};
 
 		VisualizationUtils.loadVisualizationApi(onLoadCallbackMap, GeoMap.PACKAGE); 
+	}
+	
+	
+	private void addLineChart(){	
+		SimpleRegressionServiceAsync simpleRegSvc = GWT.create(SimpleRegressionService.class);
+		double[] points = new double[22];
+   		for(int j=0;j<=21;j++){
+   			String[] tempNumber= dataArray.get(j);
+   			if(tempNumber[2].equals("-")){
+   				points[j]=0;
+   			}
+   			else{
+   				points[j]=Double.parseDouble(tempNumber[2]);
+   			}
+   		}
+			
+			double[][] data = new double[points.length+1][2];
+			for(int k=0;k<=21;k++){
+				data[k][0]=k;
+				data[k][1]=points[k];
+			}
+		final double rpcPoints[] = points;	
+		simpleRegSvc.getSimpleReg(data, new AsyncCallback<double[]>() {
+			
+
+				
+				public void onFailure(Throwable caught) {
+					// Show the RPC error message to the user
+					log.warning("failure creating async callback");	
+				}
+				public void onSuccess(double[] resultTemp) {
+					double[] resultReg = new double[2];
+					resultReg=resultTemp;
+					Chart chart = vLineChart.getLineChart(dataArray, rpcPoints, resultReg);
+					interpolationPanel.add(chart.asWidget());						
+				}
+	});
 	}
 }
