@@ -285,8 +285,8 @@ public class CreateView extends Composite{
 		}
 		Runnable onLoadCallbackMap = new Runnable(){
 			public void run(){
-				VisualizationMap map = new VisualizationMap(year);
-				GeoMap newMap = map.createMap(table);
+				VisualizationMap map = new VisualizationMap();
+				GeoMap newMap = map.getMap(table);
 				    	  mapPanel.add(newMap.asWidget());
 			}
 		};

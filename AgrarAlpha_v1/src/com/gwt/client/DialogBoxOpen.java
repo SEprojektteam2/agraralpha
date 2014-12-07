@@ -20,7 +20,8 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 /** this class is a dialog witch allows the user to enter a name of a saved option
  * if the name he enters exist in the database, createView will be generated with the saved options
- * /
+ */
+ 
 public class DialogBoxOpen extends DialogBox {
 	public static Logger log = Logger.getLogger(DialogBoxOpen.class.getName());
      private TextBox tb;
