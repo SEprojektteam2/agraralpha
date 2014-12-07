@@ -109,6 +109,7 @@ public class CreateView extends Composite{
 				public void onMouseUp(MouseUpEvent event) {
 					// TODO Auto-generated method stub
 					createMapFromSlider();
+					createBarChartFromSlider();
 					slider.redraw();
 				}
 	          });
@@ -134,9 +135,7 @@ public class CreateView extends Composite{
 			
 			
 			addLineChart();
-			
-			
-			;
+		
 		/*}
 		if(interpolation==false){
 			tablePanel.add(vTable.create());
@@ -333,8 +332,12 @@ public class CreateView extends Composite{
 	
 	private void addBarChart()
 	{
-		vBarChart = new VisualizationBarChart(dataArray,year);
+		vBarChart = new VisualizationBarChart(dataArray, year);
 		vBarChart.draw(year, 10);
+		
+		vBarChart.setTitle("Histogram for ...");
+		vBarChart.setTitleX("Range");
+		vBarChart.setTitleY("Amount");
 		
 		histogramPanel.add(slider);
 		histogramPanel.add(vBarChart.getChart());
