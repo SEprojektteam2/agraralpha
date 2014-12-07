@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import org.moxieapps.gwt.highcharts.client.Chart;
 import org.moxieapps.gwt.highcharts.client.Series;
 
-public class VisualizationBarChart{
+public class VisualizationBarChart_v2{
 
 	final static int COLUMNSDEFAULT = 10;
 	final static int COLUMNSMIN = 2;
 	final static int COLUMNSMAX = 20;
 	
-	private Chart chart;
-	private ArrayList<ArrayList<Double>> data;
-	private int numColumns = COLUMNSDEFAULT;
-	private int yearIndex;
+	public static Chart chart;
+	public static ArrayList<ArrayList<Double>> data;
+	public static int numColumns = COLUMNSDEFAULT;
+	public static int yearIndex;
 	
 	/**
 	 * The constructor receives the data from the database in a String form and the year in string form.
@@ -23,7 +23,7 @@ public class VisualizationBarChart{
 	 * @param resultData
 	 * @param year
 	 */
-	public VisualizationBarChart(ArrayList<String[]> resultData, String year)
+	public VisualizationBarChart_v2(ArrayList<String[]> resultData, String year)
 	{
 		chart = new Chart();
 		chart.setType(Series.Type.COLUMN);
@@ -39,7 +39,7 @@ public class VisualizationBarChart{
 	 * @param columns
 	 * @return
 	 */
-	public Chart draw(String year, int columns)
+	public static Chart draw(String year, int columns)
 	{
 		//if colums is not in range, set to default --> 10
 		setNumColumns(columns);
@@ -71,7 +71,7 @@ public class VisualizationBarChart{
 	 * 
 	 * @return
 	 */
-	private String[] calculateRanges() {
+	public static String[] calculateRanges() {
 		//finding the min and max for the the first (min) and last (max) range
 		double min = findMin();
 		double max = findMax();
@@ -99,9 +99,9 @@ public class VisualizationBarChart{
 	 * 
 	 * @param ArrayList<String[]>	this is the data that the database has returned
 	 */
-	private void convertData(ArrayList<String[]> resultData)
+	public static void convertData(ArrayList<String[]> resultData)
 	{
-data = new ArrayList<ArrayList<Double>>();
+		data = new ArrayList<ArrayList<Double>>();
 		
 		for(int i = 0; i < 22; i++)
 		{
@@ -121,7 +121,7 @@ data = new ArrayList<ArrayList<Double>>();
 	 * @param max
 	 * @return the occurances counted for the particular range [min, max)
 	 */
-	private int count(double min, double max)
+	public static int count(double min, double max)
 	{
 		int count = 0;
 		
@@ -142,7 +142,7 @@ data = new ArrayList<ArrayList<Double>>();
 	 * 
 	 * @return 
 	 */
-	private double findMin()
+	public static double findMin()
 	{
 		double curMin = data.get(yearIndex).get(0);
 		
@@ -162,7 +162,7 @@ data = new ArrayList<ArrayList<Double>>();
 	 * 
 	 * @return
 	 */
-	private double findMax()
+	public static double findMax()
 	{
 		double curMax = data.get(yearIndex).get(0);
 		
@@ -185,7 +185,7 @@ data = new ArrayList<ArrayList<Double>>();
 	 * @param year
 	 * @return index
 	 */
-	private int calculateYearIndex(String year)
+	public static int calculateYearIndex(String year)
 	{
 		
 		int index = -1;
@@ -203,17 +203,17 @@ data = new ArrayList<ArrayList<Double>>();
 	
 //get- and set-Methods for some of the attributes
 	
-	public void setYearIndex(int index)
+	public static void setYearIndex(int index)
 	{
 		yearIndex = index;
 	}
 	
-	public void setYearIndex(String year)
+	public static void setYearIndex(String year)
 	{
 		setYearIndex(calculateYearIndex(year));
 	}
 	
-	public void setNumColumns(int number)
+	public static void setNumColumns(int number)
 	{
 
 		if (number < COLUMNSMIN || number > COLUMNSMAX)
@@ -223,27 +223,27 @@ data = new ArrayList<ArrayList<Double>>();
 		
 	}
 	
-	public int getNumColumns()
+	public static int getNumColumns()
 	{
 		return numColumns;
 	} 
 	
-	public Chart getChart()
+	public static Chart getChart()
 	{
 		return chart;
 	}
 	
-	public void setTitle(String title)
+	public static void setTitle(String title)
 	{
 		chart.setTitle(title);
 	}
 	
-	public void setTitleX(String xAchsis)
+	public static void setTitleX(String xAchsis)
 	{
 		chart.getXAxis().setAxisTitleText(xAchsis);
 	}
 	
-	public void setTitleY(String yAchsis)
+	public static void setTitleY(String yAchsis)
 	{
 		chart.getYAxis().setAxisTitleText(yAchsis);
 	}
