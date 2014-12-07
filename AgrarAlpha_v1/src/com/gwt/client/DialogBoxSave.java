@@ -17,105 +17,119 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-// only placeholder at the moment
+
+/*
+ This class is a DialogBox witch allows the user to enter a name. And save the selected options under that name.
+ */
 public class DialogBoxSave extends DialogBox {
 	public static Logger log = Logger.getLogger(DialogBoxSave.class.getName());
-     private TextBox tb;
-     private VerticalPanel base;
-     private HorizontalPanel btnPanel;
- 		private SaveServiceAsync saveSvc = GWT
-			.create(SaveService.class);
- 		private SelectionView selView;
- 		private ArrayList<String[]> data = new ArrayList<String[]>();
- 		
- 		
-     public DialogBoxSave(SelectionView selectionView, ArrayList<String[]> data){
-    	 this.data=data;
-    	 this.selView = selectionView;
-    	 setText("Save");
-    	  // Enable animation.
-         setAnimationEnabled(true);
-        
-         // Enable glass background.
-         setGlassEnabled(true);
-    	 base=new VerticalPanel();
-    	 btnPanel=new HorizontalPanel();
+	private TextBox tb;
+	private VerticalPanel base;
+	private HorizontalPanel btnPanel;
+	private SaveServiceAsync saveSvc = GWT.create(SaveService.class);
+	private SelectionView selView;
+	private ArrayList<String[]> data = new ArrayList<String[]>();
 
-    	 
-    	 tb=new TextBox();
-    	 tb.addKeyPressHandler(new KeyPressHandler() {
-    		  @Override
-    		  public void onKeyPress(KeyPressEvent event) {
-    		    TextBox sender = (TextBox) event.getSource();
+	/**
+	 * @param selectionView
+	 * @param data
+	 */
+	public DialogBoxSave(SelectionView selectionView, ArrayList<String[]> data) {
+		this.data = data;
+		this.selView = selectionView;
+		setText("Save");
+		// Enable animation.
+		setAnimationEnabled(true);
 
-    		    int keyCode = event.getNativeEvent().getKeyCode();
+		// Enable glass background.
+		setGlassEnabled(true);
+		base = new VerticalPanel();
+		btnPanel = new HorizontalPanel();
 
-    		    if (!(Character.isLetterOrDigit(event.getCharCode()))) {
-    		      sender.cancelKey();
-    		    }
-    		  }
-    		});
-    	 // Set the dialog box's caption.
+		tb = new TextBox();
+		// this event only allows the user to enter letter or numbers other
+		// signs get canceled
+		tb.addKeyPressHandler(new KeyPressHandler() {
+			@Override
+			public void onKeyPress(KeyPressEvent event) {
+				TextBox sender = (TextBox) event.getSource();
 
-       
+				int keyCode = event.getNativeEvent().getKeyCode();
 
-         // DialogBox is a SimplePanel, so you have to set its widget property to
-         // whatever you want its contents to be.
-         Button save = new Button("Save");
-         save.addClickHandler(new ClickHandler() {
-           public void onClick(ClickEvent event) {
-        	   log.info("BEFORE SAVE");
-        	   if(!searchForValue())
-        		   saveData();
-        	   else
-        		   new DialogBoxCreate("Name already exists!").show();
-             
-           }
-         });
-         
-         Button close = new Button("close");
-         close.addClickHandler(new ClickHandler() {
-           public void onClick(ClickEvent event) {
-             DialogBoxSave.this.hide();
-           }
-         });
-        btnPanel.add(save);
-        btnPanel.add(close);
+				if (!(Character.isLetterOrDigit(event.getCharCode()))) {
+					sender.cancelKey();
+				}
+			}
+		});
+		// Set the dialog box's caption.
 
-   base.add(tb);
-   base.add(btnPanel);
+		Button save = new Button("Save");
+		/**
+		 * if save button gets clicked, it will take the string from the textbox
+		 * and check if there already is an item with that name in the database.
+		 * If there is an error dialog pops up if there isnt the options will be
+		 * saved.
+		 **/
+		save.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				log.info("BEFORE SAVE");
+				if (!searchForValue()) //checks if there is already an entry with that name
+					saveData();
+				else
+					new DialogBoxCreate("Name already exists!").show();
 
-         setWidget(base);
-       }
-    	 
-     private void saveData(){
-    	  	
-			saveSvc.save(Integer.parseInt(selView.getYear()), selView.getCountry(), selView.getProduct(), selView.getType(),
-					selView.getPerCapita(), tb.getValue(), new AsyncCallback<Void>() {
-							public void onFailure(Throwable caught) {
-								// Show the RPC error message to the user
-								log.warning(caught.getMessage());
-							}
+			}
+		});
 
+		Button close = new Button("close");
+		close.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				DialogBoxSave.this.hide();
+			}
+		});
+		btnPanel.add(save);
+		btnPanel.add(close);
 
-							@Override
-							public void onSuccess(Void result) {
-								// TODO Auto-generated method stub
-								DialogBoxSave.this.hide();
-								log.info("SUCCESS!");
-							}
-			    });
-		
-     }
-     
-     private boolean searchForValue(){
-    	 String searchingVar = tb.getValue();
-    	 for(int i=0; i<data.size();i++){
-    		 if(searchingVar.equals(data.get(i)[6]))
-    			 return true;
-    	 }
-    	 return false;
-     }
+		base.add(tb);
+		base.add(btnPanel);
 
+		setWidget(base);
+	}
+
+	/**
+	 * saves the options selected in a database
+	 */
+	private void saveData() {
+
+		saveSvc.save(Integer.parseInt(selView.getYear()), selView.getCountry(),
+				selView.getProduct(), selView.getType(),
+				selView.getPerCapita(), tb.getValue(),
+				new AsyncCallback<Void>() {
+					public void onFailure(Throwable caught) {
+						// Show the RPC error message to the user
+						log.warning(caught.getMessage());
+					}
+
+					@Override
+					public void onSuccess(Void result) {
+						// TODO Auto-generated method stub
+						DialogBoxSave.this.hide();
+						log.info("SUCCESS!");
+					}
+				});
+
+	}
+
+	/**
+	 * @return boolean whether  a string is or isn't already in the database
+	 */
+	private boolean searchForValue() {
+		String searchingVar = tb.getValue();
+		for (int i = 0; i < data.size(); i++) {
+			if (searchingVar.equals(data.get(i)[6]))
+				return true;
+		}
+		return false;
+	}
 
 }
