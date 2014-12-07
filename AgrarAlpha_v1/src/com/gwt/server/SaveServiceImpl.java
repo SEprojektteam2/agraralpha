@@ -14,6 +14,11 @@ import java.util.logging.Logger;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.gwt.client.SaveService;
 
+/**
+ * Class to get saved Data from SQL Server
+ * @author Fabian Weber
+ *
+ */
 @SuppressWarnings("serial")
 public class SaveServiceImpl extends RemoteServiceServlet implements
 		SaveService {
@@ -55,14 +60,14 @@ public class SaveServiceImpl extends RemoteServiceServlet implements
 	public void save(int year, String country, String product, String type,
 			boolean perCapita, String name) throws IllegalArgumentException {
 		
-		// set date format
+		// Set date format
 		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy - HH:mm:ss");
 		
-		// set TimeZone
+		// Set TimeZone
 		dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+1"));;
 		Date date = new Date();
 		
-		// parse boolean perCapita to Integer 1 or 0 
+		// Parse boolean perCapita to Integer 1 or 0 
 		int capita = 0;
 		if(perCapita == true)
 			capita = 1;
@@ -70,10 +75,11 @@ public class SaveServiceImpl extends RemoteServiceServlet implements
 		Statement insertion;
 		try {
 			insertion = conn.createStatement();
-			// insert values into database
+			// Insert values into database
 			insertion.executeUpdate("INSERT INTO store (year,country,product,type,name,perCapita,date) VALUES ('" + String.valueOf(year) + "','" + country + "','" + product + "','" + type + "','" + name + "','" + capita + "','" + dateFormat.format(date) + "')");
 			log.info("Insertion succeeded!");
 		} catch (SQLException e1) {
+			//Log Exception
 			log.warning(e1.getMessage());
 		}
 		
@@ -83,24 +89,24 @@ public class SaveServiceImpl extends RemoteServiceServlet implements
 	 * @see com.gwt.client.SaveService#getSavedData()
 	 */
 	public ArrayList<String[]> getSavedData(){
-		// initialize ArrayList that will be returned
+		// Initialize ArrayList that will be returned
 		ArrayList<String[]> savedData = new ArrayList<String[]>();
 		
-		// set up query to get all the data in the SQL table
+		// Set up query to get all the data in the SQL table
 		String query = "SELECT * FROM store ORDER BY date";
 		Statement st = null;
 		try {
 			st = conn.createStatement();
 			
-			// execute the query, and get a java ResulSet
+			// Execute the query, and get a java ResulSet
 			ResultSet rs = st.executeQuery(query);
 							
-			// iterate through the java ResultSet						
+			// Iterate through the java ResultSet						
 			while (rs.next())
 			{
 				String[] resultTemp = new String[8];
 				
-				// add all values of the result set to a string array
+				// Add all values of the result set to a string array
 				resultTemp[0] = String.valueOf(rs.getInt("id"));
 				resultTemp[1] = rs.getString("year");
 				resultTemp[2] = rs.getString("country");
@@ -110,14 +116,15 @@ public class SaveServiceImpl extends RemoteServiceServlet implements
 				resultTemp[6] = rs.getString("name");
 				resultTemp[7] = rs.getString("date");
 				
-				// add the string-array to the ArrayList
+				// Add the string-array to the ArrayList
 				savedData.add(resultTemp);
 			}
 		} 
 		catch (SQLException e) {
+			// Log exception
 			log.warning(e.getMessage());
 		}
-		// return the ArrayList
+		// Return the ArrayList
 		return (savedData);
 	}
 

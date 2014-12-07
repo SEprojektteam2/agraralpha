@@ -9,10 +9,17 @@ import java.util.logging.Logger;
 import com.google.appengine.api.utils.SystemProperty;
 
 public class MySQLConnection {
+	// initialize instance variables
 	private String host, user, password, db, appengineSource;
 	Connection conn;
 	public static final Logger log = Logger.getLogger(MySQLConnection.class.getName());
+	
+	/**
+	 * Constructor. Sets up the connection parameters.
+	 * @author Fabian Weber
+	 */
 	public MySQLConnection(){
+		// set up parameters
 		this.host = "173.194.240.221";
 		this.user = "root";
 		this.password = "";
@@ -20,57 +27,71 @@ public class MySQLConnection {
 		this.appengineSource = "agraralphav2:agrar";
 	}
 	
+	/**
+	 * Connects to database.
+	 * @author Fabian Weber
+	 * @return 	<code>true</code> if the connection succeeded
+	 * 			<code>false</code> otherwise
+	 */
 	public boolean connect(){
 		try {
-		      String url;
-			if (SystemProperty.environment.value() ==
-		          SystemProperty.Environment.Value.Production) {
-		        // Load the class that provides the new "jdbc:google:mysql://" prefix.
+			String url;
+		    
+			// Checks if application is running on AppEngine or not and set up corresponding url
+			if (SystemProperty.environment.value() == SystemProperty.Environment.Value.Production) {
+		        // If application is running on AppEngine.
 		        Class.forName("com.mysql.jdbc.GoogleDriver");
 		        url = "jdbc:google:mysql://"+appengineSource+"/"+ db +"?user=" + user + "&charset=utf8";
-		        if(!password.equals("")){
+		        if(!password.equals(""))
 		        	url = url + "?password=" + password;
-		        }
-		      } else {
-		        // Local MySQL instance to use during development.
+		    	} 
+			else {
+		        // If application is not running on AppEngine
 		        Class.forName("com.mysql.jdbc.Driver");
 		        url = "jdbc:mysql://"+ host +":3306/"+ db +"?user=" + user +"&charset=utf8";
-		        // Alternatively, connect to a Google Cloud SQL instance using:
-		        // jdbc:mysql://ip-address-of-google-cloud-sql-instance:3306/guestbook?user=root
-		        if(!password.equals("")){
+		        if(!password.equals(""))
 		        	url = url + "?password=" + password;
 		        }
-		      }
-			  conn = DriverManager.getConnection(url);
-		      return true;
-		    } catch (Exception e) {
-		     log.warning(e.toString());
-		      return false;
-		    }
-	}
-	
-	public int executeUpdate(String statement){
-    	int success = 2;
-    	try {
-		PreparedStatement stmt = conn.prepareStatement(statement);
-		success = stmt.executeUpdate();
-		} catch (SQLException e) {
-			success = -1;
-			log.warning(e.toString());
+			// Get Connection
+			conn = DriverManager.getConnection(url);
+			
+			// Return true if success
+			return true;
+		   	
+		} catch (Exception e) {
+			// Log exception
+		    log.warning(e.getMessage());
+		    // Return false if connection did not succeed
+		    return false;
 		}
-		return success;
 	}
 	
+	
+	/**
+	 * Returns the SQL-Connection.
+	 * @author Fabian Weber
+	 * @return <code>Connection</code> 
+	 */
 	public Connection returnConnection(){
 		return conn;
 	}
 	
+	/**
+	 * Closes the Connection.
+	 * @author Fabian Weber
+	 * @return	<code>true</code> if connecton close succeeded.
+	 * 			<code>false</code> otherwise
+	 */
 	public boolean close(){
 		try {
+			// Close the connection
 			conn.close();
+			// Return true if closing the connection succeeded.
 			return true;
 		} catch (SQLException e) {
-			log.warning(e.toString());
+			// Log the exception
+			log.warning(e.getMessage());
+			// Return false if the connection did not succeed.
 			return false;
 		}
 	}
