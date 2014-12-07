@@ -17,7 +17,11 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-// only placeholder at the moment
+
+/** this class is a dialog witch allows the user to enter a name of a saved option
+ * if the name he enters exist in the database, createView will be generated with the saved options
+ */
+ 
 public class DialogBoxOpen extends DialogBox {
 	public static Logger log = Logger.getLogger(DialogBoxOpen.class.getName());
      private TextBox tb;
@@ -29,7 +33,11 @@ public class DialogBoxOpen extends DialogBox {
  	private MainView main;
  	
  	
-     public DialogBoxOpen(ArrayList<String[]> data,MainView main){
+     /**
+     * @param data
+     * @param main
+     */
+    public DialogBoxOpen(ArrayList<String[]> data,MainView main){
     	 this.main = main;
     	 this.savedData = data;
     	 setText("Open");
@@ -93,12 +101,15 @@ public class DialogBoxOpen extends DialogBox {
          
          btnPanel.add(open);
          btnPanel.add(close);
-   base.add(tb);
-   base.add(btnPanel);
+         base.add(tb);
+         base.add(btnPanel);
 
          setWidget(base);
        }
      
+     	/**
+     	 * @return boolean whether the name is found in database or not
+     	 */
      	private boolean searchForValue(){
 	    	 String searchingVar = tb.getValue();
 	    	 for(int i=0; i<savedData.size();i++){
@@ -108,7 +119,10 @@ public class DialogBoxOpen extends DialogBox {
 	    	 return false;
 	     }
     	 
-		 private String[] getData(){
+		 /**
+		 * @return the array with the saved options
+		 */
+		private String[] getData(){
 			 String searchingVar = tb.getValue();
 			 for(int i=0; i<savedData.size();i++){
 				 if(searchingVar.equals(savedData.get(i)[6]))
@@ -117,7 +131,11 @@ public class DialogBoxOpen extends DialogBox {
 		     return null;
 		 }
 		 
-		 private void updateView(final String[] data){
+		 /**
+		 * @param data
+		 * opens createView with the saved options
+		 */
+		private void updateView(final String[] data){
 			 
 			 
 			 highchartSvc.getData(data[2], data[3], data[4],

@@ -1,6 +1,5 @@
 package com.gwt.client;
 
-//package guiA.client;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -27,11 +26,16 @@ public class ExtendedMenuView extends Composite {
 			.create(SaveService.class);
 	public static Logger log = Logger.getLogger(ExtendedMenuView.class.getName());
 
+	/**
+	 * @param main
+	 * @param selectionView
+	 * This class generate the extended menu for the application
+	 */
 	public ExtendedMenuView(final MainView main, final SelectionView selectionView) {
 		initWidget(this.vPanel);
 		
 		this.main=main;
-		
+		//create the buttons and add styles and clickHandlers
 		openBtn = new Button("Open");
 		openBtn.addClickHandler(new openClickHandler());
 		openBtn.addStyleName("beautifulbutton");
@@ -49,7 +53,7 @@ public class ExtendedMenuView extends Composite {
 		
 		
 		
-
+        //get an arraylist with all stored data
 		saveSvc.getSavedData(new AsyncCallback<ArrayList<String[]>>() {
  			public void onFailure(Throwable caught) {
  				// Show the RPC error message to the user
@@ -72,6 +76,9 @@ public class ExtendedMenuView extends Composite {
 		
 	}
 	
+	/**
+	 *on click show the DialogBox "DialogBoxOpen"	
+	 */
 	private class openClickHandler implements ClickHandler{
 
 		@Override
@@ -82,6 +89,10 @@ public class ExtendedMenuView extends Composite {
 		
 	}
 	
+	/**
+	 * 
+	 * on click call the method from mainView to open the start page
+	 */
 	private class homeClickHandler implements ClickHandler{
 
 		@Override
@@ -91,6 +102,10 @@ public class ExtendedMenuView extends Composite {
 		}
 		
 	}
+	/**
+	 *on click show the DialogBox "DialogBoxSave"
+	 *
+	 */
 	private class saveClickHandler implements ClickHandler{
 
 		@Override
