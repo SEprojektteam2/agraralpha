@@ -21,10 +21,10 @@ import com.gwt.client.SaveService;
  *
  */
 @SuppressWarnings("serial")
-public class SaveServiceImpl extends RemoteServiceServlet implements
+public class SaveServiceImpl_Test extends RemoteServiceServlet implements
 		SaveService {
 	// add Logger to log exceptions
-	public static final Logger log = Logger.getLogger(SaveServiceImpl.class
+	public static final Logger log = Logger.getLogger(SaveServiceImpl_Test.class
 			.getName());
 	// add Connection to use in functions
 	private Connection conn;
@@ -35,7 +35,7 @@ public class SaveServiceImpl extends RemoteServiceServlet implements
 	 * @author Fabian Weber
 	 * 
 	 */
-	public SaveServiceImpl() {
+	public SaveServiceImpl_Test() {
 		connectToDatabase();
 	}
 
@@ -44,7 +44,7 @@ public class SaveServiceImpl extends RemoteServiceServlet implements
 	 * 
 	 * @author Fabian Weber
 	 */
-	private boolean connectToDatabase() {
+	public boolean connectToDatabase() {
 		MySQLConnection database = new MySQLConnection();
 		if (database.connect()) {
 			// set database connection
