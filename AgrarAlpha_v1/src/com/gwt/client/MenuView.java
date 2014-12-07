@@ -1,6 +1,5 @@
 package com.gwt.client;
 
-//package guiA.client;
 
 import java.util.ArrayList;
 
@@ -12,6 +11,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+//the menu of the starting page
 public class MenuView extends Composite {
 
 private VerticalPanel vPanel = new VerticalPanel();
@@ -21,10 +21,15 @@ private VerticalPanel vPanel = new VerticalPanel();
     private DialogBoxOpen openDB;
     private SaveServiceAsync saveSvc = GWT
 			.create(SaveService.class);
-	/*the menu on the main page to navigate through application*/
+	/**
+	 * @param main
+	 * 
+	 * menu on the main page to navigate through application
+	 */
 	public MenuView(final MainView main) {
 		initWidget(this.vPanel);
 		this.main=main;
+		//add buttons, style and clickhandler
 		openBtn = new Button("Open");
 		openBtn.addClickHandler(new openClickHandler());
 		openBtn.addStyleName("beautifulbutton");
@@ -33,6 +38,7 @@ private VerticalPanel vPanel = new VerticalPanel();
 	    homeBtn.addClickHandler(new homeClickHandler());
 	    homeBtn.addStyleName("beautifulbutton");
 	    
+	    //get the ArrayList with data from the saved options
 	    saveSvc.getSavedData(new AsyncCallback<ArrayList<String[]>>() {
  			public void onFailure(Throwable caught) {
  				// Show the RPC error message to the user
@@ -40,7 +46,7 @@ private VerticalPanel vPanel = new VerticalPanel();
  			}
 
  			public void onSuccess(ArrayList<String[]> resultTemp) {
-
+                //only initialize DialogBox if the service was successful and the show the open button
  				openDB=new DialogBoxOpen(resultTemp, main);
  				vPanel.add(openBtn);
  			}
@@ -50,6 +56,9 @@ private VerticalPanel vPanel = new VerticalPanel();
 		this.vPanel.add(openBtn);
 		}
 	
+	/**
+	 *on click call the method from mainView to open the start page  
+	 */
 	private class homeClickHandler implements ClickHandler{
 
 		@Override
@@ -58,6 +67,9 @@ private VerticalPanel vPanel = new VerticalPanel();
 			}
 		
 	}
+	/**
+	 *on click show the DialogBox "DialogBoxOpen"
+	 */
 	private class openClickHandler implements ClickHandler{
 
 		@Override
