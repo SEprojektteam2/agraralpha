@@ -12,6 +12,10 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+/*
+ * main view is the home page where the user can choose the options to create
+ * the graph(it uses selectionview for this purpose). Or can open saved options
+ */
 public class MainView extends Composite {
 
 	private HorizontalPanel rootPanel = new HorizontalPanel();
@@ -20,9 +24,9 @@ public class MainView extends Composite {
 	private MenuView menu;
 	private ExtendedMenuView emenu;
 
-	/*
-	 * main view is the home page where the user can choose the options to create
-	 * the graph. Or can open saved options
+	
+	/**
+	 * 
 	 */
 	public MainView() {
 		initWidget(this.rootPanel);
@@ -46,27 +50,9 @@ public class MainView extends Composite {
 
 	}
 
-	/* clears the panel and draw the open view */
-	/*
-	 * public void openOpenView() { rootPanel.clear(); contentPanel.clear();
-	 * ExtendedMenuView menu = new ExtendedMenuView(this); rootPanel.add(menu);
-	 * 
-	 * //to be created appropriatly from database VisualizationManager VisMan =
-	 * null;
-	 * 
-	 * CreateView cView= new CreateView(visMan);
-	 * 
-	 * OpenView oView = new OpenView(); contentPanel.add(oView);
-	 * rootPanel.add(contentPanel);
-	 * 
-	 * //create openView
-	 * 
-	 * }
-	 */
-
-	/* clears the panel and draw the home view */
-	public void openHomeView() {
-		//selView = new SelectionView(this);
+	/* clears the panel and add the basic menu  and the selectionView*/
+	
+		public void openHomeView() {
 		rootPanel.clear();
 		contentPanel.clear();
 		rootPanel.add(menu);
@@ -77,7 +63,15 @@ public class MainView extends Composite {
 		contentPanel.add(selView);
 		rootPanel.add(contentPanel);
 	}
-
+	
+	
+	/**
+	 * @param b
+	 * @param a
+	 * @param year
+	 * clears the panel and add the extended menu  and the createView
+	   CreateView needs the data to (Arraylist) to generate the charts
+	 */
 	public void openCreateView(boolean b, ArrayList<String[]> a, String year) {
 		rootPanel.clear();
 		contentPanel.clear();
@@ -87,15 +81,4 @@ public class MainView extends Composite {
 		contentPanel.add(cView);
 		rootPanel.add(contentPanel);
 	}
-	/*
-	public void openSaveView() {
-		rootPanel.clear();
-		contentPanel.clear();
-		rootPanel.add(emenu);
-
-		SaveView saveView = new SaveView();
-		contentPanel.add(saveView);
-		rootPanel.add(contentPanel);
 	}
-*/
-}
