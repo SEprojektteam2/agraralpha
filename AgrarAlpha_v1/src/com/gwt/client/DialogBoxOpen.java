@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -31,6 +32,7 @@ public class DialogBoxOpen extends DialogBox {
  			.create(HighchartService.class);
  	private ArrayList<String[]> savedData = new ArrayList<String[]>();
  	private MainView main;
+ 	private Label label;
  	
  	
      /**
@@ -40,7 +42,6 @@ public class DialogBoxOpen extends DialogBox {
     public DialogBoxOpen(ArrayList<String[]> data,MainView main){
     	 this.main = main;
     	 this.savedData = data;
-    	 setText("Open");
     	 // Enable animation.
          setAnimationEnabled(true);
 
@@ -50,7 +51,7 @@ public class DialogBoxOpen extends DialogBox {
          base=new VerticalPanel();
     	 btnPanel=new HorizontalPanel();
 
-    	 
+    	 label=new Label("Enter the name you saved as:");
     	 tb=new TextBox();
     	 tb.addKeyPressHandler(new KeyPressHandler() {
     		  @Override
@@ -101,6 +102,9 @@ public class DialogBoxOpen extends DialogBox {
          
          btnPanel.add(open);
          btnPanel.add(close);
+         
+         base.setPixelSize(300, 300);
+         base.add(label);
          base.add(tb);
          base.add(btnPanel);
 

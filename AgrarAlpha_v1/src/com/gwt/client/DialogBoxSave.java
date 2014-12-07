@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -24,6 +25,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class DialogBoxSave extends DialogBox {
 	public static Logger log = Logger.getLogger(DialogBoxSave.class.getName());
 	private TextBox tb;
+	private Label label;
 	private VerticalPanel base;
 	private HorizontalPanel btnPanel;
 	private SaveServiceAsync saveSvc = GWT.create(SaveService.class);
@@ -37,13 +39,17 @@ public class DialogBoxSave extends DialogBox {
 	public DialogBoxSave(SelectionView selectionView, ArrayList<String[]> data) {
 		this.data = data;
 		this.selView = selectionView;
-		setText("Save");
+
+		
 		// Enable animation.
 		setAnimationEnabled(true);
 
 		// Enable glass background.
 		setGlassEnabled(true);
+		
 		base = new VerticalPanel();
+		base.setPixelSize(300,300);
+		label = new Label("Enter a name to save as:");
 		btnPanel = new HorizontalPanel();
 
 		tb = new TextBox();
@@ -63,7 +69,7 @@ public class DialogBoxSave extends DialogBox {
 		});
 		// Set the dialog box's caption.
 
-		Button save = new Button("Save");
+		Button save = new Button("Save As");
 		/**
 		 * if save button gets clicked, it will take the string from the textbox
 		 * and check if there already is an item with that name in the database.
@@ -89,7 +95,7 @@ public class DialogBoxSave extends DialogBox {
 		});
 		btnPanel.add(save);
 		btnPanel.add(close);
-
+        base.add(label);
 		base.add(tb);
 		base.add(btnPanel);
 
