@@ -52,6 +52,7 @@ public class CreateView extends Composite{
 	private SliderBar slider = new SliderBar(1990, 2011);
 	public static final Logger log = Logger.getLogger(CreateView.class.getName());
 	final VisualizationLineChart vLineChart = new VisualizationLineChart();
+	VisualizationBarChart vBarChart;
 //private VisualizationLineChart vLineChart;
 
 	/* This class present the view the user has after he clicked the create button on mainView. it contains the graphics the user wants to see
@@ -133,6 +134,7 @@ public class CreateView extends Composite{
 			
 			
 			addLineChart();
+			addBarChart();
 			
 			
 			
@@ -273,7 +275,7 @@ public class CreateView extends Composite{
 						table.setValue(y, 0, "SS");
 						table.setValue(y, 1, value);
 					}
-					else if(dataArray.get(i)[1].equalsIgnoreCase("Côte d'Ivoire")){
+					else if(dataArray.get(i)[1].equalsIgnoreCase("Cï¿½te d'Ivoire")){
 						table.setValue(y, 0, "CIV");
 						table.setValue(y, 1, value);
 					}
@@ -340,6 +342,15 @@ public class CreateView extends Composite{
 					Chart chart = vLineChart.getLineChart(dataArray, rpcPoints, resultReg);
 					interpolationPanel.add(chart.asWidget());						
 				}
-	});
+		});
 	}
+	
+	private void addBarChart()
+	{
+		vBarChart = new VisualizationBarChart(dataArray,year);
+		vBarChart.draw(year, 10);
+		histogramPanel.add(vBarChart.getChart());
+		
+	}
+	
 }

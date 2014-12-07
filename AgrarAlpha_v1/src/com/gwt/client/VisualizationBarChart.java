@@ -11,10 +11,10 @@ public class VisualizationBarChart{
 	final static int COLUMNSMIN = 2;
 	final static int COLUMNSMAX = 20;
 	
-	public static Chart chart;
-	public static ArrayList<ArrayList<Double>> data;
-	public static int numColumns = COLUMNSDEFAULT;
-	public static int yearIndex;
+	private Chart chart;
+	private ArrayList<ArrayList<Double>> data;
+	private int numColumns = COLUMNSDEFAULT;
+	private int yearIndex;
 	
 	public VisualizationBarChart(ArrayList<String[]> resultData, String year)
 	{
@@ -25,7 +25,7 @@ public class VisualizationBarChart{
 		convertData(resultData);
 	}
 	
-	public static Chart draw(String year, int columns)
+	public Chart draw(String year, int columns)
 	{
 		//if colums is not in range, set to default --> 10
 		if (columns < 2 || columns > 20)
@@ -68,7 +68,7 @@ public class VisualizationBarChart{
 	
 	//resultData has the form: "year" "product/producttype/country" "double"
 	//for Histogramm I am not interested in the String under Index 1!
-	public static void convertData(ArrayList<String[]> resultData)
+	private void convertData(ArrayList<String[]> resultData)
 	{
 		data = new ArrayList<ArrayList<Double>>();
 		for(String[] datapart : resultData)
@@ -85,7 +85,7 @@ public class VisualizationBarChart{
 		
 	}
 	
-	public static int count(double min, double max)
+	private int count(double min, double max)
 	{
 		int count = 0;
 		
@@ -101,7 +101,7 @@ public class VisualizationBarChart{
 		
 	}
 	
-	public static double findMin()
+	private double findMin()
 	{
 		double curMin = data.get(yearIndex).get(0);
 		
@@ -116,7 +116,7 @@ public class VisualizationBarChart{
 		return curMin;
 	}
 	
-	public static double findMax()
+	private double findMax()
 	{
 		double curMax = data.get(yearIndex).get(0);
 		
@@ -131,18 +131,23 @@ public class VisualizationBarChart{
 		return curMax;
 	}
 	
-	public static void updateData()
+	private void updateData()
 	{
-		
+		//TODO
 	}
 	
-	public static void setYearIndex(int index)
+	private void setYearIndex(int index)
 	{
 		yearIndex = index;
 	}
 	
+	public void setYearIndex(String year)
+	{
+		setYearIndex(calculateYearIndex(year));
+	}
 	
-	public static int calculateYearIndex(String year)
+	
+	private int calculateYearIndex(String year)
 	{
 		
 		int index = -1;
@@ -158,26 +163,19 @@ public class VisualizationBarChart{
 		return index;
 	}
 	
-	public static void setNumColumns(int number)
+	public void setNumColumns(int number)
 	{
 		numColumns = number;
 		updateData();
 	}
 	
-	public static int getNumColumns()
+	public int getNumColumns()
 	{
 		return numColumns;
-	}
+	} 
 	
-	/*
-	//beispiel
-	Chart chart = new Chart()
-   	.setType(Series.Type.SPLINE)
-   	.setChartTitleText("Lawn Tunnels")
-   	.setMarginRight(10);
-   	Series series = chart.createSeries()
-   	.setName("Moles per Yard")
-   	.setPoints(new Number[] { 163, 203, 276, 408, 547, 729, 628 });
-	chart.addSeries(series);
-	 */ 
+	public Chart getChart()
+	{
+		return chart;
+	}
 }
