@@ -28,7 +28,7 @@ public class ImportHandlerThread implements Runnable {
 	}
 
 	/*
-	 * (non-Javadoc)
+	 * (non-Javadoc) Run the Thread
 	 * 
 	 * @see java.lang.Runnable#run()
 	 */
@@ -49,11 +49,11 @@ public class ImportHandlerThread implements Runnable {
 				// Check if it is the head row of the csv File
 				if (!insertion[y][2].equals("AreaCode")) {
 					try {
-						// Convert the value to a float 
+						// Convert the value to a float
 						Float value = new Float(0);
 						if (!insertion[y][10].equals(""))
 							value = Float.parseFloat(insertion[y][10]);
-						
+
 						// Add the values to the statement
 						stmt.setString(1, insertion[y][0]);
 						stmt.setString(2, insertion[y][1]);
@@ -71,7 +71,7 @@ public class ImportHandlerThread implements Runnable {
 						// Add statement to batch
 						stmt.addBatch();
 					} catch (SQLException e) {
-						// Log the error 
+						// Log the exception
 						log.warning(e.getMessage());
 					}
 				}
@@ -80,20 +80,17 @@ public class ImportHandlerThread implements Runnable {
 				// Execute MySQL insertion
 				stmt.executeBatch();
 
-				// delete header row with Row-Descriptions
-//				String query = "DELETE FROM records WHERE domainCode = 'Domain Code' AND domain = 'Domain' AND areaCode = 'AreaCode' AND areaName = 'AreaName' AND elementCode = 'ElementCode' AND elementName = 'ElementName' AND itemCode = 'ItemCode' AND itemName = 'ItemName' AND year = 'Year' AND unit = 'Unit' AND value = 'Value' AND flag = 'Flag' AND flagD = 'FlagD'";
-//				PreparedStatement preparedStmt = conn.prepareStatement(query);
-//				preparedStmt.execute();
-
 			} catch (SQLException e) {
-				log.warning(e.toString());
+				// Log the exception
+				log.warning(e.getMessage());
 			}
 
-			// close mysql connection
+			// Close MySQL connection
 			conn.close();
 
 		} catch (SQLException e1) {
-			log.warning(e1.toString());
+			// Log the exception
+			log.warning(e1.getMessage());
 		}
 	}
 }
