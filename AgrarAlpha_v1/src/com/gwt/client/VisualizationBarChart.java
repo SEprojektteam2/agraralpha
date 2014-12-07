@@ -11,10 +11,10 @@ public class VisualizationBarChart{
 	final static int COLUMNSMIN = 2;
 	final static int COLUMNSMAX = 20;
 	
-	private Chart chart;
-	private Number[][] data;
-	private int numColumns;
-	private int yearIndex;
+	public static Chart chart;
+	public static ArrayList<ArrayList<Double>> data;
+	public static int numColumns = COLUMNSDEFAULT;
+	public static int yearIndex;
 	
 	public VisualizationBarChart(ArrayList<String[]> resultData, String year)
 	{
@@ -22,12 +22,10 @@ public class VisualizationBarChart{
 		chart.setType(Series.Type.COLUMN);
 		
 		yearIndex = calculateYearIndex(year);
-		prepareData(resultData);
-		
-		numColumns = 10;
+		convertData(resultData);
 	}
 	
-	public Chart draw(String year, int columns)
+	public static Chart draw(String year, int columns)
 	{
 		//if colums is not in range, set to default --> 10
 		if (columns < 2 || columns > 20)
@@ -35,26 +33,116 @@ public class VisualizationBarChart{
 			columns = 10;
 		}
 		
+		double min = findMin();
+		double max = findMax();
+		
+		double diff = (max-min)/columns;
+		String[] cols = new String[columns+1];
+		for(int i = 0; i < columns; i++)
+		{
+			cols[i] = Double.toString(min+diff*(i));
+		}
+		cols[columns] = Double.toString(max);
+		
+		
+		chart.getXAxis()
+		//auf diese Art können nur eine bestimmte anzahl von collonen hinzugefuegt werden
+		//andere moeglichkeit um es allgemeiner zu machen?
+        .setCategories(cols)
+         .setTickInterval(1);
+		
+		Number[] points = new Number[columns];
+		
+		for(int i = 0; i < cols.length-1; i++)
+		{
+			points[i] = count(Double.parseDouble(cols[i]), Double.parseDouble(cols[i+1]));
+		}
+		
+		chart.addSeries(chart.createSeries()  
+	   			.setType(Series.Type.COLUMN)
+	   			.setPoints(points)  
+	   		);
+		
 		return chart;
 	}
 	
-	private void prepareData(ArrayList<String[]> resultData)
+	//resultData has the form: "year" "product/producttype/country" "double"
+	//for Histogramm I am not interested in the String under Index 1!
+	public static void convertData(ArrayList<String[]> resultData)
 	{
-		
+		data = new ArrayList<ArrayList<Double>>();
+		for(String[] datapart : resultData)
+		{
+			
+			if(data.get(calculateYearIndex(datapart[0])).equals(null))
+				data.add(calculateYearIndex(datapart[0]), new ArrayList<Double>());
+			
+			data.get(calculateYearIndex(datapart[0])).add(Double.parseDouble(datapart[2]));
+		}
+
+		//TODO: Cound occourences, make datastructure
+		//TODO: add all points to a current series, which will be added to graph!
 		
 	}
 	
-	private void updateData()
+	public static int count(double min, double max)
+	{
+		int count = 0;
+		
+		for(double num : data.get(yearIndex))
+		{
+			if(num < max || num >= min)
+			{
+				count++;
+			}
+		}
+		
+		return count;
+		
+	}
+	
+	public static double findMin()
+	{
+		double curMin = data.get(yearIndex).get(0);
+		
+		for(int i = 1; i < data.get(yearIndex).size(); i++)
+		{
+			if(curMin > data.get(yearIndex).get(i))
+			{
+				curMin = data.get(yearIndex).get(i);
+			}
+		}
+		
+		return curMin;
+	}
+	
+	public static double findMax()
+	{
+		double curMax = data.get(yearIndex).get(0);
+		
+		for(int i = 1; i < data.get(yearIndex).size(); i++)
+		{
+			if(curMax < data.get(yearIndex).get(i))
+			{
+				curMax = data.get(yearIndex).get(i);
+			}
+		}
+		
+		return curMax;
+	}
+	
+	public static void updateData()
 	{
 		
 	}
 	
-	private Number[] getDataForYear(String year)
+	public static void setYearIndex(int index)
 	{
-		return data[calculateYearIndex(year)];
+		yearIndex = index;
 	}
 	
-	private int calculateYearIndex(String year)
+	
+	public static int calculateYearIndex(String year)
 	{
 		
 		int index = -1;
@@ -70,13 +158,13 @@ public class VisualizationBarChart{
 		return index;
 	}
 	
-	private void setNumColumns(int number)
+	public static void setNumColumns(int number)
 	{
 		numColumns = number;
 		updateData();
 	}
 	
-	int getNumColumns()
+	public static int getNumColumns()
 	{
 		return numColumns;
 	}
