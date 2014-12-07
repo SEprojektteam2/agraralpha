@@ -28,11 +28,11 @@ public class MainView extends Composite {
 		initWidget(this.rootPanel);
 		
 
-		selView = new SelectionView(this);
-		selView.addStyleName("selView");
+		this.selView = new SelectionView(this);
+		this.selView.addStyleName("selView");
 		
 		
-		MenuView menu = new MenuView(this);
+		this.menu = new MenuView(this);
 		menu.addStyleName("menu");
 		rootPanel.add(menu);
 		emenu = new ExtendedMenuView(this, selView);
@@ -66,11 +66,12 @@ public class MainView extends Composite {
 
 	/* clears the panel and draw the home view */
 	public void openHomeView() {
+		//selView = new SelectionView(this);
 		rootPanel.clear();
 		contentPanel.clear();
 		rootPanel.add(menu);
 
-		selView = new SelectionView(this);
+		
 
 		contentPanel = new VerticalPanel();
 		contentPanel.add(selView);

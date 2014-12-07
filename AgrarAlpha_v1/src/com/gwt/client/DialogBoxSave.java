@@ -26,7 +26,11 @@ public class DialogBoxSave extends DialogBox {
  		private SaveServiceAsync saveSvc = GWT
 			.create(SaveService.class);
  		private SelectionView selView;
-     public DialogBoxSave(SelectionView selectionView){
+ 		private ArrayList<String[]> data = new ArrayList<String[]>();
+ 		
+ 		
+     public DialogBoxSave(SelectionView selectionView, ArrayList<String[]> data){
+    	 this.data=data;
     	 this.selView = selectionView;
     	 setText("Save");
     	  // Enable animation.
@@ -61,7 +65,10 @@ public class DialogBoxSave extends DialogBox {
          save.addClickHandler(new ClickHandler() {
            public void onClick(ClickEvent event) {
         	   log.info("BEFORE SAVE");
-        	   saveData();
+        	   if(!searchForValue())
+        		   saveData();
+        	   else
+        		   new DialogBoxCreate("Name already exists!").show();
              
            }
          });
@@ -99,6 +106,15 @@ public class DialogBoxSave extends DialogBox {
 							}
 			    });
 		
+     }
+     
+     private boolean searchForValue(){
+    	 String searchingVar = tb.getValue();
+    	 for(int i=0; i<data.size();i++){
+    		 if(searchingVar.equals(data.get(i)[6]))
+    			 return true;
+    	 }
+    	 return false;
      }
 
 

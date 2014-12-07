@@ -2,8 +2,12 @@ package com.gwt.client;
 
 //package guiA.client;
 
+import java.util.ArrayList;
+
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -15,8 +19,10 @@ private VerticalPanel vPanel = new VerticalPanel();
     private MainView main;
 	private Button homeBtn;
     private DialogBoxOpen openDB;
+    private SaveServiceAsync saveSvc = GWT
+			.create(SaveService.class);
 	/*the menu on the main page to navigate through application*/
-	public MenuView(MainView main) {
+	public MenuView(final MainView main) {
 		initWidget(this.vPanel);
 		this.main=main;
 		openBtn = new Button("Open");
@@ -27,7 +33,18 @@ private VerticalPanel vPanel = new VerticalPanel();
 	    homeBtn.addClickHandler(new homeClickHandler());
 	    homeBtn.addStyleName("beautifulbutton");
 	    
-	    openDB=new DialogBoxOpen();
+	    saveSvc.getSavedData(new AsyncCallback<ArrayList<String[]>>() {
+ 			public void onFailure(Throwable caught) {
+ 				// Show the RPC error message to the user
+ 
+ 			}
+
+ 			public void onSuccess(ArrayList<String[]> resultTemp) {
+
+ 				openDB=new DialogBoxOpen(resultTemp, main);
+ 				vPanel.add(openBtn);
+ 			}
+ 		});
 		
 		this.vPanel.add(homeBtn);
 		this.vPanel.add(openBtn);

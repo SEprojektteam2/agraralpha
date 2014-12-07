@@ -3,9 +3,13 @@ package com.gwt.client;
 //package guiA.client;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Logger;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -19,10 +23,11 @@ public class ExtendedMenuView extends Composite {
 	private MainView main;
 	private DialogBoxOpen openDB;
 	private DialogBoxSave saveDB;
+	private SaveServiceAsync saveSvc = GWT
+			.create(SaveService.class);
+	public static Logger log = Logger.getLogger(ExtendedMenuView.class.getName());
 
-	
-
-	public ExtendedMenuView(MainView main, SelectionView selectionView) {
+	public ExtendedMenuView(final MainView main, final SelectionView selectionView) {
 		initWidget(this.vPanel);
 		
 		this.main=main;
@@ -42,13 +47,27 @@ public class ExtendedMenuView extends Composite {
 		homeBtn.addClickHandler(new homeClickHandler());
 		homeBtn.addStyleName("beautifulbutton");
 		
-		openDB=new DialogBoxOpen();
-		saveDB=new DialogBoxSave(selectionView);
-
 		
+		
+
+		saveSvc.getSavedData(new AsyncCallback<ArrayList<String[]>>() {
+ 			public void onFailure(Throwable caught) {
+ 				// Show the RPC error message to the user
+ 				log.warning("Error get ElementNames!");
+ 			}
+
+ 			public void onSuccess(ArrayList<String[]> resultTemp) {
+ 				log.info("success");
+ 				openDB=new DialogBoxOpen(resultTemp, main);
+ 				vPanel.add(openBtn);
+ 				
+ 				saveDB=new DialogBoxSave(selectionView, resultTemp);
+ 				vPanel.add(saveBtn);
+ 			}
+ 		});
 		this.vPanel.add(homeBtn);
-		this.vPanel.add(openBtn);
-		this.vPanel.add(saveBtn);
+		
+	
 		
 		
 	}

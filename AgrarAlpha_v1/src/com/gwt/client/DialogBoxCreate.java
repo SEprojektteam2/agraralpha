@@ -7,9 +7,9 @@ import com.google.gwt.user.client.ui.DialogBox;
 
 class DialogBoxCreate extends DialogBox {
 
-    public DialogBoxCreate() {
+    public DialogBoxCreate(String message) {
       // Set the dialog box's caption.
-      setText("Invalid selection");
+      setText(message);
 
       // Enable animation.
       setAnimationEnabled(true);
