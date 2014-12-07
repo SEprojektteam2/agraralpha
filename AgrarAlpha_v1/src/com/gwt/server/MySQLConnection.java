@@ -2,12 +2,16 @@ package com.gwt.server;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
 import com.google.appengine.api.utils.SystemProperty;
 
+/**
+ * Class to easy handle MySQL Connections. Provides functions to 
+ * connect to our Cloud-SQL instance and use it in other classes.
+ * @author Fabian Weber
+ */
 public class MySQLConnection {
 	// initialize instance variables
 	private String host, user, password, db, appengineSource;
