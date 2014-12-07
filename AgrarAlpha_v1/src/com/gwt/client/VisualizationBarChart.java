@@ -33,6 +33,8 @@ public class VisualizationBarChart{
 			columns = 10;
 		}
 		
+		setYearIndex(year);
+		
 		double min = findMin();
 		double max = findMax();
 		

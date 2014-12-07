@@ -349,8 +349,19 @@ public class CreateView extends Composite{
 	{
 		vBarChart = new VisualizationBarChart(dataArray,year);
 		vBarChart.draw(year, 10);
+		
+		histogramPanel.add(slider);
 		histogramPanel.add(vBarChart.getChart());
 		
 	}
 	
+	public void createBarChartFromSlider(){
+		int cols = vBarChart.getNumColumns();
+		histogramPanel.remove(2);
+		
+		year = Integer.toString((int) slider.getCurrentValue());
+		
+		vBarChart.draw(year, cols);
+		histogramPanel.add(vBarChart.getChart());
+	}
 }
