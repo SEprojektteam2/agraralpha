@@ -134,22 +134,6 @@ public class CreateView extends Composite{
 			
 			
 			addLineChart();
-			addBarChart();
-			
-			
-			
-			
-			
-	
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			
 			;
@@ -172,6 +156,8 @@ public class CreateView extends Composite{
 		
 		//mapPanel.add(vMap.createChart());
 		//vMap.createChart(mapPanel);
+		
+		addBarChart();
 		
 		
 		mapPanel.add(new SourceView()); // adding a verticalPanel with all source to the mapPanel
