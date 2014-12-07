@@ -1,7 +1,5 @@
 package com.gwt.client;
 
-//package guiA.client;
-
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -41,7 +39,6 @@ public class SelectionView extends Composite implements Serializable {
 	private Label test3;
 	private Label test4;
 
-
 	private CheckBox perCapitaCB;
 
 	private ListBox yearLB;
@@ -52,9 +49,6 @@ public class SelectionView extends Composite implements Serializable {
 	private ListBox typeLB;
 
 	private Button createBtn;
-	private Label informationL; // will appear if world is selected and inform
-								// the user that he can only choose a product or
-								// a producttype but not both
 
 	private MainView main;
 
@@ -67,18 +61,16 @@ public class SelectionView extends Composite implements Serializable {
 	private HighchartServiceAsync highchartSvc = GWT
 			.create(HighchartService.class);
 
-	/*
-	 * This class is drawing the options, the user can choose from. The
-	 * RootPanel is a FlexTable (Table with flexible size)
+	/**
+	 * @param main
+	 *            This class is drawing the options, the user can choose from.
+	 *            The RootPanel is a FlexTable (Table with flexible size)
 	 */
 	public SelectionView(MainView main) {
 
 		initWidget(this.fTable);
 		this.main = main;
 
-		informationL = new Label("placeholder"); // informs the user that he can
-													// only select a product or
-													// a producttyp but not both
 		yearLabel = new Label("Year");
 		countryLabel = new Label("Country");
 
@@ -88,9 +80,8 @@ public class SelectionView extends Composite implements Serializable {
 		yearLB = new ListBox();
 		yearLB.addItem(" "); // Adding blank option
 
-		
-		perCapitaCB=new CheckBox("Per capita");
-		
+		perCapitaCB = new CheckBox("Per capita");
+
 		/* fills listbox with years */
 		String year = null;
 		for (int i = 1990; i <= lastyear; i++) // i is the first year user can
@@ -102,6 +93,7 @@ public class SelectionView extends Composite implements Serializable {
 
 		countryLB = new ListBox();
 		countryLB.addChangeHandler(new countryLBChangeHandler());
+		// get an arraylist with all countries
 		dataManagerSvc.getCountries(new AsyncCallback<ArrayList<String>>() {
 			public void onFailure(Throwable caught) {
 				// Show the RPC error message to the user
@@ -117,6 +109,7 @@ public class SelectionView extends Composite implements Serializable {
 		});
 
 		productLB = new ListBox();
+		// get an arraylist with all products
 		dataManagerSvc.getProducts(new AsyncCallback<ArrayList<String>>() {
 			public void onFailure(Throwable caught) {
 				// Show the RPC error message to the user
@@ -133,7 +126,8 @@ public class SelectionView extends Composite implements Serializable {
 		productLB.addChangeHandler(new listBoxChangeHandler(productLB));
 
 		typeLB = new ListBox();
-		
+
+		// get an Arraylist with all types
 		dataManagerSvc.getElementNames(new AsyncCallback<ArrayList<String>>() {
 			public void onFailure(Throwable caught) {
 				// Show the RPC error message to the user
@@ -147,14 +141,12 @@ public class SelectionView extends Composite implements Serializable {
 				}
 			}
 		});
-		
-		
-		/*typeLB.addChangeHandler(new listBoxChangeHandler(typeLB, typeCB));*/
+
+		/* typeLB.addChangeHandler(new listBoxChangeHandler(typeLB, typeCB)); */
 
 		createBtn = new Button("Create");
 		createBtn.addClickHandler(new createClickHandler());
 		createBtn.addStyleName("beautifulbutton");
-	
 
 		/* Adding every component to the FlexTable */
 		fTable.setWidget(0, 0, yearLabel);
@@ -175,34 +167,45 @@ public class SelectionView extends Composite implements Serializable {
 		fTable.setWidget(5, 0, createBtn);
 
 	}
-	
-	public boolean isValid(){
-		boolean b=true;
-		if(countryLB.isItemSelected(0)){
-			if(productLB.isItemSelected(0)||typeLB.isItemSelected(0) ){
-				b=false;
+
+	/**
+	 * @return boolean whether selected options are valid or not
+	 */
+	public boolean isValid() {
+		boolean b = true;
+		if (countryLB.isItemSelected(0)) {
+			if (productLB.isItemSelected(0) || typeLB.isItemSelected(0)) {
+				b = false;
 			}
-			
-		}
-		else{
-			if(productLB.isItemSelected(0) && typeLB.isItemSelected(0)){
-				b=false;
+
+		} else {
+			if (productLB.isItemSelected(0) && typeLB.isItemSelected(0)) {
+				b = false;
 			}
 		}
 		return b;
 	}
 
+	/**
+	 * @return selected year as a string
+	 */
 	public String getYear() {
 
 		String s = yearLB.getValue(yearLB.getSelectedIndex());
 		return s;
 	}
 
+	/**
+	 * @return selected country as a string
+	 */
 	public String getCountry() {
 		String s = countryLB.getValue(countryLB.getSelectedIndex());
 		return s;
 	}
 
+	/**
+	 * @return selected product as a string
+	 */
 	public String getProduct() {
 		String s;
 		if (!productLB.isItemSelected(0)) // checks if checkbox is selected
@@ -212,6 +215,9 @@ public class SelectionView extends Composite implements Serializable {
 		return s;
 	}
 
+	/**
+	 * @return selected type as a string
+	 */
 	public String getType() {
 		String s;
 		if (!typeLB.isItemSelected(0)) // checks if checkbox is selected
@@ -220,7 +226,7 @@ public class SelectionView extends Composite implements Serializable {
 			s = "null";
 		return s;
 	}
-	
+
 	public boolean getPerCapita() {
 		return perCapitaCB.getValue();
 	}
@@ -235,102 +241,98 @@ public class SelectionView extends Composite implements Serializable {
 		@Override
 		public void onClick(ClickEvent event) {
 			// dialog appears when user wants to create an invalid selection
-			
-			  if(yearLB.isItemSelected(0) || isValid()==false){ new
-			  DialogBoxCreate("FAIL!").show(); }
-			  
-			  else{
-			
-				
 
-			
+			if (yearLB.isItemSelected(0) || isValid() == false) {
+				new DialogBoxCreate("FAIL!").show();
+			}
 
-			log.warning("hallo");
-		 
-		    highchartSvc.getData(getCountry(), getProduct(), getType(),
-					true, new AsyncCallback<ArrayList<String[]>>() {
-						public void onFailure(Throwable caught) {
-							// Show the RPC error message to the user
-							System.out.println("Error Arraylist!");
-						}
+			else {
 
-						public void onSuccess(ArrayList<String[]> resultTemp) {
-							if(getCountry().equals("Global"))
-								main.openCreateView(true,resultTemp, getYear());
-							else
-								main.openCreateView(false,resultTemp, getYear());
-						}
-		    });
-		    
+				log.warning("hallo");
 
-			  }
-			 
+				highchartSvc.getData(getCountry(), getProduct(), getType(),
+						true, new AsyncCallback<ArrayList<String[]>>() {
+							public void onFailure(Throwable caught) {
+								// Show the RPC error message to the user
+								System.out.println("Error Arraylist!");
+							}
+
+							public void onSuccess(ArrayList<String[]> resultTemp) {
+								if (getCountry().equals("Global"))
+									main.openCreateView(true, resultTemp,
+											getYear());
+								else
+									main.openCreateView(false, resultTemp,
+											getYear());
+							}
+						});
+
+			}
+
 		}
 
 	}
 
-	// this changehandler will let a label appear when world is not selected and
-	// dissapear when a country is selected
+	/**
+	 * Handles change in the country listbox
+	 */
 	private class countryLBChangeHandler implements ChangeHandler {
 
 		@Override
 		public void onChange(ChangeEvent event) {
 			if (!countryLB.isItemSelected(0)) { // checks if world is selected
-				if(!productLB.isItemSelected(0) && !typeLB.isItemSelected(0)){
-				   fTable.getRowFormatter().setVisible(3, false);
-				   productLB.setItemSelected(0, true);
-				   
-			    }
-				
+				if (!productLB.isItemSelected(0) && !typeLB.isItemSelected(0)) {
+					fTable.getRowFormatter().setVisible(3, false);
+					productLB.setItemSelected(0, true);
+
+				}
+
 			} else {
 				fTable.getRowFormatter().setVisible(3, true);
 				fTable.getRowFormatter().setVisible(4, true);
-			    
-			
+
 			}
 		}
 
 	}
 
+	/**
+	 * Handles change in the listbox (product, type)
+	 */
 	private class listBoxChangeHandler implements ChangeHandler {
 
-	private ListBox list;
-    private int row;
-	private listBoxChangeHandler(ListBox list) {
-		this.list = list;
-		
-        
-		if(list.equals(productLB)){
-			row=3;
-		}
-		else{
-			row=2;
-		}
-	}
+		private ListBox list;
+		private int row;
 
-	/*
-	 * this method handles the change of the selection in a listbox if the
-	 * user select an option in a listbox the checkbox will adapt
-	 */
-	public void onChange(ChangeEvent event) {
-		if (!countryLB.isItemSelected(0)) {
-			if (!list.isItemSelected(0)) {
-				fTable.getRowFormatter().setVisible(row, false);
-				((ListBox) fTable.getWidget(row, 1)).setItemSelected(0,true);
+		private listBoxChangeHandler(ListBox list) {
+			this.list = list;
+
+			if (list.equals(productLB)) {
+				row = 3;
 			} else {
-				fTable.getRowFormatter().setVisible(row, true);
+				row = 2;
+			}
+		}
+
+		/**
+		 * if one selects an item the other disappears until the first one is
+		 * blank again
+		 */
+		public void onChange(ChangeEvent event) {
+			if (!countryLB.isItemSelected(0)) {
+				if (!list.isItemSelected(0)) {
+					fTable.getRowFormatter().setVisible(row, false);
+					((ListBox) fTable.getWidget(row, 1)).setItemSelected(0,
+							true);
+				} else {
+					fTable.getRowFormatter().setVisible(row, true);
+
+				}
 
 			}
-			
-		}
-		
-		
-	
+
 		}
 
 	}
-
-	
-	
 
 }

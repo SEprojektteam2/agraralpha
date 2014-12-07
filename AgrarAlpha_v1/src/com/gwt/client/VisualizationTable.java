@@ -35,7 +35,6 @@ public class VisualizationTable {
 	private HTML table;
 	private String htmlString = new String();
 	ArrayList<String[]> arraylist;
-	private String leer;
 
 	/**
 	 * @param a
