@@ -63,7 +63,7 @@ public class SaveServiceImpl_Test extends RemoteServiceServlet implements
 	 * java.lang.String, java.lang.String, boolean, java.lang.String)
 	 */
 	public void save(int year, String country, String product, String type,
-			boolean perCapita, String name) throws IllegalArgumentException, SQLException {
+			boolean perCapita, String name) throws IllegalArgumentException {
 
 		// Set date format
 		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy - HH:mm:ss");
@@ -95,11 +95,9 @@ public class SaveServiceImpl_Test extends RemoteServiceServlet implements
 							+ name
 							+ "','"
 							+ capita + "','" + dateFormat.format(date) + "')");
-			log.info("Insertion succeeded!");
 		} catch (SQLException e1) {
 			// Log Exception
 			log.warning(e1.getMessage());
-			throw new SQLException("Could not update",e1);
 		}
 
 	}

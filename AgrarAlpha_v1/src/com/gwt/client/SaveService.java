@@ -1,6 +1,5 @@
 package com.gwt.client;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -34,7 +33,7 @@ public interface SaveService extends RemoteService {
 	 * @throws SQLException 
 	 */
 	void save(int year, String country, String product, String type,
-			boolean perCapita, String name) throws IllegalArgumentException, SQLException;
+			boolean perCapita, String name) throws IllegalArgumentException;
 
 	/**
 	 * @author Fabian Weber
