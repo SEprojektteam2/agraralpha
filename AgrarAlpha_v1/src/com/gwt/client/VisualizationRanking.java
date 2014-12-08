@@ -2,7 +2,6 @@ package com.gwt.client;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-
 import java.util.logging.Logger;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -34,13 +33,15 @@ public class VisualizationRanking {
 	private String td2 = "</td>";
 	private HTML table;
 	private String htmlString = new String();
+	private int year = 0;
 	ArrayList<String[]> arraylist;
 
 	/**
 	 * @param a
 	 */
-	public VisualizationRanking(ArrayList<String[]> a) {
-		this.arraylist = a;
+	public VisualizationRanking(ArrayList<String[]> a, int year) {
+		this.arraylist = getTopTenCountries(a);
+		this.year = year;
 	}
 
 	/**
@@ -86,5 +87,51 @@ public class VisualizationRanking {
 		htmlString += "</table>";
 		html.setHTML(htmlString);
 		return html;
+	}
+	
+	public ArrayList<String[]> getTopTenCountries(ArrayList<String[]> dataArray){
+		ArrayList<String[]> countries = new ArrayList<String[]>();
+		String type = dataArray.get(dataArray.size()-1)[1];
+		if(type.equals("AreaName"))
+			type = "Country";
+		if(type.equals("ItemName"))
+			type = "Product";
+		if(type.equals("ElementName"))
+			type = "Type";
+			
+		//String[] headRow = {"Year",type,"Value"};
+		//countries.add(headRow);
+
+		for(int i = 0; i<dataArray.size()-1; i++){
+			if(dataArray.get(i)[0].equals(year)){
+				if(!dataArray.get(i)[2].equals("-"))
+					countries.add(dataArray.get(i));
+			}
+		}
+		countries = selectionSort(countries);
+		ArrayList<String[]> returnArray = new ArrayList<String[]>();
+		String[] headRow = {"Year",type,"Value"};
+		returnArray.add(headRow);
+		for(int i = 0; i<10; i++)
+		{ returnArray.add(countries.get(i));}
+		return returnArray;
+	}
+	
+	public ArrayList<String[]> selectionSort(ArrayList<String[]> arr) {
+		int i, j, maxIndex; 
+		String[] tmp = new String[3];
+		int n = arr.size();
+		for (i = 0; i < n - 1; i++) {
+			maxIndex = i;
+			for (j = i + 1; j < n; j++)
+				if (Double.valueOf(arr.get(j)[2]) > Double.valueOf(arr.get(maxIndex)[2]))
+					maxIndex = j;
+			if (maxIndex != i) {
+				tmp = arr.get(i);
+				arr.set(i, arr.get(maxIndex));
+				arr.set(maxIndex,tmp);
+			}
+		}
+		return arr;
 	}
 }
