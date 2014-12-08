@@ -195,7 +195,7 @@ public class VisualizationBarChart{
 		
 		int yInd = Integer.parseInt(year);
 		if(yInd < 1990 || yInd > 2011)
-			return -1;
+			return -yInd;
 		
 		yInd -= 2011;
 		
