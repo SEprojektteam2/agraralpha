@@ -34,7 +34,7 @@ public class CreateView extends Composite{
     private VisualizationRanking vRanking;
 	private VerticalPanel rankingPanel;
 	private Label label;
-	private ListBox list;
+	private ListBox interpol;
 	private VerticalPanel mapPanel = new VerticalPanel();
 	private ArrayList <String[]>dataArray;
 	public GeoMap map;
@@ -70,8 +70,6 @@ public class CreateView extends Composite{
 
 		
 		VisualizationTable vTable = new VisualizationTable(Data);
-		list=new ListBox();
-		label= new Label("Placeholder");
 		
 		rankingPanel = new VerticalPanel();
 		rankingPanel.add(new SourceView());
@@ -92,9 +90,7 @@ public class CreateView extends Composite{
 		tablePanel.add(vTable.create());
 
 		addLineChart();
-		
-		list = new ListBox();
-		list.addItem("bla");
+
 
 		/**createBtn = new Button("Create");
 		createBtn.addClickHandler(new createClickHandler());
@@ -255,6 +251,11 @@ public class CreateView extends Composite{
 	
 	
 	private void addLineChart(){	
+		label = new Label("Visualization: ");
+		interpolationPanel.add(label);
+		interpol = new ListBox();
+		interpol.addItem("bla");
+		interpolationPanel.add(interpol);
 		SimpleRegressionServiceAsync simpleRegSvc = GWT.create(SimpleRegressionService.class);
 		double[] points = new double[22];
    		for(int j=0;j<=21;j++){
