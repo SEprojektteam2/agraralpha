@@ -9,6 +9,9 @@ import org.moxieapps.gwt.highcharts.client.Series;
 /**
  * @author Romana Pernischova
  *
+ * This class creates a new ColumnChart with GWT Highchart. This ColumnsChart will be showing an Histogram and is not a regular ColumnChart.
+ * The data for this Histogram is calculated within this chart and will be done automatically, when creating an object of this class.
+ * To draw the created chart it has to be added to the Rootpanel though calling the Method, which returns the chart.
  */
 public class VisualizationBarChart{
 
@@ -32,17 +35,19 @@ public class VisualizationBarChart{
 	 */
 	public VisualizationBarChart(ArrayList<String[]> resultData, String year)
 	{
+		//create a new Chart with a Column-Series
 		chart = new Chart();
 		chart.setType(Series.Type.COLUMN);
 		
+		//set the year Index
 		yearIndex = calculateYearIndex(year);
 		convertData(resultData);
 		
+		//set some window properties
 		String info[]=resultData.get(resultData.size()-1);
 		chart.setSize(1050,600)
 	     .setChartTitleText("Histogram "+info[2])
 	        .setChartSubtitleText("Source: FAO. 2014. FAOSTAT. data.fao.org. (Accessed 1.9.2014)");
-	
 	}
 	
 	/**
@@ -69,7 +74,6 @@ public class VisualizationBarChart{
 		
 		//creating points which will be added to series of the chart, based on ranges calculated previously
 		Number[] points = new Number[columns];
-		
 		points[0] = count(0, Double.parseDouble(cols[0].substring(3)));
 		for(int i = 0; i < cols.length-1; i++)
 		{
@@ -119,6 +123,7 @@ public class VisualizationBarChart{
 	{
 		data = new ArrayList<ArrayList<Double>>();
 		
+		//generate ArrayLists for all years, so that no outOfBoundExeption will be throughn when adding data
 		for(int i = calculateYearIndex("2011"); i <= calculateYearIndex("1990"); i++)
 		{
 			data.add(i, new ArrayList<Double>());
@@ -126,11 +131,13 @@ public class VisualizationBarChart{
 		
 		for(String[] datapart : resultData)
 		{	
-			
+			//if year is not within range, we have reached the end of the data.
+			//We don't want to consider this last dataline for converted data.
 			if(calculateYearIndex(datapart[0]) < 0)
 				break;
 			if(!(datapart[2].equals("-")))
 			{
+				//Only add the dataline if it is an accepted country
 				if(isRelevantCountry(datapart[1]))
 					data.get(calculateYearIndex(datapart[0])).add(Double.parseDouble(datapart[2]));
 			}
@@ -150,15 +157,15 @@ public class VisualizationBarChart{
 		
 		for(double num : data.get(yearIndex))
 		{
+			//if current data is 0 - ignore
 			if(num == 0.0)
 				;
+			//if current data is within range - increase counter
 			else if(Double.compare(max, num) >= 0 && Double.compare(num, min) > 0 )
 			{
-				log.warning(Double.toString(num));
 				count++;
 			}
 		}
-		log.warning("next Range");
 		
 		return count;
 	}
@@ -174,6 +181,7 @@ public class VisualizationBarChart{
 		
 		for(int i = 1; i < data.get(yearIndex).size(); i++)
 		{
+			//if current Minimum is larger - set new Minimum
 			if(curMin > data.get(yearIndex).get(i))
 			{
 				curMin = data.get(yearIndex).get(i);
@@ -194,6 +202,7 @@ public class VisualizationBarChart{
 		
 		for(int i = 1; i < data.get(yearIndex).size(); i++)
 		{
+			//if current Maximum is larger - set new Maximum
 			if(curMax < data.get(yearIndex).get(i))
 			{
 				curMax = data.get(yearIndex).get(i);
@@ -216,6 +225,7 @@ public class VisualizationBarChart{
 		
 		int index = -1;
 		
+		//if not within Range - return year as a negative number. This will create an outOfBoundExeption
 		int yInd = Integer.parseInt(year);
 		if(yInd < 1990 || yInd > 2011)
 			return -yInd;
@@ -227,6 +237,11 @@ public class VisualizationBarChart{
 		return index;
 	}
 	
+	/**
+	 * call this method after changing something in the Chart at runtime and it will return an updated chart.
+	 * 
+	 * @return the updated Chart
+	 */
 	public Chart redraw()
 	{
 		return chart.redraw();
