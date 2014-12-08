@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import org.moxieapps.gwt.highcharts.client.Chart;
 import org.moxieapps.gwt.highcharts.client.Series;
 
+/**
+ * @author Romana Pernischova
+ *
+ */
 public class VisualizationBarChart{
 
 	final static int COLUMNSDEFAULT = 10;
@@ -110,6 +114,8 @@ public class VisualizationBarChart{
 		
 		for(String[] datapart : resultData)
 		{	
+			if(calculateYearIndex(datapart[0]) < 0)
+				break;
 			if(!(datapart[2].equals("-")))
 			{
 				data.get(calculateYearIndex(datapart[0])).add(Double.parseDouble(datapart[2]));
