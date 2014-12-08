@@ -72,7 +72,7 @@ public class VisualizationRanking {
 		for(int i=0;i<arraylist.size()-1;i++){
 			
 			htmlString += tr;
-			htmlString += "th + String.valueOf(i+1) + th2";
+			htmlString += th + String.valueOf(i+1) + th2;
 
 			for(int j=0; j<4;j++){
 				htmlString += th + arraylist.get(i)[j] + th2;
