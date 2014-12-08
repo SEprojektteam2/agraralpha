@@ -59,6 +59,7 @@ public class VisualizationRanking {
 		htmlString += "<thead>";
 		htmlString += tr;
 
+		//adding head of table
 		htmlString += th + "Rank" + th2;
 		htmlString += th + arraylist.get(0)[1] + th2;
 		htmlString += th + arraylist.get(0)[2] + th2;
@@ -69,21 +70,22 @@ public class VisualizationRanking {
 		htmlString += "</thead>";
 		htmlString += "<tbody>";
 		String isWorld = "World";
+		//adding elements of table
 		  for (int i = 1; i < arraylist.size(); i++) {
-		   if (i == 1 && isWorld.equals(arraylist.get(1)[1])) {
-		    htmlString += tr;
-		    htmlString += td + "Year: "+ arraylist.get(0)[0] + td2;
+		   if (i == 1 && isWorld.equals(arraylist.get(1)[1])) {//if world is selected it is world is always rank 1
+		    htmlString += tr;       //new row                            
+		    htmlString += td + "Year: "+ arraylist.get(1)[0] + td2; //add the year instead of rank
 
 		   } else {
-		    htmlString += tr;
-		    if (isWorld.equals(arraylist.get(1)[1]))
-		     htmlString += td + String.valueOf(i - 1) + td2;
+		    htmlString += tr; //new row
+		    if (isWorld.equals(arraylist.get(1)[1])) // check if world is in the arraylist
+		     htmlString += td + String.valueOf(i - 1) + td2; //add rank
 		    else
 		     htmlString += td + String.valueOf(i) + td2;
 
 		   }
 			for(int j=1; j<3;j++){
-				htmlString += td + arraylist.get(i)[j] + td2;
+				htmlString += td + arraylist.get(i)[j] + td2; //add table item
 
 			}
 			htmlString += tr2;
