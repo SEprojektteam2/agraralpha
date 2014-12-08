@@ -9,10 +9,10 @@ public void setUpStaticData()
 		
 		data.addRows(5);
 		data.setCell(0, 0, "Switzerland", "Switzerland", null);
-		data.setCell(0, 0, "Germany", "Germany", null);
-		data.setCell(0, 0, "Austria", "Austria", null);
-		data.setCell(0, 0, "Slovakia", "Slovakia", null);
-		data.setCell(0, 0, "Czech Republic", "Czech Republic", null);
+		data.setCell(1, 0, "Germany", "Germany", null);
+		data.setCell(2, 0, "Austria", "Austria", null);
+		data.setCell(3, 0, "Slovakia", "Slovakia", null);
+		data.setCell(4, 0, "Czech Republic", "Czech Republic", null);
 		
 		
 		Random random = new Random();
