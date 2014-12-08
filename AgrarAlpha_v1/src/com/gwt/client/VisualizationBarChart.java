@@ -110,8 +110,10 @@ data = new ArrayList<ArrayList<Double>>();
 		
 		for(String[] datapart : resultData)
 		{	
-			if(!datapart[2].equalsIgnoreCase("-"))
+			if(!(datapart[2].equals("-")))
+			{
 				data.get(calculateYearIndex(datapart[0])).add(Double.parseDouble(datapart[2]));
+			}
 		}
 	}
 	

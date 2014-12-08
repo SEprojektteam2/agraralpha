@@ -93,6 +93,21 @@ public class VisualizationBarChartTest{
 		assertEquals(-1, VisualizationBarChart_v2.calculateYearIndex("2012"));
 		assertEquals(-1, VisualizationBarChart_v2.calculateYearIndex("1989"));
 	}
+	
+	@Test
+	public void testCalculateRanges()
+	{
+		String[] results = VisualizationBarChart_v2.calculateRanges();
+		
+		//year 0
+		
+	}
+	
+	@Test
+	public void testCount()
+	{
+		//TODO
+	}
 
 		
 	
