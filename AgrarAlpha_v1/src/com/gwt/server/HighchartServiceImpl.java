@@ -85,6 +85,12 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 			String controll = "null";
 			ArrayList<String[]> population = getPopulation();
 			
+			String actualCountry;
+			String countryBefore = "null";
+			String[] currentCountry = new String[22];
+			for(int r=0; r<currentCountry.length;r++)
+				currentCountry[r]="-";
+			
 			// iterate through the java resultset
 			while (rs.next()) {
 				//the controll string
@@ -120,62 +126,31 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 					}
 				}
 				
-				//Fill the arraylist with "-" where no value is given
-				if (resultTemp[0].equals(String.valueOf(i))) {
-					result.add(resultTemp);
-					if (i == 2011) {
-						i = 1990;
-						controll = "null";
-					} else {
-						i++;
-					}
-				} else {
-					if (!resultTemp[1].equals(controll)) {
-						for (int j = i; j <= 2011; j++) {
-							String[] resultCorrect = new String[3];
-							resultCorrect[0] = String.valueOf(j);
-							resultCorrect[1] = controll;
-							resultCorrect[2] = "-";
-							result.add(resultCorrect);
-						}
-						i = 1990;
-						if (resultTemp[0].equals("1990")) {
-							String[] resultCorrect = new String[3];
-							resultCorrect[0] = String.valueOf(i);
-							resultCorrect[1] = resultTemp[1];
-							resultCorrect[2] = "-";
-						} else {
-							for (int j = i; j < Integer.parseInt(resultTemp[0]); j++) {
-								String[] resultCorrect = new String[3];
-								resultCorrect[0] = String.valueOf(j);
-								resultCorrect[1] = resultTemp[1];
-								resultCorrect[2] = "-";
-								result.add(resultCorrect);
-								i++;
-							}
-						}
-						result.add(resultTemp);
-						controll = resultTemp[1];
-						i++;
-
-					} else {
-						for (int j = i; j < Integer.parseInt(resultTemp[0]); j++) {
-							String[] resultCorrect = new String[3];
-							resultCorrect[0] = String.valueOf(j);
-							resultCorrect[1] = resultTemp[1];
-							resultCorrect[2] = "-";
-							result.add(resultCorrect);
-							i++;
-						}
-						result.add(resultTemp);
-						if (i == 2011) {
-							i = 1990;
-							controll = "null";
-						} else {
-							i++;
-						}
-					}
+				actualCountry = rs.getString(searchingVar);
+				
+				if(countryBefore.equals("null"))
+					countryBefore = rs.getString(searchingVar);
+				log.warning(actualCountry + countryBefore);
+				if(countryBefore.equals(actualCountry)){
+				log.warning(String.valueOf(Integer.parseInt(rs.getString("Year"))-1990));
+					currentCountry[Integer.parseInt(rs.getString("Year"))-1990] = rs.getString(outputVar);
 				}
+				
+				else{
+					for(int x=0; x<currentCountry.length; x++){
+						log.warning("FOR: " + x);
+						String[] resultTe = new String[3];
+						resultTe[0] = String.valueOf(1990 + x);
+						resultTe[1] = countryBefore;
+						resultTe[2] = currentCountry[x];
+						result.add(resultTe);
+						currentCountry[x] = "-";
+					}
+					log.warning("ELSE: " + String.valueOf(Integer.parseInt(rs.getString("Year"))-1990));
+					currentCountry[Integer.parseInt(rs.getString("Year"))-1990] = rs.getString(outputVar);
+				}
+				
+				countryBefore=actualCountry;
 			}
 
 		} catch (SQLException e) {
