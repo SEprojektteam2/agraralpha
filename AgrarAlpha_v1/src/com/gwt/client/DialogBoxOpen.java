@@ -103,7 +103,7 @@ public class DialogBoxOpen extends DialogBox {
          btnPanel.add(open);
          btnPanel.add(close);
          
-        // base.setPixelSize(300, 300);
+         base.setPixelSize(300, 150);
          base.add(label);
          base.add(tb);
          base.add(btnPanel);
