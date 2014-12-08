@@ -73,12 +73,15 @@ public class SelectionView extends Composite implements Serializable {
 
 		yearLabel = new Label("Year");
 		countryLabel = new Label("Country");
+		countryLabel.addStyleName("label");
 
 		productLabel = new Label("Product");
 		typeLabel = new Label("Product Type");
+		typeLabel.addStyleName("label");
 
 		yearLB = new ListBox();
 		yearLB.addItem(" "); // Adding blank option
+		yearLB.addStyleName("label");
 
 		perCapitaCB = new CheckBox("Per capita");
 

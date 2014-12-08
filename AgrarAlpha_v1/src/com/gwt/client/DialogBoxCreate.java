@@ -29,7 +29,6 @@ class DialogBoxCreate extends DialogBox {
       // Enable glass background.
       setGlassEnabled(true);
       vpanel= new VerticalPanel();
-      vpanel.setStyleName("fuerFabian2");
       vpanel.setPixelSize(300, 150);
       label = new Label(message);
       label.setStyleName("fuerFabian");
@@ -46,6 +45,7 @@ class DialogBoxCreate extends DialogBox {
       
       vpanel.add(label);
       vpanel.add(ok);
+      
       setWidget(vpanel);
     }
   }
