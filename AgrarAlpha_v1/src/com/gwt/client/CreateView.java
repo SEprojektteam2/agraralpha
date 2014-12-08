@@ -339,7 +339,7 @@ public class CreateView extends Composite{
 		rankingPanel = new VerticalPanel();
 		rankingPanel.add(new SourceView());
 		rankingPanel.add(slider.asWidget());
-        vRanking= new VisualizationRanking(dataArray, Integer.valueOf(newYear));
+        vRanking= new VisualizationRanking(dataArray, newYear);
         HTML ranking=vRanking.create();
 		rankingPanel.add(ranking);	
         rankingPanel.setCellHorizontalAlignment(ranking,HasHorizontalAlignment.ALIGN_CENTER);
