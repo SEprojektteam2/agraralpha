@@ -51,6 +51,7 @@ public class CreateView extends Composite{
 	public GeoMap map;
 	private String year;
 	private SliderBar slider = new SliderBar(1990, 2011);
+	private SliderBar sliderHisto = new SliderBar(1990, 2011);
 	public static final Logger log = Logger.getLogger(CreateView.class.getName());
 	final VisualizationLineChart vLineChart = new VisualizationLineChart();
 	VisualizationBarChart vBarChart;
@@ -113,10 +114,11 @@ public class CreateView extends Composite{
 				public void onMouseUp(MouseUpEvent event) {
 					// TODO Auto-generated method stub
 					createMapFromSlider();
-					createBarChartFromSlider();
 					slider.redraw();
 				}
 	          });
+		  
+		  
 //		  slider.addChangeListener(new ChangeListener() {
 //				@Override
 //				public void onChange(Widget sender) {
@@ -160,12 +162,26 @@ public class CreateView extends Composite{
 		//mapPanel.add(vMap.createChart());
 		//vMap.createChart(mapPanel);
 		
-		addBarChart();
+		addBarChart();	
+		sliderHisto.setStepSize(1);
+		sliderHisto.setCurrentValue(Integer.parseInt(year));
+		sliderHisto.setNumTicks(21);
+		sliderHisto.setNumLabels(21);
+		sliderHisto.setWidth("100%");
+		sliderHisto.addMouseUpHandler(new MouseUpHandler(){
+			@Override
+			public void onMouseUp(MouseUpEvent event) {
+				createBarChartFromSlider();
+				sliderHisto.redraw();
+			}
+		});	
+			
+		
 		
 		
 		mapPanel.add(new SourceView()); // adding a verticalPanel with all source to the mapPanel
 		mapPanel.add(slider.asWidget());
-		histogramPanel.add(slider.asWidget());
+		histogramPanel.add(sliderHisto.asWidget());
 		createMap(Integer.parseInt(year));	
 		//mapPanel.add(getMap());
 		basePanel.add(tablePanel,"Table");
@@ -344,8 +360,6 @@ public class CreateView extends Composite{
 		vBarChart.setTitleX("Range in 10 000");
 		vBarChart.setTitleY("Amount");
 		
-		System.out.println("first draw "+year);
-		
 		histogramPanel.add(slider);
 		histogramPanel.add(vBarChart.draw(year, 10));
 		
@@ -358,8 +372,6 @@ public class CreateView extends Composite{
 		histogramPanel.remove(2);
 		
 		year = Integer.toString((int) slider.getCurrentValue());
-		
-		System.out.println("draw form slider "+year);
 		
 		histogramPanel.add(vBarChart.draw(year, cols));
 	}
