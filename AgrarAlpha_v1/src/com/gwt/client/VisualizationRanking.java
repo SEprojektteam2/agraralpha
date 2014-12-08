@@ -24,7 +24,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 /**
  */
 public class VisualizationRanking {
-
+	
 	private String tr = "<tr>";
 	private String tr2 = "</tr>";
 	private String th = "<th>";
@@ -34,14 +34,14 @@ public class VisualizationRanking {
 	private HTML table;
 	private String htmlString = new String();
 	private int year = 0;
-	ArrayList<String[]> arraylist;
+	ArrayList<String[]> arraylist = new ArrayList<String[]>();
 
 	/**
 	 * @param a
 	 */
-	public VisualizationRanking(ArrayList<String[]> a, int year) {
+	public VisualizationRanking(ArrayList<String[]> a, String year) {
+		this.year = Integer.parseInt(year);
 		this.arraylist = getTopTenCountries(a);
-		this.year = year;
 	}
 
 	/**
@@ -91,6 +91,7 @@ public class VisualizationRanking {
 	
 	public ArrayList<String[]> getTopTenCountries(ArrayList<String[]> dataArray){
 		ArrayList<String[]> countries = new ArrayList<String[]>();
+		// get the type of data (stored in last row of ArrayList)
 		String type = dataArray.get(dataArray.size()-1)[1];
 		if(type.equals("AreaName"))
 			type = "Country";
@@ -98,12 +99,9 @@ public class VisualizationRanking {
 			type = "Product";
 		if(type.equals("ElementName"))
 			type = "Type";
-			
-		//String[] headRow = {"Year",type,"Value"};
-		//countries.add(headRow);
 
 		for(int i = 0; i<dataArray.size()-1; i++){
-			if(dataArray.get(i)[0].equals(year)){
+			if(dataArray.get(i)[0].equals(String.valueOf(year))){
 				if(!dataArray.get(i)[2].equals("-"))
 					countries.add(dataArray.get(i));
 			}
@@ -134,4 +132,6 @@ public class VisualizationRanking {
 		}
 		return arr;
 	}
+	
+	//public ArrayList<String[]> removeIrrelevantCountries
 }
