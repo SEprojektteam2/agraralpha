@@ -11,7 +11,7 @@
 .gwt-Label{ 
    font-size: 110%; 
    font-weight: bold;
-   color:#666666;
+/*    color:#666666; */
    padding:5px;
    margin:5px;
 }
@@ -26,6 +26,10 @@
 
 .label2{ 
    color:#CCCCCA;
+}
+
+.label3{ 
+   color:#666666;
 }
 
 table#tdisplay{
@@ -90,7 +94,7 @@ h1 {
 
 .gwt-TabBar {
   padding-top: 2px;
-  border-bottom: 4px solid #878787;
+  border-bottom: 4px solid #252530;
   background-color: #fff;
 }
 
