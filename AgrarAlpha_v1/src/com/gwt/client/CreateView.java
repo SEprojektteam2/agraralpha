@@ -42,7 +42,8 @@ public class CreateView extends Composite{
 	private VerticalPanel tablePanel;
 	private VerticalPanel interpolationPanel;
 	private VerticalPanel histogramPanel;
-    
+    private VisualizationRanking vRanking;
+	private VerticalPanel rankingPanel;
 	private Label label;
 	private ListBox list;
 	private VerticalPanel mapPanel = new VerticalPanel();
@@ -71,7 +72,10 @@ public class CreateView extends Composite{
 		 list.addItem(String.valueOf(i));
 		 }
 		 */
-		
+		rankingPanel = new VerticalPanel();
+		rankingPanel.add(new SourceView());
+		vRanking= new VisualizationRanking(getTopTenCountries(Integer.parseInt(year)));
+        rankingPanel.add(vRanking.create());		
 		tablePanel = new VerticalPanel();
 		interpolationPanel = new VerticalPanel();
 		histogramPanel = new VerticalPanel();
@@ -168,6 +172,7 @@ public class CreateView extends Composite{
 		basePanel.add(interpolationPanel,"Interpolation");
 		basePanel.add(histogramPanel,"Histogram");
 		basePanel.add(mapPanel,"Map");
+		basePanel.add(rankingPanel,"Ranking");
 
 		basePanel.selectTab(0); // first tab of the tabPanel will be open
 		
