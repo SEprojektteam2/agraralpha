@@ -360,7 +360,7 @@ public class CreateView extends Composite{
 		vBarChart.setTitleX("Range in 10 000");
 		vBarChart.setTitleY("Amount");
 		
-		histogramPanel.add(slider);
+		histogramPanel.add(sliderHisto);
 		histogramPanel.add(vBarChart.draw(year, 10));
 		
 		
@@ -371,7 +371,7 @@ public class CreateView extends Composite{
 		int cols = vBarChart.getNumColumns();
 		histogramPanel.remove(2);
 		
-		year = Integer.toString((int) slider.getCurrentValue());
+		year = Integer.toString((int) sliderHisto.getCurrentValue());
 		
 		histogramPanel.add(vBarChart.draw(year, cols));
 	}
