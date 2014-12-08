@@ -110,7 +110,9 @@ public class VisualizationBarChart_v2{
 		
 		for(String[] datapart : resultData)
 		{	
-			data.get(calculateYearIndex(datapart[0])).add(Double.parseDouble(datapart[2]));
+			if(!datapart[2].equalsIgnoreCase("-"))
+				data.get(calculateYearIndex(datapart[0])).add(Double.parseDouble(datapart[2]));
+			
 		}
 	}
 	
