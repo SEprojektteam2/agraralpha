@@ -71,13 +71,13 @@ public class VisualizationRanking {
 		htmlString += "<tbody>";
 		String isWorld = "World";
 		  for (int i = 1; i < arraylist.size(); i++) {
-		   if (i == 1 && isWorld.equals(arraylist.get(0)[i])) {
+		   if (i == 1 && isWorld.equals(arraylist.get(0)[1])) {
 		    htmlString += tr;
 		    htmlString += td + " " + td2;
 
 		   } else {
 		    htmlString += tr;
-		    if (isWorld.equals(arraylist.get(0)[i]))
+		    if (isWorld.equals(arraylist.get(0)[1]))
 		     htmlString += td + String.valueOf(i - 1) + td2;
 		    else
 		     htmlString += td + String.valueOf(i) + td2;
