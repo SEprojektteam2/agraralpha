@@ -64,14 +64,16 @@ public class CreateView extends Composite{
 		  sliderMap.addMouseUpHandler(new MouseUpHandler(){
 				@Override
 				public void onMouseUp(MouseUpEvent event) {
+					createMapFromSlider();
 					sliderRanking.setCurrentValue(sliderMap.getCurrentValue());
 					sliderHisto.setCurrentValue(sliderMap.getCurrentValue());
-					createMapFromSlider();
-					createRankingFromSlider();
-					createMapFromSlider();
-					sliderMap.redraw();
 					sliderHisto.redraw();
 					sliderRanking.redraw();
+					createBarChartFromSlider();
+					createRankingFromSlider();
+					
+					sliderMap.redraw();
+					
 				}
 	          });
 		  
@@ -87,14 +89,15 @@ public class CreateView extends Composite{
 		  sliderRanking.addMouseUpHandler(new MouseUpHandler(){
 				@Override
 				public void onMouseUp(MouseUpEvent event) {
+					createRankingFromSlider();
 					sliderMap.setCurrentValue(sliderRanking.getCurrentValue());
 					sliderHisto.setCurrentValue(sliderRanking.getCurrentValue());
 					sliderMap.redraw();
 					sliderHisto.redraw();
+					createBarChartFromSlider();
+					createMapFromSlider();
+					
 					sliderRanking.redraw();
-					createMapFromSlider();
-					createRankingFromSlider();
-					createMapFromSlider();
 				}
 	          });
 
@@ -127,14 +130,18 @@ public class CreateView extends Composite{
 		sliderHisto.addMouseUpHandler(new MouseUpHandler(){
 			@Override
 			public void onMouseUp(MouseUpEvent event){
+				createBarChartFromSlider();
 				sliderMap.setCurrentValue(sliderHisto.getCurrentValue());
 				sliderRanking.setCurrentValue(sliderHisto.getCurrentValue());
+				sliderMap.redraw();
+				
+				sliderRanking.redraw();
+				
 				createMapFromSlider();
 				createRankingFromSlider();
-				createMapFromSlider();
-				sliderMap.redraw();
+				
+				
 				sliderHisto.redraw();
-				sliderRanking.redraw();
 			}
 		});	
 			
