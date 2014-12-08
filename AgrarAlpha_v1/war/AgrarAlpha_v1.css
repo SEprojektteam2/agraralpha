@@ -101,6 +101,7 @@ h1 {
 .gwt-TabBarItem {
   padding: 4px;
   cursor: pointer;
+  color: #252530;
   background-color: #e8e8e8;
   border-bottom: 2px solid white;
   margin-right: 2px;
