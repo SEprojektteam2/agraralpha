@@ -34,6 +34,7 @@ public class VisualizationRanking {
 	private HTML table;
 	private String htmlString = new String();
 	private int year = 0;
+	private String information;
 	ArrayList<String[]> arraylist = new ArrayList<String[]>();
 
 	/**
@@ -41,6 +42,7 @@ public class VisualizationRanking {
 	 */
 	public VisualizationRanking(ArrayList<String[]> a, int year) {
 		this.year = year;
+		this.information=a.get(a.size()-1)[2];
 		this.arraylist = getTopEleven(a);
 	}
 
@@ -63,6 +65,8 @@ public class VisualizationRanking {
 		htmlString += th + "Rank" + th2;
 		htmlString += th + arraylist.get(0)[1] + th2;
 		htmlString += th + arraylist.get(0)[2] + th2;
+		htmlString += th + information +String.valueOf(year) + th2;
+
 
 
 
@@ -74,7 +78,7 @@ public class VisualizationRanking {
 		  for (int i = 1; i < arraylist.size(); i++) {
 		   if (i == 1 && isWorld.equals(arraylist.get(1)[1])) {//if world is selected it is world is always rank 1
 		    htmlString += tr;       //new row                            
-		    htmlString += td + "Year: "+ arraylist.get(1)[0] + td2; //add the year instead of rank
+		    htmlString += td + " " + td2; // no rank for world
 
 		   } else {
 		    htmlString += tr; //new row
