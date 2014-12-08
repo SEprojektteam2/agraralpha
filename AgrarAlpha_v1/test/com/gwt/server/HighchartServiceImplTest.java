@@ -12,7 +12,7 @@ public class HighchartServiceImplTest {
 	@Test
 	public void calcPerCapitaTest() {
 		//create new HighchartServiceImpl
-		HighchartServiceImpl test = new HighchartServiceImpl();
+		HighchartServiceImpl_test test = new HighchartServiceImpl_test();
 		ArrayList<String[]> arraylist = new ArrayList<String[]>();
 		
 		//add a string array to arraylist
@@ -20,7 +20,7 @@ public class HighchartServiceImplTest {
 		arraylist.add(content);
 		
 		//get calc per capita
-		ArrayList<String[]> answer = test.calcPerCapita(arraylist);
+		ArrayList<String[]> answer = test.getPopulation();
 		
 		//test if calcPerCapita returns the same arraylist
 		if(!answer.equals(arraylist))
@@ -34,7 +34,7 @@ public class HighchartServiceImplTest {
 	@Test
 	public void ConnectToDatabaseTest(){
 		//generate a new HighChartServiceImpl
-		HighchartServiceImpl test = new HighchartServiceImpl();
+		HighchartServiceImpl_test test = new HighchartServiceImpl_test();
 		
 		//Get the value of the connection before the method call
 		Connection connection1 = test.conn;
@@ -51,7 +51,7 @@ public class HighchartServiceImplTest {
 				fail("Connection already exists before method call!");
 			
 			//check if connection after method call is valid.
-			if(!connection2.isValid(0))
+			if(!connection2.isValid(500))
 				fail("Connection failed!");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -62,7 +62,7 @@ public class HighchartServiceImplTest {
 	@Test
 	public void getCounterTest(){
 		//generate a new HighChartServiceImpl
-		HighchartServiceImpl test = new HighchartServiceImpl();
+		HighchartServiceImpl_test test = new HighchartServiceImpl_test();
 		test.connectToDatabase();
 		int number = test.getCounter("Select AreaName, Year, Value from records where ItemName = 'Apple' Order by year ASC");
 		
@@ -79,10 +79,10 @@ public class HighchartServiceImplTest {
 	@Test
 	public void readDatabaseTest(){
 		//generate a new HighChartServiceImpl
-		HighchartServiceImpl test = new HighchartServiceImpl();
+		HighchartServiceImpl_test test = new HighchartServiceImpl_test();
 		test.connectToDatabase();
 		
-		ArrayList<String[]> arraylist = test.readDatabase("Select AreaName, Year, ItemName, Value from records where ElementName = 'Import Quantity' AND ItemName = 'Tea' And AreaName = 'Sri Lanka' Order by year ASC", "ItemName", "Value");
+		ArrayList<String[]> arraylist = test.readDatabase("Select AreaName, ItemName, Value from records where ElementName = 'Import Quantity' AND ItemName = 'Tea' And AreaName = 'Sri Lanka' Order by year ASC", "ItemName", "Value",false);
 		System.out.println(arraylist.get(0)[0]);
 		System.out.println(arraylist.get(0)[1]);
 		System.out.println(arraylist.get(0)[2]);
