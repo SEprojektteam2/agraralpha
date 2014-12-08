@@ -84,7 +84,7 @@ public class VisualizationBarChart{
 	/**
 	 * Calculation of ranges for the histogram based on set column number
 	 * 
-	 * @return
+	 * @return a string Array of the max of each range is returned
 	 */
 	private String[] calculateRanges() {
 		// finding the min and max for the the first (min) and last (max) range
@@ -96,11 +96,10 @@ public class VisualizationBarChart{
 		
 		// creating the categhories for the xAchsis, which won't be added to the chart in this method!
 		String[] cols = new String[numColumns];
-		for (int i = 0; i < numColumns-1; i++) 
+		for (int i = 0; i < numColumns; i++) 
 		{
-			cols[i] = "to "+ Integer.toString((int)(min + (diff * (i + 1))));
+			cols[i] = "to "+ Integer.toString((int)(max - (diff * (numColumns-i))));
 		}
-		cols[numColumns-1] = "to " + Integer.toString((int)Math.ceil(max));
 		
 		return cols;
 	} 
@@ -147,7 +146,6 @@ public class VisualizationBarChart{
 		
 		for(double num : data.get(yearIndex))
 		{
-			
 			if(Double.compare(max, num) >= 0 && Double.compare(num, min) > 0 )
 			{
 				log.warning(Double.toString(num));
