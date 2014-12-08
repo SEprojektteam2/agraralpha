@@ -63,7 +63,7 @@ public class VisualizationBarChart{
 		chart.addSeries(chart.createSeries().setType(Series.Type.COLUMN).setPoints(points));
 		
 		//this return is important, when executing this method from outside
-		return chart;
+		return chart.redraw();
 	}
 
 	/**
@@ -112,7 +112,6 @@ data = new ArrayList<ArrayList<Double>>();
 		{	
 			if(!datapart[2].equalsIgnoreCase("-"))
 				data.get(calculateYearIndex(datapart[0])).add(Double.parseDouble(datapart[2]));
-			
 		}
 	}
 	
