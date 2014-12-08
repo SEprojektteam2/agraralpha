@@ -29,9 +29,10 @@ class DialogBoxCreate extends DialogBox {
       // Enable glass background.
       setGlassEnabled(true);
       vpanel= new VerticalPanel();
+      vpanel.setStyleName("fuerFabian2");
       vpanel.setPixelSize(300, 150);
       label = new Label(message);
-      
+      label.setStyleName("fuerFabian");
 
       // DialogBox is a SimplePanel, so you have to set its widget property to
       // whatever you want its contents to be.
