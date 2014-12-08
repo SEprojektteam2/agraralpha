@@ -126,10 +126,12 @@ public class VisualizationBarChart{
 		
 		for(String[] datapart : resultData)
 		{	
+			
 			if(calculateYearIndex(datapart[0]) < 0)
 				break;
 			if(!(datapart[2].equals("-")))
 			{
+				if(isRelevantCountry(datapart[1]))
 				data.get(calculateYearIndex(datapart[0])).add(Double.parseDouble(datapart[2]));
 			}
 		}
@@ -276,4 +278,86 @@ public class VisualizationBarChart{
 	{
 		chart.getYAxis().setAxisTitleText(yAchsis);
 	}
+	
+	  public boolean isRelevantCountry(String country){
+		   if(country.equals("Central African Republic"))
+			   return false;
+		   if(country.equals("Central America"))
+			   return false;
+		   if(country.equals("Central Asia"))
+			   return false;
+		   if(country.equals("China ex. int"))
+			   return false;
+		   if(country.equals("EU(12)ex.int"))
+			   return false;
+		   if(country.equals("EU(15)ex.int"))
+			   return false;
+		   if(country.equals("EU(25)ex.int"))
+			   return false;
+		   if(country.equals("EU(27)ex.int"))
+			   return false;
+		   if(country.equals("Europe"))
+			   return false;
+		   if(country.equals("European Union"))
+			   return false;
+		   if(country.equals("Eastern Asia"))
+			   return false;
+		   if(country.equals("South Africa"))
+			   return false;
+		   if(country.equals("South America"))
+			   return false;
+		   if(country.equals("Southern Africa"))
+			   return false;
+		   if(country.equals("Southern Asia"))
+			   return false;
+		   if(country.equals("Southern Europe"))
+			   return false;
+		   if(country.equals("South-Eastern Asia"))
+			   return false; 
+		   if(country.equals("Western Africa"))
+			   return false;
+		   if(country.equals("Western Asia"))
+			   return false;
+		   if(country.equals("Western Europe"))
+			   return false;
+		   if(country.equals("Middle Africa"))
+			   return false;
+		   if(country.equals("Northern America"))
+			   return false;
+		   if(country.equals("Asia"))
+			   return false;
+		   if(country.equals("Eastern Asia"))
+			   return false;
+		   if(country.equals("Eastern Europe"))
+			   return false;
+		   if(country.equals("Low Income Food Deficit Countries"))
+			   return false;
+		   if(country.equals("Net Food Importing Developing Countries"))
+			   return false;
+		   if(country.equals("Africa"))
+			   return false;
+		   if(country.equals("Eastern Asia"))
+			   return false;
+		   if(country.equals("Least Developed Countries"))
+			   return false;
+		   if(country.equals("Americas"))
+			   return false;
+		   if(country.equals("Northern Europe"))
+			   return false;
+		   if(country.equals("Low Income Food Deficit Countries"))
+			   return false;
+		   if(country.equals("Northern Europe"))
+			   return false;
+		   if(country.equals("Australia & New Zealand"))
+			   return false; 
+		   if(country.equals("Land Locked Developing Countries"))
+			   return false; 
+		   if(country.equals("China, mainland"))
+			   return false; 
+		   if(country.equals("Eastern Africa"))
+			   return false; 
+		   if(country.equals("Northern Africa"))
+			   return false; 
+		   return true;
+	   }
 }
