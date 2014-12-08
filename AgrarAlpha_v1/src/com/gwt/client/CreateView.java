@@ -39,7 +39,7 @@ public class CreateView extends Composite{
 	private ArrayList <String[]>dataArray;
 	public GeoMap map;
 	private String year;
-	private SliderBar slider = new SliderBar(1990, 2011);
+	private SliderBar sliderMap = new SliderBar(1990, 2011);
 	private SliderBar sliderHisto = new SliderBar(1990, 2011);
 	private SliderBar sliderRanking = new SliderBar(1990, 2011);
 	public static final Logger log = Logger.getLogger(CreateView.class.getName());
@@ -55,23 +55,25 @@ public class CreateView extends Composite{
 		this.year = year;
 		
 			// Set up slider
-		  slider.setStepSize(1);
-		  slider.setCurrentValue(Integer.parseInt(year));
-		  slider.setNumTicks(21);
-		  slider.setNumLabels(21);
-		  slider.setWidth("100%");
-		  slider.addMouseUpHandler(new MouseUpHandler(){
+		  sliderMap.setStepSize(1);
+		  sliderMap.setCurrentValue(Integer.parseInt(year));
+		  sliderMap.setNumTicks(21);
+		  sliderMap.setNumLabels(21);
+		  sliderMap.setWidth("100%");
+		  sliderMap.addMouseUpHandler(new MouseUpHandler(){
 				@Override
 				public void onMouseUp(MouseUpEvent event) {
 					// TODO Auto-generated method stub
 					createMapFromSlider();
-					slider.redraw();
+					sliderRanking.setCurrentValue(sliderMap.getCurrentValue());
+					sliderHisto.setCurrentValue(sliderMap.getCurrentValue());
+					sliderMap.redraw();
 				}
 	          });
 		  
 		  rankingPanel = new VerticalPanel();
 			rankingPanel.add(new SourceView());
-			rankingPanel.add(slider.asWidget());
+			rankingPanel.add(sliderMap.asWidget());
 		  
 		  sliderRanking.setStepSize(1);
 		  sliderRanking.setCurrentValue(Integer.parseInt(year));
@@ -82,7 +84,7 @@ public class CreateView extends Composite{
 				@Override
 				public void onMouseUp(MouseUpEvent event) {
 					createRankingFromSlider();
-					slider.setCurrentValue(sliderRanking.getCurrentValue());
+					sliderMap.setCurrentValue(sliderRanking.getCurrentValue());
 					sliderHisto.setCurrentValue(sliderRanking.getCurrentValue());
 					sliderRanking.redraw();
 				}
@@ -119,6 +121,8 @@ public class CreateView extends Composite{
 			@Override
 			public void onMouseUp(MouseUpEvent event) {
 				createBarChartFromSlider();
+				sliderMap.setCurrentValue(sliderHisto.getCurrentValue());
+				sliderRanking.setCurrentValue(sliderHisto.getCurrentValue());
 				sliderHisto.redraw();
 			}
 		});	
@@ -127,7 +131,7 @@ public class CreateView extends Composite{
 		
 		
 		mapPanel.add(new SourceView()); // adding a verticalPanel with all source to the mapPanel
-		mapPanel.add(slider.asWidget());
+		mapPanel.add(sliderMap.asWidget());
 		rankingPanel.add(sliderRanking.asWidget());
 		addRanking(Integer.valueOf(year));
 		histogramPanel.add(sliderHisto.asWidget());
@@ -153,7 +157,7 @@ public class CreateView extends Composite{
 	
 	public void createMapFromSlider(){
 		mapPanel.remove(2);
-		createMap((int)slider.getCurrentValue());
+		createMap((int)sliderMap.getCurrentValue());
 	}
 	public void createMap(final int year){
 		final DataTable table = DataTable.create();
