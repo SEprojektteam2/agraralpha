@@ -201,6 +201,11 @@ data = new ArrayList<ArrayList<Double>>();
 		return index;
 	}
 	
+	public Chart redraw()
+	{
+		return chart.redraw();
+	}
+	
 //get- and set-Methods for some of the attributes
 	
 	public void setYearIndex(int index)

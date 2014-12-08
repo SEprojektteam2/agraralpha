@@ -340,7 +340,9 @@ public class CreateView extends Composite{
 		vBarChart.setTitleY("Amount");
 		
 		histogramPanel.add(slider);
-		histogramPanel.add(vBarChart.getChart());
+		histogramPanel.add(vBarChart.redraw());
+		
+		
 		
 	}
 	
@@ -351,6 +353,7 @@ public class CreateView extends Composite{
 		year = Integer.toString((int) slider.getCurrentValue());
 		
 		vBarChart.draw(year, cols);
-		histogramPanel.add(vBarChart.getChart());
+		
+		histogramPanel.add(vBarChart.redraw());
 	}
 }
