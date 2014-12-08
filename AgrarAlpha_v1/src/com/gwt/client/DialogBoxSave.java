@@ -54,7 +54,7 @@ public class DialogBoxSave extends DialogBox {
 		btnPanel = new HorizontalPanel();
 
 		tb = new TextBox();
-		// this event only allows the user to enter letter or numbers other
+		// this event  allows the user only to enter letter or numbers other
 		// signs get canceled
 		tb.addKeyPressHandler(new KeyPressHandler() {
 			@Override
@@ -83,7 +83,7 @@ public class DialogBoxSave extends DialogBox {
 				log.info("BEFORE SAVE");
 				if (!searchForValue()) //checks if there is already an entry with that name
 					saveData();
-				else{
+				else{//if there is already an entry opens a dialog
 					DialogBoxCreate db=new DialogBoxCreate("Name already exists!");
 	            	db.center();
 	            	db.show();				}
@@ -92,9 +92,9 @@ public class DialogBoxSave extends DialogBox {
 
 		Button close = new Button("close");
 		close.setStyleName("beautifulbutton2");
-		close.addClickHandler(new ClickHandler() {
+		close.addClickHandler(new ClickHandler() {//handles events when close get clicked
 			public void onClick(ClickEvent event) {
-				DialogBoxSave.this.hide();
+				DialogBoxSave.this.hide(); //close the dialog
 			}
 		});
 		btnPanel.add(save);

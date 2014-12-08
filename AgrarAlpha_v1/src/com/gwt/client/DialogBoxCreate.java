@@ -18,9 +18,10 @@ class DialogBoxCreate extends DialogBox {
 	private Label label;
 	private VerticalPanel vpanel;
 	
-	/**
-	 Dialog for invalid actions
-	 */
+
+    /**
+     * @param message
+     */
     public DialogBoxCreate(String message) {
       // Set the dialog box's caption.
       setText("Error message");

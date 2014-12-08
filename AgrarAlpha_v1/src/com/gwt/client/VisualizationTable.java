@@ -73,12 +73,13 @@ public class VisualizationTable {
 		HTML html = new HTML();
 		htmlString += "<thead>";
 		htmlString += tr;
-		
-		if (arraylist.get(arraylist.size() - 1)[1].equals(isCountry)) {
-			htmlString += th + "Country" + th2;
+		//add table head
+		if (arraylist.get(arraylist.size() - 1)[1].equals(isCountry)) { //checks if world is selected
+			htmlString += th + "Country" + th2;      
 		} else {
 			htmlString += th + arraylist.get(arraylist.size() - 1)[2] + th2;
 		}
+		//add the years in the table head
 		for (int a = start; a <= end; a++) {
 
 			htmlString += th + String.valueOf(a) + th2;
@@ -89,6 +90,7 @@ public class VisualizationTable {
 		String checkCountry = arraylist.get(0)[1];
 		int i = 0;
 		int k = 0;
+		
 		while (i < arraylist.size() - 1) {
 			htmlString += tr;
 			htmlString += th + arraylist.get(i)[1] + th2; //add either country name or data type (import export)
