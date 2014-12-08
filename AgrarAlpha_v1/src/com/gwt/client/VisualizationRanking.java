@@ -122,7 +122,7 @@ public class VisualizationRanking {
 				// If value is defined
 				if (!dataArray.get(i)[2].equals("-"))
 					// If it is a country we don't want to exclude from ranking
-					if (filter(dataArray.get(i)[1]))
+					if (isRelevantCountry(dataArray.get(i)[1]))
 						//add the country to our ArrayList
 						countries.add(dataArray.get(i));
 			}
@@ -142,26 +142,38 @@ public class VisualizationRanking {
 		return returnArray;
 	}
 	
-	public ArrayList<String[]> selectionSort(ArrayList<String[]> arr) {
+	public ArrayList<String[]> selectionSort(ArrayList<String[]> arrayList) {
+		// Initialize different ArrayList positions
 		int pointerBefore, pointerAfter, maxIndex;
+		// Initialize String array to store String array temporarily
 		String[] tmp = new String[3];
-		int n = arr.size();
+		// Get size of ArrayList
+		int n = arrayList.size();
+		// Go trough ArrayList
 		for (pointerBefore = 0; pointerBefore < n - 1; pointerBefore++) {
+			// Set index of the actual highest value
 			maxIndex = pointerBefore;
+			// Inner loop to compare elements
 			for (pointerAfter = pointerBefore + 1; pointerAfter < n; pointerAfter++)
-				if (Double.valueOf(arr.get(pointerAfter)[2]) > Double.valueOf(arr.get(maxIndex)[2]))
+				// Check if value of inner loop and compare if it's bigger than value of item at position maxIndex
+				if (Double.valueOf(arrayList.get(pointerAfter)[2]) > Double.valueOf(arrayList.get(maxIndex)[2]))
+					// If value is bigger, set pointer maxIndex to actual arrayList position
 					maxIndex = pointerAfter;
+			// If maximal Index doesn't equal pointerBefore
 			if (maxIndex != pointerBefore) {
-				tmp = arr.get(pointerBefore);
-				arr.set(pointerBefore, arr.get(maxIndex));
-				arr.set(maxIndex, tmp);
+				// Store value at position pointerBefore to temporary array
+				tmp = arrayList.get(pointerBefore);
+				// Set array at position pointerBefore to array stored at maxIndex
+				arrayList.set(pointerBefore, arrayList.get(maxIndex));
+				// Set array at position maxIndex to array stored in temporary array
+				arrayList.set(maxIndex, tmp);
 			}
 		}
-		return arr;
+		return arrayList;
 	}
 	
 	//public ArrayList<String[]> removeIrrelevantCountries
-	   public boolean filter(String country){
+	   public boolean isRelevantCountry(String country){
 		   if(country.equals("Central African Republic"))
 			   return false;
 		   if(country.equals("Central America"))
@@ -230,7 +242,8 @@ public class VisualizationRanking {
 			   return false;
 		   if(country.equals("Northern Europe"))
 			   return false;
-		   
+		   if(country.equals("Australia & New Zealand"))
+			   return false; 
 
 		   return true;
 	   }
