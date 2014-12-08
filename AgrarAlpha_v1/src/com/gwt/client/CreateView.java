@@ -161,6 +161,7 @@ public class CreateView extends Composite{
 		
 		mapPanel.add(new SourceView()); // adding a verticalPanel with all source to the mapPanel
 		mapPanel.add(slider.asWidget());
+		histogramPanel.add(slider.asWidget());
 		createMap(Integer.parseInt(year));	
 		//mapPanel.add(getMap());
 		basePanel.add(tablePanel,"Table");
@@ -356,5 +357,15 @@ public class CreateView extends Composite{
 		System.out.println("draw form slider "+year);
 		
 		histogramPanel.add(vBarChart.draw(year, cols));
+	}
+	
+	public ArrayList<String[]> getTopTenCountries(int year){
+		ArrayList<String[]> countries = new ArrayList<String[]>();
+		for(int i = 0; i<dataArray.size(); i++){
+			if(dataArray.get(i)[0].equals(String.valueOf(year))){
+				countries.add(dataArray.get(i));
+			}
+		}
+		return countries;
 	}
 }
