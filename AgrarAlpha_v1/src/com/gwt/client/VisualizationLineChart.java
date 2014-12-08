@@ -52,8 +52,8 @@ public class VisualizationLineChart {
 					public String format(ToolTipData toolTipData) {
 						return toolTipData.getXAsDouble()
 								+ ": "
-								+ NumberFormat.getFormat("#'###'###").format(
-										toolTipData.getYAsLong());
+								+ NumberFormat.getFormat("#.##").format(
+										toolTipData.getYAsDouble());
 					}
 				}))
 				.setAreaPlotOptions(
@@ -64,7 +64,6 @@ public class VisualizationLineChart {
 										.setRadius(2)
 										.setHoverState(
 												new Marker().setEnabled(true)))
-
 				);
 
 		chart.getXAxis()
