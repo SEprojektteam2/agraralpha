@@ -274,6 +274,19 @@ public class CreateView extends Composite{
 		label = new Label("Visualization: ");
 		interpolationPanel.add(label);
 		interpol = new ListBox();
+		String controll = "null";
+		for(int k=0;k<dataArray.size()-1;k++){
+			String[] resultTemp = new String[3];
+			resultTemp = dataArray.get(k);
+			if(controll.equals("null")){
+				controll=resultTemp[1];
+				interpol.addItem(resultTemp[1]);
+			}
+			else if(!controll.equals(resultTemp[1])){
+				controll=resultTemp[1];
+				interpol.addItem(resultTemp[1]);
+			}
+		}
 		interpol.addItem("bla");
 		interpol.addItem("bla1");
 		interpol.addItem("bla2");

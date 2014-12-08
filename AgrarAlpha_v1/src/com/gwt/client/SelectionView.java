@@ -69,7 +69,6 @@ public class SelectionView extends Composite implements Serializable {
 
 		yearLB = new ListBox();
 		yearLB.addItem(" "); // Adding blank option
-		yearLB.addStyleName("label");
 
 		perCapitaCB = new CheckBox("Per capita");
 
