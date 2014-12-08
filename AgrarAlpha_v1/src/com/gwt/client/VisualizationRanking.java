@@ -24,7 +24,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 /**
  */
 public class VisualizationRanking {
-
+	
 	private String tr = "<tr>";
 	private String tr2 = "</tr>";
 	private String th = "<th>";
@@ -34,14 +34,14 @@ public class VisualizationRanking {
 	private HTML table;
 	private String htmlString = new String();
 	private int year = 0;
-	ArrayList<String[]> arraylist;
+	ArrayList<String[]> arraylist = new ArrayList<String[]>();
 
 	/**
 	 * @param a
 	 */
-	public VisualizationRanking(ArrayList<String[]> a, int year) {
+	public VisualizationRanking(ArrayList<String[]> a, String year) {
+		this.year = Integer.parseInt(year);
 		this.arraylist = getTopTenCountries(a);
-		this.year = year;
 	}
 
 	/**
@@ -71,12 +71,16 @@ public class VisualizationRanking {
 		htmlString += "<tbody>";
 
 		for(int i=1;i<arraylist.size();i++){
-			
-			htmlString += tr;
-			htmlString += th + String.valueOf(i) + th2;
+			if(i==1){
+				htmlString += tr;
+				htmlString += td + " " + td2;
 
+			}else{
+			htmlString += tr;
+			htmlString += td + String.valueOf(i-1) + td2;
+			}
 			for(int j=0; j<3;j++){
-				htmlString += th + arraylist.get(i)[j] + th2;
+				htmlString += td + arraylist.get(i)[j] + td2;
 
 			}
 			htmlString += tr2;
@@ -91,6 +95,7 @@ public class VisualizationRanking {
 	
 	public ArrayList<String[]> getTopTenCountries(ArrayList<String[]> dataArray){
 		ArrayList<String[]> countries = new ArrayList<String[]>();
+		// get the type of data (stored in last row of ArrayList)
 		String type = dataArray.get(dataArray.size()-1)[1];
 		if(type.equals("AreaName"))
 			type = "Country";
@@ -98,13 +103,11 @@ public class VisualizationRanking {
 			type = "Product";
 		if(type.equals("ElementName"))
 			type = "Type";
-			
-		//String[] headRow = {"Year",type,"Value"};
-		//countries.add(headRow);
 
 		for(int i = 0; i<dataArray.size()-1; i++){
-			if(dataArray.get(i)[0].equals(year)){
+			if(dataArray.get(i)[0].equals(String.valueOf(year))){
 				if(!dataArray.get(i)[2].equals("-"))
+					if(filter(dataArray.get(i)[1]))
 					countries.add(dataArray.get(i));
 			}
 		}
@@ -112,7 +115,7 @@ public class VisualizationRanking {
 		ArrayList<String[]> returnArray = new ArrayList<String[]>();
 		String[] headRow = {"Year",type,"Value"};
 		returnArray.add(headRow);
-		for(int i = 0; i<10; i++)
+		for(int i = 0; i<11; i++)
 		{ returnArray.add(countries.get(i));}
 		return returnArray;
 	}
@@ -134,4 +137,53 @@ public class VisualizationRanking {
 		}
 		return arr;
 	}
+	
+	//public ArrayList<String[]> removeIrrelevantCountries
+	   public boolean filter(String country){
+		   if(country.equals("Central African Republic"))
+			   return false;
+		   if(country.equals("Central America"))
+			   return false;
+		   if(country.equals("Central Asia"))
+			   return false;
+		   if(country.equals("China ex. int"))
+			   return false;
+		   if(country.equals("Eu(12)ex.int"))
+			   return false;
+		   if(country.equals("Eu(15)ex.int"))
+			   return false;
+		   if(country.equals("Eu(25)ex.int"))
+			   return false;
+		   if(country.equals("Eu(27)ex.int"))
+			   return false;
+		   if(country.equals("Europe"))
+			   return false;
+		   if(country.equals("European Union"))
+			   return false;
+		   if(country.equals("Eatern Asia"))
+			   return false;
+		   if(country.equals("South Africa"))
+			   return false;
+		   if(country.equals("South America"))
+			   return false;
+		   if(country.equals("Southern Africa"))
+			   return false;
+		   if(country.equals("Southern Asia"))
+			   return false;
+		   if(country.equals("Southern Europe"))
+			   return false;
+		   if(country.equals("South-Eastern Asia"))
+			   return false; 
+		   if(country.equals("Western Africa"))
+			   return false;
+		   if(country.equals("Western Asia"))
+			   return false;
+		   if(country.equals("Western Europe"))
+			   return false;
+		   if(country.equals("Middle Africa"))
+			   return false;
+
+		   return true;
+	   }
+
 }

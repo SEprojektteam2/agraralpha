@@ -75,7 +75,7 @@ public class CreateView extends Composite{
 		 */
 		rankingPanel = new VerticalPanel();
 		rankingPanel.add(new SourceView());
-		vRanking= new VisualizationRanking(dataArray, Integer.parseInt(year));
+		vRanking= new VisualizationRanking(dataArray, year);
         rankingPanel.add(vRanking.create());		
 		tablePanel = new VerticalPanel();
 		interpolationPanel = new VerticalPanel();
