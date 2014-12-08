@@ -87,20 +87,20 @@ public class VisualizationBarChart{
 	 * @return
 	 */
 	private String[] calculateRanges() {
-		//finding the min and max for the the first (min) and last (max) range
+		// finding the min and max for the the first (min) and last (max) range
 		double min = findMin();
 		double max = findMax();
+
+		// calculating the diff between each ranges max and min
+		double diff = (max - min) / numColumns;
 		
-		//calculating the diff between each ranges max and min
-		double diff = (max-min)/numColumns;
-		
-		//creating the categhories for the xAchsis, which won't be added to the chart in this method!
-		String[] cols = new String[numColumns+1];
-		for(int i = 0; i < numColumns; i++)
+		// creating the categhories for the xAchsis, which won't be added to the chart in this method!
+		String[] cols = new String[numColumns];
+		for (int i = 0; i < numColumns-1; i++) 
 		{
-			cols[i] = "to " + Double.toString(((min+diff*(i+1))));// + " to " + Double.toString(Math.round((min+diff*(i+1))/10000));
+			cols[i] = "to "+ Integer.toString((int)(min + (diff * (i + 1))));
 		}
-		cols[numColumns] = Double.toString((max));
+		cols[numColumns-1] = "to " + Integer.toString((int)Math.ceil(max));
 		
 		return cols;
 	} 
@@ -144,17 +144,16 @@ public class VisualizationBarChart{
 	private int count(double min, double max)
 	{
 		int count = 0;
+		
 		for(double num : data.get(yearIndex))
 		{
-			if(num <= max && num > min)
+			if(Double.compare(max, num) >= 0 && Double.compare(num, min) > 0 )
 			{
 				count++;
-				log.warning(Double.toString(num));
 			}
 		}
-		log.warning(Double.toString(min) + " to " +Double.toString(max) +" count: " + Integer.toString(count));
-		return count;
 		
+		return count;
 	}
 	
 	/**
@@ -240,12 +239,12 @@ public class VisualizationBarChart{
 	
 	public void setNumColumns(int number)
 	{
-
 		if (number < COLUMNSMIN || number > COLUMNSMAX)
 		{
 			numColumns = COLUMNSDEFAULT;
+			return;
 		}
-		
+		numColumns = number;
 	}
 	
 	public int getNumColumns()

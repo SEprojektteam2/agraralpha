@@ -18,7 +18,7 @@ public class VisualizationBarChart_v2{
 	
 	public static Chart chart;
 	public static ArrayList<ArrayList<Double>> data;
-	public static int numColumns = COLUMNSDEFAULT;
+	public static int numColumns;
 	public static int yearIndex;
 	
 	/**
@@ -30,6 +30,7 @@ public class VisualizationBarChart_v2{
 	 */
 	public VisualizationBarChart_v2(ArrayList<String[]> resultData, String year)
 	{
+		setNumColumns(COLUMNSDEFAULT);
 		chart = new Chart();
 		chart.setType(Series.Type.COLUMN);
 		
@@ -64,9 +65,14 @@ public class VisualizationBarChart_v2{
 		
 		//creating points which will be added to series of the chart, based on ranges calculated previously
 		Number[] points = new Number[columns];
-		for(int i = 0; i < cols.length-1; i++)
+		for(int i = 0; i < cols.length; i++)
 		{
-			points[i] = count(Double.parseDouble(cols[i]), Double.parseDouble(cols[i+1]));
+			if(i==0)
+				points[i] = count(0.0, Double.parseDouble(cols[i]));
+			else if(i == cols.length-1)
+				points[i] = count(Double.parseDouble(cols[i-1]), Double.parseDouble(cols[i]+1));
+			else
+				points[i] = count(Double.parseDouble(cols[i-1]), Double.parseDouble(cols[i]));
 		}
 		
 		//adding the series to the chart
@@ -89,14 +95,13 @@ public class VisualizationBarChart_v2{
 		// calculating the diff between each ranges max and min
 		double diff = (max - min) / numColumns;
 
-		// creating the categhories for the xAchsis, which won't be added to the
-		// chart in this method!
-		String[] cols = new String[numColumns + 1];
-		for (int i = 0; i < numColumns; i++) 
+		// creating the categhories for the xAchsis, which won't be added to the chart in this method!
+		String[] cols = new String[numColumns];
+		for (int i = 0; i < numColumns-1; i++) 
 		{
-			cols[i] = "to "+ Integer.toString((int)Math.round((min + diff * (i + 1))));
+			cols[i] = "to "+ Integer.toString((int)(min + (diff * (i + 1))));
 		}
-		cols[numColumns] = Integer.toString((int)Math.ceil(max));
+		cols[numColumns-1] = "to " + Integer.toString((int)Math.ceil(max));
 
 		return cols;
 	} 
@@ -143,7 +148,7 @@ public class VisualizationBarChart_v2{
 		
 		for(double num : data.get(yearIndex))
 		{
-			if(num < max && num >= min)
+			if(Double.compare(max, num) >= 0 && Double.compare(num, min) > 0 )
 			{
 				count++;
 			}
@@ -234,7 +239,9 @@ public class VisualizationBarChart_v2{
 		if (number < COLUMNSMIN || number > COLUMNSMAX)
 		{
 			numColumns = COLUMNSDEFAULT;
+			return;
 		}
+		numColumns = number;
 	}
 	
 	public static int getNumColumns()
