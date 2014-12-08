@@ -1,7 +1,5 @@
 package com.gwt.client;
 
-import java.util.ArrayList;
-
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;

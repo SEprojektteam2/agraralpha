@@ -47,9 +47,10 @@ public class CreateView extends Composite{
 	private SliderBar sliderHisto = new SliderBar(1990, 2011);
 	private SliderBar sliderRanking = new SliderBar(1990, 2011);
 	public static final Logger log = Logger.getLogger(CreateView.class.getName());
-	final VisualizationLineChart vLineChart = new VisualizationLineChart();
+	private VisualizationLineChart vLineChart = new VisualizationLineChart();
 	private VisualizationMap visMap = new VisualizationMap();
 	VisualizationBarChart vBarChart;
+	private int Index = 0;
 
 	/* This class present the view the user has after he clicked the create button on mainView. it contains the graphics the user wants to see
 	 */
@@ -274,14 +275,14 @@ public class CreateView extends Composite{
 		interpolBtn.addClickHandler(new createClickHandler());
 		interpolBtn.addStyleName("beautifulbutton2");
 		interpolationPanel.add(interpolBtn);
-		createLineChart(0);
+		createLineChart();
 	}
-	private void createLineChart(int Index){
+	private void createLineChart(){
 		SimpleRegressionServiceAsync simpleRegSvc = GWT.create(SimpleRegressionService.class);
 		double[] points = new double[22];
-		int start = Index*21;
-   		for(int j=0+start;j<=21+start;j++){
-   			String[] tempNumber= dataArray.get(j);
+		int start = Index*22;
+   		for(int j=0;j<=21;j++){
+   			String[] tempNumber= dataArray.get(j+start);
    			if(tempNumber[2].equals("-")){
    				points[j]=0;
    			}
@@ -295,36 +296,38 @@ public class CreateView extends Composite{
 				data[k][0]=k;
 				data[k][1]=points[k];
 			}
-		final double rpcPoints[] = points;	
+		final double rpcPoints[] = points;
+		
 		simpleRegSvc.getSimpleReg(data, new AsyncCallback<double[]>() {
-			
-
-				
 				public void onFailure(Throwable caught) {
 					// Show the RPC error message to the user
 					log.warning("failure creating async callback");	
 				}
 				public void onSuccess(double[] resultTemp) {
+					log.warning("onSuccess");
 					double[] resultReg = new double[2];
 					resultReg=resultTemp;
-					LineChart = vLineChart.getLineChart(dataArray, rpcPoints, resultReg);
-					interpolationPanel.add(LineChart.asWidget());						
+					vLineChart = new VisualizationLineChart();
+					LineChart = new Chart();
+					log.warning(Integer.toString(dataArray.size()));
+					LineChart = vLineChart.getLineChart(dataArray, rpcPoints, resultReg, Index);
+					interpolationPanel.add(LineChart);
 				}
 		});
 	}
 
-	public int getIndex() {
-		int i = interpolLB.getSelectedIndex();
-		return i;
+	public void getIndex() {
+		this.Index = interpolLB.getSelectedIndex();
 	}
 
 	private class createClickHandler implements ClickHandler {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			interpolationPanel.remove(LineChart.asWidget());
-			LineChart=null;
-			createLineChart(getIndex());
+			interpolationPanel.remove(LineChart);
+			log.warning(Integer.toString(Index));
+			getIndex();
+			createLineChart();
 		}
 
 	}
