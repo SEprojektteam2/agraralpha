@@ -52,8 +52,8 @@ public class VisualizationLineChart {
 					public String format(ToolTipData toolTipData) {
 						return toolTipData.getXAsDouble()
 								+ ": "
-								+ NumberFormat.getFormat("#'###").format(
-										toolTipData.getYAsDouble());
+								+ NumberFormat.getFormat("#'###'###").format(
+										toolTipData.getYAsLong());
 					}
 				}))
 				.setAreaPlotOptions(
@@ -75,8 +75,8 @@ public class VisualizationLineChart {
 				.setTickInterval(5);
 
 		final YAxis axis = chart.getYAxis();
-		axis.setAxisTitleText("Value in tonnes")
-				// .setMin(0)
+		axis.setAxisTitleText("Value")
+				.setMin(0)
 				.setMinorGridLineWidth(0).setGridLineWidth(0)
 				.setAlternateGridColor(null);
 
