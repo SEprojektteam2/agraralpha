@@ -58,5 +58,70 @@ public class VisualizationMap {
 		// Return the GeoMap
 		return map;
 	}
+	
+	/**
+	 * Replaces invalid ISO-Country names
+	 * @param country
+	 * @return
+	 */
+	public String createValidCountry(String country){
+		// If / else tree to replace incorrect country names with iso name
+		if (country.equalsIgnoreCase("United States of America"))
+			country = "United States";
+		
+		else if (country.equalsIgnoreCase("Russian Federation"))
+			country = "Russia";
+		
+		else if (country.equalsIgnoreCase("Iran (Islamic Republic of)"))
+			country = "Iran";
+		
+		else if (country.equalsIgnoreCase("Venezuela (Bolivarian Republic of)"))
+			country = "Venezuela";
+
+		else if (country.equalsIgnoreCase("Bolivia (Plurinational State of)"))
+			country = "Bolivia";
+
+		else if (country.equalsIgnoreCase("United Republic of Tanzania"))
+			country = "Tanzania";
+
+		else if (country.equalsIgnoreCase("Congo"))
+			country = "CG";
+
+		else if (country.equalsIgnoreCase("Syrian Arab Republic"))
+			country = "Syria";
+
+		else if (country.equalsIgnoreCase("Democratic People's Republic of Korea"))
+			country = "North Korea";
+
+		else if (country.equalsIgnoreCase("Republic of Korea"))
+			country = "South Korea";
+
+		else if (country.equalsIgnoreCase("Viet Nam"))
+			country = "Vietnam";
+
+		else if (country.equalsIgnoreCase("Lao People's Democratic Republic"))
+			country = "Laos";
+
+		else if (country.equalsIgnoreCase("Democratic Republic of the Congo"))
+			country = "CD";
+
+		else if (country.equalsIgnoreCase("South Sudan"))
+			country = "SS";
+
+		else if (country.equalsIgnoreCase("Côte d'Ivoire"))
+			country = "CIV";
+
+		else if (country.equalsIgnoreCase("Republic of Moldova"))
+			country = "Moldova";
+
+		else if (country.equalsIgnoreCase("The former Yugoslav Republic of Macedonia"))
+			country = "Macedonia";
+
+		else if (country.equalsIgnoreCase("Falkland"))
+			country = "Falkland Islands (Malvinas)";
+		
+		// Return country name. Either changed or not.
+		return country;
+	}
 
 }
