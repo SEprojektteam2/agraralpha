@@ -18,6 +18,8 @@ import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
@@ -92,8 +94,10 @@ public class CreateView extends Composite{
 		rankingPanel = new VerticalPanel();
 		rankingPanel.add(new SourceView());
 		rankingPanel.add(slider.asWidget());
-		vRanking= new VisualizationRanking(dataArray, year);
-        rankingPanel.add(vRanking.create());		
+        vRanking= new VisualizationRanking(dataArray, year);
+        HTML ranking=vRanking.create();
+		rankingPanel.add(vRanking.create());	
+        rankingPanel.setCellHorizontalAlignment(ranking,HasHorizontalAlignment.ALIGN_CENTER);
 		
         tablePanel = new VerticalPanel();
 		interpolationPanel = new VerticalPanel();
