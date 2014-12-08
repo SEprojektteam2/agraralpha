@@ -132,7 +132,7 @@ public class VisualizationBarChart{
 			if(!(datapart[2].equals("-")))
 			{
 				if(isRelevantCountry(datapart[1]))
-				data.get(calculateYearIndex(datapart[0])).add(Double.parseDouble(datapart[2]));
+					data.get(calculateYearIndex(datapart[0])).add(Double.parseDouble(datapart[2]));
 			}
 		}
 	}
@@ -314,6 +314,8 @@ public class VisualizationBarChart{
 			   return false;
 		   if(country.equals("South-Eastern Asia"))
 			   return false; 
+		   if(country.equals("Small Island Developing States"))
+			   return false;
 		   if(country.equals("Western Africa"))
 			   return false;
 		   if(country.equals("Western Asia"))
