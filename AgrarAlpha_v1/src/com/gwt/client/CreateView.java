@@ -378,6 +378,8 @@ public class CreateView extends Composite{
 	
 	public ArrayList<String[]> getTopTenCountries(int year){
 		ArrayList<String[]> countries = new ArrayList<String[]>();
+		String[] headRow = {"Year",dataArray.get(dataArray.size()-1)[1],"Value"};
+		countries.add(headRow);
 		for(int i = 0; i<dataArray.size(); i++){
 			if(dataArray.get(i)[0].equals(String.valueOf(year))){
 				countries.add(dataArray.get(i));
