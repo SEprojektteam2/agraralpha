@@ -162,7 +162,7 @@ public class CreateView extends Composite{
 		//mapPanel.add(vMap.createChart());
 		//vMap.createChart(mapPanel);
 		
-		addBarChart();	
+		
 		sliderHisto.setStepSize(1);
 		sliderHisto.setCurrentValue(Integer.parseInt(year));
 		sliderHisto.setNumTicks(21);
@@ -182,6 +182,7 @@ public class CreateView extends Composite{
 		mapPanel.add(new SourceView()); // adding a verticalPanel with all source to the mapPanel
 		mapPanel.add(slider.asWidget());
 		histogramPanel.add(sliderHisto.asWidget());
+		addBarChart();	
 		createMap(Integer.parseInt(year));	
 		//mapPanel.add(getMap());
 		basePanel.add(tablePanel,"Table");
@@ -368,8 +369,9 @@ public class CreateView extends Composite{
 	}
 	
 	public void createBarChartFromSlider(){
+		vBarChart = new VisualizationBarChart(dataArray, year);
 		int cols = vBarChart.getNumColumns();
-		histogramPanel.remove(2);
+		histogramPanel.remove(1);
 		
 		year = Integer.toString((int) sliderHisto.getCurrentValue());
 		
