@@ -10,6 +10,7 @@ import org.moxieapps.gwt.highcharts.client.Chart;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
@@ -254,7 +255,6 @@ public class CreateView extends Composite{
 	
 	private void addLineChart(){	
 		label = new Label("Visualization: ");
-		interpolationPanel.add(label);
 		interpolLB = new ListBox();
 		String controll = "null";
 		for(int k=0;k<dataArray.size()-1;k++){
@@ -269,20 +269,23 @@ public class CreateView extends Composite{
 				interpolLB.addItem(resultTemp[1]);
 			}
 		}
-		interpolationPanel.add(interpolLB);
 		
 		Button interpolBtn = new Button("Create");
 		interpolBtn.addClickHandler(new createClickHandler());
 		interpolBtn.addStyleName("beautifulbutton2");
-		interpolationPanel.add(interpolBtn);
+		FlexTable fTable = new FlexTable();
+		fTable.setWidget(0, 0, label);
+		fTable.setWidget(0, 1, interpolLB);
+		fTable.setWidget(0, 2, interpolBtn);
+		interpolationPanel.add(fTable);
 		createLineChart();
 	}
+	
 	private void createLineChart(){
 		SimpleRegressionServiceAsync simpleRegSvc = GWT.create(SimpleRegressionService.class);
 		double[] points = new double[22];
-		int start = Index*22;
    		for(int j=0;j<=21;j++){
-   			String[] tempNumber= dataArray.get(j+start);
+   			String[] tempNumber= dataArray.get(j+Index);
    			if(tempNumber[2].equals("-")){
    				points[j]=0;
    			}
@@ -304,12 +307,10 @@ public class CreateView extends Composite{
 					log.warning("failure creating async callback");	
 				}
 				public void onSuccess(double[] resultTemp) {
-					log.warning("onSuccess");
 					double[] resultReg = new double[2];
 					resultReg=resultTemp;
 					vLineChart = new VisualizationLineChart();
 					LineChart = new Chart();
-					log.warning(Integer.toString(dataArray.size()));
 					LineChart = vLineChart.getLineChart(dataArray, rpcPoints, resultReg, Index);
 					interpolationPanel.add(LineChart);
 				}
@@ -317,7 +318,7 @@ public class CreateView extends Composite{
 	}
 
 	public void getIndex() {
-		this.Index = interpolLB.getSelectedIndex();
+		this.Index = interpolLB.getSelectedIndex()*22;
 	}
 
 	private class createClickHandler implements ClickHandler {
@@ -325,7 +326,6 @@ public class CreateView extends Composite{
 		@Override
 		public void onClick(ClickEvent event) {
 			interpolationPanel.remove(LineChart);
-			log.warning(Integer.toString(Index));
 			getIndex();
 			createLineChart();
 		}
