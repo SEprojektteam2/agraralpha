@@ -57,6 +57,7 @@ public class SelectionView extends Composite implements Serializable {
 		initWidget(this.fTable);
 		this.main = main;
 
+		//add Lables
 		yearLabel = new Label("Year");
 		yearLabel.addStyleName("label2");
 		countryLabel = new Label("Country");

@@ -64,8 +64,7 @@ public class VisualizationRanking {
 		//adding head of table
 		htmlString += th + "Rank" + th2;
 		htmlString += th + arraylist.get(0)[1] + th2;
-		htmlString += th + arraylist.get(0)[2] + th2;
-		htmlString += th + information +String.valueOf(year) + th2;
+		htmlString += th + information +" "+String.valueOf(year) + th2;
 
 
 
