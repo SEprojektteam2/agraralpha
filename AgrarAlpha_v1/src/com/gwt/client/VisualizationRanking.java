@@ -39,8 +39,8 @@ public class VisualizationRanking {
 	/**
 	 * @param a
 	 */
-	public VisualizationRanking(ArrayList<String[]> a, String year) {
-		this.year = Integer.parseInt(year);
+	public VisualizationRanking(ArrayList<String[]> a, int year) {
+		this.year = year;
 		this.arraylist = getTopEleven(a);
 	}
 

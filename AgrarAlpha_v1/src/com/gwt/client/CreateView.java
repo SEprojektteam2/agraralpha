@@ -41,6 +41,7 @@ public class CreateView extends Composite{
 	private String year;
 	private SliderBar slider = new SliderBar(1990, 2011);
 	private SliderBar sliderHisto = new SliderBar(1990, 2011);
+	private SliderBar sliderRanking = new SliderBar(1990, 2011);
 	public static final Logger log = Logger.getLogger(CreateView.class.getName());
 	final VisualizationLineChart vLineChart = new VisualizationLineChart();
 	VisualizationBarChart vBarChart;
@@ -67,17 +68,26 @@ public class CreateView extends Composite{
 					slider.redraw();
 				}
 	          });
+		  
+		  sliderRanking.setStepSize(1);
+		  sliderRanking.setCurrentValue(Integer.parseInt(year));
+		  sliderRanking.setNumTicks(21);
+		  sliderRanking.setNumLabels(21);
+		  sliderRanking.setWidth("100%");
+		  sliderRanking.addMouseUpHandler(new MouseUpHandler(){
+				@Override
+				public void onMouseUp(MouseUpEvent event) {
+					createRankingFromSlider();
+					slider.setCurrentValue(sliderRanking.getCurrentValue());
+					sliderHisto.setCurrentValue(sliderRanking.getCurrentValue());
+					sliderRanking.redraw();
+				}
+	          });
 
 		
 		VisualizationTable vTable = new VisualizationTable(Data);
 		
-		rankingPanel = new VerticalPanel();
-		rankingPanel.add(new SourceView());
-		rankingPanel.add(slider.asWidget());
-        vRanking= new VisualizationRanking(dataArray, year);
-        HTML ranking=vRanking.create();
-		rankingPanel.add(ranking);	
-        rankingPanel.setCellHorizontalAlignment(ranking,HasHorizontalAlignment.ALIGN_CENTER);
+		
 		
         tablePanel = new VerticalPanel();
 		interpolationPanel = new VerticalPanel();
@@ -114,6 +124,8 @@ public class CreateView extends Composite{
 		
 		mapPanel.add(new SourceView()); // adding a verticalPanel with all source to the mapPanel
 		mapPanel.add(slider.asWidget());
+		rankingPanel.add(sliderRanking.asWidget());
+		addRanking(Integer.valueOf(year));
 		histogramPanel.add(sliderHisto.asWidget());
 		addBarChart();	
 		createMap(Integer.parseInt(year));	
@@ -318,5 +330,18 @@ public class CreateView extends Composite{
 		histogramPanel.add(vBarChart.draw(year, cols));
 	}
 	
+	public void createRankingFromSlider(){
+		rankingPanel.remove(2);
+		addRanking((int)sliderRanking.getCurrentValue());
+	}
 	
+	public void addRanking(int newYear){
+		rankingPanel = new VerticalPanel();
+		rankingPanel.add(new SourceView());
+		rankingPanel.add(slider.asWidget());
+        vRanking= new VisualizationRanking(dataArray, Integer.valueOf(newYear));
+        HTML ranking=vRanking.create();
+		rankingPanel.add(ranking);	
+        rankingPanel.setCellHorizontalAlignment(ranking,HasHorizontalAlignment.ALIGN_CENTER);
+	}
 }
