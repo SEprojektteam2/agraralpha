@@ -61,11 +61,12 @@ public class VisualizationMap {
 	
 	/**
 	 * Replaces invalid ISO-Country names
-	 * @param country
-	 * @return
+	 * @param country a country name to check
+	 * @return String country in ISO-Format
+	 * @author Fabian Weber
 	 */
 	public String createValidCountry(String country){
-		// If / else tree to replace incorrect country names with iso name
+		// If / else tree to replace incorrect country names with ISO name
 		if (country.equalsIgnoreCase("United States of America"))
 			country = "United States";
 		
