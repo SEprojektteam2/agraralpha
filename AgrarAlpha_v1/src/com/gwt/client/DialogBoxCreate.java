@@ -39,7 +39,7 @@ class DialogBoxCreate extends DialogBox {
       // whatever you want its contents to be.
       Button ok = new Button("OK");
       ok.setStyleName("beautifulbutton2");
-      ok.addClickHandler(new ClickHandler() {
+      ok.addClickHandler(new ClickHandler() { //close dialog if ok gets clicked
         public void onClick(ClickEvent event) {
           DialogBoxCreate.this.hide();
         }
