@@ -234,7 +234,7 @@ public class SelectionView extends Composite implements Serializable {
 			// dialog appears when user wants to create an invalid selection
 
 			if (yearLB.isItemSelected(0) || isValid() == false) {
-			DialogBoxCreate dbCreate=new DialogBoxCreate("Everything need to be selected besides \"per Capita\" ");
+			DialogBoxCreate dbCreate=new DialogBoxCreate("Everything besides \"per Capita\" needs to be selected. ");
 			dbCreate.center();
 			dbCreate.show();
 			}

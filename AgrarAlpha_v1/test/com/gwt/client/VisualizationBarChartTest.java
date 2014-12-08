@@ -9,7 +9,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-//To be able to execute this test and for the errors to desapear, the class VisualizationBarChart must have all of its variables and methods on public and static!!
+/**This test is executed with the class VisualizationBarChart_v2 which is equavalent to the class VisualizationBarChart
+ * all its methods and attributes are public and static, to be able to executed this test, without having to change it every time.
+ * 
+ * @author Romi
+ */
 public class VisualizationBarChartTest{
 
 	ArrayList<String[]> data;
@@ -22,7 +26,6 @@ public class VisualizationBarChartTest{
 		convertedData = new ArrayList<ArrayList<Double>>();
 		
 		Random random = new Random();
-		System.out.println("I am here!!");
 		for(int i = 0; i < 3; i++)
 		{
 			convertedData.add(i, new ArrayList<Double>());
@@ -50,6 +53,7 @@ public class VisualizationBarChartTest{
 			
 			VisualizationBarChart_v2.setYearIndex(0);
 			VisualizationBarChart_v2.convertData(data);
+			VisualizationBarChart_v2.setNumColumns(2);
 		}	
 	}
 	
@@ -97,16 +101,49 @@ public class VisualizationBarChartTest{
 	@Test
 	public void testCalculateRanges()
 	{
+		//TODO Check the ranges with the data - the expected values!!
+		VisualizationBarChart_v2.setYearIndex(0);
 		String[] results = VisualizationBarChart_v2.calculateRanges();
+		//assert
+		assertEquals("to 0", results[0]);
+		assertEquals("to 0", results[1]);
 		
-		//year 0
+		VisualizationBarChart_v2.setYearIndex(1);
+		results = VisualizationBarChart_v2.calculateRanges();
+		//assert
+		assertEquals("to 1", results[0]);
+		assertEquals("to 2", results[1]);
+		
+		VisualizationBarChart_v2.setYearIndex(2);
+		results = VisualizationBarChart_v2.calculateRanges();
+		//assert
+		assertEquals("to 3", results[0]);
+		assertEquals("to 3", results[1]);
 		
 	}
 	
 	@Test
 	public void testCount()
 	{
-		//TODO
+		//TODO Check the ranges with the data - the expected values!!
+		VisualizationBarChart_v2.setYearIndex(0);
+		String[] results = VisualizationBarChart_v2.calculateRanges();
+		//assert
+		assertEquals(0, VisualizationBarChart_v2.count(0, Double.parseDouble(results[0].substring(3))));
+		assertEquals(0, VisualizationBarChart_v2.count(Double.parseDouble(results[0].substring(3)), Double.parseDouble(results[1].substring(3))));
+		
+		VisualizationBarChart_v2.setYearIndex(1);
+		results = VisualizationBarChart_v2.calculateRanges();
+		//assert
+		assertEquals(0, VisualizationBarChart_v2.count(0, Double.parseDouble(results[0].substring(3))));
+		assertEquals(1, VisualizationBarChart_v2.count(Double.parseDouble(results[0].substring(3)), Double.parseDouble(results[1].substring(3))));
+		
+		VisualizationBarChart_v2.setYearIndex(2);
+		results = VisualizationBarChart_v2.calculateRanges();
+		//assert
+		assertEquals(1, VisualizationBarChart_v2.count(0, Double.parseDouble(results[0].substring(3))));
+		assertEquals(0, VisualizationBarChart_v2.count(Double.parseDouble(results[0].substring(3)), Double.parseDouble(results[1].substring(3))));
+		
 	}
 
 		
