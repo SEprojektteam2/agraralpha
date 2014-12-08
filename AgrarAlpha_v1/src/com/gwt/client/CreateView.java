@@ -69,6 +69,10 @@ public class CreateView extends Composite{
 				}
 	          });
 		  
+		  rankingPanel = new VerticalPanel();
+			rankingPanel.add(new SourceView());
+			rankingPanel.add(slider.asWidget());
+		  
 		  sliderRanking.setStepSize(1);
 		  sliderRanking.setCurrentValue(Integer.parseInt(year));
 		  sliderRanking.setNumTicks(21);
@@ -336,9 +340,6 @@ public class CreateView extends Composite{
 	}
 	
 	public void addRanking(int newYear){
-		rankingPanel = new VerticalPanel();
-		rankingPanel.add(new SourceView());
-		rankingPanel.add(slider.asWidget());
         vRanking= new VisualizationRanking(dataArray, newYear);
         HTML ranking=vRanking.create();
 		rankingPanel.add(ranking);	
