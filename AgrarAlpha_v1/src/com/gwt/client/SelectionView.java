@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+
 import java.io.Serializable;
 
 
@@ -75,7 +76,7 @@ public class SelectionView extends Composite implements Serializable {
 		for (int i = 1990; i <= lastyear; i++) // i is the first year user can
 												// select
 		{
-			year = year.valueOf(i);
+			year = String.valueOf(i);
 			yearLB.addItem(year);
 		}
 
