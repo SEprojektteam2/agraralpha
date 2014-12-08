@@ -51,6 +51,8 @@ public class VisualizationBarChart{
 	 */
 	public Chart draw(String year, int columns)
 	{
+		chart.removeAllSeries();
+		
 		//if colums is not in range, set to default --> 10
 		setNumColumns(columns);
 		
@@ -70,7 +72,7 @@ public class VisualizationBarChart{
 		}
 		
 		//adding the series to the chart
-		chart.addSeries(chart.createSeries().setType(Series.Type.COLUMN).setPoints(points));
+		chart.addSeries(chart.createSeries().setType(Series.Type.COLUMN).setPoints(points).setName(year));
 		
 		//this return is important, when executing this method from outside
 		return chart.redraw();
