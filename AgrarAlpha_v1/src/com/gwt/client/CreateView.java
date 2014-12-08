@@ -89,12 +89,12 @@ public class CreateView extends Composite{
 				public void onMouseUp(MouseUpEvent event) {
 					sliderMap.setCurrentValue(sliderRanking.getCurrentValue());
 					sliderHisto.setCurrentValue(sliderRanking.getCurrentValue());
-					createMapFromSlider();
-					createRankingFromSlider();
-					createMapFromSlider();
 					sliderMap.redraw();
 					sliderHisto.redraw();
 					sliderRanking.redraw();
+					createMapFromSlider();
+					createRankingFromSlider();
+					createMapFromSlider();
 				}
 	          });
 
