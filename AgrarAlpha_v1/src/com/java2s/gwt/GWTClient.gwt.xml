@@ -1,5 +1,0 @@
-<module>
-	<inherits name="com.google.gwt.user.User"/>
-	<entry-point class="com.java2s.gwt.client.GWTClient"/>
-	<stylesheet src='your.css'/>
-</module>
