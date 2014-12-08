@@ -75,7 +75,7 @@ public class CreateView extends Composite{
 		 */
 		rankingPanel = new VerticalPanel();
 		rankingPanel.add(new SourceView());
-		vRanking= new VisualizationRanking(getTopTenCountries(Integer.parseInt(year)));
+		vRanking= new VisualizationRanking(dataArray, Integer.parseInt(year));
         rankingPanel.add(vRanking.create());		
 		tablePanel = new VerticalPanel();
 		interpolationPanel = new VerticalPanel();
@@ -378,50 +378,5 @@ public class CreateView extends Composite{
 		histogramPanel.add(vBarChart.draw(year, cols));
 	}
 	
-	public ArrayList<String[]> getTopTenCountries(int year){
-		ArrayList<String[]> countries = new ArrayList<String[]>();
-		String type = dataArray.get(dataArray.size()-1)[1];
-		if(type.equals("AreaName"))
-			type = "Country";
-		if(type.equals("ItemName"))
-			type = "Product";
-		if(type.equals("ElementName"))
-			type = "Type";
-			
-		//String[] headRow = {"Year",type,"Value"};
-		//countries.add(headRow);
-
-		for(int i = 0; i<dataArray.size()-1; i++){
-			if(dataArray.get(i)[0].equals(String.valueOf(year))){
-				if(!dataArray.get(i)[2].equals("-"))
-					countries.add(dataArray.get(i));
-			}
-		}
-		countries = selectionSort(countries);
-		ArrayList<String[]> returnArray = new ArrayList<String[]>();
-		String[] headRow = {"Year",type,"Value"};
-		returnArray.add(headRow);
-		for(int i = 0; i<10; i++)
-		{ returnArray.add(countries.get(i));}
-		return returnArray;
-	}
-	
-	public ArrayList<String[]> selectionSort(ArrayList<String[]> arr) {
-		int i, j, maxIndex; 
-		String[] tmp = new String[3];
-		int n = arr.size();
-		for (i = 0; i < n - 1; i++) {
-			maxIndex = i;
-			for (j = i + 1; j < n; j++)
-				if (Double.valueOf(arr.get(j)[2]) > Double.valueOf(arr.get(maxIndex)[2]))
-					maxIndex = j;
-			if (maxIndex != i) {
-				tmp = arr.get(i);
-				arr.set(i, arr.get(maxIndex));
-				arr.set(maxIndex,tmp);
-			}
-		}
-		return arr;
-	}
 	
 }
