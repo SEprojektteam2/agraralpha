@@ -142,6 +142,15 @@ public class VisualizationRanking {
 		return returnArray;
 	}
 	
+	/**
+	 * Sorts a given ArrayList of type String[] descending using the selectionSort
+	 * algorithm
+	 * 
+	 * @param arrayList
+	 *            of type String[] with values stored in array at position 2
+	 * @return descending ordered arrayList
+	 * @author Fabian Weber
+	 */
 	public ArrayList<String[]> selectionSort(ArrayList<String[]> arrayList) {
 		// Initialize different ArrayList positions
 		int pointerBefore, pointerAfter, maxIndex;
