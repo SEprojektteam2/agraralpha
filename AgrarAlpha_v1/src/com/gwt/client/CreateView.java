@@ -248,8 +248,8 @@ public class CreateView extends Composite{
 	{
 		vBarChart = new VisualizationBarChart(dataArray, year);
 		
-		vBarChart.setTitle("Histogram for ...");
-		vBarChart.setTitleX("Range in 10 000");
+		vBarChart.setTitle("Histogram");
+		vBarChart.setTitleX("Range");
 		vBarChart.setTitleY("Amount");
 		
 		histogramPanel.add(sliderHisto);
