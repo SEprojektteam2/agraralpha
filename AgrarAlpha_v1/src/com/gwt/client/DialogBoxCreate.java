@@ -44,10 +44,11 @@ class DialogBoxCreate extends DialogBox {
         }
       });
       
-      vpanel.setCellHorizontalAlignment(ok,
-    		  HasHorizontalAlignment.ALIGN_CENTER);
+     
       vpanel.add(label);
       vpanel.add(ok);
+      vpanel.setCellHorizontalAlignment(ok,
+    		  HasHorizontalAlignment.ALIGN_CENTER);
       
       setWidget(vpanel);
     }
