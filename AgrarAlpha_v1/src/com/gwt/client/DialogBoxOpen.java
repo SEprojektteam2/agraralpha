@@ -73,7 +73,7 @@ public class DialogBoxOpen extends DialogBox {
 
          // DialogBox is a SimplePanel, so you have to set its widget property to
          // whatever you want its contents to be.
-         Button open = new Button("Open");
+         Button open = new Button("open");
          open.setStyleName("beautifulbutton2");
          open.addClickHandler(new ClickHandler() {
            public void onClick(ClickEvent event) {

@@ -134,4 +134,51 @@ public class VisualizationRanking {
 	}
 	
 	//public ArrayList<String[]> removeIrrelevantCountries
+	   public boolean filter(String country){
+		   if(country.equals("Central African Republic"))
+			   return false;
+		   if(country.equals("Central America"))
+			   return false;
+		   if(country.equals("Central Asia"))
+			   return false;
+		   if(country.equals("China ex. int"))
+			   return false;
+		   if(country.equals("Eu(12)ex.int"))
+			   return false;
+		   if(country.equals("Eu(15)ex.int"))
+			   return false;
+		   if(country.equals("Eu(25)ex.int"))
+			   return false;
+		   if(country.equals("Eu(27)ex.int"))
+			   return false;
+		   if(country.equals("Europe"))
+			   return false;
+		   if(country.equals("European Union"))
+			   return false;
+		   if(country.equals("Eatern Asia"))
+			   return false;
+		   if(country.equals("South Africa"))
+			   return false;
+		   if(country.equals("South America"))
+			   return false;
+		   if(country.equals("Southern Africa"))
+			   return false;
+		   if(country.equals("Southern Asia"))
+			   return false;
+		   if(country.equals("Southern Europe"))
+			   return false;
+		   if(country.equals("South-Eastern Asia"))
+			   return false; 
+		   if(country.equals("Western Africa"))
+			   return false;
+		   if(country.equals("Western Asia"))
+			   return false;
+		   if(country.equals("Western Europe"))
+			   return false;
+		   if(country.equals("Middle Africa"))
+			   return false;
+
+		   return true;
+	   }
+
 }

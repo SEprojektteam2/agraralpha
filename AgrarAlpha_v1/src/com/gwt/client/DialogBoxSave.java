@@ -70,7 +70,7 @@ public class DialogBoxSave extends DialogBox {
 		});
 		// Set the dialog box's caption.
 
-		Button save = new Button("Save As");
+		Button save = new Button("save");
 		save.setStyleName("beautifulbutton2");
 		/**
 		 * if save button gets clicked, it will take the string from the textbox
