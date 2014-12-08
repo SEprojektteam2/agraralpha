@@ -2,6 +2,7 @@ package com.gwt.client;
 
 import java.util.ArrayList;
 
+import org.eclipse.jetty.util.log.Log;
 import org.moxieapps.gwt.highcharts.client.Chart;
 import org.moxieapps.gwt.highcharts.client.Series;
 
@@ -148,7 +149,7 @@ public class VisualizationBarChart{
 				count++;
 			}
 		}
-		
+		Log.warn(Double.toString(min) + " to " +Double.toString(max) +" count: " + Integer.toString(count));
 		return count;
 		
 	}
