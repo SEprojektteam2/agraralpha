@@ -20,6 +20,7 @@ public class SourceView extends Composite {
 	//add source to the panel
 	public void addSource(String s){
 		label=new Label(s);
+		label.addStyleName("label2");
 		vPanel.add(label);
 	}
 	

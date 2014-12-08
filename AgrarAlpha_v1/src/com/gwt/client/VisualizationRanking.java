@@ -253,7 +253,20 @@ public class VisualizationRanking {
 			   return false;
 		   if(country.equals("Australia & New Zealand"))
 			   return false; 
-
+		   if(country.equals("Land Locked Developing Countries"))
+			   return false; 
+		   if(country.equals("China, mainland"))
+			   return false; 
+		   if(country.equals("Eastern Africa"))
+			   return false; 
+		   if(country.equals("Northern Africa"))
+			   return false; 
+		   
+		   
+		   
+		   
+		   
+		   
 		   return true;
 	   }
 

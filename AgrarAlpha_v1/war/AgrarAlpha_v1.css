@@ -19,10 +19,13 @@
 .label{ 
    font-size: 110%; 
    font-weight: bold;
-   color:#CCCCCA;
    padding:5px;
    margin:5px;
    width:120px
+}
+
+.label2{ 
+   color:#CCCCCA;
 }
 
 table#tdisplay{
@@ -104,8 +107,8 @@ h1 {
   font-weight: bold;
   cursor: default;
   color: #e8e8e8;
-  background-color: #878787;
-  border-bottom: 2px solid #878787;
+  background-color: #252530;
+  border-bottom: 2px solid #252530;
   margin-right: 2px;
 }
 
