@@ -11,6 +11,7 @@
 .gwt-Label{ 
    font-size: 110%; 
    font-weight: bold;
+   width:120px;
    color:#CCCCCA;
    padding:5px;
    margin:5px;
@@ -23,7 +24,18 @@
 	
 }
 
+.fuerFabian{
+   font-size: 110%; 
+   font-weight: bold;
+   color:##252530;
+   padding:5px;
+   margin:5px;
+}
 
+.fuerFabian2{
+		background-color: #CCCCCA;
+
+}
 
 /** EXAMPLE RULES used by the template application (remove for your app) */
 h1 {
