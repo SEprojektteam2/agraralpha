@@ -255,6 +255,8 @@ public class CreateView extends Composite{
 		interpolationPanel.add(label);
 		interpol = new ListBox();
 		interpol.addItem("bla");
+		interpol.addItem("bla1");
+		interpol.addItem("bla2");
 		interpolationPanel.add(interpol);
 		SimpleRegressionServiceAsync simpleRegSvc = GWT.create(SimpleRegressionService.class);
 		double[] points = new double[22];
