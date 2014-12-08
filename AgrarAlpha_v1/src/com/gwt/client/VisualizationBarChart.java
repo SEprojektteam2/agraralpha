@@ -34,6 +34,12 @@ public class VisualizationBarChart{
 		
 		yearIndex = calculateYearIndex(year);
 		convertData(resultData);
+		
+		String info[]=resultData.get(resultData.size()-1);
+		chart.setSize(1050,600)
+	     .setChartTitleText("Histogram "+info[2])
+	        .setChartSubtitleText("Source: FAO. 2014. FAOSTAT. data.fao.org. (Accessed 1.9.2014)");
+	
 	}
 	
 	/**

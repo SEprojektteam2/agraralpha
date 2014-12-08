@@ -35,6 +35,11 @@ public class VisualizationBarChart_v2{
 		
 		yearIndex = calculateYearIndex(year);
 		convertData(resultData);
+		
+		String info[]=resultData.get(resultData.size()-1);
+		chart.setSize(1050,600)
+	     .setChartTitleText("Histogram "+info[2])
+	        .setChartSubtitleText("Source: FAO. 2014. FAOSTAT. data.fao.org. (Accessed 1.9.2014)");
 	}
 	
 	/**
@@ -108,7 +113,7 @@ public class VisualizationBarChart_v2{
 	{
 		data = new ArrayList<ArrayList<Double>>();
 		
-		for(int i = 0; i < 22; i++)
+		for(int i = calculateYearIndex("2011"); i <= calculateYearIndex("1990"); i++)
 		{
 			data.add(i, new ArrayList<Double>());
 		}
