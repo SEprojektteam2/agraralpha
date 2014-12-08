@@ -24,6 +24,9 @@ import com.google.gwt.widgetideas.client.SliderBar;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.MouseUpEvent;
 import com.google.gwt.event.dom.client.MouseUpHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+
 
 public class CreateView extends Composite{
 	
@@ -34,7 +37,7 @@ public class CreateView extends Composite{
     private VisualizationRanking vRanking;
 	private VerticalPanel rankingPanel;
 	private Label label;
-	private ListBox interpol;
+	private ListBox interpolLB;
 	private VerticalPanel mapPanel = new VerticalPanel();
 	private ArrayList <String[]>dataArray;
 	public GeoMap map;
@@ -212,54 +215,27 @@ public class CreateView extends Composite{
 	private void addLineChart(){	
 		label = new Label("Visualization: ");
 		interpolationPanel.add(label);
-		interpol = new ListBox();
+		interpolLB = new ListBox();
 		String controll = "null";
 		for(int k=0;k<dataArray.size()-1;k++){
 			String[] resultTemp = new String[3];
 			resultTemp = dataArray.get(k);
 			if(controll.equals("null")){
 				controll=resultTemp[1];
-				interpol.addItem(resultTemp[1]);
+				interpolLB.addItem(resultTemp[1]);
 			}
 			else if(!controll.equals(resultTemp[1])){
 				controll=resultTemp[1];
-				interpol.addItem(resultTemp[1]);
+				interpolLB.addItem(resultTemp[1]);
 			}
 		}
-		interpolationPanel.add(interpol);
-		SimpleRegressionServiceAsync simpleRegSvc = GWT.create(SimpleRegressionService.class);
-		double[] points = new double[22];
-   		for(int j=0;j<=21;j++){
-   			String[] tempNumber= dataArray.get(j);
-   			if(tempNumber[2].equals("-")){
-   				points[j]=0;
-   			}
-   			else{
-   				points[j]=Double.parseDouble(tempNumber[2]);
-   			}
-   		}
-			
-			double[][] data = new double[points.length+1][2];
-			for(int k=0;k<=21;k++){
-				data[k][0]=k;
-				data[k][1]=points[k];
-			}
-		final double rpcPoints[] = points;	
-		simpleRegSvc.getSimpleReg(data, new AsyncCallback<double[]>() {
-			
-
-				
-				public void onFailure(Throwable caught) {
-					// Show the RPC error message to the user
-					log.warning("failure creating async callback");	
-				}
-				public void onSuccess(double[] resultTemp) {
-					double[] resultReg = new double[2];
-					resultReg=resultTemp;
-					Chart chart = vLineChart.getLineChart(dataArray, rpcPoints, resultReg);
-					interpolationPanel.add(chart.asWidget());						
-				}
-		});
+		interpolationPanel.add(interpolLB);
+		
+		Button interpolBtn = new Button("Create");
+		interpolBtn.addClickHandler(new createClickHandler());
+		interpolBtn.addStyleName("beautifulbutton2");
+		interpolationPanel.add(interpolBtn);
+		createLineChart(0);
 	}
 	
 	private void addBarChart()
@@ -297,5 +273,57 @@ public class CreateView extends Composite{
         HTML ranking=vRanking.create();
 		rankingPanel.add(ranking);	
         rankingPanel.setCellHorizontalAlignment(ranking,HasHorizontalAlignment.ALIGN_CENTER);
+	}
+	
+	private void createLineChart(int Index){
+		SimpleRegressionServiceAsync simpleRegSvc = GWT.create(SimpleRegressionService.class);
+		double[] points = new double[22];
+		int start = Index*21;
+   		for(int j=0+start;j<=21+start;j++){
+   			String[] tempNumber= dataArray.get(j);
+   			if(tempNumber[2].equals("-")){
+   				points[j]=0;
+   			}
+   			else{
+   				points[j]=Double.parseDouble(tempNumber[2]);
+   			}
+   		}
+			
+			double[][] data = new double[points.length+1][2];
+			for(int k=0;k<=21;k++){
+				data[k][0]=k;
+				data[k][1]=points[k];
+			}
+		final double rpcPoints[] = points;	
+		simpleRegSvc.getSimpleReg(data, new AsyncCallback<double[]>() {
+			
+
+				
+				public void onFailure(Throwable caught) {
+					// Show the RPC error message to the user
+					log.warning("failure creating async callback");	
+				}
+				public void onSuccess(double[] resultTemp) {
+					double[] resultReg = new double[2];
+					resultReg=resultTemp;
+					Chart chart = vLineChart.getLineChart(dataArray, rpcPoints, resultReg);
+					interpolationPanel.add(chart.asWidget());						
+				}
+		});
+	}
+
+	public int getIndex() {
+		int i = interpolLB.getSelectedIndex();
+		return i;
+	}
+
+	private class createClickHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			createLineChart(getIndex());
+			
+		}
+
 	}
 }
