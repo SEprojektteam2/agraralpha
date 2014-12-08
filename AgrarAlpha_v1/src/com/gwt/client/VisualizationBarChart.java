@@ -148,11 +148,12 @@ public class VisualizationBarChart{
 		for(double num : data.get(yearIndex))
 		{
 			log.warning(Double.toString(num));
-			if(Double.compare(max, num) >= 0 && Double.compare(num, min) >= 0 )
+			if(Double.compare(max, num) >= 0 && Double.compare(num, min) > 0 )
 			{
 				count++;
 			}
 		}
+		log.warning("next Range");
 		
 		return count;
 	}
