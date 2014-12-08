@@ -97,6 +97,12 @@ public class VisualizationRanking {
 		return html;
 	}
 	
+	/**
+	 * Returns Top 11 Countries of a data ArrayList
+	 * @param dataArray containing all the countries and years
+	 * @return ArrayList<String[]> containing top 11 countries
+	 * @author Fabian Weber
+	 */
 	public ArrayList<String[]> getTopTenCountries(ArrayList<String[]> dataArray) {
 		ArrayList<String[]> countries = new ArrayList<String[]>();
 		// Get the type of data (stored in last row of ArrayList)
