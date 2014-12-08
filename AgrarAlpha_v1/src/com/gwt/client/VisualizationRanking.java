@@ -69,16 +69,20 @@ public class VisualizationRanking {
 		htmlString += "</tr>";
 		htmlString += "</thead>";
 		htmlString += "<tbody>";
+		String isWorld = "World";
+		  for (int i = 1; i < arraylist.size(); i++) {
+		   if (i == 1 && isWorld.equals(arraylist.get(0)[i])) {
+		    htmlString += tr;
+		    htmlString += td + " " + td2;
 
-		for(int i=1;i<arraylist.size();i++){
-			if(i==1){
-				htmlString += tr;
-				htmlString += td + " " + td2;
+		   } else {
+		    htmlString += tr;
+		    if (isWorld.equals(arraylist.get(0)[i]))
+		     htmlString += td + String.valueOf(i - 1) + td2;
+		    else
+		     htmlString += td + String.valueOf(i) + td2;
 
-			}else{
-			htmlString += tr;
-			htmlString += td + String.valueOf(i-1) + td2;
-			}
+		   }
 			for(int j=0; j<3;j++){
 				htmlString += td + arraylist.get(i)[j] + td2;
 
@@ -93,35 +97,46 @@ public class VisualizationRanking {
 		return html;
 	}
 	
-	public ArrayList<String[]> getTopTenCountries(ArrayList<String[]> dataArray){
+	public ArrayList<String[]> getTopTenCountries(ArrayList<String[]> dataArray) {
 		ArrayList<String[]> countries = new ArrayList<String[]>();
-		// get the type of data (stored in last row of ArrayList)
-		String type = dataArray.get(dataArray.size()-1)[1];
-		if(type.equals("AreaName"))
+		// Get the type of data (stored in last row of ArrayList)
+		String type = dataArray.get(dataArray.size() - 1)[1];
+		if (type.equals("AreaName"))
 			type = "Country";
-		if(type.equals("ItemName"))
+		if (type.equals("ItemName"))
 			type = "Product";
-		if(type.equals("ElementName"))
+		if (type.equals("ElementName"))
 			type = "Type";
-
-		for(int i = 0; i<dataArray.size()-1; i++){
-			if(dataArray.get(i)[0].equals(String.valueOf(year))){
-				if(!dataArray.get(i)[2].equals("-"))
-					if(filter(dataArray.get(i)[1]))
-					countries.add(dataArray.get(i));
+		
+		// Go through the dataArray
+		for (int i = 0; i < dataArray.size() - 1; i++) {
+			// If the year equals selected year
+			if (dataArray.get(i)[0].equals(String.valueOf(year))) {
+				// If value is defined
+				if (!dataArray.get(i)[2].equals("-"))
+					// If it is a country we don't want to exclude from ranking
+					if (filter(dataArray.get(i)[1]))
+						//add the country to our ArrayList
+						countries.add(dataArray.get(i));
 			}
 		}
+		// Sort ArrayList by selectionSort
 		countries = selectionSort(countries);
+		// Create new ArrayList in which we will store the values to return
 		ArrayList<String[]> returnArray = new ArrayList<String[]>();
-		String[] headRow = {"Year",type,"Value"};
+		// Generate a informationRow for headrow of the table 
+		String[] headRow = { "Year", type, "Value" };
+		// Add the informationRow at index 0
 		returnArray.add(headRow);
-		for(int i = 0; i < 11 && i < countries.size(); i++)
-		{ returnArray.add(countries.get(i));}
+		// Add first 11 values to ArrayList. (11 because if there is world)
+		for (int i = 0; i < 11 && i < countries.size(); i++) {
+			returnArray.add(countries.get(i));
+		}
 		return returnArray;
 	}
 	
 	public ArrayList<String[]> selectionSort(ArrayList<String[]> arr) {
-		int i, j, maxIndex; 
+		int i, j, maxIndex;
 		String[] tmp = new String[3];
 		int n = arr.size();
 		for (i = 0; i < n - 1; i++) {
@@ -132,7 +147,7 @@ public class VisualizationRanking {
 			if (maxIndex != i) {
 				tmp = arr.get(i);
 				arr.set(i, arr.get(maxIndex));
-				arr.set(maxIndex,tmp);
+				arr.set(maxIndex, tmp);
 			}
 		}
 		return arr;
