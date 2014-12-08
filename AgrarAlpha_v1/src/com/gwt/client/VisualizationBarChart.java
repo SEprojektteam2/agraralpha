@@ -69,10 +69,10 @@ public class VisualizationBarChart{
 		
 		//creating points which will be added to series of the chart, based on ranges calculated previously
 		Number[] points = new Number[columns];
-		ArrayList<ArrayList<Double>> copyOfData = (ArrayList<ArrayList<Double>>) data.clone();
+		
 		for(int i = 0; i < cols.length-1; i++)
 		{
-			points[i] = count(Double.parseDouble(cols[i].substring(2, cols[i].length())), Double.parseDouble(cols[i+1].substring(2, cols[i].length())), copyOfData);
+			points[i] = count(Double.parseDouble(cols[i].substring(3)), Double.parseDouble(cols[i+1].substring(3)));
 		}
 		
 		//adding the series to the chart
@@ -141,19 +141,18 @@ public class VisualizationBarChart{
 	 * @param max
 	 * @return the occurances counted for the particular range [min, max)
 	 */
-	private int count(double min, double max, ArrayList<ArrayList<Double>> copyData)
+	private int count(double min, double max)
 	{
 		int count = 0;
 		
-		for(double num : copyData.get(yearIndex))
+		for(double num : data.get(yearIndex))
 		{
 			if(num == 0.0)
-				copyData.remove(num);
+				;
 			else if(Double.compare(max, num) >= 0 && Double.compare(num, min) > 0 )
 			{
 				log.warning(Double.toString(num));
 				count++;
-				copyData.remove(num);
 			}
 		}
 		log.warning("next Range");
