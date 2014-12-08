@@ -53,6 +53,7 @@ public class DialogBoxOpen extends DialogBox {
     	 btnPanel=new HorizontalPanel();
 
     	 label=new Label("Enter the name you saved as:");
+    	 label.setStyleName("fuerFabian");
     	 tb=new TextBox();
     	 tb.addKeyPressHandler(new KeyPressHandler() {
     		  @Override
@@ -73,6 +74,7 @@ public class DialogBoxOpen extends DialogBox {
          // DialogBox is a SimplePanel, so you have to set its widget property to
          // whatever you want its contents to be.
          Button open = new Button("Open");
+         open.setStyleName("beautifulbutton2");
          open.addClickHandler(new ClickHandler() {
            public void onClick(ClickEvent event) {
             if(searchForValue()){
@@ -89,6 +91,7 @@ public class DialogBoxOpen extends DialogBox {
          });
          
          Button close = new Button("close");
+         close.setStyleName("beautifulbutton2");
          close.addClickHandler(new ClickHandler() {
            public void onClick(ClickEvent event) {
              DialogBoxOpen.this.hide();

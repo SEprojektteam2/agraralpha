@@ -50,6 +50,7 @@ public class DialogBoxSave extends DialogBox {
 		base = new VerticalPanel();
 		base.setPixelSize(300,150);
 		label = new Label("Enter a name to save as:");
+		label.setStyleName("fuerFabian");
 		btnPanel = new HorizontalPanel();
 
 		tb = new TextBox();

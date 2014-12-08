@@ -4,6 +4,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -43,6 +44,8 @@ class DialogBoxCreate extends DialogBox {
         }
       });
       
+      vpanel.setCellHorizontalAlignment(ok,
+    		  HasHorizontalAlignment.ALIGN_CENTER);
       vpanel.add(label);
       vpanel.add(ok);
       
