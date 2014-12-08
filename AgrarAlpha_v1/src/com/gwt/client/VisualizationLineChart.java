@@ -49,7 +49,7 @@ public class VisualizationLineChart{
                     new ToolTipFormatter() {  
                         public String format(ToolTipData toolTipData) {  
                             return toolTipData.getXAsDouble() + ": " +  
-                                NumberFormat.getFormat("#,###").format(toolTipData.getYAsDouble()) + " thousand";  
+                                NumberFormat.getFormat("#,###").format(toolTipData.getYAsDouble());  
                         }  
                     }  
                 )  
