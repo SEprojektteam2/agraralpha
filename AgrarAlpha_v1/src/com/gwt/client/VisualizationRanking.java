@@ -115,7 +115,7 @@ public class VisualizationRanking {
 		ArrayList<String[]> returnArray = new ArrayList<String[]>();
 		String[] headRow = {"Year",type,"Value"};
 		returnArray.add(headRow);
-		for(int i = 0; i<11; i++)
+		for(int i = 0; i < 11 && i < countries.size(); i++)
 		{ returnArray.add(countries.get(i));}
 		return returnArray;
 	}
