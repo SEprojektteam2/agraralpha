@@ -147,7 +147,7 @@ public class VisualizationBarChart{
 		
 		for(double num : data.get(yearIndex))
 		{
-			if(Double.compare(max, num) >= 0 && Double.compare(num, min) > 0 )
+			if(Double.compare(max, num) >= 0 && Double.compare(num, min) >= 0 )
 			{
 				count++;
 			}
