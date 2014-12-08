@@ -82,20 +82,22 @@ public class VisualizationBarChart_v2{
 	 * @return
 	 */
 	public static String[] calculateRanges() {
-		//finding the min and max for the the first (min) and last (max) range
+		// finding the min and max for the the first (min) and last (max) range
 		double min = findMin();
 		double max = findMax();
-		
-		//calculating the diff between each ranges max and min
-		double diff = (max-min)/numColumns;
-		
-		//creating the categhories for the xAchsis, which won't be added to the chart in this method!
-		String[] cols = new String[numColumns+1];
-		for(int i = 0; i < numColumns; i++)
+
+		// calculating the diff between each ranges max and min
+		double diff = (max - min) / numColumns;
+
+		// creating the categhories for the xAchsis, which won't be added to the
+		// chart in this method!
+		String[] cols = new String[numColumns + 1];
+		for (int i = 0; i < numColumns; i++) 
 		{
-			cols[i] = Double.toString(Math.round((min+diff*(i))/10000)) + " to " + Double.toString(Math.round((min+diff*(i+1))/10000));
+			cols[i] = "to "+ Integer.toString((int)Math.round((min + diff * (i + 1))));
 		}
-		
+		cols[numColumns] = Integer.toString((int)Math.ceil(max));
+
 		return cols;
 	} 
 	
