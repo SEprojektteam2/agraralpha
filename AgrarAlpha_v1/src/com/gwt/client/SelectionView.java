@@ -257,7 +257,7 @@ public class SelectionView extends Composite implements Serializable {
 							}
 
 							public void onSuccess(ArrayList<String[]> resultTemp) {
-								if (resultTemp.size() == 0) {
+								if (resultTemp.size() == 1) {
 									DialogBoxCreate dbCreate2 = new DialogBoxCreate(
 											"No data found");
 									dbCreate2.center();
