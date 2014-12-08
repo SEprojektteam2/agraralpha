@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import junit.framework.TestCase;
+
 import org.junit.Test;
 
 /**
@@ -13,7 +15,7 @@ import org.junit.Test;
  * @author Fabian Weber
  *
  */
-public class SaveServiceImplTest {
+public class SaveServiceImplTest extends TestCase {
 
 	/**
 	 * Tests the method Constructor of Class SaveServiceImpl
