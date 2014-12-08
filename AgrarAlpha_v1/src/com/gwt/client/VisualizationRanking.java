@@ -41,7 +41,7 @@ public class VisualizationRanking {
 	 */
 	public VisualizationRanking(ArrayList<String[]> a, String year) {
 		this.year = Integer.parseInt(year);
-		this.arraylist = getTopTenCountries(a);
+		this.arraylist = getTopEleven(a);
 	}
 
 	/**
@@ -98,12 +98,12 @@ public class VisualizationRanking {
 	}
 	
 	/**
-	 * Returns Top 11 Countries of a data ArrayList
-	 * @param dataArray containing all the countries and years
-	 * @return ArrayList<String[]> containing top 11 countries
+	 * Returns Top 11 contents of a data ArrayList
+	 * @param dataArray containing all the data
+	 * @return ArrayList<String[]> containing top 11 contents
 	 * @author Fabian Weber
 	 */
-	public ArrayList<String[]> getTopTenCountries(ArrayList<String[]> dataArray) {
+	public ArrayList<String[]> getTopEleven(ArrayList<String[]> dataArray) {
 		ArrayList<String[]> countries = new ArrayList<String[]>();
 		// Get the type of data (stored in last row of ArrayList)
 		String type = dataArray.get(dataArray.size() - 1)[1];
