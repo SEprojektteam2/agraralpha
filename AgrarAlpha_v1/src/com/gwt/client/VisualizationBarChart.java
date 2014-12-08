@@ -95,7 +95,7 @@ public class VisualizationBarChart{
 		String[] cols = new String[numColumns+1];
 		for(int i = 0; i < numColumns; i++)
 		{
-			cols[i] = Double.toString(Math.round((min+diff*(i))/10000));// + " to " + Double.toString(Math.round((min+diff*(i+1))/10000));
+			cols[i] = "to " +Double.toString(Math.round((min+diff*(i+1))/10000));// + " to " + Double.toString(Math.round((min+diff*(i+1))/10000));
 		}
 		cols[numColumns] = Double.toString(Math.ceil(max/10000));
 		
