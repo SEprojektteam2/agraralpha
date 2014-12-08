@@ -25,7 +25,7 @@ class DialogBoxCreate extends DialogBox {
       // Enable glass background.
       setGlassEnabled(true);
       vpanel= new VerticalPanel();
-      vpanel.setPixelSize(300, 300);
+      //vpanel.setPixelSize(300, 300);
       label = new Label(message);
       
 

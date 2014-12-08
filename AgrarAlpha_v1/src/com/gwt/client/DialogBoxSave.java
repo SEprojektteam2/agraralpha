@@ -48,7 +48,7 @@ public class DialogBoxSave extends DialogBox {
 		setGlassEnabled(true);
 		
 		base = new VerticalPanel();
-		base.setPixelSize(300,300);
+		//base.setPixelSize(300,300);
 		label = new Label("Enter a name to save as:");
 		btnPanel = new HorizontalPanel();
 
