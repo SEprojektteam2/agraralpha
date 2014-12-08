@@ -25,13 +25,14 @@ class DialogBoxCreate extends DialogBox {
       // Enable glass background.
       setGlassEnabled(true);
       vpanel= new VerticalPanel();
-      //vpanel.setPixelSize(300, 300);
+      vpanel.setPixelSize(300, 150);
       label = new Label(message);
       
 
       // DialogBox is a SimplePanel, so you have to set its widget property to
       // whatever you want its contents to be.
       Button ok = new Button("OK");
+      ok.setStyleName("beautifulbutton2");
       ok.addClickHandler(new ClickHandler() {
         public void onClick(ClickEvent event) {
           DialogBoxCreate.this.hide();

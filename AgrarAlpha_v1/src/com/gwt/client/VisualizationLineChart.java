@@ -31,17 +31,15 @@ public class VisualizationLineChart{
 		
 		
 		//String[] dbl = new String;
-		log.warning("rpc");
 		addRegression();
 		
-		log.warning("WARNING");
 		//if(callback.hasFinished())
 			return chart;
 	}
   
     public void initializeChart() {
     	String info[]=resultData.get(resultData.size()-1); 
-        chart.setSize( 1050,600)
+        chart.setSize(1050,600)
     	.setChartTitleText("Interpolation and Extrapolation "+info[2])
         .setChartSubtitleText("Source: FAO. 2014. FAOSTAT. data.fao.org. (Accessed 1.9.2014)")
         .setToolTip(new ToolTip()  
@@ -121,6 +119,6 @@ public class VisualizationLineChart{
    		            })  
    		         
    		);
-   		log.warning("Regression Line Created");
-   		}
+
+   	}
 }

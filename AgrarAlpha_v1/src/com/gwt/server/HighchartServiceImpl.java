@@ -47,8 +47,8 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 			}
 		} 
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			log.warning("Error getCounter in HighchartServiceImpl" );
 		}
 		return i;
 	}
@@ -57,7 +57,6 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		ArrayList<String[]> result = new ArrayList<String[]>();
 		// create the java statement
 		Statement st = null;
-		log.warning("now reading database!");
 		try {
 			st = conn.createStatement();
 			
@@ -78,6 +77,7 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 					if(controll.equals("null")){
 						controll = rs.getString(searchingVar);
 					}
+					
 					String[] resultTemp = new String[3];
 					resultTemp[0] = rs.getString("Year");
 					resultTemp[1] = rs.getString(searchingVar);
@@ -97,17 +97,12 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 							for(int r=0; r<population.size();r++){
 								//areacode year value unit
 								if(population.get(r)[0].equals(rs.getString("AreaCode")) && population.get(r)[1].equals(resultTemp[0]))
-									resultTemp[2] = String.valueOf(Double.parseDouble(resultTemp[2]) / Double.parseDouble(population.get(r)[2]) * Double.parseDouble(population.get(r)[3]));
+									resultTemp[2] = String.valueOf(Double.parseDouble(resultTemp[2]) / (Double.parseDouble(population.get(r)[2]) * Double.parseDouble(population.get(r)[3])));
 							}
 							
 						}
 					}
 					
-					
-					
-					
-					/**result.add(resultTemp);**/
-					//i++;
 					if(resultTemp[0].equals(String.valueOf(i))){
 						result.add(resultTemp);
 						if(i==2011){
@@ -175,12 +170,12 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 			
 		} 
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			log.warning("Error readDatabase in HighchartServiceImpl" );
 		}
 		return result;
 	}
-	//									Namibia			Tea			Export Quantity			false	
+
 	public ArrayList<String[]> getData(String country, String product, String type, Boolean perCapita){
 		// "null" nicht angegeben => nicht Beachtung der varaible 
 		//private DataTable TableDATA;
@@ -208,7 +203,7 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 			searchingVar="AreaName";
 			mapInfo=type+" of "+product;
 			if(perCapita)
-				mapInfo.concat(" (per Capita)");
+				mapInfo=mapInfo.concat(" (per Capita)");
 		}
 		//
 		else if(product.equals("null")){
@@ -218,7 +213,7 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 			searchingVar="ItemName";
 			mapInfo=type+" in "+country;
 			if(perCapita)
-				mapInfo.concat(" (per Capita)");
+				mapInfo=mapInfo.concat(" (per Capita)");
 		}
 		//
 		else if(type.equals("null")){
@@ -228,82 +223,14 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 			searchingVar="ElementName";
 			mapInfo=product+" in "+country;
 			if(perCapita)
-				mapInfo.concat(" (per Capita)");
+				mapInfo=mapInfo.concat(" (per Capita)");
 		}
-		else{
-			query = "SELECT AreaName, Year, Value, AreaCode, Unit FROM records WHERE ItemName = '"+product+"' AND AreaName = '"+country+"' AND ElementName = '"+type+"' ORDER BY Year ASC";
-			query2 = "SELECT distinct AreaCode, AreaName FROM records WHERE ItemName = '"+product+"' AND AreaName = '"+country+"' AND ElementName = '"+type+"'";
-			counter=getCounter(query2);
-			searchingVar="AreaName";
-			/** HIER FEHLT NOCH MAP INFO! **/
-		}
-			
 		result = readDatabase(query,searchingVar,outputVar,perCapita);
-		
-		
-		/*String[] resultTemp = new String[3];
-		resultTemp[0] = Integer.toString(counter);
-		resultTemp[1] = searchingVar;
-		resultTemp[2] = "null";
-		result.add(result.size(),resultTemp);
-		
-		String[] sArray= {"1990","Schweiz","3.0"};
-		String[] sArray1= {"1991","Schweiz","10.0"};
-		String[] sArray2= {"1992","Schweiz","9.0"};
-		String[] sArray3= {"1993","Schweiz","11.0"};
-		String[] sArray4= {"1994","Schweiz","15.0"};
-		String[] sArray5= {"1995","Schweiz","12.0"};
-		String[] sArray6= {"1996","Schweiz","14.0"};
-		String[] sArray7= {"1997","Schweiz","16.0"};
-		String[] sArray8= {"1998","Schweiz","10.0"};
-		String[] sArray9= {"1999","Schweiz","14.0"};
-		String[] sArray10= {"2000","Schweiz","19.0"};
-		String[] sArray11= {"2001","Schweiz","20.0"};
-		String[] sArray12= {"2002","Schweiz","21.0"};
-		String[] sArray13= {"2003","Schweiz","25.0"};
-		String[] sArray14= {"2004","Schweiz","14.0"};
-		String[] sArray15= {"2005","Schweiz","16.0"};
-		String[] sArray16= {"2006","Schweiz","19.0"};
-		String[] sArray17= {"2007","Schweiz","18.0"};
-		String[] sArray18= {"2008","Schweiz","20.0"};
-		String[] sArray19= {"2009","Schweiz","21.0"};
-		String[] sArray20= {"2010","Schweiz","22.0"};
-		String[] sArray21= {"2011","Schweiz","20.0"};
-		
-		result.add(sArray);
-		result.add(sArray1);
-		result.add(sArray2);
-		result.add(sArray3);
-		result.add(sArray4);
-		result.add(sArray5);
-		result.add(sArray6);
-		result.add(sArray7);
-		result.add(sArray8);
-		result.add(sArray9);
-		result.add(sArray10);
-		result.add(sArray11);
-		result.add(sArray12);
-		result.add(sArray13);
-		result.add(sArray14);
-		result.add(sArray15);
-		result.add(sArray16);
-		result.add(sArray17);
-		result.add(sArray18);
-		result.add(sArray19);
-		result.add(sArray20);
-		result.add(sArray21);*/
 	
-		
-		//adding informations
-
 		String[] informationRow= {Integer.toString(counter),searchingVar,mapInfo};
 		result.add(informationRow);
 		
 		return result;
-	}
-	
-	private ArrayList<String[]> calcPerCapita(ArrayList<String[]> resultData){
-		return resultData;
 	}
 	
 	private ArrayList<String[]> getPopulation() {
