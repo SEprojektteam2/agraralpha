@@ -169,19 +169,19 @@ public class VisualizationRanking {
 			   return false;
 		   if(country.equals("China ex. int"))
 			   return false;
-		   if(country.equals("Eu(12)ex.int"))
+		   if(country.equals("EU(12)ex.int"))
 			   return false;
-		   if(country.equals("Eu(15)ex.int"))
+		   if(country.equals("EU(15)ex.int"))
 			   return false;
-		   if(country.equals("Eu(25)ex.int"))
+		   if(country.equals("EU(25)ex.int"))
 			   return false;
-		   if(country.equals("Eu(27)ex.int"))
+		   if(country.equals("EU(27)ex.int"))
 			   return false;
 		   if(country.equals("Europe"))
 			   return false;
 		   if(country.equals("European Union"))
 			   return false;
-		   if(country.equals("Eatern Asia"))
+		   if(country.equals("Eastern Asia"))
 			   return false;
 		   if(country.equals("South Africa"))
 			   return false;
@@ -202,6 +202,14 @@ public class VisualizationRanking {
 		   if(country.equals("Western Europe"))
 			   return false;
 		   if(country.equals("Middle Africa"))
+			   return false;
+		   if(country.equals("Northern America"))
+			   return false;
+		   if(country.equals("Asia"))
+			   return false;
+		   if(country.equals("Eastern Asia"))
+			   return false;
+		   if(country.equals("Eastern Europe"))
 			   return false;
 
 		   return true;
