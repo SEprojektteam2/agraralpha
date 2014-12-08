@@ -48,7 +48,7 @@ public class DialogBoxSave extends DialogBox {
 		setGlassEnabled(true);
 		
 		base = new VerticalPanel();
-		//base.setPixelSize(300,300);
+		base.setPixelSize(300,150);
 		label = new Label("Enter a name to save as:");
 		btnPanel = new HorizontalPanel();
 
@@ -70,6 +70,7 @@ public class DialogBoxSave extends DialogBox {
 		// Set the dialog box's caption.
 
 		Button save = new Button("Save As");
+		save.setStyleName("beautifulbutton2");
 		/**
 		 * if save button gets clicked, it will take the string from the textbox
 		 * and check if there already is an item with that name in the database.
@@ -88,6 +89,7 @@ public class DialogBoxSave extends DialogBox {
 		});
 
 		Button close = new Button("close");
+		close.setStyleName("beautifulbutton2");
 		close.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				DialogBoxSave.this.hide();
