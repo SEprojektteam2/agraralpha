@@ -398,9 +398,12 @@ public class CreateView extends Composite{
 			}
 		}
 		countries = selectionSort(countries);
-		for(int i = 10; i<countries.size(); i++)
-		{ countries.remove(i);}
-		return selectionSort(countries);
+		ArrayList<String[]> returnArray = new ArrayList<String[]>();
+		String[] headRow = {"Year",type,"Value"};
+		returnArray.add(headRow);
+		for(int i = 0; i<10; i++)
+		{ returnArray.add(countries.get(i));}
+		return returnArray;
 	}
 	
 	public ArrayList<String[]> selectionSort(ArrayList<String[]> arr) {
