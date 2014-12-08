@@ -60,7 +60,6 @@ public class VisualizationRanking {
 		htmlString += tr;
 
 		htmlString += th + "Rank" + th2;
-		htmlString += th + arraylist.get(0)[0] + th2;
 		htmlString += th + arraylist.get(0)[1] + th2;
 		htmlString += th + arraylist.get(0)[2] + th2;
 
@@ -73,7 +72,7 @@ public class VisualizationRanking {
 		  for (int i = 1; i < arraylist.size(); i++) {
 		   if (i == 1 && isWorld.equals(arraylist.get(1)[1])) {
 		    htmlString += tr;
-		    htmlString += td + " " + td2;
+		    htmlString += td + "Year: "+ arraylist.get(0)[0] + td2;
 
 		   } else {
 		    htmlString += tr;
@@ -83,7 +82,7 @@ public class VisualizationRanking {
 		     htmlString += td + String.valueOf(i) + td2;
 
 		   }
-			for(int j=0; j<3;j++){
+			for(int j=1; j<3;j++){
 				htmlString += td + arraylist.get(i)[j] + td2;
 
 			}
