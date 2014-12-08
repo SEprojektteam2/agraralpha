@@ -211,6 +211,16 @@ public class VisualizationRanking {
 			   return false;
 		   if(country.equals("Eastern Europe"))
 			   return false;
+		   if(country.equals("Low Income Food Deficit Countries	"))
+			   return false;
+		   if(country.equals("Net Food Importing Developing Countries"))
+			   return false;
+		   if(country.equals("Africa"))
+			   return false;
+		   if(country.equals("Eastern Asia"))
+			   return false;
+		   if(country.equals("Least Developed Countries	"))
+			   return false;
 
 		   return true;
 	   }
