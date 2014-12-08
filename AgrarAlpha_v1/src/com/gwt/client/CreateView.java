@@ -30,6 +30,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 
 public class CreateView extends Composite{
 	
+	private Chart LineChart;
 	private TabPanel basePanel = new TabPanel();
 	private VerticalPanel tablePanel;
 	private VerticalPanel interpolationPanel;
@@ -210,33 +211,7 @@ public class CreateView extends Composite{
 
 		VisualizationUtils.loadVisualizationApi(onLoadCallbackMap, GeoMap.PACKAGE); 
 	}
-	
-	
-	private void addLineChart(){	
-		label = new Label("Visualization: ");
-		interpolationPanel.add(label);
-		interpolLB = new ListBox();
-		String controll = "null";
-		for(int k=0;k<dataArray.size()-1;k++){
-			String[] resultTemp = new String[3];
-			resultTemp = dataArray.get(k);
-			if(controll.equals("null")){
-				controll=resultTemp[1];
-				interpolLB.addItem(resultTemp[1]);
-			}
-			else if(!controll.equals(resultTemp[1])){
-				controll=resultTemp[1];
-				interpolLB.addItem(resultTemp[1]);
-			}
-		}
-		interpolationPanel.add(interpolLB);
-		
-		Button interpolBtn = new Button("Create");
-		interpolBtn.addClickHandler(new createClickHandler());
-		interpolBtn.addStyleName("beautifulbutton2");
-		interpolationPanel.add(interpolBtn);
-		createLineChart(0);
-	}
+
 	
 	private void addBarChart()
 	{
@@ -274,7 +249,33 @@ public class CreateView extends Composite{
 		rankingPanel.add(ranking);	
         rankingPanel.setCellHorizontalAlignment(ranking,HasHorizontalAlignment.ALIGN_CENTER);
 	}
+		
 	
+	private void addLineChart(){	
+		label = new Label("Visualization: ");
+		interpolationPanel.add(label);
+		interpolLB = new ListBox();
+		String controll = "null";
+		for(int k=0;k<dataArray.size()-1;k++){
+			String[] resultTemp = new String[3];
+			resultTemp = dataArray.get(k);
+			if(controll.equals("null")){
+				controll=resultTemp[1];
+				interpolLB.addItem(resultTemp[1]);
+			}
+			else if(!controll.equals(resultTemp[1])){
+				controll=resultTemp[1];
+				interpolLB.addItem(resultTemp[1]);
+			}
+		}
+		interpolationPanel.add(interpolLB);
+		
+		Button interpolBtn = new Button("Create");
+		interpolBtn.addClickHandler(new createClickHandler());
+		interpolBtn.addStyleName("beautifulbutton2");
+		interpolationPanel.add(interpolBtn);
+		createLineChart(0);
+	}
 	private void createLineChart(int Index){
 		SimpleRegressionServiceAsync simpleRegSvc = GWT.create(SimpleRegressionService.class);
 		double[] points = new double[22];
@@ -306,8 +307,8 @@ public class CreateView extends Composite{
 				public void onSuccess(double[] resultTemp) {
 					double[] resultReg = new double[2];
 					resultReg=resultTemp;
-					Chart chart = vLineChart.getLineChart(dataArray, rpcPoints, resultReg);
-					interpolationPanel.add(chart.asWidget());						
+					LineChart = vLineChart.getLineChart(dataArray, rpcPoints, resultReg);
+					interpolationPanel.add(LineChart.asWidget());						
 				}
 		});
 	}
@@ -321,8 +322,9 @@ public class CreateView extends Composite{
 
 		@Override
 		public void onClick(ClickEvent event) {
+			interpolationPanel.remove(LineChart.asWidget());
+			LineChart=null;
 			createLineChart(getIndex());
-			
 		}
 
 	}
