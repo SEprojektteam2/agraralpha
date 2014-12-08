@@ -17,6 +17,7 @@ public class VisualizationLineChart {
 
 	private double[] resultReg;
 	private double[] points;
+	private int index;
 
 	final Chart chart = new Chart();
 	ArrayList<String[]> resultData;
@@ -28,17 +29,16 @@ public class VisualizationLineChart {
 	 * @return Chart
 	 */
 	public Chart getLineChart(ArrayList<String[]> resultData, double[] points,
-			double[] regressionPoints) {
+			double[] regressionPoints, int Index) {
 		this.resultReg = regressionPoints;
 		this.resultData = resultData;
 		this.points = points;
+		this.index=Index;
 		initializeChart();
 		generatePoints();
 
-		// String[] dbl = new String;
 		addRegression();
 
-		// if(callback.hasFinished())
 		return chart;
 	}
 
@@ -75,14 +75,14 @@ public class VisualizationLineChart {
 
 		final YAxis axis = chart.getYAxis();
 		axis.setAxisTitleText("Value")
-				.setMin(0)
+				//.setMin(0)
 				.setMinorGridLineWidth(0).setGridLineWidth(0)
 				.setAlternateGridColor(null);
 
 	}
 
 	private void generatePoints() {
-		String[] temp2 = resultData.get(0);
+		String[] temp2 = resultData.get(index);
 		chart.addSeries(chart
 				.createSeries()
 				.setName(temp2[1])
@@ -93,13 +93,13 @@ public class VisualizationLineChart {
 								points[7], points[8], points[9], points[10],
 								points[11], points[12], points[13], points[14],
 								points[15], points[16], points[17], points[18],
-								points[19], points[20], points[21] /**/
+								points[19], points[20], points[21]
 						}));
 
 	}
 
 	private void addRegression() {
-		String[] temp2 = resultData.get(0);
+		String[] temp2 = resultData.get(index);
 		chart.addSeries(chart
 				.createSeries()
 				.setName("Regression Line " + temp2[1])
@@ -112,7 +112,7 @@ public class VisualizationLineChart {
 
 				.setPoints(
 						new Number[][] { { 0.0, resultReg[0] },
-								{ 26.0, resultReg[26] }
+								{ 26.0, resultReg[1] }
 
 						})
 
