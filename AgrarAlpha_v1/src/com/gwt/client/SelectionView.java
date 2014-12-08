@@ -58,10 +58,12 @@ public class SelectionView extends Composite implements Serializable {
 		this.main = main;
 
 		yearLabel = new Label("Year");
+		yearLabel.addStyleName("label");
 		countryLabel = new Label("Country");
 		countryLabel.addStyleName("label");
 
 		productLabel = new Label("Product");
+		productLabel.addStyleName("label");
 		typeLabel = new Label("Product Type");
 		typeLabel.addStyleName("label");
 
@@ -257,7 +259,7 @@ public class SelectionView extends Composite implements Serializable {
 							}
 
 							public void onSuccess(ArrayList<String[]> resultTemp) {
-								if (resultTemp.size() == 0) {
+								if (resultTemp.size() == 1) {
 									DialogBoxCreate dbCreate2 = new DialogBoxCreate(
 											"No data found");
 									dbCreate2.center();

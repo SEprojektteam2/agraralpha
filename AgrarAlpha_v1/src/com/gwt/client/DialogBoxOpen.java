@@ -49,12 +49,14 @@ public class DialogBoxOpen extends DialogBox {
          // Enable glass background.
          setGlassEnabled(true);
     	
-         base=new VerticalPanel();
-    	 btnPanel=new HorizontalPanel();
+         base=new VerticalPanel(); //panel is the base of the dialog
+    	 btnPanel=new HorizontalPanel();//contains both buttons
 
     	 label=new Label("Enter the name you saved as:");
     	 label.setStyleName("fuerFabian");
+    	 
     	 tb=new TextBox();
+    	 //allows the user only to use letters and numbers
     	 tb.addKeyPressHandler(new KeyPressHandler() {
     		  @Override
     		  public void onKeyPress(KeyPressEvent event) {
@@ -67,22 +69,18 @@ public class DialogBoxOpen extends DialogBox {
     		    }
     		  }
     		});
-    	 // Set the dialog box's caption.
 
-      
-
-         // DialogBox is a SimplePanel, so you have to set its widget property to
-         // whatever you want its contents to be.
+            
          Button open = new Button("open");
          open.setStyleName("beautifulbutton2");
          open.addClickHandler(new ClickHandler() {
-           public void onClick(ClickEvent event) {
-            if(searchForValue()){
-            	updateView(getData());
-                DialogBoxOpen.this.hide();
+           public void onClick(ClickEvent event) {//event when open gets clicked
+            if(searchForValue()){   //checks if the name is in the database
+            	updateView(getData()); //opens createView with the saved options
+                DialogBoxOpen.this.hide(); //close dialog
             }
             else
-            {
+            {   //name not found, opens new dialog
             	DialogBoxCreate db=new DialogBoxCreate("Name doesn't exist!");
             	db.center();
             	db.show();
@@ -95,8 +93,8 @@ public class DialogBoxOpen extends DialogBox {
          Button close = new Button("close");
          close.setStyleName("beautifulbutton2");
          close.addClickHandler(new ClickHandler() {
-           public void onClick(ClickEvent event) {
-             DialogBoxOpen.this.hide();
+           public void onClick(ClickEvent event) {//handles the event when close gets clicked
+             DialogBoxOpen.this.hide(); //close dialog
            }
          });
          

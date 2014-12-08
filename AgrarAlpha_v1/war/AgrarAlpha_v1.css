@@ -11,18 +11,22 @@
 .gwt-Label{ 
    font-size: 110%; 
    font-weight: bold;
-   color:#CCCCCA;
+   color:#666666;
    padding:5px;
    margin:5px;
 }
 
-.Label{ 
+.label{ 
    font-size: 110%; 
    font-weight: bold;
    color:#CCCCCA;
    padding:5px;
    margin:5px;
    width:120px
+}
+
+table#tdisplay{
+	magrin: 5px 0px 0px 20px
 }
 
 .fuerFabian{
