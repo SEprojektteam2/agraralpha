@@ -109,9 +109,8 @@ public class VisualizationMap {
 		else if (country.equalsIgnoreCase("South Sudan"))
 			country = "SS";
 
-		else if (country.substring(7).equalsIgnoreCase("Ivoire")){
+		else if (country.substring(7).equalsIgnoreCase("Ivoire"))
 			country = "CI";
-			log.warning(country.substring(7));}
 
 		else if (country.equalsIgnoreCase("Republic of Moldova"))
 			country = "Moldova";
