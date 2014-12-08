@@ -68,7 +68,7 @@ public class VisualizationBarChart{
 		Number[] points = new Number[columns];
 		for(int i = 0; i < cols.length-1; i++)
 		{
-			points[i] = count(Double.parseDouble(cols[i]), Double.parseDouble(cols[i+1]));
+			points[i] = count(Double.parseDouble(cols[i].substring(2, cols[i].length()))*10000, Double.parseDouble(cols[i+1].substring(2, cols[i].length()))*10000);
 		}
 		
 		//adding the series to the chart
@@ -95,7 +95,7 @@ public class VisualizationBarChart{
 		String[] cols = new String[numColumns+1];
 		for(int i = 0; i < numColumns; i++)
 		{
-			cols[i] = "to " +Double.toString(Math.round((min+diff*(i+1))/10000));// + " to " + Double.toString(Math.round((min+diff*(i+1))/10000));
+			cols[i] = "to " + Double.toString(Math.round((min+diff*(i+1))/10000));// + " to " + Double.toString(Math.round((min+diff*(i+1))/10000));
 		}
 		cols[numColumns] = Double.toString(Math.ceil(max/10000));
 		
