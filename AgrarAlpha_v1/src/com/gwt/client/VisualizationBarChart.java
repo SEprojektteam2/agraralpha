@@ -93,9 +93,9 @@ public class VisualizationBarChart{
 		String[] cols = new String[numColumns+1];
 		for(int i = 0; i < numColumns; i++)
 		{
-			cols[i] = Double.toString(min+diff*(i));
+			cols[i] = Double.toString(min+diff*(i)) + " - " + Double.toString(min+diff*(i+1));
 		}
-		cols[numColumns] = Double.toString(max);
+		//cols[numColumns] = Double.toString(max);
 		
 		return cols;
 	} 

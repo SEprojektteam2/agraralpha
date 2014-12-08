@@ -93,9 +93,9 @@ public class VisualizationBarChart_v2{
 		String[] cols = new String[numColumns+1];
 		for(int i = 0; i < numColumns; i++)
 		{
-			cols[i] = Double.toString(min+diff*(i));
+			cols[i] = Double.toString(min+diff*(i)) + " - " + Double.toString(min+diff*(i+1));
 		}
-		cols[numColumns] = Double.toString(max);
+		//cols[numColumns] = Double.toString()Double.toString(max);
 		
 		return cols;
 	} 
@@ -142,7 +142,7 @@ public class VisualizationBarChart_v2{
 		
 		for(double num : data.get(yearIndex))
 		{
-			if(num < max || num >= min)
+			if(num < max && num >= min)
 			{
 				count++;
 			}
@@ -230,12 +230,10 @@ public class VisualizationBarChart_v2{
 	
 	public static void setNumColumns(int number)
 	{
-
 		if (number < COLUMNSMIN || number > COLUMNSMAX)
 		{
 			numColumns = COLUMNSDEFAULT;
 		}
-		
 	}
 	
 	public static int getNumColumns()
