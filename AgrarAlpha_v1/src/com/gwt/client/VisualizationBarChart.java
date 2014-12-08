@@ -358,6 +358,8 @@ public class VisualizationBarChart{
 			   return false; 
 		   if(country.equals("Northern Africa"))
 			   return false; 
+		   if(country.equals("World"))
+			   return false; 
 		   return true;
 	   }
 }
