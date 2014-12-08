@@ -149,6 +149,7 @@ public class VisualizationBarChart{
 			if(num <= max && num > min)
 			{
 				count++;
+				log.warning(Double.toString(num));
 			}
 		}
 		log.warning(Double.toString(min) + " to " +Double.toString(max) +" count: " + Integer.toString(count));
