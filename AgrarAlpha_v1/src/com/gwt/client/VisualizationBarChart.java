@@ -70,9 +70,10 @@ public class VisualizationBarChart{
 		//creating points which will be added to series of the chart, based on ranges calculated previously
 		Number[] points = new Number[columns];
 		
+		points[0] = count(0, Double.parseDouble(cols[0].substring(3)));
 		for(int i = 0; i < cols.length-1; i++)
 		{
-			points[i] = count(Double.parseDouble(cols[i].substring(3)), Double.parseDouble(cols[i+1].substring(3)));
+			points[i+1] = count(Double.parseDouble(cols[i].substring(3)), Double.parseDouble(cols[i+1].substring(3)));
 		}
 		
 		//adding the series to the chart

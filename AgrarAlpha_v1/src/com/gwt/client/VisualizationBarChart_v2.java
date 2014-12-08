@@ -65,14 +65,9 @@ public class VisualizationBarChart_v2{
 		
 		//creating points which will be added to series of the chart, based on ranges calculated previously
 		Number[] points = new Number[columns];
-		for(int i = 0; i < cols.length; i++)
+		for(int i = 0; i < cols.length-1; i++)
 		{
-			if(i==0)
-				points[i] = count(0.0, Double.parseDouble(cols[i]));
-			else if(i == cols.length-1)
-				points[i] = count(Double.parseDouble(cols[i-1]), Double.parseDouble(cols[i]+1));
-			else
-				points[i] = count(Double.parseDouble(cols[i-1]), Double.parseDouble(cols[i]));
+			points[i] = count(Double.parseDouble(cols[i].substring(3)), Double.parseDouble(cols[i+1].substring(3)));
 		}
 		
 		//adding the series to the chart
@@ -94,15 +89,14 @@ public class VisualizationBarChart_v2{
 
 		// calculating the diff between each ranges max and min
 		double diff = (max - min) / numColumns;
-
+				
 		// creating the categhories for the xAchsis, which won't be added to the chart in this method!
 		String[] cols = new String[numColumns];
-		for (int i = 0; i < numColumns-1; i++) 
+		for (int i = 0; i < numColumns; i++) 
 		{
-			cols[i] = "to "+ Integer.toString((int)(min + (diff * (i + 1))));
+			cols[i] = "to "+ Integer.toString((int)(max - (diff * (numColumns-i-1))));
 		}
-		cols[numColumns-1] = "to " + Integer.toString((int)Math.ceil(max));
-
+				
 		return cols;
 	} 
 	
