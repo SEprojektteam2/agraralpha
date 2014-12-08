@@ -142,17 +142,17 @@ public class VisualizationRanking {
 	}
 	
 	public ArrayList<String[]> selectionSort(ArrayList<String[]> arr) {
-		int i, j, maxIndex;
+		int pointerBefore, pointerAfter, maxIndex;
 		String[] tmp = new String[3];
 		int n = arr.size();
-		for (i = 0; i < n - 1; i++) {
-			maxIndex = i;
-			for (j = i + 1; j < n; j++)
-				if (Double.valueOf(arr.get(j)[2]) > Double.valueOf(arr.get(maxIndex)[2]))
-					maxIndex = j;
-			if (maxIndex != i) {
-				tmp = arr.get(i);
-				arr.set(i, arr.get(maxIndex));
+		for (pointerBefore = 0; pointerBefore < n - 1; pointerBefore++) {
+			maxIndex = pointerBefore;
+			for (pointerAfter = pointerBefore + 1; pointerAfter < n; pointerAfter++)
+				if (Double.valueOf(arr.get(pointerAfter)[2]) > Double.valueOf(arr.get(maxIndex)[2]))
+					maxIndex = pointerAfter;
+			if (maxIndex != pointerBefore) {
+				tmp = arr.get(pointerBefore);
+				arr.set(pointerBefore, arr.get(maxIndex));
 				arr.set(maxIndex, tmp);
 			}
 		}
