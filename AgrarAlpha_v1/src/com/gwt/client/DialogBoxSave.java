@@ -83,9 +83,10 @@ public class DialogBoxSave extends DialogBox {
 				log.info("BEFORE SAVE");
 				if (!searchForValue()) //checks if there is already an entry with that name
 					saveData();
-				else
-					new DialogBoxCreate("Name already exists!").show();
-
+				else{
+					DialogBoxCreate db=new DialogBoxCreate("Name already exists!");
+	            	db.center();
+	            	db.show();				}
 			}
 		});
 

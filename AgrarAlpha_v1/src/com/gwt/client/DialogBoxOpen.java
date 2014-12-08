@@ -83,7 +83,9 @@ public class DialogBoxOpen extends DialogBox {
             }
             else
             {
-            	new DialogBoxCreate("Name doesn't exist!").show();
+            	DialogBoxCreate db=new DialogBoxCreate("Name doesn't exist!");
+            	db.center();
+            	db.show();
 
             }
        
