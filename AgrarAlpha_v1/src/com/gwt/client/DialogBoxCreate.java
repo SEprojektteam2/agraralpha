@@ -7,6 +7,10 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+/**
+ * @author Bill
+ *
+ */
 class DialogBoxCreate extends DialogBox {
 
 	private Label label;
@@ -27,7 +31,7 @@ class DialogBoxCreate extends DialogBox {
       vpanel= new VerticalPanel();
       vpanel.setPixelSize(300, 150);
       label = new Label(message);
-      
+      label.setStyleName("fuerFabian");
 
       // DialogBox is a SimplePanel, so you have to set its widget property to
       // whatever you want its contents to be.
@@ -41,6 +45,7 @@ class DialogBoxCreate extends DialogBox {
       
       vpanel.add(label);
       vpanel.add(ok);
+      
       setWidget(vpanel);
     }
   }

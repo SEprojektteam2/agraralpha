@@ -16,6 +16,19 @@
    margin:5px;
 }
 
+.Label{ 
+   font-size: 110%; 
+   font-weight: bold;
+   color:#CCCCCA;
+   padding:5px;
+   margin:5px;
+   width:120px
+}
+
+.fuerFabian{
+	   color:#3a392c;
+	
+}
 
 .message{
 	background-color: white;

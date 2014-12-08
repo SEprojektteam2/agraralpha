@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import org.moxieapps.gwt.highcharts.client.Chart;
 import org.moxieapps.gwt.highcharts.client.Series;
 
+/**
+ * @author Romana Pernischova
+ *
+ * this class is used for testing of the class VisualizationBarChart
+ */
 public class VisualizationBarChart_v2{
 
 	final static int COLUMNSDEFAULT = 10;
@@ -30,6 +35,11 @@ public class VisualizationBarChart_v2{
 		
 		yearIndex = calculateYearIndex(year);
 		convertData(resultData);
+		
+		String info[]=resultData.get(resultData.size()-1);
+		chart.setSize(1050,600)
+	     .setChartTitleText("Histogram "+info[2])
+	        .setChartSubtitleText("Source: FAO. 2014. FAOSTAT. data.fao.org. (Accessed 1.9.2014)");
 	}
 	
 	/**
@@ -83,9 +93,9 @@ public class VisualizationBarChart_v2{
 		String[] cols = new String[numColumns+1];
 		for(int i = 0; i < numColumns; i++)
 		{
-			cols[i] = Double.toString(min+diff*(i));
+			cols[i] = Double.toString(min+diff*(i)) + " - " + Double.toString(min+diff*(i+1));
 		}
-		cols[numColumns] = Double.toString(max);
+		//cols[numColumns] = Double.toString()Double.toString(max);
 		
 		return cols;
 	} 
@@ -103,16 +113,19 @@ public class VisualizationBarChart_v2{
 	{
 		data = new ArrayList<ArrayList<Double>>();
 		
-		for(int i = 0; i < 22; i++)
+		for(int i = calculateYearIndex("2011"); i <= calculateYearIndex("1990"); i++)
 		{
 			data.add(i, new ArrayList<Double>());
 		}
 		
 		for(String[] datapart : resultData)
 		{	
-			if(!datapart[2].equalsIgnoreCase("-"))
+			if(calculateYearIndex(datapart[0]) < 0)
+				break;
+			if(!(datapart[2].equals("-")))
+			{
 				data.get(calculateYearIndex(datapart[0])).add(Double.parseDouble(datapart[2]));
-			
+			}
 		}
 	}
 	
@@ -129,7 +142,7 @@ public class VisualizationBarChart_v2{
 		
 		for(double num : data.get(yearIndex))
 		{
-			if(num < max || num >= min)
+			if(num < max && num >= min)
 			{
 				count++;
 			}
@@ -217,12 +230,10 @@ public class VisualizationBarChart_v2{
 	
 	public static void setNumColumns(int number)
 	{
-
 		if (number < COLUMNSMIN || number > COLUMNSMAX)
 		{
 			numColumns = COLUMNSDEFAULT;
 		}
-		
 	}
 	
 	public static int getNumColumns()

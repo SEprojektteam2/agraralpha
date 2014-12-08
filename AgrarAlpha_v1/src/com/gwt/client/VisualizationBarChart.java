@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import org.moxieapps.gwt.highcharts.client.Chart;
 import org.moxieapps.gwt.highcharts.client.Series;
 
+/**
+ * @author Romana Pernischova
+ *
+ */
 public class VisualizationBarChart{
 
 	final static int COLUMNSDEFAULT = 10;
@@ -30,6 +34,12 @@ public class VisualizationBarChart{
 		
 		yearIndex = calculateYearIndex(year);
 		convertData(resultData);
+		
+		String info[]=resultData.get(resultData.size()-1);
+		chart.setSize(1050,600)
+	     .setChartTitleText("Histogram "+info[2])
+	        .setChartSubtitleText("Source: FAO. 2014. FAOSTAT. data.fao.org. (Accessed 1.9.2014)");
+	
 	}
 	
 	/**
@@ -83,9 +93,9 @@ public class VisualizationBarChart{
 		String[] cols = new String[numColumns+1];
 		for(int i = 0; i < numColumns; i++)
 		{
-			cols[i] = Double.toString(min+diff*(i));
+			cols[i] = Double.toString(Math.round((min+diff*(i))/10000)) + " to " + Double.toString(Math.round((min+diff*(i+1))/10000));
 		}
-		cols[numColumns] = Double.toString(max);
+		//cols[numColumns] = Double.toString(max);
 		
 		return cols;
 	} 
@@ -103,13 +113,15 @@ public class VisualizationBarChart{
 	{
 		data = new ArrayList<ArrayList<Double>>();
 		
-		for(int i = calculateYearIndex("2011"); i < calculateYearIndex("1990"); i++)
+		for(int i = calculateYearIndex("2011"); i <= calculateYearIndex("1990"); i++)
 		{
 			data.add(i, new ArrayList<Double>());
 		}
 		
 		for(String[] datapart : resultData)
 		{	
+			if(calculateYearIndex(datapart[0]) < 0)
+				break;
 			if(!(datapart[2].equals("-")))
 			{
 				data.get(calculateYearIndex(datapart[0])).add(Double.parseDouble(datapart[2]));
@@ -130,7 +142,7 @@ public class VisualizationBarChart{
 		
 		for(double num : data.get(yearIndex))
 		{
-			if(num < max || num >= min)
+			if(num < max && num >= min)
 			{
 				count++;
 			}
@@ -195,7 +207,7 @@ public class VisualizationBarChart{
 		
 		int yInd = Integer.parseInt(year);
 		if(yInd < 1990 || yInd > 2011)
-			return -1;
+			return -yInd;
 		
 		yInd -= 2011;
 		

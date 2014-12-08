@@ -42,7 +42,8 @@ public class CreateView extends Composite{
 	private VerticalPanel tablePanel;
 	private VerticalPanel interpolationPanel;
 	private VerticalPanel histogramPanel;
-    
+    private VisualizationRanking vRanking;
+	private VerticalPanel rankingPanel;
 	private Label label;
 	private ListBox list;
 	private VerticalPanel mapPanel = new VerticalPanel();
@@ -71,7 +72,10 @@ public class CreateView extends Composite{
 		 list.addItem(String.valueOf(i));
 		 }
 		 */
-		
+		rankingPanel = new VerticalPanel();
+		rankingPanel.add(new SourceView());
+		vRanking= new VisualizationRanking(getTopTenCountries(Integer.parseInt(year)));
+        rankingPanel.add(vRanking.create());		
 		tablePanel = new VerticalPanel();
 		interpolationPanel = new VerticalPanel();
 		histogramPanel = new VerticalPanel();
@@ -161,12 +165,14 @@ public class CreateView extends Composite{
 		
 		mapPanel.add(new SourceView()); // adding a verticalPanel with all source to the mapPanel
 		mapPanel.add(slider.asWidget());
+		histogramPanel.add(slider.asWidget());
 		createMap(Integer.parseInt(year));	
 		//mapPanel.add(getMap());
 		basePanel.add(tablePanel,"Table");
 		basePanel.add(interpolationPanel,"Interpolation");
 		basePanel.add(histogramPanel,"Histogram");
 		basePanel.add(mapPanel,"Map");
+		basePanel.add(rankingPanel,"Ranking");
 
 		basePanel.selectTab(0); // first tab of the tabPanel will be open
 		
@@ -335,7 +341,7 @@ public class CreateView extends Composite{
 		vBarChart = new VisualizationBarChart(dataArray, year);
 		
 		vBarChart.setTitle("Histogram for ...");
-		vBarChart.setTitleX("Range");
+		vBarChart.setTitleX("Range in 10 000");
 		vBarChart.setTitleY("Amount");
 		
 		System.out.println("first draw "+year);
@@ -356,5 +362,15 @@ public class CreateView extends Composite{
 		System.out.println("draw form slider "+year);
 		
 		histogramPanel.add(vBarChart.draw(year, cols));
+	}
+	
+	public ArrayList<String[]> getTopTenCountries(int year){
+		ArrayList<String[]> countries = new ArrayList<String[]>();
+		for(int i = 0; i<dataArray.size(); i++){
+			if(dataArray.get(i)[0].equals(String.valueOf(year))){
+				countries.add(dataArray.get(i));
+			}
+		}
+		return countries;
 	}
 }
