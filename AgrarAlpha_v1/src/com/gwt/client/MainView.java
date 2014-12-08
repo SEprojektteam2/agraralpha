@@ -1,15 +1,10 @@
 package com.gwt.client;
 
-//package guiA.client;
-
-import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 /*

@@ -1,8 +1,6 @@
 package com.gwt.client;
 import java.util.ArrayList;
 
-import org.moxieapps.gwt.highcharts.client.Chart;
-
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface HighchartServiceAsync {

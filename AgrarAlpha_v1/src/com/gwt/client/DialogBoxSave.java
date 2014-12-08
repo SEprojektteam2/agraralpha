@@ -10,10 +10,7 @@ import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
@@ -60,8 +57,6 @@ public class DialogBoxSave extends DialogBox {
 			@Override
 			public void onKeyPress(KeyPressEvent event) {
 				TextBox sender = (TextBox) event.getSource();
-
-				int keyCode = event.getNativeEvent().getKeyCode();
 
 				if (!(Character.isLetterOrDigit(event.getCharCode()))) {
 					sender.cancelKey();
