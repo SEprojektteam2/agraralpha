@@ -182,7 +182,7 @@ public class CreateView extends Composite{
 		mapPanel.add(new SourceView()); // adding a verticalPanel with all source to the mapPanel
 		mapPanel.add(slider.asWidget());
 		histogramPanel.add(sliderHisto.asWidget());
-		//addBarChart();	
+		addBarChart();	
 		createMap(Integer.parseInt(year));	
 		//mapPanel.add(getMap());
 		basePanel.add(tablePanel,"Table");
@@ -397,6 +397,9 @@ public class CreateView extends Composite{
 					countries.add(dataArray.get(i));
 			}
 		}
+		countries = selectionSort(countries);
+		for(int i = 10; i<countries.size(); i++)
+		{ countries.remove(i);}
 		return selectionSort(countries);
 	}
 	
