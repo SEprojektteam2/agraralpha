@@ -83,7 +83,7 @@ public class ExtendedMenuView extends Composite {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			
+			openDB.center();
 			openDB.show();
 			}
 		
@@ -110,6 +110,7 @@ public class ExtendedMenuView extends Composite {
 
 		@Override
 		public void onClick(ClickEvent event) {
+			saveDB.center();
 			saveDB.show();
 			}
 	}

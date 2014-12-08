@@ -74,6 +74,7 @@ private VerticalPanel vPanel = new VerticalPanel();
 
 		@Override
 		public void onClick(ClickEvent event) {
+			openDB.center();
 			openDB.show();
 			}
 		
