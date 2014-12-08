@@ -18,7 +18,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import java.io.Serializable;
 
-
 public class SelectionView extends Composite implements Serializable {
 	public static Logger log = Logger.getLogger(SelectionView.class.getName());
 	private Label yearLabel;
@@ -47,7 +46,8 @@ public class SelectionView extends Composite implements Serializable {
 	private HighchartServiceAsync highchartSvc = GWT
 			.create(HighchartService.class);
 
-	/**@author Bill
+	/**
+	 * @author Bill
 	 * @param main
 	 *            This class is drawing the options, the user can choose from.
 	 *            The RootPanel is a FlexTable (Table with flexible size)
@@ -157,7 +157,8 @@ public class SelectionView extends Composite implements Serializable {
 
 	}
 
-	/**@author Bill
+	/**
+	 * @author Bill
 	 * @return boolean whether selected options are valid or not
 	 */
 	public boolean isValid() {
@@ -175,7 +176,8 @@ public class SelectionView extends Composite implements Serializable {
 		return b;
 	}
 
-	/**@author Bill
+	/**
+	 * @author Bill
 	 * @return selected year as a string
 	 */
 	public String getYear() {
@@ -184,7 +186,8 @@ public class SelectionView extends Composite implements Serializable {
 		return s;
 	}
 
-	/**@author Bill
+	/**
+	 * @author Bill
 	 * @return selected country as a string
 	 */
 	public String getCountry() {
@@ -192,7 +195,8 @@ public class SelectionView extends Composite implements Serializable {
 		return s;
 	}
 
-	/**@author Bill
+	/**
+	 * @author Bill
 	 * @return selected product as a string
 	 */
 	public String getProduct() {
@@ -204,7 +208,8 @@ public class SelectionView extends Composite implements Serializable {
 		return s;
 	}
 
-	/**@author Bill
+	/**
+	 * @author Bill
 	 * @return selected type as a string
 	 */
 	public String getType() {
@@ -220,13 +225,12 @@ public class SelectionView extends Composite implements Serializable {
 		return perCapitaCB.getValue();
 	}
 
-	
-	/**@author Bill and William Martini
-	 * handels the event when createBtn will get clicked checks if requirements
-	 * for creating are fullfilled if they are, open the createView if not open
-	 * an Dialog
+	/**
+	 * @author Bill and William Martini handels the event when createBtn will get
+	 *         clicked checks if requirements for creating are fullfilled if
+	 *         they are, open the createView if not open an Dialog
 	 */
-	
+
 	private class createClickHandler implements ClickHandler {
 
 		@Override
@@ -234,9 +238,10 @@ public class SelectionView extends Composite implements Serializable {
 			// dialog appears when user wants to create an invalid selection
 
 			if (yearLB.isItemSelected(0) || isValid() == false) {
-			DialogBoxCreate dbCreate=new DialogBoxCreate("Everything besides \"per Capita\" needs to be selected. ");
-			dbCreate.center();
-			dbCreate.show();
+				DialogBoxCreate dbCreate = new DialogBoxCreate(
+						"Everything besides \"per Capita\" needs to be selected. ");
+				dbCreate.center();
+				dbCreate.show();
 			}
 
 			else {
@@ -244,19 +249,28 @@ public class SelectionView extends Composite implements Serializable {
 				log.warning("hallo");
 
 				highchartSvc.getData(getCountry(), getProduct(), getType(),
-						perCapitaCB.getValue(), new AsyncCallback<ArrayList<String[]>>() {
+						perCapitaCB.getValue(),
+						new AsyncCallback<ArrayList<String[]>>() {
 							public void onFailure(Throwable caught) {
 								// Show the RPC error message to the user
 								System.out.println("Error Arraylist!");
 							}
 
 							public void onSuccess(ArrayList<String[]> resultTemp) {
-								if (getCountry().equals("Global"))
-									main.openCreateView(true, resultTemp,
-											getYear());
-								else
-									main.openCreateView(false, resultTemp,
-											getYear());
+								if (resultTemp.size() == 0) {
+									DialogBoxCreate dbCreate2 = new DialogBoxCreate(
+											"No data found");
+									dbCreate2.center();
+									dbCreate2.show();
+
+								} else {
+									if (getCountry().equals("Global"))
+										main.openCreateView(true, resultTemp,
+												getYear());
+									else
+										main.openCreateView(false, resultTemp,
+												getYear());
+								}
 							}
 						});
 
@@ -266,8 +280,8 @@ public class SelectionView extends Composite implements Serializable {
 
 	}
 
-	/**@author Bill
-	 * Handles change in the country listbox
+	/**
+	 * @author Bill Handles change in the country listbox
 	 */
 	private class countryLBChangeHandler implements ChangeHandler {
 
@@ -289,8 +303,8 @@ public class SelectionView extends Composite implements Serializable {
 
 	}
 
-	/**@author Bill
-	 * Handles change in the listbox (product, type)
+	/**
+	 * @author Bill Handles change in the listbox (product, type)
 	 */
 	private class listBoxChangeHandler implements ChangeHandler {
 
@@ -307,9 +321,9 @@ public class SelectionView extends Composite implements Serializable {
 			}
 		}
 
-		/**@author Bill
-		 * if one selects an item the other disappears until the first one is
-		 * blank again
+		/**
+		 * @author Bill if one selects an item the other disappears until the
+		 *         first one is blank again
 		 */
 		public void onChange(ChangeEvent event) {
 			if (!countryLB.isItemSelected(0)) {
