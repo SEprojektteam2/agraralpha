@@ -58,10 +58,12 @@ public class SelectionView extends Composite implements Serializable {
 		this.main = main;
 
 		yearLabel = new Label("Year");
+		yearLabel.addStyleName("label");
 		countryLabel = new Label("Country");
 		countryLabel.addStyleName("label");
 
 		productLabel = new Label("Product");
+		productLabel.addStyleName("label");
 		typeLabel = new Label("Product Type");
 		typeLabel.addStyleName("label");
 
