@@ -1,8 +1,8 @@
 package com.gwt.client;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
-import org.eclipse.jetty.util.log.Log;
 import org.moxieapps.gwt.highcharts.client.Chart;
 import org.moxieapps.gwt.highcharts.client.Series;
 
@@ -20,6 +20,8 @@ public class VisualizationBarChart{
 	private ArrayList<ArrayList<Double>> data;
 	private int numColumns = COLUMNSDEFAULT;
 	private int yearIndex;
+	
+	public static final Logger log = Logger.getLogger(VisualizationBarChart.class.getName());
 	
 	/**
 	 * The constructor receives the data from the database in a String form and the year in string form.
@@ -149,7 +151,7 @@ public class VisualizationBarChart{
 				count++;
 			}
 		}
-		Log.warn(Double.toString(min) + " to " +Double.toString(max) +" count: " + Integer.toString(count));
+		log.warning(Double.toString(min) + " to " +Double.toString(max) +" count: " + Integer.toString(count));
 		return count;
 		
 	}

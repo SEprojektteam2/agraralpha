@@ -63,6 +63,21 @@ public class CreateView extends Composite{
 		initWidget(this.basePanel);
 		this.dataArray = Data;
 		this.year = year;
+		
+			// Set up slider
+		  slider.setStepSize(1);
+		  slider.setCurrentValue(Integer.parseInt(year));
+		  slider.setNumTicks(21);
+		  slider.setNumLabels(21);
+		  slider.setWidth("100%");
+		  slider.addMouseUpHandler(new MouseUpHandler(){
+				@Override
+				public void onMouseUp(MouseUpEvent event) {
+					// TODO Auto-generated method stub
+					createMapFromSlider();
+					slider.redraw();
+				}
+	          });
 
 		
 		VisualizationTable vTable = new VisualizationTable(Data);
@@ -73,64 +88,22 @@ public class CreateView extends Composite{
 		 list.addItem(String.valueOf(i));
 		 }
 		 */
+		
 		rankingPanel = new VerticalPanel();
 		rankingPanel.add(new SourceView());
+		rankingPanel.add(slider.asWidget());
 		vRanking= new VisualizationRanking(dataArray, year);
         rankingPanel.add(vRanking.create());		
-		tablePanel = new VerticalPanel();
+		
+        tablePanel = new VerticalPanel();
 		interpolationPanel = new VerticalPanel();
 		histogramPanel = new VerticalPanel();
 		histogramPanel.add(new SourceView());
 
 		mapPanel = new VerticalPanel();
 
-
-	
-		/*Runnable onLoadCallbackTable = new Runnable(){
-			public void run(){
-				VisMan = visMan;
-				tablePanel.add(VisMan.graphs.get(0));
-			}
-		};
-
-		VisualizationUtils.loadVisualizationApi(onLoadCallbackTable, Table.PACKAGE);
-		  
 		
-		*/
-		
-		  slider.setStepSize(1);
-		  slider.setCurrentValue(Integer.parseInt(year));
-		  slider.setNumTicks(21);
-		  slider.setNumLabels(21);
-		  slider.setWidth("100%");
-		  
-		 /* slider.sinkEvents( Event.MOUSEEVENTS ); 
-		  slider.sinkEvents( Event.KEYEVENTS ); 
-		  slider.sinkEvents( Event.ONMOUSEWHEEL ); 
-		  slider.sinkEvents( Event.FOCUSEVENTS );
-		  */
-		  slider.addMouseUpHandler(new MouseUpHandler(){
-				@Override
-				public void onMouseUp(MouseUpEvent event) {
-					// TODO Auto-generated method stub
-					createMapFromSlider();
-					slider.redraw();
-				}
-	          });
-		  
-		  
-//		  slider.addChangeListener(new ChangeListener() {
-//				@Override
-//				public void onChange(Widget sender) {
-//					// TODO Auto-generated method stub
-//					createMapFromSlider();
-//					slider.redraw();
-//				}
-//	          });
-		 
-		  
-		  
-		  //slider.addValueChangeHandler();
+
 		  
 		
 		/*if(interpolation==true){*/
