@@ -70,6 +70,8 @@ public class CreateView extends Composite{
 					createRankingFromSlider();
 					createMapFromSlider();
 					sliderMap.redraw();
+					sliderHisto.redraw();
+					sliderRanking.redraw();
 				}
 	          });
 		  
@@ -90,6 +92,8 @@ public class CreateView extends Composite{
 					createMapFromSlider();
 					createRankingFromSlider();
 					createMapFromSlider();
+					sliderMap.redraw();
+					sliderHisto.redraw();
 					sliderRanking.redraw();
 				}
 	          });
@@ -128,7 +132,9 @@ public class CreateView extends Composite{
 				createMapFromSlider();
 				createRankingFromSlider();
 				createMapFromSlider();
+				sliderMap.redraw();
 				sliderHisto.redraw();
+				sliderRanking.redraw();
 			}
 		});	
 			
