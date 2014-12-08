@@ -53,7 +53,7 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		return i;
 	}
 	
-	private ArrayList<String[]> readDatabase(String query, String searchingVar, String outputVar){
+	private ArrayList<String[]> readDatabase(String query, String searchingVar, String outputVar, Boolean perCapita){
 		ArrayList<String[]> result = new ArrayList<String[]>();
 		// create the java statement
 		Statement st = null;
@@ -71,6 +71,8 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 			int i=1990;
 			//String controll = rs.getString(searchingVar);
 			String controll = "null";
+			ArrayList<String[]> population = getPopulation(); 
+			
 			while (rs.next())
 			{		
 					if(controll.equals("null")){
@@ -80,6 +82,30 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 					resultTemp[0] = rs.getString("Year");
 					resultTemp[1] = rs.getString(searchingVar);
 					resultTemp[2] = rs.getString(outputVar);
+					if(rs.getString("Unit").equals("tonnes"))
+						resultTemp[2] = String.valueOf(Double.parseDouble(resultTemp[2]) * 1000);
+					else
+						resultTemp[2] = String.valueOf(Double.parseDouble(resultTemp[2]) * Double.parseDouble(rs.getString("Unit")));
+					
+					// If we want to have the values per capita
+					if(perCapita){
+						log.warning("perCapita");
+						// We can only do this if the values don't equal an empty String
+						if(!resultTemp[2].equals("")){
+							log.warning("now calculating");
+							//int valueTotal = Integer.parseInt(resultTemp[2]);
+							for(int r=0; r<population.size();r++){
+								//areacode year value unit
+								if(population.get(r)[0].equals(rs.getString("AreaCode")) && population.get(r)[1].equals(resultTemp[0]))
+									resultTemp[2] = String.valueOf(Double.parseDouble(resultTemp[2]) / Double.parseDouble(population.get(r)[2]) * Double.parseDouble(population.get(r)[3]));
+							}
+							
+						}
+					}
+					
+					
+					
+					
 					/**result.add(resultTemp);**/
 					//i++;
 					if(resultTemp[0].equals(String.valueOf(i))){
@@ -176,36 +202,43 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 		int counter=0;
 		// country=null when world is selected and product is given and type is given => Output: Country + Year + Value
 		if(country.equals("Global")){ 
-			query = "SELECT AreaName, Year, Value FROM records WHERE ElementName = '"+type+"' AND ItemName = '"+product+"' ORDER BY AreaName ASC, Year ASC";
+			query = "SELECT AreaName, Year, Value, AreaCode, Unit FROM records WHERE ElementName = '"+type+"' AND ItemName = '"+product+"' ORDER BY AreaName ASC, Year ASC";
 			query2 = "SELECT distinct AreaCode, AreaName FROM records WHERE ElementName = '"+type+"' AND ItemName = '"+product+"'";
 			counter=getCounter(query2);
 			searchingVar="AreaName";
 			mapInfo=type+" of "+product;
+			if(perCapita)
+				mapInfo.concat(" (per Capita)");
 		}
 		//
 		else if(product.equals("null")){
-			query = "SELECT ItemName, Year, Value FROM records WHERE ElementName = '"+type+"' AND AreaName = '"+country+"' ORDER BY ItemName ASC, Year ASC";
+			query = "SELECT ItemName, Year, Value, AreaCode, Unit FROM records WHERE ElementName = '"+type+"' AND AreaName = '"+country+"' ORDER BY ItemName ASC, Year ASC";
 			query2 = "SELECT distinct ItemCode, ItemName FROM records WHERE ElementName = '"+type+"' AND AreaName = '"+country+"'";
 			counter=getCounter(query2);
 			searchingVar="ItemName";
 			mapInfo=type+" in "+country;
+			if(perCapita)
+				mapInfo.concat(" (per Capita)");
 		}
 		//
 		else if(type.equals("null")){
-			query = "SELECT ElementName, Year, Value FROM records WHERE ItemName = '"+product+"' AND AreaName = '"+country+"' ORDER BY ElementName ASC, Year ASC";
+			query = "SELECT ElementName, Year, Value, AreaCode, Unit FROM records WHERE ItemName = '"+product+"' AND AreaName = '"+country+"' ORDER BY ElementName ASC, Year ASC";
 			query2 = "SELECT distinct ElementCode, ElementName FROM records WHERE ItemName = '"+product+"' AND AreaName = '"+country+"'";
 			counter=getCounter(query2);
 			searchingVar="ElementName";
 			mapInfo=product+" in "+country;
+			if(perCapita)
+				mapInfo.concat(" (per Capita)");
 		}
 		else{
-			query = "SELECT AreaName, Year, Value FROM records WHERE ItemName = '"+product+"' AND AreaName = '"+country+"' AND ElementName = '"+type+"' ORDER BY Year ASC";
+			query = "SELECT AreaName, Year, Value, AreaCode, Unit FROM records WHERE ItemName = '"+product+"' AND AreaName = '"+country+"' AND ElementName = '"+type+"' ORDER BY Year ASC";
 			query2 = "SELECT distinct AreaCode, AreaName FROM records WHERE ItemName = '"+product+"' AND AreaName = '"+country+"' AND ElementName = '"+type+"'";
 			counter=getCounter(query2);
 			searchingVar="AreaName";
+			/** HIER FEHLT NOCH MAP INFO! **/
 		}
 			
-		result = readDatabase(query,searchingVar,outputVar);
+		result = readDatabase(query,searchingVar,outputVar,perCapita);
 		
 		
 		/*String[] resultTemp = new String[3];
@@ -272,6 +305,31 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 	private ArrayList<String[]> calcPerCapita(ArrayList<String[]> resultData){
 		return resultData;
 	}
-		
+	
+	private ArrayList<String[]> getPopulation() {
+		ArrayList<String[]> population = new ArrayList<String[]>();
+		String query = "SELECT AreaCode, Value, Year, Unit FROM records WHERE ElementName = 'Total Population - Both sexes' ORDER BY AreaName ASC, Year ASC";
+
+		Statement st;
+		try {
+			st = conn.createStatement();
+			ResultSet populationSet = st.executeQuery(query);
+
+			while (populationSet.next()) {
+				String[] resultTemp = new String[4];
+				resultTemp[0] = populationSet.getString("AreaCode");
+				resultTemp[1] = populationSet.getString("Year");
+				resultTemp[2] = populationSet.getString("Value");
+				resultTemp[3] = populationSet.getString("Unit");
+				population.add(resultTemp);
+				log.warning("Got population");
+			}
+
+		} catch (SQLException e) {
+			log.warning("Error getting population values");
+		}
+
+		return population;
+	}
 
 }	
