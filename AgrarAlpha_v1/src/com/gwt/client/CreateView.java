@@ -182,7 +182,7 @@ public class CreateView extends Composite{
 		mapPanel.add(new SourceView()); // adding a verticalPanel with all source to the mapPanel
 		mapPanel.add(slider.asWidget());
 		histogramPanel.add(sliderHisto.asWidget());
-		addBarChart();	
+		//addBarChart();	
 		createMap(Integer.parseInt(year));	
 		//mapPanel.add(getMap());
 		basePanel.add(tablePanel,"Table");
@@ -388,13 +388,34 @@ public class CreateView extends Composite{
 		if(type.equals("ElementName"))
 			type = "Type";
 			
-		String[] headRow = {"Year",type,"Value"};
-		countries.add(headRow);
-		for(int i = 0; i<dataArray.size(); i++){
+		//String[] headRow = {"Year",type,"Value"};
+		//countries.add(headRow);
+
+		for(int i = 0; i<dataArray.size()-1; i++){
 			if(dataArray.get(i)[0].equals(String.valueOf(year))){
-				countries.add(dataArray.get(i));
+				if(!dataArray.get(i)[2].equals("-"))
+					countries.add(dataArray.get(i));
 			}
 		}
-		return countries;
+		return selectionSort(countries);
 	}
+	
+	public ArrayList<String[]> selectionSort(ArrayList<String[]> arr) {
+		int i, j, maxIndex; 
+		String[] tmp = new String[3];
+		int n = arr.size();
+		for (i = 0; i < n - 1; i++) {
+			maxIndex = i;
+			for (j = i + 1; j < n; j++)
+				if (Double.valueOf(arr.get(j)[2]) > Double.valueOf(arr.get(maxIndex)[2]))
+					maxIndex = j;
+			if (maxIndex != i) {
+				tmp = arr.get(i);
+				arr.set(i, arr.get(maxIndex));
+				arr.set(maxIndex,tmp);
+			}
+		}
+		return arr;
+	}
+	
 }
