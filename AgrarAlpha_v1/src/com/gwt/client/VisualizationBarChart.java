@@ -95,7 +95,6 @@ public class VisualizationBarChart{
 		{
 			cols[i] = Double.toString(Math.round((min+diff*(i))/10000)) + " to " + Double.toString(Math.round((min+diff*(i+1))/10000));
 		}
-		//cols[numColumns] = Double.toString(max);
 		
 		return cols;
 	} 
