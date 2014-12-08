@@ -81,7 +81,6 @@ public class HighchartServiceImpl extends RemoteServiceServlet implements
 			ResultSet rs = null;
 			rs = st.executeQuery(query);
 			
-			int i = 1990;
 			String controll = "null";
 			ArrayList<String[]> population = getPopulation();
 			

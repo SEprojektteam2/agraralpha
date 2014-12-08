@@ -14,7 +14,6 @@ public class VisualizationRanking {
 	private String th2 = "</th>";
 	private String td = "<td>";
 	private String td2 = "</td>";
-	private HTML table;
 	private String htmlString = new String();
 	private int year = 0;
 	private String information;
