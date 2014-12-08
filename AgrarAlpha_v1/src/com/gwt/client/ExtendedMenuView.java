@@ -13,6 +13,10 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+/**
+ * @author Bill
+ * This class generate the extended menu for the application
+ */
 public class ExtendedMenuView extends Composite {
 
 	private VerticalPanel vPanel = new VerticalPanel();
@@ -26,10 +30,9 @@ public class ExtendedMenuView extends Composite {
 			.create(SaveService.class);
 	public static Logger log = Logger.getLogger(ExtendedMenuView.class.getName());
 
-	/**
+	/**@author Bill
 	 * @param main
 	 * @param selectionView
-	 * This class generate the extended menu for the application
 	 */
 	public ExtendedMenuView(final MainView main, final SelectionView selectionView) {
 		initWidget(this.vPanel);
@@ -76,7 +79,7 @@ public class ExtendedMenuView extends Composite {
 		
 	}
 	
-	/**
+	/**@author Bill
 	 *on click show the DialogBox "DialogBoxOpen"	
 	 */
 	private class openClickHandler implements ClickHandler{
@@ -90,7 +93,7 @@ public class ExtendedMenuView extends Composite {
 	}
 	
 	/**
-	 * 
+	 * @author Bill
 	 * on click call the method from mainView to open the start page
 	 */
 	private class homeClickHandler implements ClickHandler{

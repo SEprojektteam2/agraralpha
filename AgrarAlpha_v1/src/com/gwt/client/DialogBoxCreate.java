@@ -7,6 +7,10 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+/**
+ * @author Bill
+ *
+ */
 class DialogBoxCreate extends DialogBox {
 
 	private Label label;

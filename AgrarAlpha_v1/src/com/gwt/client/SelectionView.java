@@ -61,7 +61,7 @@ public class SelectionView extends Composite implements Serializable {
 	private HighchartServiceAsync highchartSvc = GWT
 			.create(HighchartService.class);
 
-	/**
+	/**@author Bill
 	 * @param main
 	 *            This class is drawing the options, the user can choose from.
 	 *            The RootPanel is a FlexTable (Table with flexible size)
@@ -168,7 +168,7 @@ public class SelectionView extends Composite implements Serializable {
 
 	}
 
-	/**
+	/**@author Bill
 	 * @return boolean whether selected options are valid or not
 	 */
 	public boolean isValid() {
@@ -186,7 +186,7 @@ public class SelectionView extends Composite implements Serializable {
 		return b;
 	}
 
-	/**
+	/**@author Bill
 	 * @return selected year as a string
 	 */
 	public String getYear() {
@@ -195,7 +195,7 @@ public class SelectionView extends Composite implements Serializable {
 		return s;
 	}
 
-	/**
+	/**@author Bill
 	 * @return selected country as a string
 	 */
 	public String getCountry() {
@@ -203,7 +203,7 @@ public class SelectionView extends Composite implements Serializable {
 		return s;
 	}
 
-	/**
+	/**@author Bill
 	 * @return selected product as a string
 	 */
 	public String getProduct() {
@@ -215,7 +215,7 @@ public class SelectionView extends Composite implements Serializable {
 		return s;
 	}
 
-	/**
+	/**@author Bill
 	 * @return selected type as a string
 	 */
 	public String getType() {
@@ -231,11 +231,13 @@ public class SelectionView extends Composite implements Serializable {
 		return perCapitaCB.getValue();
 	}
 
-	/*
+	
+	/**@author Bill
 	 * handels the event when createBtn will get clicked checks if requirements
 	 * for creating are fullfilled if they are, open the createView if not open
 	 * an Dialog
 	 */
+	
 	private class createClickHandler implements ClickHandler {
 
 		@Override
@@ -275,7 +277,7 @@ public class SelectionView extends Composite implements Serializable {
 
 	}
 
-	/**
+	/**@author Bill
 	 * Handles change in the country listbox
 	 */
 	private class countryLBChangeHandler implements ChangeHandler {
@@ -298,7 +300,7 @@ public class SelectionView extends Composite implements Serializable {
 
 	}
 
-	/**
+	/**@author Bill
 	 * Handles change in the listbox (product, type)
 	 */
 	private class listBoxChangeHandler implements ChangeHandler {
@@ -316,7 +318,7 @@ public class SelectionView extends Composite implements Serializable {
 			}
 		}
 
-		/**
+		/**@author Bill
 		 * if one selects an item the other disappears until the first one is
 		 * blank again
 		 */

@@ -36,6 +36,7 @@ public class DialogBoxOpen extends DialogBox {
  	
  	
      /**
+     * @author Bill
      * @param data
      * @param main
      */
@@ -111,7 +112,8 @@ public class DialogBoxOpen extends DialogBox {
          setWidget(base);
        }
      
-     	/**
+     	/**  @author Bill, Fabian
+
      	 * @return boolean whether the name is found in database or not
      	 */
      	private boolean searchForValue(){
@@ -123,7 +125,7 @@ public class DialogBoxOpen extends DialogBox {
 	    	 return false;
 	     }
     	 
-		 /**
+		 /**@author Bill, Fabian
 		 * @return the array with the saved options
 		 */
 		private String[] getData(){
@@ -135,7 +137,7 @@ public class DialogBoxOpen extends DialogBox {
 		     return null;
 		 }
 		 
-		 /**
+		 /**@author Bill, Fabian
 		 * @param data
 		 * opens createView with the saved options
 		 */

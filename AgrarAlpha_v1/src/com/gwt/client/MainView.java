@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 /*
  * main view is the home page where the user can choose the options to create
  * the graph(it uses selectionview for this purpose). Or can open saved options
+ *@author Bill
  */
 public class MainView extends Composite {
 
@@ -26,7 +27,7 @@ public class MainView extends Composite {
 
 	
 	/**
-	 * 
+	 * @author Bill
 	 */
 	public MainView() {
 		initWidget(this.rootPanel);
@@ -65,7 +66,7 @@ public class MainView extends Composite {
 	}
 	
 	
-	/**
+	/**@author Bill
 	 * @param b
 	 * @param a
 	 * @param year
