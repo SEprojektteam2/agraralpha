@@ -73,10 +73,10 @@ public class VisualizationRanking {
 		for(int i=1;i<arraylist.size();i++){
 			
 			htmlString += tr;
-			htmlString += th + String.valueOf(i) + th2;
+			htmlString += td + String.valueOf(i) + td2;
 
 			for(int j=0; j<3;j++){
-				htmlString += th + arraylist.get(i)[j] + th2;
+				htmlString += td + arraylist.get(i)[j] + td2;
 
 			}
 			htmlString += tr2;
@@ -103,6 +103,7 @@ public class VisualizationRanking {
 		for(int i = 0; i<dataArray.size()-1; i++){
 			if(dataArray.get(i)[0].equals(String.valueOf(year))){
 				if(!dataArray.get(i)[2].equals("-"))
+					if(filter(dataArray.get(i)[1]))
 					countries.add(dataArray.get(i));
 			}
 		}
@@ -110,7 +111,7 @@ public class VisualizationRanking {
 		ArrayList<String[]> returnArray = new ArrayList<String[]>();
 		String[] headRow = {"Year",type,"Value"};
 		returnArray.add(headRow);
-		for(int i = 0; i<10; i++)
+		for(int i = 0; i<11; i++)
 		{ returnArray.add(countries.get(i));}
 		return returnArray;
 	}
