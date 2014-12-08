@@ -101,9 +101,9 @@ public class VisualizationBarChart{
 	 */
 	private void convertData(ArrayList<String[]> resultData)
 	{
-data = new ArrayList<ArrayList<Double>>();
+		data = new ArrayList<ArrayList<Double>>();
 		
-		for(int i = 0; i < 22; i++)
+		for(int i = calculateYearIndex("2011"); i < calculateYearIndex("1990"); i++)
 		{
 			data.add(i, new ArrayList<Double>());
 		}
