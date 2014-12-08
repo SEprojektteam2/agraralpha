@@ -50,6 +50,7 @@ public class DialogBoxSave extends DialogBox {
 		base = new VerticalPanel();
 		base.setPixelSize(300,150);
 		label = new Label("Enter a name to save as:");
+		label.setStyleName("fuerFabian");
 		btnPanel = new HorizontalPanel();
 
 		tb = new TextBox();
@@ -82,9 +83,10 @@ public class DialogBoxSave extends DialogBox {
 				log.info("BEFORE SAVE");
 				if (!searchForValue()) //checks if there is already an entry with that name
 					saveData();
-				else
-					new DialogBoxCreate("Name already exists!").show();
-
+				else{
+					DialogBoxCreate db=new DialogBoxCreate("Name already exists!");
+	            	db.center();
+	            	db.show();				}
 			}
 		});
 
