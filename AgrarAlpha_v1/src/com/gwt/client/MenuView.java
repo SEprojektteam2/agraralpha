@@ -23,7 +23,7 @@ private VerticalPanel vPanel = new VerticalPanel();
 			.create(SaveService.class);
 	/**
 	 * @param main
-	 * 
+	 * @author Bill
 	 * menu on the main page to navigate through application
 	 */
 	public MenuView(final MainView main) {
@@ -56,7 +56,7 @@ private VerticalPanel vPanel = new VerticalPanel();
 		this.vPanel.add(openBtn);
 		}
 	
-	/**
+	/**@author Bill
 	 *on click call the method from mainView to open the start page  
 	 */
 	private class homeClickHandler implements ClickHandler{
@@ -67,7 +67,7 @@ private VerticalPanel vPanel = new VerticalPanel();
 			}
 		
 	}
-	/**
+	/**@author Bill
 	 *on click show the DialogBox "DialogBoxOpen"
 	 */
 	private class openClickHandler implements ClickHandler{

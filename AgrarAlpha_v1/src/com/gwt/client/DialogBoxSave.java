@@ -32,7 +32,7 @@ public class DialogBoxSave extends DialogBox {
 	private SelectionView selView;
 	private ArrayList<String[]> data = new ArrayList<String[]>();
 
-	/**
+	/**@author Bill
 	 * @param selectionView
 	 * @param data
 	 */
@@ -104,7 +104,7 @@ public class DialogBoxSave extends DialogBox {
 		setWidget(base);
 	}
 
-	/**
+	/**@author Bill, Fabian
 	 * saves the options selected in a database
 	 */
 	private void saveData() {
@@ -128,7 +128,7 @@ public class DialogBoxSave extends DialogBox {
 
 	}
 
-	/**
+	/**@author Bill, Fabian
 	 * @return boolean whether  a string is or isn't already in the database
 	 */
 	private boolean searchForValue() {
