@@ -336,7 +336,7 @@ public class CreateView extends Composite{
 		vBarChart = new VisualizationBarChart(dataArray, year);
 		
 		vBarChart.setTitle("Histogram for ...");
-		vBarChart.setTitleX("Range");
+		vBarChart.setTitleX("Range in 10 000");
 		vBarChart.setTitleY("Amount");
 		
 		System.out.println("first draw "+year);
