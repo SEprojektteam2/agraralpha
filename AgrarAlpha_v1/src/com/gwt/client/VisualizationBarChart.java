@@ -102,10 +102,11 @@ public class VisualizationBarChart{
 		
 		// creating the categhories for the xAchsis, which won't be added to the chart in this method!
 		String[] cols = new String[numColumns];
-		for (int i = 0; i < numColumns; i++) 
+		for (int i = 0; i < numColumns-1; i++) 
 		{
 			cols[i] = "to "+ Integer.toString((int)(min + (diff * (i+1))));
 		}
+		cols[numColumns-1] = "to "+ Integer.toString((int)Math.ceil(max));
 		
 		return cols;
 	} 
