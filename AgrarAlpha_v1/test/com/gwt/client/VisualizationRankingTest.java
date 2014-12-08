@@ -3,16 +3,10 @@ package com.gwt.client;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-
-import junit.framework.TestCase;
-
 import org.junit.Test;
-
-import com.google.gwt.junit.client.GWTTestCase;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.gwt.client.VisualizationRanking;
-import com.gwt.client.VisualizationTable;
+
 
 public class VisualizationRankingTest {
 	

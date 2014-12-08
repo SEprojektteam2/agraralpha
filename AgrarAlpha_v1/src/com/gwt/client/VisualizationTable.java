@@ -14,7 +14,6 @@ public class VisualizationTable {
 	private String th2 = "</th>";
 	private String td = "<td>";
 	private String td2 = "</td>";
-	private HTML table;
 	private String htmlString = new String();
 	ArrayList<String[]> arraylist;
 
@@ -29,19 +28,6 @@ public class VisualizationTable {
 	 * @return HTML object with the table in it
 	 */
 	public HTML create() {
-
-		/*
-		 * ArrayList for testing purposeString[] sArray= {"Schweiz","2","3"};
-		 * String[] sArray1= {"Schweiz","12","13"}; String[] sArray2=
-		 * {"Frankreich","22","23"}; String[] sArray3= {"Frankreich","32","33"};
-		 * String[] sArray4= {"Schweiz","2","3"}; String[] sArray5=
-		 * {"Schweiz","12","13"}; String[] sArray6= {"Frankreich","22","23"};
-		 * String[] sArray7= {"Frankreich","32","33"}; arraylist.add(sArray);
-		 * arraylist.add(sArray1); arraylist.add(sArray2);
-		 * arraylist.add(sArray3); arraylist.add(sArray4);
-		 * arraylist.add(sArray5); arraylist.add(sArray6);
-		 * arraylist.add(sArray7);
-		 */
 		// if world is selected in the arraylist this class get there is a String areaName
 		String isCountry = "AreaName";
 		
