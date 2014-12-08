@@ -44,6 +44,7 @@ public class CreateView extends Composite{
 	private SliderBar sliderRanking = new SliderBar(1990, 2011);
 	public static final Logger log = Logger.getLogger(CreateView.class.getName());
 	final VisualizationLineChart vLineChart = new VisualizationLineChart();
+	private VisualizationMap visMap = new VisualizationMap();
 	VisualizationBarChart vBarChart;
 
 	/* This class present the view the user has after he clicked the create button on mainView. it contains the graphics the user wants to see
@@ -189,7 +190,6 @@ public class CreateView extends Composite{
 						table.setValue(y, 0, "Iran");
 						table.setValue(y, 1, value);
 					}
-					
 					else if(dataArray.get(i)[1].equals("Venezuela (Bolivarian Republic of)")){
 						table.setValue(y, 0, "Venezuela");
 						table.setValue(y, 1, value);
@@ -198,7 +198,6 @@ public class CreateView extends Composite{
 						table.setValue(y, 0, "Bolivia");
 						table.setValue(y, 1, value);
 					}
-					
 					else if(dataArray.get(i)[1].equalsIgnoreCase("United Republic of Tanzania")){
 						table.setValue(y, 0, "Tanzania");
 						table.setValue(y, 1, value);
@@ -227,7 +226,6 @@ public class CreateView extends Composite{
 						table.setValue(y, 0, "Laos");
 						table.setValue(y, 1, value);
 					}
-					
 					else if(dataArray.get(i)[1].equalsIgnoreCase("Democratic Republic of the Congo")){
 						table.setValue(y, 0, "CD");
 						table.setValue(y, 1, value);
@@ -260,8 +258,7 @@ public class CreateView extends Composite{
 		}
 		Runnable onLoadCallbackMap = new Runnable(){
 			public void run(){
-				VisualizationMap map = new VisualizationMap();
-				GeoMap newMap = map.getMap(table);
+				GeoMap newMap = visMap.getMap(table);
 				    	  mapPanel.add(newMap.asWidget());
 			}
 		};
