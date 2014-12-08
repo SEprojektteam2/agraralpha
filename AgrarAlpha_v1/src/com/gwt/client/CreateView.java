@@ -99,7 +99,6 @@ public class CreateView extends Composite{
         tablePanel = new VerticalPanel();
 		interpolationPanel = new VerticalPanel();
 		histogramPanel = new VerticalPanel();
-		histogramPanel.add(new SourceView());
 
 		mapPanel = new VerticalPanel();
 
@@ -263,7 +262,7 @@ public class CreateView extends Composite{
 	public void createBarChartFromSlider(){
 		vBarChart = new VisualizationBarChart(dataArray, year);
 		int cols = vBarChart.getNumColumns();
-		histogramPanel.remove(2);
+		histogramPanel.remove(1);
 		
 		year = Integer.toString((int) sliderHisto.getCurrentValue());
 		
