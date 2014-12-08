@@ -100,7 +100,7 @@ public class VisualizationBarChart{
 		String[] cols = new String[numColumns];
 		for (int i = 0; i < numColumns; i++) 
 		{
-			cols[i] = "to "+ Integer.toString((int)(max - (diff * (numColumns-i-1))));
+			cols[i] = "to "+ Integer.toString((int)(min + (diff * (i+1))));
 		}
 		
 		return cols;
@@ -164,7 +164,7 @@ public class VisualizationBarChart{
 	/**
 	 * Finds the minimal value for the set year and returns it
 	 * 
-	 * @return 
+	 * @return the found minimum in the set year
 	 */
 	private double findMin()
 	{
@@ -184,7 +184,7 @@ public class VisualizationBarChart{
 	/**
 	 * Finds the maximal value for the set year and returns it
 	 * 
-	 * @return
+	 * @return the found minimum in the set year
 	 */
 	private double findMax()
 	{
