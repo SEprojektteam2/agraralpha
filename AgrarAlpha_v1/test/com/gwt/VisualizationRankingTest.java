@@ -9,17 +9,18 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.gwt.client.VisualizationRanking;
 import com.gwt.client.VisualizationTable;
 
 public class VisualizationRankingTest extends TestCase {
-	VisualizationTable vTable;
+	
+	VisualizationRanking vrTest;
 
 	public void test() {
-		ArrayList<String[]> a = new ArrayList();
-		String[] sArray = { "Schweiz", "2", "3" };
-		String[] sArray1 = { "Deutschland", "12", "13" };
-		String[] sArray2 = { "Frankreich", "22", "23" };
-		String[] sArray3 = { "England", "32", "33" };
+		String[] sArray = { "Schweiz", "100", " " };
+		String[] sArray1 = { "Deutschland", "90", " " };
+		String[] sArray2 = { "Frankreich", "80", "23" };
+		String[] sArray3 = { "England", "99", "33" };
 		String[] sArray4 = { "USA", "2", "3" };
 		String[] sArray5 = { "Belgien", "12", "13" };
 		String[] sArray6 = { "Russland", "22", "23" };
@@ -32,17 +33,22 @@ public class VisualizationRankingTest extends TestCase {
 		String[] sArray13 = { "Thailand", "12", "13" };
 		String[] sArray14 = { "Indien", "22", "23" };
 		String[] sArray15 = { "Mars", "32", "33" };
-		a.add(sArray);
-		a.add(sArray1);
-		a.add(sArray2);
-		a.add(sArray3);
-		a.add(sArray4);
-		a.add(sArray5);
-		a.add(sArray6);
-		a.add(sArray7);
-		vTable = new VisualizationTable(a);
-		//assertEquals(a, vTable.arraylist);
+		ArrayList<String[]> a = new ArrayList();
+		ArrayList<String[]> b = new ArrayList();
+		b.add(sArray1);
+		b.add(sArray);
+		b.add(sArray2);
+		
+		vrTest= new VisualizationRanking(b,0);
+		vrTest.selectionSort(b);
+		
+		assertEquals(sArray,b.get(0));
+		assertEquals(sArray1,b.get(1));
+		assertEquals(sArray2,b.get(2));
 
+		
+
+		
 	}
    
 }
