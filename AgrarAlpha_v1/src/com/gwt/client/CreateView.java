@@ -371,7 +371,7 @@ public class CreateView extends Composite{
 	public void createBarChartFromSlider(){
 		vBarChart = new VisualizationBarChart(dataArray, year);
 		int cols = vBarChart.getNumColumns();
-		histogramPanel.remove(1);
+		histogramPanel.remove(2);
 		
 		year = Integer.toString((int) sliderHisto.getCurrentValue());
 		
