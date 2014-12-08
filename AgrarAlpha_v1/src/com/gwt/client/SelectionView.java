@@ -10,23 +10,14 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.visualization.client.DataTable;
-import com.google.gwt.visualization.client.VisualizationUtils;
-import com.google.gwt.visualization.client.visualizations.Table;
 
 import java.io.Serializable;
 
-import org.moxieapps.gwt.highcharts.client.Chart;
 
 public class SelectionView extends Composite implements Serializable {
 	public static Logger log = Logger.getLogger(SelectionView.class.getName());
@@ -34,10 +25,6 @@ public class SelectionView extends Composite implements Serializable {
 	private Label countryLabel;
 	private Label productLabel;
 	private Label typeLabel;
-	private Label test1; // only to test if the getter functions works
-	private Label test2;
-	private Label test3;
-	private Label test4;
 
 	private CheckBox perCapitaCB;
 
@@ -53,7 +40,6 @@ public class SelectionView extends Composite implements Serializable {
 	private MainView main;
 
 	private int lastyear = 2011; // last year we got data
-	private int CBcounter = 0; // counter how many checkboxes are checked
 	// private DataManager data;
 
 	private DataManagerServiceAsync dataManagerSvc = GWT
@@ -90,7 +76,7 @@ public class SelectionView extends Composite implements Serializable {
 		for (int i = 1990; i <= lastyear; i++) // i is the first year user can
 												// select
 		{
-			year = year.valueOf(i);
+			year = String.valueOf(i);
 			yearLB.addItem(year);
 		}
 
@@ -235,7 +221,7 @@ public class SelectionView extends Composite implements Serializable {
 	}
 
 	
-	/**@author Bill
+	/**@author Bill and William Martini
 	 * handels the event when createBtn will get clicked checks if requirements
 	 * for creating are fullfilled if they are, open the createView if not open
 	 * an Dialog
